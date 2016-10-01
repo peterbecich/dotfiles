@@ -31,8 +31,6 @@
 
 (require 'org)
 
-(require 'scala-mode2)
-(require 'scala-outline-popup)
 (require 'sbt-mode)
 (require 'maker-mode)
 
@@ -85,7 +83,7 @@
 (define-global-minor-mode my-global-auto-complete-mode auto-complete-mode
   (lambda ()
     (when (not (memq major-mode
-		     (list 'scala-mode 'scala-mode2 'sbt-mode 'shell)))
+		     (list 'scala-mode 'sbt-mode 'shell)))
       (auto-complete-mode))))
 (my-global-auto-complete-mode 1)
 
@@ -100,10 +98,6 @@
 
 (add-hook 'scala-mode-hook #'yas-minor-mode)
 
-(setq scala-indent:use-javadoc-style t
-      popup-complete-enabled-modes '(scala-mode2)
-      ensime-default-buffer-prefix "ENSIME-"
-      scala-outline-popup-select 'closest)
 (require 'ensime nil
 	 (lambda()
 	   (setq ensime-goto-test-config-defaults
