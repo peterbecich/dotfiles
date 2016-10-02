@@ -30,10 +30,8 @@
 
 
 (require 'org)
-
 (require 'sbt-mode)
-(require 'maker-mode)
-
+(require 'ensime)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -91,22 +89,32 @@
 
 ;;(setq ess-use-auto-complete t)
 (require 'ensime)
+(require 'scala-mode)
 ;; This step causes the ensime-mode to be started whenever
 ;; scala-mode2 is started for a buffer. You may have to customize this step
 ;; if you're not using the standard scala mode.
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
-(add-hook 'scala-mode-hook #'yas-minor-mode)
+;; (add-hook 'scala-mode-hook #'yas-minor-mode)
 
-(require 'ensime nil
-	 (lambda()
-	   (setq ensime-goto-test-config-defaults
-		 (plist-put (plist-put ;; TODO: clean up double plist-put
-			     ensime-goto-test-config-defaults
-			     :test-class-suffixes '("Spec" "Test" "Check"))
-			    :test-template-fn 'ensime-template-wordspec))))
+;; (require 'ensime nil
+;; 	 (lambda()
+;; 	   (setq ensime-goto-test-config-defaults
+;; 		 (plist-put (plist-put ;; TODO: clean up double plist-put
+;; 			     ensime-goto-test-config-defaults
+;; 			     :test-class-suffixes '("Spec" "Test" "Check"))
+;; 			    :test-template-fn 'ensime-template-wordspec))))
 
 
+;; https://gist.github.com/Scorpil/3821118
+
+;; (setq exec-path (append exec-path (list "/opt/local/bin/" )))
+;; (require 'scala-mode-auto) 
+
+;; (add-hook 'scala-mode-hook
+;;          '(lambda ()
+;;        (scala-mode-feature-electric-mode)
+;;           ))
 
 (add-hook 'compilation-filter-hook
           'comint-truncate-buffer)
@@ -128,7 +136,7 @@
 (global-hl-line-mode 0); Highlight current row
 (show-paren-mode 1); Matches parentheses and such in every mode
 
-(setq visible-bell t); Flashes on error
+;; (setq visible-bell t); Flashes on error
 
 (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
 
@@ -145,12 +153,12 @@
 (yas-global-mode 1)
 
 ;; define function to shutdown emacs server instance
-(defun server-shutdown ()
-  "Save buffers, Quit, and Shutdown (kill) server"
-  (interactive)
-  (save-some-buffers)
-  (kill-emacs)
-  )
+;; (defun server-shutdown ()
+;;   "Save buffers, Quit, and Shutdown (kill) server"
+;;   (interactive)
+;;   (save-some-buffers)
+;;   (kill-emacs)
+;;   )
 
 
 
