@@ -22,10 +22,10 @@
       )
 
 
-(auto-package-update-maybe)
-(setq auto-package-update-interval 3)
-(add-hook 'auto-package-update-before-hook
-          (lambda () (message "I will update packages now")))
+;; (auto-package-update-maybe)
+;; (setq auto-package-update-interval 3)
+;; (add-hook 'auto-package-update-before-hook
+;;           (lambda () (message "I will update packages now")))
 
 
 
