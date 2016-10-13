@@ -1,0 +1,39 @@
+<monitors version="1">
+  <configuration>
+      <clone>no</clone>
+      <output name="DVI-I-0">
+      </output>
+      <output name="DVI-I-1">
+      </output>
+      <output name="DVI-I-2">
+          <vendor>DEL</vendor>
+          <product>0xa07a</product>
+          <serial>0x32474c53</serial>
+          <width>1920</width>
+          <height>1200</height>
+          <rate>60</rate>
+          <x>1200</x>
+          <y>342</y>
+          <rotation>normal</rotation>
+          <reflect_x>no</reflect_x>
+          <reflect_y>no</reflect_y>
+          <primary>yes</primary>
+      </output>
+      <output name="HDMI-0">
+      </output>
+      <output name="DVI-I-3">
+          <vendor>DEL</vendor>
+          <product>0xa07a</product>
+          <serial>0x304d504c</serial>
+          <width>1920</width>
+          <height>1200</height>
+          <rate>60</rate>
+          <x>0</x>
+          <y>0</y>
+          <rotation>normal</rotation>
+          <reflect_x>no</reflect_x>
+          <reflect_y>no</reflect_y>
+          <primary>no</primary>
+      </output>
+  </configuration>
+</monitors>
