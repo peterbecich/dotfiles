@@ -124,3 +124,4 @@
 
 (let ((gls "/opt/local/bin/gls"))
   (if (file-exists-p gls) (setq insert-directory-program gls)))
+(put 'erase-buffer 'disabled nil)
