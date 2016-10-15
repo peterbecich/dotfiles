@@ -5,7 +5,7 @@
 #xrdb -merge .Xresources
 
 # Set up an icon tray
-stalonetray &
+# stalonetray &
 
 # Fire up apps
 

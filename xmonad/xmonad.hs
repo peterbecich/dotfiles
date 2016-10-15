@@ -1,27 +1,28 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.SetWMName
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Config.Desktop
 import XMonad.Util.SpawnOnce
+import XMonad.Actions.WorkspaceNames
 import System.IO
 
 baseConfig = desktopConfig
 
-main = do
-  xmproc <- spawnPipe "xmobar"
---dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
-  xmonad $ baseConfig
-      { logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn xmproc }
-        , modMask = controlMask .|. mod1Mask
-	, terminal = "rxvt"
-	, startupHook = startupHook baseConfig <+> spawnOnce "rxvt"
-	}
+main = xmonad . myConfig =<< spawnPipe "xmobar"
+             
+myConfig pipe = desktopConfig {modMask = controlMask .|. mod1Mask
+        , terminal = "rxvt"
+        , startupHook = startupHook baseConfig <+> spawnOnce "rxvt"
+        , logHook = myLogHook pipe
+        , manageHook = manageDocks            
+        }
 
---quitWithWarning :: X ()
---quitWithWarning = do
---    let m = "confirm quit"
---    s <- dmenu [m]
---    when (m == s) (io exitSuccess) 
+myLogHook pipe = workspaceNamesPP xmobarPP {
+                   ppOutput = hPutStrLn pipe
+                 } >>= dynamicLogWithPP
+             
+
 
