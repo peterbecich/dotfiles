@@ -18,7 +18,8 @@ myConfig pipe = desktopConfig {modMask = controlMask .|. mod1Mask
         , startupHook = startupHook baseConfig <+> spawnOnce "rxvt"
         , logHook = myLogHook pipe
         , manageHook = manageDocks            
-        }
+        } `additionalKeys`
+        [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c") ]
 
 myLogHook pipe = workspaceNamesPP xmobarPP {
                    ppOutput = hPutStrLn pipe
