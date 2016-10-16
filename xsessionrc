@@ -9,14 +9,16 @@
 
 # Fire up apps
 
+# nautilus &
+
 #xscreensaver -no-splash &
 
 #if [ -x /usr/bin/nm-applet ] ; then
 #   nm-applet --sm-disable &
 #fi
 
-emacs-25.1 --daemon &
+#emacs-25.1 --daemon &
 
 #emacsclient -c &
 
-exec xmonad
+#exec xmonad

@@ -30,7 +30,7 @@
           <rate>60</rate>
           <x>1920</x>
           <y>0</y>
-          <rotation>left</rotation>
+          <rotation>normal</rotation>
           <reflect_x>no</reflect_x>
           <reflect_y>no</reflect_y>
           <primary>no</primary>
