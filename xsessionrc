@@ -5,9 +5,11 @@
 #xrdb -merge .Xresources
 
 # Set up an icon tray
-#stalonetray &
+# stalonetray &
 
 # Fire up apps
+
+# nautilus &
 
 #xscreensaver -no-splash &
 
@@ -15,4 +17,8 @@
 #   nm-applet --sm-disable &
 #fi
 
-exec xmonad
+#emacs-25.1 --daemon &
+
+#emacsclient -c &
+
+#exec xmonad
