@@ -2,6 +2,7 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(desktop-save-mode 1)
 
 (setq dired-listing-switches "-alh")
 
