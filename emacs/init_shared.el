@@ -5,6 +5,7 @@
 (desktop-save-mode 1)
 
 (setq dired-listing-switches "-alh")
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 (auto-package-update-maybe)
 (auto-package-update-at-time "08:00")
