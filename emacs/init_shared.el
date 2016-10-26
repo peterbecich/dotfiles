@@ -2,8 +2,18 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(desktop-save-mode 1)
 
 (setq dired-listing-switches "-alh")
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
+(auto-package-update-maybe)
+(auto-package-update-at-time "08:00")
+(setq auto-package-update-interval 1)
+(setq auto-package-update-delete-old-versions t)
+
+(add-hook 'auto-package-update-before-hook
+          (lambda () (message "I will update packages now")))
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)

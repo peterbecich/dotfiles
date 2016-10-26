@@ -48,7 +48,7 @@ main = do
         , layoutHook = avoidStruts $ layoutHook defaultConfig
         } `additionalKeys`
         [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
-          ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend -i")--,
+          ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend")--,
  --         ((mod1Mask, xK_F7), lowerVolume 4 >> return()),
  --         ((mod1Mask, xK_F8), raiseVolume 4 >> return())
                                                                           
