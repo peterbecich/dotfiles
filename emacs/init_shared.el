@@ -56,6 +56,12 @@
 (eval-after-load "org"
   '(require 'ox-md nil t))
 
+
+;; https://noahfrederick.com/log/restclient-for-emacs
+(use-package restclient
+  :mode ("\\.http\\'" . restclient-mode))
+
+
 (setq emerge-diff-options "--ignore-all-space")
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
