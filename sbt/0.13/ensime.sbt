@@ -1,4 +1,4 @@
-import org.ensime.Imports.EnsimeKeys
+// import org.ensime.Imports.EnsimeKeys
 
-EnsimeKeys.ensimeDebuggingPort := 1337
+// EnsimeKeys.ensimeDebuggingPort := 1337
 
