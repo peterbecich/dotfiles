@@ -48,7 +48,9 @@ main = do
         , layoutHook = avoidStruts $ layoutHook defaultConfig
         } `additionalKeys`
         [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
-          ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend")--,
+          ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend"),
+          ((controlMask .|. mod1Mask, xK_n), spawn "nautilus -w"),
+          ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
  --         ((mod1Mask, xK_F7), lowerVolume 4 >> return()),
  --         ((mod1Mask, xK_F8), raiseVolume 4 >> return())
                                                                           

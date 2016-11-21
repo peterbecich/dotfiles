@@ -68,8 +68,8 @@
 
 
 ;; https://noahfrederick.com/log/restclient-for-emacs
-(use-package restclient
-  :mode ("\\.http\\'" . restclient-mode))
+;; (use-package restclient
+;;   :mode ("\\.http\\'" . restclient-mode))
 
 
 (setq emerge-diff-options "--ignore-all-space")

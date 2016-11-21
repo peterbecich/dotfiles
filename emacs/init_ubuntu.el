@@ -40,7 +40,7 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(fci-rule-character-color "#452E2E")
- '(linum-format " %7i ")
+ ;; '(linum-format " %7i ")
  '(midnight-mode t)
  '(package-selected-packages
    (quote
