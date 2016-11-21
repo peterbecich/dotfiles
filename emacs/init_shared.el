@@ -253,4 +253,4 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
 )
 
-
+(setq js-indent-level 2)
