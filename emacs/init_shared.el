@@ -4,6 +4,8 @@
 
 (desktop-save-mode 1)
 
+(pdf-tools-install)
+
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
@@ -20,25 +22,6 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
-
-(require 'package)
-(setq package-enable-at-startup nil) ; To avoid initializing twice
-(package-initialize)
-
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("org-mode" . "http://orgmode.org/elpa/")
-			 )
-      )
-
-
-;; (auto-package-update-maybe)
-;; (setq auto-package-update-interval 3)
-;; (add-hook 'auto-package-update-before-hook
-;;           (lambda () (message "I will update packages now")))
-
 
 
 (require 'org)

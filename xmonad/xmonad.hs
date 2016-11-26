@@ -39,6 +39,7 @@ main = do
   h <- spawnPipe "xmobar"
   xmonad $ defaultConfig {
           modMask = controlMask .|. mod1Mask
+        , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         , startupHook = startupHook defaultConfig
         , logHook = dynamicLogWithPP $ defaultPP {
