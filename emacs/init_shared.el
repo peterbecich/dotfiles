@@ -4,7 +4,7 @@
 
 (desktop-save-mode 1)
 
-(pdf-tools-install)
+;; (pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
