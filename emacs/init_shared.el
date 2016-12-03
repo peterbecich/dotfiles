@@ -23,10 +23,15 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+(setq ensime-startup-notification nil)
+(setq ensime-startup-snapshot-notification nil)
+
+(use-package ensime
+	     :ensure t
+	     :pin melpa-stable)
 
 (require 'org)
 (require 'sbt-mode)
-(require 'ensime)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
