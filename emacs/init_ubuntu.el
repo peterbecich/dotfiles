@@ -1,10 +1,19 @@
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize) ;; You might already have this line
+
+
+
+(eval-when-compile
+  (require 'use-package))
 
 
 (load "~/dotfiles/emacs/init_shared.el")
@@ -15,6 +24,8 @@
 (scroll-bar-mode -1)
 
 (put 'erase-buffer 'disabled nil)
+
+(setq haskell-program-name "/home/peterbecich/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ghci")
 
 
 
@@ -35,11 +46,18 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(fci-rule-character-color "#452E2E")
- ;; '(linum-format " %7i ")
+ '(grep-find-ignored-directories
+   (quote
+    ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
+ '(haskell-mode-hook
+   (quote
+    (flyspell-prog-mode haskell-indent-mode interactive-haskell-mode turn-on-haskell-doc-mode)))
+ '(haskell-process-type (quote stack-ghci))
+ '(haskell-stylish-on-save t)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
-    (solarized-theme wanderlust w3m twittering-mode sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup ensime company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (flycheck-haskell ensime use-package solarized-theme wanderlust w3m twittering-mode sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-view-midnight-colors (quote ("gainsboro" . "gray15")))
  '(show-paren-mode t)
  '(tool-bar-mode nil))

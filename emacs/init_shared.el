@@ -9,13 +9,13 @@
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-(auto-package-update-maybe)
-(auto-package-update-at-time "08:00")
-(setq auto-package-update-interval 1)
-(setq auto-package-update-delete-old-versions t)
+;; (auto-package-update-maybe)
+;; (auto-package-update-at-time "08:00")
+;; (setq auto-package-update-interval 1)
+;; (setq auto-package-update-delete-old-versions t)
 
-(add-hook 'auto-package-update-before-hook
-          (lambda () (message "I will update packages now")))
+;; (add-hook 'auto-package-update-before-hook
+;;           (lambda () (message "I will update packages now")))
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
@@ -23,11 +23,19 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
-
 (require 'js-doc)
+
+(setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))
+
+(setq ensime-startup-notification nil)
+(setq ensime-startup-snapshot-notification nil)
+
+(use-package ensime
+	     :ensure t
+	     :pin melpa-stable)
+
 (require 'org)
 (require 'sbt-mode)
-(require 'ensime)
 
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
