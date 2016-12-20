@@ -25,6 +25,8 @@
 
 (put 'erase-buffer 'disabled nil)
 
+(setq haskell-program-name "/home/peterbecich/.stack/programs/x86_64-linux/ghc-8.0.1/bin/ghci")
+
 
 
 (custom-set-variables
@@ -47,6 +49,11 @@
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
+ '(haskell-mode-hook
+   (quote
+    (flyspell-prog-mode haskell-indent-mode interactive-haskell-mode turn-on-haskell-doc-mode)))
+ '(haskell-process-type (quote stack-ghci))
+ '(haskell-stylish-on-save t)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
