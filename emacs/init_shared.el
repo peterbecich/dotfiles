@@ -22,8 +22,9 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
-
+(require 'js-doc)
 (require 'org)
 (require 'sbt-mode)
 (require 'ensime)
@@ -38,6 +39,11 @@
 			     )
       )
 
+
+(add-hook 'js2-mode-hook
+	  #'(lambda ()
+	      (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+	      (define-key js2-mode-map "@" 'js-doc-insert-tag)))
 
 (defadvice load-theme (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
