@@ -54,6 +54,7 @@
     (flyspell-prog-mode haskell-indent-mode interactive-haskell-mode turn-on-haskell-doc-mode)))
  '(haskell-process-type (quote stack-ghci))
  '(haskell-stylish-on-save t)
+ '(haskell-tags-on-save t)
  '(midnight-mode t)
  '(package-selected-packages
    (quote
