@@ -22,7 +22,8 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
+(require 'js-doc)
 
 (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))
 
@@ -47,6 +48,11 @@
       )
 
 
+(add-hook 'js2-mode-hook
+	  #'(lambda ()
+	      (define-key js2-mode-map "\C-ci" 'js-doc-insert-function-doc)
+	      (define-key js2-mode-map "@" 'js-doc-insert-tag)))
+
 (defadvice load-theme (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
 
@@ -65,10 +71,17 @@
 
 (setq emerge-diff-options "--ignore-all-space")
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (setq haskell-process-type 'cabal-repl)
 
-(add-hook 'haskell-mode-hook 'haskell-indent-mode)
-(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+
+;; (add-hook 'haskell-mode-hook 'haskell-indent-mode)
+;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
+(autoload 'ghc-init "ghc" nil t)
+(autoload 'ghc-debug "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 
 ;; Ignore compiled Haskell files in filename completions
@@ -245,3 +258,7 @@
 )
 
 (setq js-indent-level 2)
+
+;; http://stackoverflow.com/questions/704616/something-wrong-with-emacs-shell
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
