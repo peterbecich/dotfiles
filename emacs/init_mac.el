@@ -24,6 +24,7 @@
 
 (setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
 
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 (load "~/dotfiles/emacs/init_shared.el")
 
