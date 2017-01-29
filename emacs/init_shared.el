@@ -62,6 +62,7 @@
 			     )
       )
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'haskell-mode-hook 'intero-mode)
 
 (add-hook 'js2-mode-hook
