@@ -2,6 +2,21 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(defun my/truncate-eshell-buffers ()
+  "Truncates all eshell buffers"
+  (interactive)
+  (save-current-buffer
+    (dolist (buffer (buffer-list t))
+      (set-buffer buffer)
+      (when (eq major-mode 'eshell-mode)
+        (eshell-truncate-buffer)))))
+
+;; After being idle for 5 seconds, truncate all the eshell-buffers if
+;; needed. If this needs to be canceled, you can run `(cancel-timer
+;; my/eshell-truncate-timer)'
+(setq my/eshell-truncate-timer
+      (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
+
 (desktop-save-mode 1)
 
 ;; (pdf-tools-install)
@@ -47,6 +62,8 @@
 			     )
       )
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'haskell-mode-hook 'intero-mode)
 
 (add-hook 'js2-mode-hook
 	  #'(lambda ()
@@ -140,7 +157,7 @@
 
 (add-hook 'compilation-filter-hook
           'comint-truncate-buffer)
-(setq comint-buffer-maximum-size 1000)
+(setq comint-buffer-maximum-size 20100)
 
 
 (when (fboundp 'windmove-default-keybindings)
