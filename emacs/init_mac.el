@@ -28,6 +28,9 @@
 
 (load "~/dotfiles/emacs/init_shared.el")
 
+(load "~/dotfiles/emacs/init_private.el")
+(load "~/dotfiles/emacs/init_private_mac.el")
+
 
 (load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
 ;;(setenv “PATH” (shell-command-to-string “bash -i -c ‘echo -n $PATH’”))

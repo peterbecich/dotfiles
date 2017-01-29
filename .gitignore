@@ -44,3 +44,7 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+
+init_private.el
+init_private_mac.el
+init_private_debian.el
