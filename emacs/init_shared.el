@@ -17,7 +17,7 @@
 (setq my/eshell-truncate-timer
       (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
 
-(desktop-save-mode 1)
+(desktop-save-mode 0)
 
 ;; (pdf-tools-install)
 
