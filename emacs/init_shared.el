@@ -187,6 +187,9 @@
 
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
+(setq eshell-scroll-to-bottom-on-input t)
+(setq eshell-scroll-to-bottom-on-output t)
+
 (setq comint-move-point-for-output t)
 
 (yas-global-mode 1)
