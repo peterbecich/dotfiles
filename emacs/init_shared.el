@@ -285,3 +285,5 @@
  (add-hook 'eshell-preoutput-filter-functions
            'ansi-color-filter-apply)
 (setq ring-bell-function 'ignore)
+;; (setq twittering-use-master-password t)
+(setq twittering-icon-mode t)
