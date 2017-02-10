@@ -5,6 +5,10 @@
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz")))
 
+(setq erc-log-channels-directory "~/.erc/logs/")
+(setq erc-save-buffer-on-part t)
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
 (defun my/truncate-eshell-buffers ()
   "Truncates all eshell buffers"
   (interactive)
