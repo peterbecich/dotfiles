@@ -2,6 +2,9 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(setq erc-autojoin-channels-alist
+      '(("freenode.net" "#emacs" "#haskell" "#xmonad" "##javascript" "#scala" "#scalaz")))
+
 (defun my/truncate-eshell-buffers ()
   "Truncates all eshell buffers"
   (interactive)
