@@ -1,4 +1,4 @@
-source ~/.bash_aliases
+source ~/dotfiles/bash_aliases_mac
 
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
@@ -16,14 +16,14 @@ export TERM=xterm-256color
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
 
 
-export EC2_HOME=~/.ec2
-export PATH=$PATH:$EC2_HOME/bin
-export EC2_PRIVATE_KEY=`ls $EC2_HOME/pk-*.pem`
-export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
+# export EC2_HOME=~/.ec2
+# export PATH=$PATH:$EC2_HOME/bin
+# export EC2_PRIVATE_KEY=`ls $EC2_HOME/pk-*.pem`
+# export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
 
 
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
 
 #export PGDATA=/sw/var/postgresql-9.1/data
 
@@ -40,7 +40,7 @@ export LESSOPEN="| /opt/local/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
 
-export GIT_SSH=/usr/bin/ssh
+# export GIT_SSH=/usr/bin/ssh
 
 # export ENSIME_ROOT=/Users/peterbecich/.emacs.d/ensime-github
 
@@ -70,11 +70,11 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # Android
 
-export ANDROID_HOME=/Users/peterbecich/android/android-sdk-macosx/
+# export ANDROID_HOME=/Users/peterbecich/android/android-sdk-macosx/
 
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/build-tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/build-tools
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 
 
