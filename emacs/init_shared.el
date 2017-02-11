@@ -2,6 +2,13 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(setq erc-autojoin-channels-alist
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz")))
+
+(setq erc-log-channels-directory "~/.erc/logs/")
+(setq erc-save-buffer-on-part t)
+(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+
 (defun my/truncate-eshell-buffers ()
   "Truncates all eshell buffers"
   (interactive)
@@ -17,7 +24,7 @@
 (setq my/eshell-truncate-timer
       (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
 
-(desktop-save-mode 1)
+(desktop-save-mode 0)
 
 ;; (pdf-tools-install)
 
@@ -34,7 +41,7 @@
 
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-live-preview-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
@@ -187,6 +194,9 @@
 
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)
+(setq eshell-scroll-to-bottom-on-input t)
+(setq eshell-scroll-to-bottom-on-output t)
+
 (setq comint-move-point-for-output t)
 
 (yas-global-mode 1)
@@ -279,3 +289,9 @@
 ;; http://stackoverflow.com/questions/704616/something-wrong-with-emacs-shell
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+ (add-hook 'eshell-preoutput-filter-functions
+           'ansi-color-filter-apply)
+(setq ring-bell-function 'ignore)
+;; (setq twittering-use-master-password t)
+(setq twittering-icon-mode t)
+(setq twittering-convert-fix-size "24")
