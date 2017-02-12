@@ -26,7 +26,7 @@
 
 (desktop-save-mode 0)
 
-;; (pdf-tools-install)
+(pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
@@ -95,22 +95,9 @@
 
 (setq emerge-diff-options "--ignore-all-space")
 
-;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-;; (setq haskell-process-type 'cabal-repl)
-
-;; (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-
-;; (add-hook 'haskell-mode-hook 'haskell-indent-mode)
-;; (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-
-(autoload 'ghc-init "ghc" nil t)
-(autoload 'ghc-debug "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
-
 
 ;; Ignore compiled Haskell files in filename completions
 (add-to-list 'completion-ignored-extensions ".hi")
-
 
 (require 'multi-web-mode)
 (setq mweb-default-major-mode 'html-mode)
