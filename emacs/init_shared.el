@@ -5,7 +5,7 @@
 (require 'tls)
 
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web")
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web" "#go-nuts" "#dart" "#postgresql" "#clojure" "#unix" "#erlang")
 	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
 
 (setq erc-log-channels-directory "~/.erc/logs/")
@@ -201,8 +201,10 @@
 
 
 
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+(setq browse-url-browser-function 'eww-browse-url)
+
+
+;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 ;; optional keyboard short-cut
 ;;(global-set-key "\C-xm" 'browse-url-at-point)
 (global-set-key "\C-c C-o" 'browse-url-at-point)
