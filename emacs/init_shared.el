@@ -203,6 +203,7 @@
 
 (setq browse-url-browser-function 'eww-browse-url)
 
+(setq eww-search-prefix "https://www.google.com/search?q=")
 
 ;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 ;; optional keyboard short-cut
