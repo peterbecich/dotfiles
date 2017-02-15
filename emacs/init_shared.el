@@ -2,8 +2,11 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(require 'tls)
+
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz")))
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web")
+	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
 
 (setq erc-log-channels-directory "~/.erc/logs/")
 (setq erc-save-buffer-on-part t)
