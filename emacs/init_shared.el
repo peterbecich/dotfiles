@@ -4,6 +4,8 @@
 
 (require 'tls)
 
+(setq request-backend 'url-retrieve)
+
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web" "#go-nuts" "#dart" "#postgresql" "#clojure" "#unix" "#erlang")
 	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
@@ -205,6 +207,13 @@
 
 (setq eww-search-prefix "https://www.google.com/search?q=")
 
+;; http://emacs.stackexchange.com/questions/24472/simple-method-for-creating-multiple-eww-buffers
+;; Auto-rename new eww buffers
+(defun xah-rename-eww-hook ()
+  "Rename eww browser's buffer so sites open in new page."
+  (rename-buffer "eww" t))
+(add-hook 'eww-mode-hook #'xah-rename-eww-hook)
+
 ;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 ;; optional keyboard short-cut
 ;;(global-set-key "\C-xm" 'browse-url-at-point)
@@ -261,8 +270,8 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 (setq magit-auto-revert-mode 1)
 
-;;(setq resize-mini-windows nil)
-(setq max-mini-window-height 2)
+(setq resize-mini-windows nil)
+;; (setq max-mini-window-height 2)
 
 ;; http://stackoverflow.com/questions/3447531/emacs-ess-version-of-clear-console
 (defun clear-shell ()
