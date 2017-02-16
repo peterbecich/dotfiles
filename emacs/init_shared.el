@@ -156,7 +156,7 @@
 
 (add-hook 'compilation-filter-hook
           'comint-truncate-buffer)
-(setq comint-buffer-maximum-size 20100)
+(setq comint-buffer-maximum-size 4096)
 
 
 (when (fboundp 'windmove-default-keybindings)

@@ -113,12 +113,21 @@
  '(erc-rename-buffers t)
  '(fci-rule-color "#eee8d5")
  '(fringe-mode 0 nil (fringe))
+ '(newsticker-url-list
+   (quote
+    (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
+     ("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
+     ("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil))))
  '(package-selected-packages
    (quote
     (slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell wakatime-mode intero redprl psci purescript-mode js-doc paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
  '(paradox-github-token t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
+ '(slack-buffer-create-on-notify (quote true))
+ '(slack-buffer-emojify (quote true))
+ '(slack-prefer-current-team (quote true))
+ '(slack-room-subscription nil)
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
