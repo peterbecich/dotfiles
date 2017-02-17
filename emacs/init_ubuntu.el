@@ -52,8 +52,11 @@
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(package-selected-packages
    (quote
-    (zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme wanderlust w3m twittering-mode sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
- '(pdf-view-midnight-colors (quote ("gainsboro" . "gray15"))))
+    (dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme wanderlust w3m twittering-mode sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+ '(pdf-view-midnight-colors (quote ("gainsboro" . "gray15")))
+ '(slack-buffer-create-on-notify (quote true))
+ '(slack-buffer-emojify (quote true))
+ '(slack-prefer-current-team (quote true)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -61,5 +64,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background nil))))
- '(query-replace ((t (:inherit isearch :background "light sea green"))))
- '(region ((t (:background "light sea green")))))
+ '(mode-line ((t (:background "#8b4500" :foreground "#8FB28F" :box (:line-width -1 :style released-button)))))
+ '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box (:line-width -1 :style released-button)))))
+ '(query-replace ((t (:inherit isearch :background "DeepSkyBlue4"))))
+ '(region ((t (:background "DeepSkyBlue4")))))
