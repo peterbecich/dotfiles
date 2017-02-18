@@ -108,6 +108,7 @@
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(erc-track-position-in-mode-line t)
  '(erc-email-userid "peterbecich@gmail.com")
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
