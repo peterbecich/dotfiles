@@ -112,6 +112,7 @@
  '(erc-email-userid "peterbecich@gmail.com")
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
+ '(erc-notifications-mode t)
  '(fci-rule-color "#eee8d5")
  '(fringe-mode 0 nil (fringe))
  '(newsticker-url-list
