@@ -37,9 +37,6 @@
 
 (global-wakatime-mode)
 
-
-(global-wakatime-mode)
-
 (load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
 ;;(setenv “PATH” (shell-command-to-string “bash -i -c ‘echo -n $PATH’”))
 
