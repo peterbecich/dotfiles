@@ -128,6 +128,7 @@
  '(slack-prefer-current-team (quote true))
  '(slack-room-subscription nil)
  '(slack-typing-visibility (quote never))
+ '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
