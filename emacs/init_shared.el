@@ -14,6 +14,8 @@
 (setq erc-save-buffer-on-part t)
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
+(setq erc-join-buffer 'bury)
+
 (defun my/truncate-eshell-buffers ()
   "Truncates all eshell buffers"
   (interactive)
