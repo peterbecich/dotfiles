@@ -4,6 +4,8 @@
 
 (require 'tls)
 
+(newsticker-start)
+
 (setq request-backend 'url-retrieve)
 
 (setq erc-autojoin-channels-alist

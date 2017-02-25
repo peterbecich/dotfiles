@@ -106,6 +106,7 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(erc-email-userid "peterbecich@gmail.com")
+ '(erc-nick "peterbecich")
  '(erc-notifications-mode nil)
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
@@ -116,7 +117,15 @@
    (quote
     (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
      ("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
-     ("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil))))
+     ("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil)
+     ("Hacker News" "https://news.ycombinator.com/rss" nil nil nil)
+     ("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil nil nil)
+     ("The Hill most popular" "http://thehill.com/rss/syndicator/19110" nil nil nil)
+     ("The Hill all news" "http://thehill.com/rss/syndicator/19109" nil nil nil)
+     ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
+     ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
+     ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
+     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
  '(package-selected-packages
    (quote
     (slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell wakatime-mode intero redprl psci purescript-mode js-doc paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
