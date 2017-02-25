@@ -1,6 +1,6 @@
 source ~/dotfiles/bash_aliases_mac
 
-
+export PATH=$PATH:~/.cabal/bin/
 export PATH=$PATH:~/.virtualenv/ENV/bin
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
