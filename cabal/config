@@ -93,30 +93,30 @@ haddock
   -- contents-location:
 
 install-dirs user
-  -- prefix: /home/peterbecich/.cabal
-  -- bindir: $prefix/bin
-  -- libdir: $prefix/lib
-  -- libsubdir: $abi/$libname
-  -- libexecdir: $prefix/libexec
-  -- datadir: $prefix/share
-  -- datasubdir: $abi/$pkgid
-  -- docdir: $datadir/doc/$abi/$pkgid
-  -- htmldir: $docdir/html
-  -- haddockdir: $htmldir
-  -- sysconfdir: $prefix/etc
+  prefix: /home/peterbecich/.cabal
+  bindir: $prefix/bin
+  libdir: $prefix/lib
+  libsubdir: $abi/$libname
+  libexecdir: $prefix/libexec
+  datadir: $prefix/share
+  datasubdir: $abi/$pkgid
+  docdir: $datadir/doc/$abi/$pkgid
+  htmldir: $docdir/html
+  haddockdir: $htmldir
+  sysconfdir: $prefix/etc
 
 install-dirs global
-  -- prefix: /usr/local
-  -- bindir: $prefix/bin
-  -- libdir: $prefix/lib
-  -- libsubdir: $abi/$libname
-  -- libexecdir: $prefix/libexec
-  -- datadir: $prefix/share
-  -- datasubdir: $abi/$pkgid
-  -- docdir: $datadir/doc/$abi/$pkgid
-  -- htmldir: $docdir/html
-  -- haddockdir: $htmldir
-  -- sysconfdir: $prefix/etc
+  prefix: /usr/local
+  bindir: $prefix/bin
+  libdir: $prefix/lib
+  libsubdir: $abi/$libname
+  libexecdir: $prefix/libexec
+  datadir: $prefix/share
+  datasubdir: $abi/$pkgid
+  docdir: $datadir/doc/$abi/$pkgid
+  htmldir: $docdir/html
+  haddockdir: $htmldir
+  sysconfdir: $prefix/etc
 
 program-locations
   -- alex-location:
