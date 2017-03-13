@@ -298,6 +298,12 @@
  (add-hook 'eshell-preoutput-filter-functions
            'ansi-color-filter-apply)
 (setq ring-bell-function 'ignore)
-;; (setq twittering-use-master-password t)
+(setq twittering-use-master-password t)
 (setq twittering-icon-mode t)
 (setq twittering-convert-fix-size "24")
+
+;; https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources
+(setq epg-gpg-program "gpg2")
+
+
+
