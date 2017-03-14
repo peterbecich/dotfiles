@@ -131,6 +131,8 @@ export LESS=' -R '
 #xrandr --output DVI-I-3 --left-of DVI-I-2 --rotate right
 
 export PATH=$PATH:/home/peterbecich/bin/thunderbird
+export PATH=/home/peterbecich/.cabal/bin:$PATH
+export PATH=$PATH:/home/peterbecich/.local/bin
 
 #xmodmap ~/.Xmodmap
 
@@ -156,8 +158,6 @@ PERL_MB_OPT="--install_base \"/home/peterbecich/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/peterbecich/perl5"; export PERL_MM_OPT;
 
 export CABAL_HOME=/home/peterbecich/.cabal/
-
-export PATH=$PATH:$CABAL_HOME/bin/
 
 SSH_ENV="$HOME/.ssh/environment"
 

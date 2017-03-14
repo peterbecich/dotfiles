@@ -12,7 +12,7 @@ import System.IO
 
 main :: IO ()
 main = do
-  h <- spawnPipe "xmobar"
+  h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
   xmonad $ docks defaultConfig {
           modMask = controlMask .|. mod1Mask
         , XMonad.focusFollowsMouse = False
