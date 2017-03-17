@@ -6,12 +6,18 @@ import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Config.Desktop
 import XMonad.Util.SpawnOnce
+import XMonad.Layout.Reflect
+import XMonad.Layout.MultiToggle
 import XMonad.Actions.WorkspaceNames
+import XMonad.Actions.CycleWS
 -- import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
 import System.IO
 
 main :: IO ()
 main = do
+  _ <- spawn "xrandr --output DVI-I-3 --rotate left"
+  _ <- spawn "xrandr --output DVI-I-2 --auto --pos 0x360 --output DVI-I-3 --auto --pos 2200x0"
+  _ <- spawn "feh --bg-fill --no-xinerama ~/Pictures/wallpaper"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
   xmonad $ docks defaultConfig {
           modMask = controlMask .|. mod1Mask
@@ -22,12 +28,18 @@ main = do
                             ppOutput = hPutStrLn h
                                        }
         , manageHook = manageHook defaultConfig
-        , layoutHook = avoidStruts $ layoutHook defaultConfig
+        , layoutHook = avoidStruts $
+          mkToggle (single REFLECTX) $
+          mkToggle (single REFLECTY) $
+          layoutHook defaultConfig
         } `additionalKeys`
         [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
           ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend"),
           ((controlMask .|. mod1Mask, xK_n), spawn "nautilus -w"),
           ((controlMask .|. mod1Mask, xK_f), spawn "firefox --new-window"),
+          ((controlMask .|. mod1Mask, xK_c), swapNextScreen),
+          ((controlMask .|. mod1Mask, xK_x), sendMessage $ Toggle REFLECTX),          
+          ((controlMask .|. mod1Mask, xK_y), sendMessage $ Toggle REFLECTY),          
           ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
  --         ((mod1Mask, xK_F7), lowerVolume 4 >> return()),
  --         ((mod1Mask, xK_F8), raiseVolume 4 >> return())
