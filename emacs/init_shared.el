@@ -8,9 +8,13 @@
 
 (setq request-backend 'url-retrieve)
 
+;; (setq erc-autojoin-channels-alist
+;;       '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web" "#go-nuts" "#dart" "#postgresql" "#clojure" "#unix" "#erlang" "#nicta-course")
+;; 	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
+
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web" "#go-nuts" "#dart" "#postgresql" "#clojure" "#unix" "#erlang" "#nicta-course")
-	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course")
+	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")))
 
 (setq erc-log-channels-directory "~/.erc/logs/")
 (setq erc-save-buffer-on-part t)
