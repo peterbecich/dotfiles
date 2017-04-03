@@ -7,7 +7,9 @@ import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Config.Desktop
 import XMonad.Util.SpawnOnce
 import XMonad.Layout.Reflect
+-- import qualified XMonad.Layout.ToggleLayouts as TL
 import XMonad.Layout.MultiToggle
+import XMonad.Layout.NoBorders
 import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.CycleWS
 -- import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
@@ -31,6 +33,9 @@ main = do
         , layoutHook = avoidStruts $
           mkToggle (single REFLECTX) $
           mkToggle (single REFLECTY) $
+          -- TL.toggleLayouts (noBorders Full) $
+          smartBorders $
+          -- lessBorders Never (Full 1 0.5 0.03) $
           layoutHook defaultConfig
         } `additionalKeys`
         [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),

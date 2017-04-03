@@ -1,4 +1,3 @@
-
 decorations none
 transparent false
 dockapp_mode none
@@ -10,7 +9,7 @@ grow_gravity NE
 icon_gravity NE
 icon_size 12
 sticky true
-#window_strut none
+window_strut auto
 window_type dock
 window_layer bottom
 #no_shrink false
