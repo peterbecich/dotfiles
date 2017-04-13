@@ -12,6 +12,7 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders
 import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.CycleWS
+import XMonad.Actions.GridSelect
 -- import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
 import System.IO
 
@@ -45,7 +46,9 @@ main = do
           ((controlMask .|. mod1Mask, xK_c), swapNextScreen),
           ((controlMask .|. mod1Mask, xK_x), sendMessage $ Toggle REFLECTX),          
           ((controlMask .|. mod1Mask, xK_y), sendMessage $ Toggle REFLECTY),          
-          ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
+          ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
+          ((controlMask .|. mod1Mask, xK_g), goToSelected defaultGSConfig)
+          
  --         ((mod1Mask, xK_F7), lowerVolume 4 >> return()),
  --         ((mod1Mask, xK_F8), raiseVolume 4 >> return())
                                                                           

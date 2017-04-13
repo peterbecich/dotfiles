@@ -47,6 +47,9 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(erc-email-userid "peterbecich@gmail.com")
+ '(erc-modules
+   (quote
+    (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp spelling track)))
  '(erc-nick "peterbecich")
  '(erc-notifications-mode nil)
  '(erc-public-away-p t)
