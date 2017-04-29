@@ -4,17 +4,15 @@
 
 (require 'tls)
 
-(newsticker-start)
+;; (newsticker-start)
 
 (setq request-backend 'url-retrieve)
 
-;; (setq erc-autojoin-channels-alist
-;;       '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "##javascript" "#scala" "#scalaz" "#node.js" "#selenium" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#docker" "#digitalocean" "#startups" "#hackernews" "#web" "#go-nuts" "#dart" "#postgresql" "#clojure" "#unix" "#erlang" "#nicta-course")
-;; 	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#mochajs/mocha" "#webdriverio/webdriverio" "#docker-selenium" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#jupyter/jupyter" "#matryoshka")))
-
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course")
-	("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")))
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod")
+	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
+	)
+      )
 
 (setq erc-log-channels-directory "~/.erc/logs/")
 (setq erc-save-buffer-on-part t)
@@ -65,9 +63,9 @@
 (setq ensime-startup-notification nil)
 (setq ensime-startup-snapshot-notification nil)
 
-(use-package ensime
-	     :ensure t
-	     :pin melpa-stable)
+;; (use-package ensime
+;; 	     :ensure t
+;; 	     :pin melpa-stable)
 
 (require 'org)
 (require 'sbt-mode)
@@ -84,6 +82,9 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'haskell-mode-hook 'intero-mode)
+
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 
 (add-hook 'js2-mode-hook
 	  #'(lambda ()
