@@ -9,7 +9,7 @@
 (setq request-backend 'url-retrieve)
 
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod")
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript")
 	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
 	)
       )
@@ -41,6 +41,18 @@
 
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+(global-flycheck-mode)
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+;;(eval-after-load 'flycheck
+;;  '(flycheck-purescript-setup))
+
 
 ;; (auto-package-update-maybe)
 ;; (auto-package-update-at-time "08:00")
@@ -82,6 +94,16 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'haskell-mode-hook 'intero-mode)
+
+;; specify path to the 'psc-ide' executable
+(require 'psc-ide)
+
+(add-hook 'purescript-mode-hook
+  (lambda ()
+    (psc-ide-mode)
+    (company-mode)
+    (flycheck-mode)
+    (turn-on-purescript-indentation)))
 
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
@@ -165,6 +187,9 @@
 
 (add-hook 'compilation-filter-hook
           'comint-truncate-buffer)
+
+(add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
+
 (setq comint-buffer-maximum-size 4096)
 
 

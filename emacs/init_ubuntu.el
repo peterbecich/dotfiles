@@ -37,6 +37,7 @@
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(ansi-term-color-vector
    [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"] t)
+ '(comment-multi-line nil)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
@@ -72,9 +73,10 @@
      ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
  '(package-selected-packages
    (quote
-    (flycheck-purescript psci purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(purescript-indent-offset 2)
  '(safe-local-variable-values
    (quote
     ((hamlet/basic-offset . 4)

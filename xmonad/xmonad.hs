@@ -18,8 +18,9 @@ import System.IO
 
 main :: IO ()
 main = do
-  _ <- spawn "xrandr --output DVI-I-2 --rotate left"
-  _ <- spawn "xrandr --output DVI-I-1 --auto --pos 0x360 --output DVI-I-2 --auto --pos 2200x0"
+  _ <- spawn "xrandr --output DVI-I-3 --rotate left"
+  _ <- spawn "xrandr --output DVI-I-2 --rotate normal"
+  _ <- spawn "xrandr --output DVI-I-2 --auto --pos 0x360 --output DVI-I-3 --auto --pos 2200x0"
   _ <- spawn "feh --bg-center --no-xinerama ~/Pictures/wallpaper"
   -- _ <- spawn "~/.dropbox-dist/dropboxd &"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
