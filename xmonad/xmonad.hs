@@ -13,6 +13,7 @@ import XMonad.Layout.NoBorders
 import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
+import XMonad.Actions.FindEmptyWorkspace
 -- import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
 import System.IO
 
@@ -25,7 +26,7 @@ main = do
   -- _ <- spawn "~/.dropbox-dist/dropboxd &"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
   xmonad $ docks defaultConfig {
-          modMask = controlMask .|. mod1Mask
+          modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         -- , startupHook = docksStartupHook <+> startupHook defaultConfig
@@ -41,18 +42,27 @@ main = do
           -- lessBorders Never (Full 1 0.5 0.03) $
           layoutHook defaultConfig
         } `additionalKeys`
-        [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
-          ((controlMask .|. mod1Mask, xK_s), spawn "systemctl suspend"),
-          ((controlMask .|. mod1Mask, xK_n), spawn "nautilus -w"),
-          ((controlMask .|. mod1Mask, xK_f), spawn "firefox --new-window"),
-          ((controlMask .|. mod1Mask, xK_c), swapNextScreen),
-          ((controlMask .|. mod1Mask, xK_x), sendMessage $ Toggle REFLECTX),          
-          ((controlMask .|. mod1Mask, xK_y), sendMessage $ Toggle REFLECTY),          
-          ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
-          ((controlMask .|. mod1Mask, xK_g), goToSelected defaultGSConfig)
-          
- --         ((mod1Mask, xK_F7), lowerVolume 4 >> return()),
- --         ((mod1Mask, xK_F8), raiseVolume 4 >> return())
-                                                                          
+        [ ((mod4Mask, xK_m), spawn "emacsclient -c"),
+          ((mod4Mask, xK_s), spawn "systemctl hibernate -i"),
+          ((mod4Mask, xK_n), spawn "nautilus -w"),
+          ((mod4Mask, xK_f), spawn "firefox --new-window"),
+          -- ((mod4Mask .|. shiftMask, xK_e), viewEmptyWorkspace),
+          ((mod4Mask, xK_c), swapNextScreen),
+          ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX),          
+          ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY),          
+          ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
+          ((mod4Mask, xK_g), goToSelected defaultGSConfig)
         ]
+
+    
+        -- [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
+        --   ((controlMask .|. mod1Mask, xK_s), spawn "systemctl hibernate -i"),
+        --   ((controlMask .|. mod1Mask, xK_n), spawn "nautilus -w"),
+        --   ((controlMask .|. mod1Mask, xK_f), spawn "firefox --new-window"),
+        --   ((controlMask .|. mod1Mask, xK_c), swapNextScreen),
+        --   ((controlMask .|. mod1Mask, xK_x), sendMessage $ Toggle REFLECTX),          
+        --   ((controlMask .|. mod1Mask, xK_y), sendMessage $ Toggle REFLECTY),          
+        --   ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
+        --   ((controlMask .|. mod1Mask, xK_g), goToSelected defaultGSConfig)
+        -- ]
 

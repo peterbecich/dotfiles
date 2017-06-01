@@ -4,12 +4,13 @@
 
 (require 'tls)
 
+(setq tramp-default-method "ssh")
 ;; (newsticker-start)
 
 (setq request-backend 'url-retrieve)
 
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript")
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript" "#hackerrank")
 	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
 	)
       )
@@ -18,7 +19,52 @@
 (setq erc-save-buffer-on-part t)
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
+;; (setq erc-format-query-as-channel-p t
+;;       erc-track-priority-faces-only 'all
+;;       erc-track-faces-priority-list '(erc-error-face
+;; 				      erc-current-nick-face
+;; 				      erc-keyword-face
+;; 				      erc-nick-msg-face
+;; 				      erc-direct-msg-face
+;; 				      erc-dangerous-host-face
+;; 				      erc-notice-face
+;; 				      erc-prompt-face))
+
+;; (setq erc-current-nick-highlight-type 'nick)
+;; (setq erc-keywords '("\\berc[-a-z]*\\b" "\\bemms[-a-z]*\\b"))
+
+;; (setq erc-track-exclude-types '("JOIN" "PART" "QUIT" "NICK" "MODE"))
+;; (setq erc-track-use-faces t)
+;; (setq erc-track-faces-priority-list
+;;       '(erc-current-nick-face erc-keyword-face))
+;; (setq erc-track-priority-faces-only 'all)
+
+
 (setq erc-join-buffer 'bury)
+
+
+(setq org-directory "~/org")
+
+(require 'org-protocol)
+
+(setq org-default-notes-file (concat org-directory "/peter.org"))
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+(setq org-capture-templates
+      (quote
+       (("w"
+         "Default template"
+         entry
+         (file+headline "~/org/peter.org" "Links")
+         "* %^{Title}\n\n  Source: %u, %c\n\n  %i"
+         :empty-lines 1)
+        ;; ... more templates here ...
+        )))
+
 
 (defun my/truncate-eshell-buffers ()
   "Truncates all eshell buffers"
@@ -104,6 +150,8 @@
     (company-mode)
     (flycheck-mode)
     (turn-on-purescript-indentation)))
+
+(setq psc-ide-use-npm-bin t)
 
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
@@ -285,6 +333,18 @@
 
 
 
+(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+;; (add-hook 'clojure-mode-hook           #'enable-paredit-mode)
+
+(require 'smartparens-config)
+(add-hook 'clojure-mode-hook  #'smartparens-strict-mode)
+
 ;; http://www.emacswiki.org/emacs/WinnerMode
 (when (fboundp 'winner-mode)
   (winner-mode 1))
@@ -337,3 +397,17 @@
 
 
 
+(add-hook
+ 'eshell-mode-hook
+ (lambda ()
+   (setq pcomplete-cycle-completions nil)))
+
+
+(plist-put org-format-latex-options :scale 1.5)
+
+(defun kdm/org-save-and-export ()
+  (interactive)
+  (if (eq major-mode 'org-mode)
+    (org-latex-export-to-latex)))
+
+(add-hook 'after-save-hook 'kdm/org-save-and-export nil)

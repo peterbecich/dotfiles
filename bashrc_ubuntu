@@ -130,9 +130,10 @@ export LESS=' -R '
 
 #xrandr --output DVI-I-3 --left-of DVI-I-2 --rotate right
 
-export PATH=$PATH:/home/peterbecich/bin/thunderbird
+export SPARK_HOME=/home/peterbecich/bin/spark/spark-2.1.1-bin-hadoop2.7
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 export PATH=$PATH:/home/peterbecich/.local/bin
+export PATH=$PATH:$SPARK_HOME/bin
 
 #xmodmap ~/.Xmodmap
 
