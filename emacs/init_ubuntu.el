@@ -16,10 +16,10 @@
 
 (load "~/dotfiles/emacs/init_shared.el")
 
-(load "~/dotfiles/emacs/init_private.el")
-(load "~/dotfiles/emacs/init_private_debian.el")
+;; (load "~/dotfiles/emacs/init_private.el")
+;; (load "~/dotfiles/emacs/init_private_debian.el")
 
-(global-wakatime-mode)
+;; (global-wakatime-mode)
 
 ;;(menu-bar-mode -1)
 (toggle-scroll-bar -1)

@@ -88,7 +88,7 @@
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-(global-flycheck-mode)
+;;(global-flycheck-mode)
 
 (add-hook 'c++-mode-hook 'irony-mode)
 (add-hook 'c-mode-hook 'irony-mode)
