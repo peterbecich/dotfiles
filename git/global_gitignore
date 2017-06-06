@@ -45,3 +45,6 @@ flycheck_*.el
 .dir-locals.el
 
 .stack-work
+
+.ensime
+.ensime_cache/

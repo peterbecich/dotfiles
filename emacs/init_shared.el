@@ -15,6 +15,10 @@
 	)
       )
 
+(setq global-auto-revert-mode 1)
+
+(setq ensime-eldoc-hints 'all)
+
 (setq erc-log-channels-directory "~/.erc/logs/")
 (setq erc-save-buffer-on-part t)
 (setq erc-hide-list '("JOIN" "PART" "QUIT"))

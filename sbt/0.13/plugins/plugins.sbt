@@ -3,9 +3,6 @@ resolvers +=
   "Sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
 
-if (sys.props("java.version").startsWith("1.6"))
-  addSbtPlugin("org.ensime" % "sbt-ensime" % "1.0.0")
-else
-  addSbtPlugin("org.ensime" % "sbt-ensime" % "1.12.0")
+addSbtPlugin("org.ensime" % "sbt-ensime" % "1.12.12")
 
 
