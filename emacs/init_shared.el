@@ -2,6 +2,23 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+(setq themes '(zenburn sanityinc-solarized-light sanityinc-tomorrow-eighties sanityinc-tomorrow-day))
+(setq themes-index 0)
+
+(defun cycle-theme ()
+  (interactive)
+  (setq themes-index (% (1+ themes-index) (length themes)))
+  (load-indexed-theme))
+
+(defun load-indexed-theme ()
+  (try-load-theme (nth themes-index themes)))
+
+(defun try-load-theme (theme)
+  (if (ignore-errors (load-theme theme :no-confirm))
+      (mapcar #'disable-theme (remove theme custom-enabled-themes))
+    (message "Unable to find theme file for ‘%s’" theme)))
+
+
 (require 'tls)
 
 (setq tramp-default-method "ssh")
@@ -79,6 +96,8 @@
       (when (eq major-mode 'eshell-mode)
         (eshell-truncate-buffer)))))
 
+(elpy-enable)
+
 ;; After being idle for 5 seconds, truncate all the eshell-buffers if
 ;; needed. If this needs to be canceled, you can run `(cancel-timer
 ;; my/eshell-truncate-timer)'
@@ -87,7 +106,7 @@
 
 (desktop-save-mode 0)
 
-(pdf-tools-install)
+;; (pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)

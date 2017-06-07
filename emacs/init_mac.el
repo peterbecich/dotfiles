@@ -2,8 +2,8 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -11,85 +11,9 @@
 (package-initialize) ;; You might already have this line
 
 
+(setenv "WORKON_HOME" "/Users/peterbecich/.virtualenv/")
 
-
-(eval-when-compile
-  (require 'use-package))
-
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
-(setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
-(setq exec-path (append exec-path '("/opt/local/bin")))
-
-(setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
-
-
-(setq redrpl-command "/Users/peterbecich/type_theory/sml-redprl/bin/redprl")
-
-(add-hook 'haskell-mode-hook 'intero-mode)
-
-
-(load "~/dotfiles/emacs/init_shared.el")
-
-(load "~/dotfiles/emacs/init_private.el")
-(load "~/dotfiles/emacs/init_private_mac.el")
-
-(global-wakatime-mode)
-
-(load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
-;;(setenv “PATH” (shell-command-to-string “bash -i -c ‘echo -n $PATH’”))
-
-;; (set-face-attribute 'default nil :font "Menlo-13")
-
-
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(ansi-color-faces-vector
-;;    [default bold shadow italic underline bold bold-italic bold])
-;;  '(ansi-color-names-vector
-;;    (vector "#cccccc" "#f2777a" "#99cc99" "#ffcc66" "#6699cc" "#cc99cc" "#66cccc" "#2d2d2d"))
-;;  '(column-number-mode t)
-;;  '(custom-enabled-themes (quote (sanityinc-tomorrow-eighties)))
-;;  '(custom-safe-themes
-;;    (quote
-;;     ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" default)))
-;;  '(fci-rule-color "#515151")
-;;  '(fringe-mode 0 nil (fringe))
-;;  '(scroll-bar-mode nil)
-;;  '(show-paren-mode t)
-;;  '(tool-bar-mode nil)
-;;  '(vc-annotate-background nil)
-;;  '(vc-annotate-color-map
-;;    (quote
-;;     ((20 . "#f2777a")
-;;      (40 . "#f99157")
-;;      (60 . "#ffcc66")
-;;      (80 . "#99cc99")
-;;      (100 . "#66cccc")
-;;      (120 . "#6699cc")
-;;      (140 . "#cc99cc")
-;;      (160 . "#f2777a")
-;;      (180 . "#f99157")
-;;      (200 . "#ffcc66")
-;;      (220 . "#99cc99")
-;;      (240 . "#66cccc")
-;;      (260 . "#6699cc")
-;;      (280 . "#cc99cc")
-;;      (300 . "#f2777a")
-;;      (320 . "#f99157")
-;;      (340 . "#ffcc66")
-;;      (360 . "#99cc99"))))
-;;  '(vc-annotate-very-old-color nil))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:inherit nil :stipple nil :background "#2d2d2d" :foreground "#cccccc" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "nil" :family "Menlo")))))
+;; (require 'epa-file)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -97,21 +21,27 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#657b83" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#073642"))
  '(column-number-mode t)
- '(custom-enabled-themes (quote (zenburn)))
+ '(custom-enabled-themes nil)
  '(custom-safe-themes
    (quote
-    ("2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
+ '(doc-view-resolution 200)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(epg-gpg-program "/opt/local/bin/gpg2")
  '(erc-email-userid "peterbecich@gmail.com")
  '(erc-nick "peterbecich")
  '(erc-notifications-mode nil)
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
+ '(erc-track-mode nil)
  '(erc-track-position-in-mode-line t)
  '(fci-rule-color "#eee8d5")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(fringe-mode 0 nil (fringe))
  '(newsticker-url-list
    (quote
@@ -126,10 +56,14 @@
      ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
      ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
      ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell wakatime-mode intero redprl psci purescript-mode js-doc paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
+    (wakatime-mode slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell intero redprl psci purescript-mode js-doc paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
  '(paradox-github-token t)
+ '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(slack-buffer-create-on-notify (quote true))
@@ -161,16 +95,48 @@
      (340 . "#dc322f")
      (360 . "#cb4b16"))))
  '(vc-annotate-very-old-color nil)
- '(w3m-confirm-leaving-secure-page nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "#8b4500" :foreground "#8FB28F" :box (:line-width -1 :style released-button)))))
- '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box (:line-width -1 :style released-button)))))
- '(query-replace ((t (:inherit isearch :background "alternateSelectedControlColor"))))
- '(region ((t (:background "alternateSelectedControlColor")))))
+ '(w3m-confirm-leaving-secure-page nil)
+ '(wakatime-cli-path "/Users/peterbecich/.virtualenv/ENV/bin/wakatime")
+ '(wakatime-python-bin nil))
+;; (epa-file-enable)
+
+
+(eval-when-compile
+  (require 'use-package))
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+(setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
+(setq exec-path (append exec-path '("/opt/local/bin")))
+
+(setenv "PATH" (concat (getenv "PATH") "/Users/peterbecich/.local/bin/"))
+(setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
+
+
+(setq redrpl-command "/Users/peterbecich/type_theory/sml-redprl/bin/redprl")
+
+(add-hook 'haskell-mode-hook 'intero-mode)
+
+
+(load "~/dotfiles/emacs/init_shared.el")
+
+(load "~/dotfiles/emacs/init_private.el")
+(load "~/dotfiles/emacs/init_private_mac.el")
+
+(global-wakatime-mode)
+
+(load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
+
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(mode-line ((t (:background "#8b4500" :foreground "#8FB28F" :box (:line-width -1 :style released-button)))))
+;;  '(mode-line-inactive ((t (:background "#383838" :foreground "#5F7F5F" :box (:line-width -1 :style released-button)))))
+;;  '(query-replace ((t (:inherit isearch :background "alternateSelectedControlColor"))))
+;;  '(region ((t (:background "alternateSelectedControlColor")))))
 
 
 (set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
@@ -180,3 +146,9 @@
   (if (file-exists-p gls) (setq insert-directory-program gls)))
 (put 'erase-buffer 'disabled nil)
 (put 'magit-clean 'disabled nil)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
