@@ -5,12 +5,11 @@ source ~/dotfiles/bash_aliases_mac
 
 export PATH=$PATH:/usr/local/cuda/bin
 
-# export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-8.0/lib\
-#        ${DYLD_LIBRARY_PATH:+:${DYLD_LIBRARY_PATH}}
+export SPARK_HOME=/Users/peterbecich/bin/spark-2.1.1-bin-hadoop2.7
+
+export PATH=$PATH:$SPARK_HOME/bin
 
 export LD_LIBRARY_PATH=/usr/local/cuda/lib/:$LD_LIBRARY_PATH
-
-
 export CUDA_HOME=/usr/local/cuda
 
 export DYLD_LIBRARY_PATH="$CUDA_HOME/lib:$CUDA_HOME/:$CUDA_HOME/extras/CUPTI/lib"
@@ -24,74 +23,13 @@ export CLICOLOR=1
 # Set colors to match iTerm2 Terminal Colors
 export TERM=xterm-256color
 
-
-# Setting PATH for Python 2.7
-# The orginal version is saved in .bash_profile.pysave
-#PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-#export PATH
-
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
-
-
-# export EC2_HOME=~/.ec2
-# export PATH=$PATH:$EC2_HOME/bin
-# export EC2_PRIVATE_KEY=`ls $EC2_HOME/pk-*.pem`
-# export EC2_CERT=`ls $EC2_HOME/cert-*.pem`
-
-
-
-#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home
-
-#export PGDATA=/sw/var/postgresql-9.1/data
-
-
-##
-# Your previous /Users/peterbecich/.bash_profile file was backed up as /Users/peterbecich/.bash_profile.macports-saved_2012-08-11_at_20:44:30
-##
-
-# MacPorts Installer addition on 2012-08-11_at_20:44:30: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
 
 export LESSOPEN="| /opt/local/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-
-# export GIT_SSH=/usr/bin/ssh
-
-# export ENSIME_ROOT=/Users/peterbecich/.emacs.d/ensime-github
-
-# export ENSIME_ELISP=/Users/peterbecich/.emacs.d/ensime_2.10.0-0.9.8.9/elisp
-
-
-
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
-# export VISUAL="emacsclient -c -a emacs" #
 export VISUAL="emacsclient -c"
-
-
-
-alias emax='emacsclient -t'
-
-
-##
-# Your previous /Users/peterbecich/.bash_profile file was backed up as /Users/peterbecich/.bash_profile.macports-saved_2013-10-28_at_23:07:36
-##
-
-# MacPorts Installer addition on 2013-10-28_at_23:07:36: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-
-
-# Android
-
-# export ANDROID_HOME=/Users/peterbecich/android/android-sdk-macosx/
-
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/build-tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 
 
