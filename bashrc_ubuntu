@@ -1,28 +1,11 @@
 
-
-#export ENSIME_ROOT=/home/peterbecich/.emacs.d/ensime_2.10.0-0.9.8.9/
-
-#xrandr --output DVI-I-3 --left-of DVI-I-2 --rotate right
-
-export SPARK_HOME=/home/peterbecich/bin/spark/
+export SPARK_HOME=/home/peterbecich/bin/spark
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 export PATH=$PATH:/home/peterbecich/.local/bin
 export PATH=$PATH:$SPARK_HOME/bin
 export PATH=$PATH:$HOME/bin
 
-#xmodmap ~/.Xmodmap
-
-#alias kindle='wine ~/.wine/drive_c/Program\ Files\ \(x86\)/Amazon/Kindle/Kindle.exe'
-
-#alias emacsclient='emacsclient -nw'
-#alias emacs='emacsclient -t'
-
-#export TERM=xterm-256color
-#export TERM=gnome-256color
-
 export ALTERNATE_EDITOR=""
-#export EDITOR="emacsclient -t"
-#export VISUAL="emacsclient -c -a emacs"
 
 export CABAL_HOME=/home/peterbecich/.cabal/
 

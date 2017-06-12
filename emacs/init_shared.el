@@ -216,14 +216,14 @@
 
 (setq column-number-mode t)
 
-;;(global-auto-complete-mode t)
-(require 'auto-complete)
-(define-global-minor-mode my-global-auto-complete-mode auto-complete-mode
-  (lambda ()
-    (when (not (memq major-mode
-		     (list 'scala-mode 'sbt-mode 'shell)))
-      (auto-complete-mode))))
-(my-global-auto-complete-mode 1)
+(global-auto-complete-mode 0)
+;; (require 'auto-complete)
+;; (define-global-minor-mode my-global-auto-complete-mode auto-complete-mode
+;;   (lambda ()
+;;     (when (not (memq major-mode
+;; 		     (list 'scala-mode 'sbt-mode 'shell)))
+;;       (auto-complete-mode))))
+;; (my-global-auto-complete-mode 0)
 
 
 
