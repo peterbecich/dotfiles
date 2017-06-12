@@ -110,7 +110,10 @@
 (setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
 (setq exec-path (append exec-path '("/opt/local/bin")))
 
-(setenv "PATH" (concat (getenv "PATH") "/Users/peterbecich/.local/bin/"))
+(setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/bin/spark-2.1.1-bin-hadoop2.7/bin"))
+(setq exec-path (append exec-path '("/Users/peterbecich/bin/spark-2.1.1-bin-hadoop2.7/bin")))
+
+(setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/.local/bin/"))
 (setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
 
 
