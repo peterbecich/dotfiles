@@ -5,6 +5,8 @@ export PATH=$PATH:/home/peterbecich/.local/bin
 export PATH=$PATH:$SPARK_HOME/bin
 export PATH=$PATH:$HOME/bin
 
+export WORKON_HOME=$HOME/virtualenv
+
 export ALTERNATE_EDITOR=""
 
 export CABAL_HOME=/home/peterbecich/.cabal/

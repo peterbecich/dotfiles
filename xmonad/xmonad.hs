@@ -24,6 +24,7 @@ main = do
   _ <- spawn "xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
   _ <- spawn "feh --bg-fill --no-xinerama ~/Pictures/wallpaper"
   _ <- spawn "setxkbmap -layout us -option ctrl:nocaps"
+  _ <- spawn "xset dpms 0 1200 0"
   _ <- spawn "~/.dropbox-dist/dropboxd"
   -- _ <- spawn "~/.dropbox-dist/dropboxd &"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"

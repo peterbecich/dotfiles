@@ -27,7 +27,11 @@
 (setq request-backend 'url-retrieve)
 
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad" "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en" "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql" "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript" "#hackerrank")
+      '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad"
+	 "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en"
+	 "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql"
+	 "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript"
+	 "#hackerrank" "#apache-spark")
 	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
 	)
       )
