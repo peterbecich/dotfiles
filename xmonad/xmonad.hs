@@ -54,6 +54,7 @@ main = do
           ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX),          
           ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY),          
           ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
+	  ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
           ((mod4Mask, xK_g), goToSelected defaultGSConfig)
         ]
 

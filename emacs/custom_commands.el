@@ -4,7 +4,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; (global-set-key (kbd "C-x r") 'shr-render-buffer)
-(global-set-key (kbd "C-x r") 'w3m-buffer)
+;; (global-set-key (kbd "C-x r") 'w3m-buffer)
 
 
 ;; try to write function to save copy of region and comment it out

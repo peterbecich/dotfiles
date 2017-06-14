@@ -12,109 +12,16 @@
 (eval-when-compile
   (require 'use-package))
 
-(add-hook 'haskell-mode-hook 'intero-mode)
-
 (load "~/dotfiles/emacs/init_shared.el")
-
 (load "~/dotfiles/emacs/init_private.el")
 (load "~/dotfiles/emacs/init_private_debian.el")
 
+(add-hook 'after-init-hook 'global-company-mode)
 
-(require 'rtags)
-
-(add-hook 'c-mode-hook 'rtags-start-process-unless-running)
-(add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-(add-hook 'objc-mode-hook 'rtags-start-process-unless-running)
-
-(require 'company-rtags)
-
-(setq rtags-completions-enabled t)
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends 'company-rtags))
-(setq rtags-autostart-diagnostics t)
-(rtags-enable-standard-keybindings)
-
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-(add-hook 'irony-mode-hook 'company-mode)
-
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-
-(add-hook 'c++-mode-hook 'flycheck-mode)
-(add-hook 'c-mode-hook 'flycheck-mode)
-
-(defun my-irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
-
-(add-hook 'irony-mode-hook 'my-irony-mode-hook)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-(setq company-backends (delete 'company-semantic company-backends))
-
-(require 'company-irony-c-headers)
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony-c-headers company-irony)))
-
-
-(require 'flycheck-rtags)
-
-(defun my-flycheck-rtags-setup ()
-  (flycheck-select-checker 'rtags)
-  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
-  (setq-local flycheck-check-syntax-automatically nil))
-;; c-mode-common-hook is also called by c++-mode
-(add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
-
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
-
-
-
-(eval-after-load 'cc-mode
-  '(progn
-     (require 'rtags)
-     (mapc (lambda (x)
-             (define-key c-mode-base-map
-               (kbd (concat "C-c r " (car x))) (cdr x)))
-           '(("." . rtags-find-symbol-at-point)
-             ("," . rtags-find-references-at-point)
-             ("v" . rtags-find-virtuals-at-point)
-             ("V" . rtags-print-enum-value-at-point)
-             ("/" . rtags-find-all-references-at-point)
-             ("Y" . rtags-cycle-overlays-on-screen)
-             (">" . rtags-find-symbol)
-             ("<" . rtags-find-references)
-             ("-" . rtags-location-stack-back)
-             ("+" . rtags-location-stack-forward)
-             ("D" . rtags-diagnostics)
-             ("G" . rtags-guess-function-at-point)
-             ("p" . rtags-set-current-project)
-             ("P" . rtags-print-dependencies)
-             ("e" . rtags-reparse-file)
-             ("E" . rtags-preprocess-file)
-             ("R" . rtags-rename-symbol)
-             ("M" . rtags-symbol-info)
-             ("S" . rtags-display-summary)
-             ("O" . rtags-goto-offset)
-             (";" . rtags-find-file)
-             ("F" . rtags-fixit)
-             ("X" . rtags-fix-fixit-at-point)
-             ("B" . rtags-show-rtags-buffer)
-             ("I" . rtags-imenu)
-             ("T" . rtags-taglist)))))
-
+;;https://www.emacswiki.org/emacs/CompanyMode#toc6
+(global-set-key (kbd "C-;") 'company-complete)
 
 (global-wakatime-mode 1)
-
-(require 'auto-virtualenv)
-(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 
 ;;(menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -179,14 +86,12 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(purescript-indent-offset 2)
  '(python-shell-exec-path (quote ("~/virtualenv/ENV/bin/")))
  '(python-shell-interpreter "/home/peterbecich/virtualenv/ENV/bin/python3.6")
- '(pyvenv-activate $HOME/virtualenv)
- '(pyvenv-workon nil)
  '(safe-local-variable-values
    (quote
     ((hamlet/basic-offset . 4)
