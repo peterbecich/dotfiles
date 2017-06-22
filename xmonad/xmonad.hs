@@ -47,6 +47,7 @@ main = do
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c"),
           ((mod4Mask, xK_s), spawn "systemctl hibernate -i"),
+          -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
           ((mod4Mask, xK_n), spawn "nautilus -w"),
           ((mod4Mask, xK_f), spawn "firefox --new-window"),
           -- ((mod4Mask .|. shiftMask, xK_e), viewEmptyWorkspace),

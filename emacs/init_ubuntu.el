@@ -50,16 +50,23 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elpy-rpc-python-command "python3")
  '(ensime-sbt-perform-on-save "compile")
+ '(erc-autojoin-channels-alist
+   (quote
+    (("verne.freenode.net" "#apache-spark" "#hackerrank" "#purescript" "#yesod" "#nicta-course" "#erlang" "#clojure" "#postgresql" "#web" "#hackernews" "##math" "#git" "#debian" "#wikipedia-en" "#lesswrong" "#scalaz" "#scala" "#haskell-lens" "#xmonad" "#haskell-beginners" "#haskell" "#emacs"))))
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
  '(erc-email-userid "peterbecich@gmail.com")
+ '(erc-join-buffer (quote bury))
  '(erc-modules
    (quote
     (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp spelling)))
  '(erc-nick "peterbecich")
- '(erc-notifications-mode nil)
+ '(erc-notifications-mode t)
+ '(erc-notify-list (quote ("peterbecich")))
+ '(erc-notify-mode t)
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
+ '(erc-reuse-frames nil)
  '(erc-track-minor-mode nil)
  '(erc-track-mode nil)
  '(erc-track-position-in-mode-line t)
@@ -86,7 +93,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme wakatime-mode flycheck-haskell ensime use-package solarized-theme w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(purescript-indent-offset 2)

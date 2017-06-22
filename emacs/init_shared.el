@@ -126,13 +126,6 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
 )
 
-(setq js-indent-level 2)
-
-;; http://stackoverflow.com/questions/704616/something-wrong-with-emacs-shell
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
- (add-hook 'eshell-preoutput-filter-functions
-           'ansi-color-filter-apply)
 (setq ring-bell-function 'ignore)
 (setq twittering-use-master-password t)
 (setq twittering-icon-mode t)

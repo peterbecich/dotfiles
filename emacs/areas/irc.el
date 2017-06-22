@@ -1,3 +1,6 @@
+
+;; (setq erc-join-buffer 'bury)
+
 (setq erc-autojoin-channels-alist
       '(("freenode.net" "#emacs" "#haskell" "#haskell-beginners" "#xmonad"
 	 "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en"
@@ -34,4 +37,3 @@
 ;; (setq erc-track-priority-faces-only 'all)
 
 
-(setq erc-join-buffer 'bury)
