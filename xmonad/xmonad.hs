@@ -47,6 +47,7 @@ main = do
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c"),
           ((mod4Mask, xK_s), spawn "systemctl hibernate -i"),
+          -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
           ((mod4Mask, xK_n), spawn "nautilus -w"),
           ((mod4Mask, xK_f), spawn "firefox --new-window"),
           -- ((mod4Mask .|. shiftMask, xK_e), viewEmptyWorkspace),
@@ -54,7 +55,7 @@ main = do
           ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX),          
           ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY),          
           ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
-	  ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
+	  -- ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
           ((mod4Mask, xK_g), goToSelected defaultGSConfig)
         ]
 
