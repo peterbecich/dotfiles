@@ -144,6 +144,7 @@
 (load "~/dotfiles/emacs/areas/markdown.el")
 (load "~/dotfiles/emacs/areas/org.el")
 (load "~/dotfiles/emacs/areas/purescript.el")
+(load "~/dotfiles/emacs/areas/proof-general.el")
 (load "~/dotfiles/emacs/areas/python.el")
 (load "~/dotfiles/emacs/areas/scala.el")
 (load "~/dotfiles/emacs/areas/shell.el")

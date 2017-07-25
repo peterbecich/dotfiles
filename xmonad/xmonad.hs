@@ -1,7 +1,8 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.ManageDocks --  ( avoidStruts, docks )
+import XMonad.Hooks.ManageDocks ( avoidStruts , docks)
+-- import XMonad.Hooks.ManageDocks ( docks )
 import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Config.Desktop
@@ -28,7 +29,9 @@ main = do
   _ <- spawn "~/.dropbox-dist/dropboxd"
   -- _ <- spawn "~/.dropbox-dist/dropboxd &"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
+  _ <- spawn "stalonetray"
   xmonad $ docks defaultConfig {
+
           modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
@@ -46,7 +49,7 @@ main = do
           layoutHook defaultConfig
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c"),
-          ((mod4Mask, xK_s), spawn "systemctl hibernate -i"),
+          ((mod4Mask, xK_s), spawn "systemctl suspend"),
           -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
           ((mod4Mask, xK_n), spawn "nautilus -w"),
           ((mod4Mask, xK_f), spawn "firefox --new-window"),
