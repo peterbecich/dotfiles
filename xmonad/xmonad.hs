@@ -15,7 +15,7 @@ import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.FindEmptyWorkspace
--- import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
+import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
 import System.IO
 
 main :: IO ()
@@ -26,10 +26,11 @@ main = do
   _ <- spawn "feh --bg-fill --no-xinerama ~/Pictures/wallpaper"
   _ <- spawn "setxkbmap -layout us -option ctrl:nocaps"
   _ <- spawn "xset dpms 0 1200 0"
-  _ <- spawn "~/.dropbox-dist/dropboxd"
+  -- _ <- spawn "~/.dropbox-dist/dropboxd"
+  -- _ <- spawn "emacsclient -c"
   -- _ <- spawn "~/.dropbox-dist/dropboxd &"
   h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
-  _ <- spawn "stalonetray"
+  -- _ <- spawn "stalonetray &"
   xmonad $ docks defaultConfig {
 
           modMask = mod4Mask
@@ -48,18 +49,21 @@ main = do
           -- lessBorders Never (Full 1 0.5 0.03) $
           layoutHook defaultConfig
         } `additionalKeys`
-        [ ((mod4Mask, xK_m), spawn "emacsclient -c"),
-          ((mod4Mask, xK_s), spawn "systemctl suspend"),
+        [ ((mod4Mask, xK_m), spawn "emacsclient -c")
+          , ((mod4Mask, xK_s), spawn "systemctl suspend")
           -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
-          ((mod4Mask, xK_n), spawn "nautilus -w"),
-          ((mod4Mask, xK_f), spawn "firefox --new-window"),
+          , ((mod4Mask, xK_n), spawn "nautilus -w")
+          , ((mod4Mask, xK_f), spawn "firefox --new-window")
           -- ((mod4Mask .|. shiftMask, xK_e), viewEmptyWorkspace),
-          ((mod4Mask, xK_c), swapNextScreen),
-          ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX),          
-          ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY),          
-          ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
+          , ((mod4Mask, xK_c), swapNextScreen)
+          , ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX)
+          , ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY)
+          , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
 	  -- ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
-          ((mod4Mask, xK_g), goToSelected defaultGSConfig)
+          , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
+          , ((mod4Mask, xK_F11 ), lowerVolume 3 >> return ())
+          , ((mod4Mask, xK_F12 ), raiseVolume 3 >> return ())
+          , ((mod4Mask, xK_F10), toggleMute    >> return ())          
         ]
 
     
