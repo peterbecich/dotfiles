@@ -54,6 +54,8 @@
  '(auto-virtualenv-dir "/home/peterbecich/virtualenv")
  '(comment-multi-line nil)
  '(company-clang-executable "clang")
+ '(coq-compile-before-require t)
+ '(coq-compile-parallel-in-background t)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
@@ -69,6 +71,9 @@
  '(erc-autojoin-timing (quote ident))
  '(erc-email-userid "peterbecich@gmail.com")
  '(erc-join-buffer (quote bury))
+ '(erc-log-insert-log-on-open nil)
+ '(erc-log-write-after-insert t)
+ '(erc-log-write-after-send t)
  '(erc-modules
    (quote
     (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp spelling)))
@@ -79,9 +84,12 @@
  '(erc-public-away-p t)
  '(erc-rename-buffers t)
  '(erc-reuse-frames nil)
+ '(erc-server-reconnect-attempts 6)
+ '(erc-server-reconnect-timeout 15)
  '(erc-track-minor-mode nil)
  '(erc-track-mode nil)
  '(erc-track-position-in-mode-line t)
+ '(erc-truncate-mode t)
  '(fci-rule-character-color "#452E2E")
  '(grep-find-ignored-directories
    (quote
@@ -120,5 +128,5 @@
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
- '(wakatime-python-bin nil))
+ '(wakatime-python-bin nil t))
 

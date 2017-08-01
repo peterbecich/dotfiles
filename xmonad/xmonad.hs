@@ -24,7 +24,8 @@ main = do
   _ <- spawn "xrandr --output DVI-D-0 --rotate normal"
   _ <- spawn "xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
   _ <- spawn "feh --bg-fill --no-xinerama ~/Pictures/wallpaper"
-  _ <- spawn "setxkbmap -layout us -option ctrl:nocaps"
+--  _ <- spawn "setxkbmap -layout us -option ctrl:nocaps"
+--  _ <- spawn "setxkbmap -device 11 -layout dvorak -option ctrl:nocaps -option altwin:swap_alt_win"
   _ <- spawn "xset dpms 0 1200 0"
   -- _ <- spawn "~/.dropbox-dist/dropboxd"
   -- _ <- spawn "emacsclient -c"
@@ -63,7 +64,10 @@ main = do
           , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
           , ((mod4Mask, xK_F11 ), lowerVolume 3 >> return ())
           , ((mod4Mask, xK_F12 ), raiseVolume 3 >> return ())
-          , ((mod4Mask, xK_F10), toggleMute    >> return ())          
+          , ((mod4Mask, xK_F10), toggleMute    >> return ())
+          , ((mod4Mask, xK_F7), spawn "setxkbmap -layout dvorak")          
+          , ((mod4Mask, xK_F8), spawn "setxkbmap -layout us")
+          
         ]
 
     
