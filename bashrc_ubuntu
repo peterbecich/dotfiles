@@ -5,6 +5,8 @@ export PATH=$PATH:/home/peterbecich/.local/bin
 export PATH=$PATH:$SPARK_HOME/bin
 export PATH=$PATH:$HOME/bin
 
+export PATH=$HOME/node/bin:$PATH
+
 export PATH=$PATH:/usr/local/cuda-8.0/bin
 
 export WORKON_HOME=$HOME/virtualenv

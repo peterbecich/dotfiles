@@ -6,7 +6,7 @@
 	 "#haskell-lens" "#scala" "#scalaz" "#lesswrong" "#wikipedia-en"
 	 "#debian" "#git" "##math" "#hackernews" "#web" "#postgresql"
 	 "#clojure" "#erlang" "#nicta-course" "#yesod" "#purescript"
-	 "#hackerrank" "#apache-spark")
+	 "#hackerrank" "#apache-spark" "#haskell-distributed")
 	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
 	)
       )

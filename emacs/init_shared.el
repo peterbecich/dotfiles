@@ -4,23 +4,23 @@
 
 (setq use-package-always-ensure t)
 
+(require 'helm-config)
 
+;; (setq themes '(zenburn sanityinc-solarized-light sanityinc-tomorrow-eighties sanityinc-tomorrow-day))
+;; (setq themes-index 0)
 
-(setq themes '(zenburn sanityinc-solarized-light sanityinc-tomorrow-eighties sanityinc-tomorrow-day))
-(setq themes-index 0)
+;; (defun cycle-theme ()
+;;   (interactive)
+;;   (setq themes-index (% (1+ themes-index) (length themes)))
+;;   (load-indexed-theme))
 
-(defun cycle-theme ()
-  (interactive)
-  (setq themes-index (% (1+ themes-index) (length themes)))
-  (load-indexed-theme))
+;; (defun load-indexed-theme ()
+;;   (try-load-theme (nth themes-index themes)))
 
-(defun load-indexed-theme ()
-  (try-load-theme (nth themes-index themes)))
-
-(defun try-load-theme (theme)
-  (if (ignore-errors (load-theme theme :no-confirm))
-      (mapcar #'disable-theme (remove theme custom-enabled-themes))
-    (message "Unable to find theme file for ‘%s’" theme)))
+;; (defun try-load-theme (theme)
+;;   (if (ignore-errors (load-theme theme :no-confirm))
+;;       (mapcar #'disable-theme (remove theme custom-enabled-themes))
+;;     (message "Unable to find theme file for ‘%s’" theme)))
 
 (require 'tls)
 
@@ -34,7 +34,7 @@
 
 (desktop-save-mode 0)
 
-;; (pdf-tools-install)
+(pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
 (add-hook 'dired-mode-hook 'auto-revert-mode)
@@ -120,7 +120,7 @@
           (save-buffers-kill-emacs)
         (message-box "use 'M-x exit'")))))
 
-(setq resize-mini-windows nil)
+(setq resize-mini-windows t)
 ;; (setq max-mini-window-height 2)
 
 ;; http://stackoverflow.com/questions/3447531/emacs-ess-version-of-clear-console
@@ -187,6 +187,12 @@
 (use-package sx)
 (use-package twittering-mode)
 (use-package w3m)
-(use-package zenburn-theme)
+(use-package yaml-mode)
+(use-package sml-mode)
 
+;; (use-package zenburn-theme)
+;; (use-package espresso-theme)
+;; (use-package leuven-theme)
+;; (use-package moe-theme)
+;; (use-package solarized-theme)
 

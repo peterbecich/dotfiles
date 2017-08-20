@@ -8,7 +8,7 @@
     (flycheck-mode)
     (turn-on-purescript-indentation)))
 
-(setq psc-ide-use-npm-bin t)
+(setq psc-ide-use-npm-bin nil)
 
 ;;(eval-after-load 'flycheck
 ;;  '(flycheck-purescript-setup))
