@@ -7,7 +7,7 @@ import XMonad.Util.Run
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Config.Desktop
 import XMonad.Util.SpawnOnce
-import XMonad.Layout.Reflect
+-- import XMonad.Layout.Reflect
 -- import qualified XMonad.Layout.ToggleLayouts as TL
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders
@@ -44,8 +44,8 @@ main = do
                                        }
         , manageHook = manageHook defaultConfig
         , layoutHook = avoidStruts $
-          mkToggle (single REFLECTX) $
-          mkToggle (single REFLECTY) $
+          -- mkToggle (single REFLECTX) $
+          -- mkToggle (single REFLECTY) $
           -- TL.toggleLayouts (noBorders Full) $
           smartBorders $
           -- lessBorders Never (Full 1 0.5 0.03) $
@@ -56,10 +56,10 @@ main = do
           -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
           , ((mod4Mask, xK_n), spawn "nautilus -w")
           , ((mod4Mask, xK_f), spawn "firefox --new-window")
-          -- ((mod4Mask .|. shiftMask, xK_e), viewEmptyWorkspace),
+          , ((mod4Mask, xK_0), viewEmptyWorkspace)
           , ((mod4Mask, xK_c), swapNextScreen)
-          , ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX)
-          , ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY)
+          -- , ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX)
+          -- , ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY)
           , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
 	  -- ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
           , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
