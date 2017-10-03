@@ -1,9 +1,6 @@
 #!/bin/bash
-# /home/peterbecich/.cabal/bin/xmobar &
-sleep .5
-/home/peterbecich/.dropbox-dist/dropboxd &
-emacsclient -c &
-stalonetray &
-exec xmonad-session
-
+sleep 1
+#export PATH=$PATH:/home/peterbecich/.cabal/bin/
+#exec /home/peterbecich/.cabal/bin/xmonad
+/home/peterbecich/.cabal/bin/xmonad &
 

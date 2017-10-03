@@ -2,8 +2,8 @@ source ~/dotfiles/bash_aliases_mac
 
 
 #export PATH=/Developer/NVIDIA/CUDA-8.0/bin${PATH:+:${PATH}}
-export PATH=/opt/local/bin:$PATH
-export PATH=~/.local/bin:$PATH
+
+export PATH=$PATH:/opt/local/bin
 
 export PATH=$PATH:/usr/local/cuda/bin
 

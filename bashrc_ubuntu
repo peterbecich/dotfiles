@@ -1,6 +1,8 @@
 
 export SPARK_HOME=/home/peterbecich/bin/spark
 
+export PATH=/home/peterbecich/bin:$PATH
+
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 
 export PATH=/home/peterbecich/.local/bin:$PATH
