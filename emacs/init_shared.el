@@ -41,16 +41,12 @@
 
 ;;(global-flycheck-mode)
 
-;; (auto-package-update-maybe)
-;; (auto-package-update-at-time "08:00")
-;; (setq auto-package-update-interval 1)
-;; (setq auto-package-update-delete-old-versions t)
-
-;; (add-hook 'auto-package-update-before-hook
-;;           (lambda () (message "I will update packages now")))
-
-
-
+(use-package auto-package-update
+   :ensure t
+   :config
+   (setq auto-package-update-delete-old-versions t
+         auto-package-update-interval 1)
+   (auto-package-update-maybe))
 
 (defadvice load-theme (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
@@ -154,41 +150,17 @@
 (load "~/dotfiles/emacs/areas/shell.el")
 (load "~/dotfiles/emacs/areas/web.el")
 
+(setq newsticker-url-list
+      (quote
+       (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
+	("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
+	("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil)
+	("Hacker News" "https://news.ycombinator.com/rss" nil nil nil)
+	("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil nil nil)
+	("The Hill most popular" "http://thehill.com/rss/syndicator/19110" nil nil nil)
+	("The Hill all news" "http://thehill.com/rss/syndicator/19109" nil nil nil))))
 
 
-(use-package magit)
-(use-package auctex-latexmk)
-(use-package auto-complete)
-(use-package auto-virtualenv)
-(use-package company-coq)
-(use-package company-irony)
-(use-package company-irony-c-headers)
-(use-package company-rtags)
-(use-package dockerfile-mode)
-(use-package ensime)
-(use-package ess)
-(use-package flycheck-rtags)
-(use-package haskell-mode)
-(use-package intero)
-(use-package irony)
-(use-package irony-eldoc)
-(use-package js2-mode)
-(use-package magit)
-(use-package markdown-mode)
-(use-package multi-web-mode)
-(use-package org)
-(use-package paredit)
-(use-package pdf-tools)
-(use-package psc-ide)
-(use-package purescript-mode)
-(use-package restclient)
-(use-package rtags)
-(use-package smartparens)
-(use-package sx)
-(use-package twittering-mode)
-(use-package w3m)
-(use-package yaml-mode)
-(use-package sml-mode)
 
 ;; (use-package zenburn-theme)
 ;; (use-package espresso-theme)

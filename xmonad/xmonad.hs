@@ -20,36 +20,21 @@ import System.IO
 
 main :: IO ()
 main = do
-  _ <- spawn "xrandr --output HDMI-0 --rotate left"
-  _ <- spawn "xrandr --output DVI-D-0 --rotate normal"
-  _ <- spawn "xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
-  -- _ <- spawn "feh --bg-fill --no-xinerama ~/Pictures/wallpaper"
---  _ <- spawn "setxkbmap -layout us -option ctrl:nocaps"
---  _ <- spawn "setxkbmap -device 11 -layout dvorak -option ctrl:nocaps -option altwin:swap_alt_win"
-  _ <- spawn "~/bin/random_wallpaper.sh &"
-  _ <- spawn "xset dpms 0 1200 0"
-  -- _ <- spawn "~/.dropbox-dist/dropboxd"
-  -- _ <- spawn "emacsclient -c"
-  -- _ <- spawn "~/.dropbox-dist/dropboxd &"
-  h <- spawnPipe "/home/peterbecich/.cabal/bin/xmobar"
-  -- _ <- spawn "stalonetray &"
+  _ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left"
+  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate normal"
+  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
+  h <- spawnPipe "/usr/local/bin/xmobar"
+  _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
+  _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
+  _ <- spawnPipe "/usr/bin/pkill stalonetray"
+  _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
   xmonad $ docks defaultConfig {
-
-          modMask = mod4Mask
+        modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
-        -- , startupHook = docksStartupHook <+> startupHook defaultConfig
-        , logHook = dynamicLogWithPP $ defaultPP {
-                            ppOutput = hPutStrLn h
-                                       }
+        , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
-        , layoutHook = avoidStruts $
-          -- mkToggle (single REFLECTX) $
-          -- mkToggle (single REFLECTY) $
-          -- TL.toggleLayouts (noBorders Full) $
-          smartBorders $
-          -- lessBorders Never (Full 1 0.5 0.03) $
-          layoutHook defaultConfig
+        , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c")
           , ((mod4Mask, xK_s), spawn "systemctl suspend")
@@ -58,10 +43,7 @@ main = do
           , ((mod4Mask, xK_f), spawn "firefox --new-window")
           , ((mod4Mask, xK_0), viewEmptyWorkspace)
           , ((mod4Mask, xK_c), swapNextScreen)
-          -- , ((mod4Mask, xK_x), sendMessage $ Toggle REFLECTX)
-          -- , ((mod4Mask, xK_y), sendMessage $ Toggle REFLECTY)
           , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
-	  -- ((mod4Mask .|. shiftMask, xK_4), spawn "shutter -s -o %Y_%m_%d_%T.png"),
           , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
           , ((mod4Mask, xK_F11 ), lowerVolume 3 >> return ())
           , ((mod4Mask, xK_F12 ), raiseVolume 3 >> return ())
@@ -70,16 +52,4 @@ main = do
           , ((mod4Mask, xK_F8), spawn "setxkbmap -layout us")
           
         ]
-
-    
-        -- [ ((controlMask .|. mod1Mask, xK_m), spawn "emacsclient -c"),
-        --   ((controlMask .|. mod1Mask, xK_s), spawn "systemctl hibernate -i"),
-        --   ((controlMask .|. mod1Mask, xK_n), spawn "nautilus -w"),
-        --   ((controlMask .|. mod1Mask, xK_f), spawn "firefox --new-window"),
-        --   ((controlMask .|. mod1Mask, xK_c), swapNextScreen),
-        --   ((controlMask .|. mod1Mask, xK_x), sendMessage $ Toggle REFLECTX),          
-        --   ((controlMask .|. mod1Mask, xK_y), sendMessage $ Toggle REFLECTY),          
-        --   ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal"),
-        --   ((controlMask .|. mod1Mask, xK_g), goToSelected defaultGSConfig)
-        -- ]
 
