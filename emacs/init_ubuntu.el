@@ -54,6 +54,11 @@
 (setq exec-path (append '("/home/peterbecich/.local/bin") exec-path ))
 
 (setenv "GOPATH" "/home/peterbecich/go")
+(setenv "SPARK_HOME" "/home/peterbecich/bin/spark")
+
+(setenv "PATH" (concat "/home/peterbecich/bin/spark/bin/:" (getenv "PATH")))
+(setq exec-path (append '("/home/peterbecich/bin/spark/bin/") exec-path ))
+
 
 (setenv "PATH" (concat (getenv "PATH")     (concat ":" (concat (getenv "GOPATH") "/bin"))))
 (setq exec-path (append exec-path '((concat (getenv "GOPATH") "/bin"))))
