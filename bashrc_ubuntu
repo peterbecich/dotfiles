@@ -28,3 +28,5 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64/
 export GOPATH=/home/peterbecich/go
 
 export PATH=$PATH:$GOPATH/bin
+
+export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
