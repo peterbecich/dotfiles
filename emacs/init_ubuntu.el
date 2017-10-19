@@ -47,6 +47,9 @@
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/node/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/node/bin")))
 
+(setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/.npm-global/bin"))
+(setq exec-path (append exec-path '("/home/peterbecich/.npm-global/bin")))
+
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/.cabal/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/.cabal/bin")))
 

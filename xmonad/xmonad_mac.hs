@@ -21,8 +21,8 @@ import System.IO
 main :: IO ()
 main = do
   h <- spawnPipe "/usr/bin/xmobar"
-  _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
-  _ <- spawnPipe "xrandr --output DP-2 --brightness 0.6"
+  _ <- spawnPipe "setxkbmap -option ctrl:nocaps,altwin:swap_lalt_lwin"
+  _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
@@ -30,6 +30,7 @@ main = do
         modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
+        , borderWidth = 2
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
         , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
