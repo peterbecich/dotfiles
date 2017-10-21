@@ -25,6 +25,7 @@ main = do
   _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
+  _ <- spawnPipe "xscreensaver -no-splash &"
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
   xmonad $ docks defaultConfig {
         modMask = mod4Mask
@@ -36,7 +37,7 @@ main = do
         , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c")
-          , ((mod4Mask, xK_s), spawn "systemctl suspend")
+          , ((mod4Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend")
           -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
           , ((mod4Mask, xK_n), spawn "nautilus -w")
           , ((mod4Mask, xK_f), spawn "firefox --new-window")

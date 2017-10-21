@@ -81,7 +81,7 @@
 
 ;; (global-wakatime-mode 1)
 
-;;(menu-bar-mode -1)
+(menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -113,6 +113,7 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(auto-virtualenv-dir "/home/peterbecich/virtualenv")
+ '(column-number-mode t)
  '(comment-multi-line nil)
  '(company-clang-executable "clang")
  '(coq-compile-before-require t)
@@ -205,7 +206,6 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
- '(menu-bar-mode nil)
  '(newsticker-url-list
    (quote
     (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
@@ -241,9 +241,11 @@ static char *gnus-pointer[] = {
      (haskell-process-use-ghci . t)
      (haskell-indent-spaces . 4))))
  '(sbt:scroll-to-bottom-on-output t)
+ '(show-paren-mode t)
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
+ '(tool-bar-mode nil)
  '(wakatime-python-bin nil t))
 
 (custom-set-faces
@@ -251,5 +253,5 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Latin Modern Mono" :foundry "unknown" :slant normal :weight normal :height 108 :width normal)))))
 (put 'magit-clean 'disabled nil)
