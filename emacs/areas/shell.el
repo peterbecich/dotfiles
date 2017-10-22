@@ -45,5 +45,10 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
- (add-hook 'eshell-preoutput-filter-functions
-           'ansi-color-filter-apply)
+(add-hook 'eshell-preoutput-filter-functions
+	  'ansi-color-filter-apply)
+
+(add-to-list
+         'comint-preoutput-filter-functions
+         (lambda (output)
+           (replace-regexp-in-string "\\[[0-9]+[GK]" "" output)))

@@ -174,6 +174,7 @@ static char *note[] = {
  '(erc-truncate-mode t)
  '(erc-try-new-nick-p nil)
  '(erc-user-mode "+RZgi")
+ '(eshell-buffer-maximum-lines 8192)
  '(gnus-mode-line-image-cache
    (quote
     (image :type xpm :ascent center :data "/* XPM */
@@ -196,7 +197,7 @@ static char *gnus-pointer[] = {
 \"######..###.######\",
 \"###....####.######\",
 \"###..######.######\",
-\"###########.######\" };")))
+\"###########.######\" };")) t)
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
@@ -214,7 +215,7 @@ static char *gnus-pointer[] = {
      ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
      ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
      ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
-     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
+     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))) t)
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
