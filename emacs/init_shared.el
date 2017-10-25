@@ -25,7 +25,9 @@
 (require 'tls)
 
 (setq tramp-default-method "ssh")
-;; (newsticker-start)
+(newsticker-start)
+
+(twit)
 
 (setq request-backend 'url-retrieve)
 
@@ -127,9 +129,6 @@
 )
 
 (setq ring-bell-function 'ignore)
-(setq twittering-use-master-password t)
-(setq twittering-icon-mode t)
-(setq twittering-convert-fix-size "24")
 
 ;; https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources
 (setq epg-gpg-program "gpg2")
@@ -149,18 +148,24 @@
 (load "~/dotfiles/emacs/areas/scala.el")
 (load "~/dotfiles/emacs/areas/shell.el")
 (load "~/dotfiles/emacs/areas/web.el")
+(load "~/dotfiles/emacs/areas/twitter.el")
 
 (setq newsticker-url-list
       (quote
-       (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
-	("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
-	("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil)
-	("Hacker News" "https://news.ycombinator.com/rss" nil nil nil)
-	("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil nil nil)
-	("The Hill most popular" "http://thehill.com/rss/syndicator/19110" nil nil nil)
-	("The Hill all news" "http://thehill.com/rss/syndicator/19109" nil nil nil))))
-
-
+       (
+	("Reuters top news" "http://feeds.reuters.com/reuters/topNews" nil 1800 nil)
+	("Reuters US news" "http://feeds.reuters.com/Reuters/domesticNews" nil 1800 nil)
+	("Reuters World news" "http://feeds.reuters.com/Reuters/worldNews" nil 1800 nil)
+	("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 1800 nil)
+	("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 1800 nil)
+	("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 1800 nil)
+	("Hacker News" "https://news.ycombinator.com/rss" nil 1800 nil)
+	("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil 1800 nil)
+	("The Hill most popular" "http://www.thehill.com/rss/syndicator/19110" nil 1800 nil)
+	("The Hill all news" "http://www.thehill.com/rss/syndicator/19109" nil 1800 nil)
+	("NYT" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" nil 1800 nil)
+	)
+       ))
 
 ;; (use-package zenburn-theme)
 ;; (use-package espresso-theme)

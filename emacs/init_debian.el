@@ -9,13 +9,17 @@
 
 (setq use-package-always-ensure t)
 
-(use-package magit)
+
 (use-package auctex-latexmk)
 (use-package auto-complete)
 (use-package auto-virtualenv)
+(use-package browse-at-remote)
 (use-package company-irony)
 (use-package company-irony-c-headers)
 (use-package company-rtags)
+(use-package company-terraform)
+(use-package docker)
+(use-package docker-compose-mode)
 (use-package dockerfile-mode)
 (use-package ensime)
 (use-package ess)
@@ -25,6 +29,7 @@
 (use-package irony)
 (use-package irony-eldoc)
 (use-package js2-mode)
+(use-package magit)
 (use-package magit)
 (use-package markdown-mode)
 (use-package multi-web-mode)
@@ -36,13 +41,12 @@
 (use-package restclient)
 (use-package rtags)
 (use-package smartparens)
+(use-package sml-mode)
 (use-package sx)
+(use-package terraform-mode)
 (use-package twittering-mode)
 (use-package w3m)
 (use-package yaml-mode)
-(use-package sml-mode)
-
-
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/node/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/node/bin")))
@@ -207,25 +211,12 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
- '(newsticker-url-list
-   (quote
-    (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
-     ("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
-     ("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil)
-     ("Hacker News" "https://news.ycombinator.com/rss" nil nil nil)
-     ("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil nil nil)
-     ("The Hill most popular" "http://thehill.com/rss/syndicator/19110" nil nil nil)
-     ("The Hill all news" "http://thehill.com/rss/syndicator/19109" nil nil nil)
-     ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
-     ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
-     ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
-     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))) t)
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (company-terraform terraform-mode browse-at-remote docker docker-compose-mode idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(proof-auto-raise-buffers nil)
  '(proof-follow-mode (quote locked))
@@ -247,13 +238,16 @@ static char *gnus-pointer[] = {
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
  '(tool-bar-mode nil)
+ '(twittering-timer-interval 300)
  '(wakatime-python-bin nil t))
 
 
 (put 'magit-clean 'disabled nil)
+
+(setq-default line-spacing 0)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Latin Modern Mono" :foundry "unknown" :slant normal :weight normal :height 130 :width normal)))))
+ )
