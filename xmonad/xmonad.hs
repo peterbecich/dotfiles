@@ -20,9 +20,10 @@ import System.IO
 
 main :: IO ()
 main = do
-  _ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left --pos 1200x0"
-  --_ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate normal"
-  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate left --pos 0x0"
+  --_ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left --pos 1200x0"
+  _ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left --pos 1920x0"
+  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate normal --pos 0x400"
+  --_ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate left --pos 0x0"
   --_ <- spawn "sleep 1; xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
   h <- spawnPipe "/usr/local/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps"

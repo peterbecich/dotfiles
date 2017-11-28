@@ -25,9 +25,10 @@
 (require 'tls)
 
 (setq tramp-default-method "ssh")
-(newsticker-start)
 
-(twit)
+;;(newsticker-start)
+
+;;(twit)
 
 (setq request-backend 'url-retrieve)
 
@@ -60,6 +61,7 @@
 ;; (use-package restclient
 ;;   :mode ("\\.http\\'" . restclient-mode))
 
+(setq dired-dwim-target t)
 
 (setq emerge-diff-options "--ignore-all-space")
 

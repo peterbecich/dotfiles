@@ -21,7 +21,7 @@
 (use-package docker)
 (use-package docker-compose-mode)
 (use-package dockerfile-mode)
-(use-package ensime)
+;;(use-package ensime)
 (use-package ess)
 (use-package flycheck-rtags)
 (use-package haskell-mode)
@@ -211,6 +211,19 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
+ '(newsticker-url-list
+   (quote
+    (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
+     ("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 3600 nil)
+     ("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 3600 nil)
+     ("Hacker News" "https://news.ycombinator.com/rss" nil nil nil)
+     ("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil nil nil)
+     ("The Hill most popular" "http://thehill.com/rss/syndicator/19110" nil nil nil)
+     ("The Hill all news" "http://thehill.com/rss/syndicator/19109" nil nil nil)
+     ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
+     ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
+     ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
+     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
@@ -239,6 +252,7 @@ static char *gnus-pointer[] = {
  '(slack-prefer-current-team (quote true))
  '(tool-bar-mode nil)
  '(twittering-timer-interval 300)
+ '(twittering-use-icon-storage t)
  '(wakatime-python-bin nil t))
 
 

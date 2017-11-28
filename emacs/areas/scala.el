@@ -2,8 +2,8 @@
 (setq ensime-eldoc-hints 'all)
 
 ;;(setq ess-use-auto-complete t)
-(require 'ensime)
-(require 'scala-mode)
+;; (require 'ensime)
+;;(require 'scala-mode)
 ;; This step causes the ensime-mode to be started whenever
 ;; scala-mode2 is started for a buffer. You may have to customize this step
 ;; if you're not using the standard scala mode.
@@ -33,7 +33,7 @@
 (setq ensime-startup-notification nil)
 (setq ensime-startup-snapshot-notification nil)
 
-(require 'sbt-mode)
+;; (require 'sbt-mode)
 
 ;; (use-package ensime
 ;; 	     :ensure t
