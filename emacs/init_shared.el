@@ -27,7 +27,7 @@
 (setq tramp-default-method "ssh")
 (newsticker-start)
 
-(twit)
+;;(twit)
 
 (setq request-backend 'url-retrieve)
 

@@ -219,7 +219,7 @@ static char *gnus-pointer[] = {
      ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
      ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
      ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
-     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))) t)
+     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
@@ -232,7 +232,7 @@ static char *gnus-pointer[] = {
  '(proof-three-window-enable t)
  '(proof-three-window-mode-policy (quote hybrid))
  '(proof-toolbar-enable t)
- '(psc-ide-purs-executable "/home/peterbecich/node/bin/purs")
+ '(psc-ide-purs-executable "/home/peterbecich/.npm-global/bin/purs")
  '(purescript-indent-offset 2)
  '(python-shell-exec-path (quote ("~/virtualenv/ENV/bin/")))
  '(python-shell-interpreter "/home/peterbecich/virtualenv/ENV/bin/python3.6")
