@@ -27,6 +27,7 @@ main = do
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
   _ <- spawnPipe "xscreensaver -no-splash &"
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
+  _ <- spawnPipe "sleep 1; /usr/bin/nm-applet &"
   xmonad $ docks defaultConfig {
         modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
