@@ -151,6 +151,7 @@
 (load "~/dotfiles/emacs/areas/shell.el")
 (load "~/dotfiles/emacs/areas/web.el")
 (load "~/dotfiles/emacs/areas/twitter.el")
+(load "~/dotfiles/emacs/areas/epub.el")
 
 (setq newsticker-url-list
       (quote
