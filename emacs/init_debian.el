@@ -47,6 +47,7 @@
 (use-package twittering-mode)
 (use-package w3m)
 (use-package yaml-mode)
+(use-package jdee)
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/node/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/node/bin")))
@@ -211,6 +212,7 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
+ '(jdee-server-dir "~/bin/java/")
  '(newsticker-url-list
    (quote
     (("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 3600 nil)
@@ -223,13 +225,13 @@ static char *gnus-pointer[] = {
      ("Politico congress" "http://www.politico.com/rss/congress.xml" nil nil nil)
      ("Politico defense" "http://www.politico.com/rss/defense.xml" nil nil nil)
      ("Politico economy" "http://www.politico.com/rss/economy.xml" nil nil nil)
-     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))))
+     ("Politico energy" "http://www.politico.com/rss/energy.xml" nil nil nil))) t)
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (company-terraform terraform-mode browse-at-remote docker docker-compose-mode idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (jdee magithub company-terraform terraform-mode browse-at-remote docker docker-compose-mode idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(proof-auto-raise-buffers nil)
  '(proof-follow-mode (quote locked))
@@ -242,7 +244,26 @@ static char *gnus-pointer[] = {
  '(python-shell-interpreter "/home/peterbecich/virtualenv/ENV/bin/python3.6")
  '(safe-local-variable-values
    (quote
-    ((hamlet/basic-offset . 4)
+    ((org-src-preserve-indentation)
+     (eval and
+	   (featurep
+	    (quote ox-extra))
+	   (ox-extras-activate
+	    (quote
+	     (ignore-headlines))))
+     (eval require
+	   (quote ox-texinfo+)
+	   nil t)
+     (eval require
+	   (quote ox-extra)
+	   nil t)
+     (eval require
+	   (quote org-man)
+	   nil t)
+     (eval require
+	   (quote magit-utils)
+	   nil t)
+     (hamlet/basic-offset . 4)
      (haskell-process-use-ghci . t)
      (haskell-indent-spaces . 4))))
  '(sbt:scroll-to-bottom-on-output t)
@@ -256,7 +277,6 @@ static char *gnus-pointer[] = {
  '(wakatime-python-bin nil t))
 
 
-(put 'magit-clean 'disabled nil)
 
 (setq-default line-spacing 0)
 (custom-set-faces
@@ -265,3 +285,4 @@ static char *gnus-pointer[] = {
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'magit-clean 'disabled nil)

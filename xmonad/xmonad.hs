@@ -28,8 +28,8 @@ main = do
   h <- spawnPipe "/usr/local/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/rotated-*"
-  --_ <- spawnPipe "/usr/bin/pkill stalonetray"
-  --_ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
+  _ <- spawnPipe "/usr/bin/pkill stalonetray"
+  _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
   xmonad $ docks defaultConfig {
         modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
