@@ -23,7 +23,7 @@
 (use-package dockerfile-mode)
 ;;(use-package ensime)
 (use-package ess)
-(use-package flycheck-rtags)
+;; (use-package flycheck-rtags)
 (use-package haskell-mode)
 (use-package intero)
 (use-package irony)
@@ -48,6 +48,8 @@
 (use-package w3m)
 (use-package yaml-mode)
 (use-package jdee)
+;; (use-package eclim)
+;; (use-package company-emacs-eclim)
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/node/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/node/bin")))
@@ -79,7 +81,7 @@
 (load "~/dotfiles/emacs/init_private.el")
 (load "~/dotfiles/emacs/init_private_debian.el")
 
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 ;;https://www.emacswiki.org/emacs/CompanyMode#toc6
 (global-set-key (kbd "C-;") 'company-complete)
@@ -128,6 +130,10 @@
    (quote
     ("9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "6de7c03d614033c0403657409313d5f01202361e35490a3404e33e46663c2596" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "b9cbfb43711effa2e0a7fbc99d5e7522d8d8c1c151a3194a4b176ec17c9a8215" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "093b2a26030dcd576cad4e59b5d804bc0496e56f4e2659e8900b4814279c3402" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3cd28471e80be3bd2657ca3f03fbb2884ab669662271794360866ab60b6cb6e6" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "c4e6fe8f5728a5d5fd0e92538f68c3b4e8b218bcfb5e07d8afff8731cc5f3df0" "b3775ba758e7d31f3bb849e7c9e48ff60929a792961a2d536edec8f68c671ca5" "9824f5d6169b1e98c79e4a6f596b6a3f94cbefc0b2458fd2bfcbadee8b5687ec" default)))
  '(diary-entry-marker (quote font-lock-variable-name-face))
+ '(eclim-eclipse-dirs
+   (quote
+    ("/Applications/eclipse" "/usr/lib/eclipse" "/usr/local/lib/eclipse" "/usr/share/eclipse" "/Applications/Eclipse.app/Contents/Eclipse/" "/home/peterbecich/bin/eclipseJEE")))
+ '(eclim-executable "/home/peterbecich/bin/eclipseJEE/eclim")
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elpy-rpc-python-command "python3")
@@ -212,6 +218,7 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
+ '(jdee-flycheck-enable-p nil)
  '(jdee-server-dir "~/bin/java/")
  '(newsticker-url-list
    (quote
@@ -231,7 +238,7 @@ static char *gnus-pointer[] = {
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (jdee magithub company-terraform terraform-mode browse-at-remote docker docker-compose-mode idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-rtags flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
+    (ac-rtags company-emacs-eclim eclim jdee magithub company-terraform terraform-mode browse-at-remote docker docker-compose-mode idris-mode go-autocomplete go-mode afternoon-theme alect-themes ample-theme cyberpunk-theme monokai-theme espresso-theme leuven-theme moe-theme solarized-theme ag keychain-environment helm flycheck-ocaml sml-mode ess latex-math-preview company-c-headers company-shell irony-eldoc flycheck-irony company-irony-c-headers company-irony company-rtags rtags auto-virtualenv auto-virtualenvwrapper buffer-move ereader org org-pomodoro orgit smartparens paredit cider clojure-mode build-status irony psc-ide glsl-mode flycheck-scala-sbt flycheck-purescript purescript-mode hamlet-mode helm-dash twittering-mode yaml-mode intero markdown-mode magit js2-mode dockerfile-mode zenburn-theme flycheck-haskell ensime use-package w3m sx sublime-themes restclient pdf-tools paradox org-caldav multi-web-mode maker-mode magit-gh-pulls ipython hide-comnt haskell-mode gist fold-this ess-R-object-popup company-coq color-theme-zenburn color-theme-wombat color-theme-vim-insert-mode color-theme-twilight color-theme-tangotango color-theme-tango color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress boron-theme birds-of-paradise-plus-theme auto-package-update auto-complete auctex-latexmk)))
  '(pdf-cache-image-limit 16)
  '(proof-auto-raise-buffers nil)
  '(proof-follow-mode (quote locked))

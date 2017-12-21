@@ -75,7 +75,7 @@
 
 (setq column-number-mode t)
 
-(global-auto-complete-mode 0)
+(global-auto-complete-mode nil)
 ;; (require 'auto-complete)
 ;; (define-global-minor-mode my-global-auto-complete-mode auto-complete-mode
 ;;   (lambda ()
@@ -152,6 +152,7 @@
 (load "~/dotfiles/emacs/areas/web.el")
 (load "~/dotfiles/emacs/areas/twitter.el")
 (load "~/dotfiles/emacs/areas/epub.el")
+(load "~/dotfiles/emacs/areas/java.el")
 
 (setq newsticker-url-list
       (quote
