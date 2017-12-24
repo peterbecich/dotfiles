@@ -81,7 +81,7 @@
 (load "~/dotfiles/emacs/init_private.el")
 (load "~/dotfiles/emacs/init_private_debian.el")
 
-;; (add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;;https://www.emacswiki.org/emacs/CompanyMode#toc6
 (global-set-key (kbd "C-;") 'company-complete)
@@ -218,7 +218,8 @@ static char *gnus-pointer[] = {
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" ".ensime_cache")))
  '(hl-sexp-background-color "#efebe9")
  '(idris-interpreter-path "/home/peterbecich/idris/.cabal-sandbox/bin/idris")
- '(jdee-flycheck-enable-p nil)
+ '(jdee-build-function (quote jdee-maven-build))
+ '(jdee-flycheck-enable-p t)
  '(jdee-server-dir "~/bin/java/")
  '(newsticker-url-list
    (quote

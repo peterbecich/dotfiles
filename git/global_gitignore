@@ -48,3 +48,6 @@ flycheck_*.el
 
 .ensime
 .ensime_cache/
+
+# jdee
+prj.el
