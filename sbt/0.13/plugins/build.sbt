@@ -1,3 +1,8 @@
+// https://github.com/alexarchambault/sbt-ammonite
+
+resolvers += Resolver.sonatypeRepo("releases")
+
+addSbtPlugin("com.github.alexarchambault" %% "sbt-ammonite" % "0.1.2")
 
 // http://stackoverflow.com/questions/24551668/automatically-clearing-the-screen-on-recompile-in-sbt
 

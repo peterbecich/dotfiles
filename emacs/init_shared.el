@@ -135,6 +135,10 @@
 ;; https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources
 (setq epg-gpg-program "gpg2")
 
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
 
 (load "~/dotfiles/emacs/areas/c.el")
 (load "~/dotfiles/emacs/areas/git.el")

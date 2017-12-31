@@ -9,8 +9,6 @@ export PATH=/home/peterbecich/.local/bin:$PATH
 
 export PATH=$PATH:$SPARK_HOME/bin
 
-export PATH=$HOME/node/bin:$PATH
-
 export PATH=$HOME/.npm-global/bin:$PATH
 
 export PATH=$PATH:/usr/local/cuda-8.0/bin
