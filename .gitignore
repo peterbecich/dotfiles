@@ -48,3 +48,6 @@ flycheck_*.el
 init_private.el
 init_private_mac.el
 init_private_debian.el
+
+
+sbt/1.0/zinc/*

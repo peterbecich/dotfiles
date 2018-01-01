@@ -5,7 +5,7 @@
 (global-set-key (kbd "C-c g g") 'browse-at-remote)
 
 
-(use-package magithub
-  :after magit
-  :ensure t
-  :config (magithub-feature-autoinject t))
+;; (use-package magithub
+;;   :after magit
+;;   :ensure t
+;;   :config (magithub-feature-autoinject t))
