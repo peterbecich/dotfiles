@@ -5,6 +5,8 @@ export PATH=/home/peterbecich/bin:$PATH
 
 export PATH=/home/peterbecich/.nix-profile/bin:$PATH
 
+export PATH=/home/peterbecich/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/:$PATH
+
 
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 
