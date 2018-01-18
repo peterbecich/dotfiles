@@ -14,3 +14,5 @@ addSbtPlugin("no.arktekk.sbt" % "aether-deploy" % "0.20.0")
 
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.6")
 
+
+addSbtPlugin("works.mesh" % "sbt-dash" % "1.0")
