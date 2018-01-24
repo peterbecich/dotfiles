@@ -11,12 +11,19 @@ import XMonad.Util.SpawnOnce
 -- import qualified XMonad.Layout.ToggleLayouts as TL
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Mosaic
+import XMonad.Layout.Grid
 import XMonad.Actions.WorkspaceNames
 import XMonad.Actions.CycleWS
 import XMonad.Actions.GridSelect
 import XMonad.Actions.FindEmptyWorkspace
 import XMonad.Actions.Volume  -- xmonad-extras not compatible with xmonad 0.13
 import System.IO
+
+-- myLayout = mosaic 2 [3,2] ||| Full ||| Tall
+-- https://github.com/xmonad/xmonad/wiki/Layouts
+-- myLayout = mosaic 2 [3,2] ||| Full ||| Tall 1 (3/100) (1/2) ||| Grid
+myLayout = Tall 1 (3/100) (1/2) ||| Full ||| Grid
 
 main :: IO ()
 main = do
@@ -37,7 +44,10 @@ main = do
         , terminal = "gnome-terminal"
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
-        , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
+        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
+        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook myLayout
+        -- , layoutHook = myLayout
+        , layoutHook = avoidStruts $ smartBorders $ myLayout
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c")
           , ((mod4Mask, xK_s), spawn "systemctl suspend")
