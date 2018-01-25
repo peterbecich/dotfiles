@@ -10,6 +10,11 @@
 (require 'gnutls)
 ;; https://blog.vifortech.com/posts/emacs-tls-fix/
 
+(add-to-list 'gnutls-trustfiles "/usr/share/gnupg/sks-keyservers.netCA.pem")                                                       
+(add-to-list 'gnutls-trustfiles "/etc/ssl/certs/Amazon_Root_CA_1.pem")                                                             
+
+
+
 ;; https://melpa.org/#/getting-started
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
