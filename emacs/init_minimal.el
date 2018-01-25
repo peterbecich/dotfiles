@@ -7,6 +7,8 @@
 ;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 ;; (package-initialize) ;; You might already have this line
 
+(require 'gnutls)
+;; https://blog.vifortech.com/posts/emacs-tls-fix/
 
 ;; https://melpa.org/#/getting-started
 (require 'package)
