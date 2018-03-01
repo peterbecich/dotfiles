@@ -27,11 +27,8 @@ myLayout = Tall 1 (3/100) (1/2) ||| Full ||| Grid
 
 main :: IO ()
 main = do
-  --_ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left --pos 1200x0"
-  _ <- spawn "sleep 1; xrandr --output HDMI-0 --rotate left --pos 1920x0"
-  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate normal --pos 0x400"
-  --_ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate left --pos 0x0"
-  --_ <- spawn "sleep 1; xrandr --output DVI-D-0 --pos 0x360 --output HDMI-0 --pos 1920x0"
+  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate left --pos 1920x0"
+  _ <- spawn "sleep 1; xrandr --output DP-4 --rotate normal --pos 0x400"
   h <- spawnPipe "/usr/local/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/rotated-*"
@@ -51,7 +48,7 @@ main = do
         } `additionalKeys`
         [ ((mod4Mask, xK_m), spawn "emacsclient -c")
           , ((mod4Mask, xK_s), spawn "systemctl suspend")
-          -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
+          -- , ((mod4Mask, xK_s), spawn "systemctl hibernate")
           , ((mod4Mask, xK_n), spawn "nautilus -w")
           , ((mod4Mask, xK_f), spawn "firefox --new-window")
           , ((mod4Mask, xK_0), viewEmptyWorkspace)
