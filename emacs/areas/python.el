@@ -3,5 +3,5 @@
 
 
 
-(require 'auto-virtualenv)
-(add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
+;; (require 'auto-virtualenv)
+;; (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)

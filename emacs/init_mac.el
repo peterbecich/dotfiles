@@ -13,12 +13,15 @@
 (setenv "PATH" (concat "/Users/peterbecich/.local/bin:" (getenv "PATH")))
 (setq exec-path (append '("/Users/peterbecich/.local/bin") exec-path ))
 
+(setenv "PATH" (concat "/opt/local/lib/postgresql96/bin:" (getenv "PATH")))
+(setq exec-path (append '("/opt/local/lib/postgresql96/bin") exec-path ))
+
 (setq use-package-always-ensure t)
 
 (use-package magit)
 (use-package auctex-latexmk)
 (use-package auto-complete)
-(use-package auto-virtualenv)
+;; (use-package auto-virtualenv)
 (use-package company-irony)
 (use-package company-irony-c-headers)
 (use-package company-rtags)
@@ -85,7 +88,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (paredit company-irony company-irony-c-headers company-rtags flycheck-rtags irony irony-eldoc rtags wakatime-mode slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell intero redprl psci purescript-mode js-doc paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
+    (auctex-latexmk paredit company-irony company-irony-c-headers company-rtags flycheck-rtags irony irony-eldoc rtags wakatime-mode slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update flycheck-haskell company-ghc zenburn-theme exec-path-from-shell intero redprl psci purescript-mode paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt haskell-mode git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(scroll-bar-mode nil)
@@ -145,7 +148,7 @@
 (load "~/dotfiles/emacs/init_private.el")
 (load "~/dotfiles/emacs/init_private_mac.el")
 
-(load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
+;; (load-file "~/.emacs.d/ProofGeneral-4.2/generic/proof-site.el")
 
 (set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
 

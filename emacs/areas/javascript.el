@@ -1,6 +1,6 @@
 
 
-(require 'js-doc)
+;; (require 'js-doc)
 
 (setq js-indent-level 2)
 
