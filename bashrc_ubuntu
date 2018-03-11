@@ -7,14 +7,14 @@ export PATH=/home/peterbecich/.nix-profile/bin:$PATH
 
 export PATH=/home/peterbecich/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/:$PATH
 
+export PATH=/home/peterbecich/.local/bin:$PATH
+
+export PATH=$HOME/.npm-global/bin:$PATH
 
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 
-export PATH=/home/peterbecich/.local/bin:$PATH
-
 export PATH=$PATH:$SPARK_HOME/bin
 
-export PATH=$HOME/.npm-global/bin:$PATH
 
 export PATH=$PATH:/usr/local/cuda-8.0/bin
 
