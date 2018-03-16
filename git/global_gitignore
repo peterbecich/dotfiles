@@ -51,3 +51,6 @@ flycheck_*.el
 
 # jdee
 prj.el
+
+
+*/dist/*

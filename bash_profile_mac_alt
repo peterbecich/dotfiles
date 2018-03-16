@@ -1,9 +1,12 @@
 source ~/dotfiles/bash_aliases_mac
 
 
-# export PATH=$PATH:/opt/local/bin
+export PATH=/opt/local/bin:$PATH
 
-export PATH=$PATH:~/.cabal/bin/
+export PATH=~/.npm-global/bin/:$PATH
+
+export PATH=~/.cabal/bin/:$PATH
+export PATH=~/.local/bin/:$PATH
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
 export CLICOLOR=1
