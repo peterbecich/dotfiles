@@ -35,7 +35,7 @@ flipScreens = [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (win
 
 myKeys = [
   ((mod4Mask, xK_m), spawn "emacsclient -c")
-  , ((mod4Mask, xK_s), spawn "systemctl suspend")
+  , ((mod4Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend")
   , ((mod4Mask, xK_n), spawn "nautilus -w")
   , ((mod4Mask, xK_f), spawn "firefox --new-window")
   , ((mod4Mask, xK_0), viewEmptyWorkspace)
@@ -58,6 +58,7 @@ main = do
   h <- spawnPipe "/usr/local/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize ~/Pictures/wallpapers/landscape/*"
+  _ <- spawnPipe "xscreensaver -no-splash &"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
   _ <- spawnPipe "sleep 2; nm-applet n &"
