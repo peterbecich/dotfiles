@@ -25,38 +25,6 @@
 
 (setq use-package-always-ensure t)
 
-(use-package magit)
-(use-package auctex-latexmk)
-(use-package auto-complete)
-;; (use-package auto-virtualenv)
-(use-package company-irony)
-(use-package company-irony-c-headers)
-(use-package company-rtags)
-(use-package dockerfile-mode)
-(use-package ensime)
-(use-package ess)
-(use-package flycheck-rtags)
-(use-package haskell-mode)
-(use-package intero)
-(use-package irony)
-(use-package irony-eldoc)
-(use-package js2-mode)
-(use-package magit)
-(use-package markdown-mode)
-(use-package multi-web-mode)
-(use-package org)
-(use-package paredit)
-(use-package pdf-tools)
-(use-package psc-ide)
-(use-package purescript-mode)
-(use-package restclient)
-(use-package rtags)
-(use-package smartparens)
-(use-package sx)
-(use-package twittering-mode)
-(use-package w3m)
-(use-package yaml-mode)
-(use-package sml-mode)
 
 (setenv "WORKON_HOME" "/Users/peterbecich/.virtualenv/")
 
@@ -110,7 +78,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (color-identifiers-mode xterm-color colormaps ghc helm-ghc helm-hoogle hindent shm helm helm-ag browse-at-remote ghub magithub docker docker-compose-mode elfeed flycheck-haskell intero ag auctex-latexmk paredit company-irony company-irony-c-headers company-rtags flycheck-rtags irony irony-eldoc rtags wakatime-mode slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update company-ghc zenburn-theme exec-path-from-shell redprl psci purescript-mode paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
+    (helm-projectile color-identifiers-mode xterm-color colormaps ghc helm-ghc helm-hoogle hindent shm helm helm-ag browse-at-remote ghub magithub docker docker-compose-mode elfeed flycheck-haskell intero ag auctex-latexmk paredit company-irony company-irony-c-headers company-rtags flycheck-rtags irony irony-eldoc rtags wakatime-mode slack anti-zenburn-theme js2-refactor js2-mode go-mode yaml-mode ctags ctags-update company-ghc zenburn-theme exec-path-from-shell redprl psci purescript-mode paradox ensime scala-mode web-mode w3m twittering-mode sx restclient powerline pdf-tools org multi-web-mode maker-mode magit-gh-pulls latex-preview-pane latex-extra idris-mode hide-comnt git geiser fold-this flx-ido ess-R-data-view elpy dockerfile-mode company-coq color-theme-tango color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-theme-railscasts color-theme-monokai color-theme-molokai color-theme-library color-theme-ir-black color-theme-heroku color-theme-gruber-darker color-theme-github color-theme-emacs-revert-theme color-theme-eclipse color-theme-dpaste color-theme-dg color-theme-complexity color-theme-cobalt color-theme-buffer-local color-theme-approximate color-theme-actress auto-package-update auto-complete)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
