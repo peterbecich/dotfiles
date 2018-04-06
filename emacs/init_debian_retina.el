@@ -112,6 +112,7 @@
     ("--smart-case" "--stats" "-p '~/dotfiles/.agignore'")))
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
  '(auto-virtualenv-dir "/home/peterbecich/virtualenv")
  '(column-number-mode t)
  '(comment-multi-line nil)
