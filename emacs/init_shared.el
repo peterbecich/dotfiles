@@ -6,7 +6,6 @@
 
 (use-package ag)
 (use-package auctex-latexmk)
-(use-package auto-complete)
 (use-package auto-virtualenv)
 (use-package browse-at-remote)
 (use-package company-irony)
@@ -125,7 +124,6 @@
 
 (setq column-number-mode t)
 
-(global-auto-complete-mode nil)
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
