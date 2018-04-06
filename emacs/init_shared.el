@@ -59,6 +59,8 @@
 
 (require 'helm-config)
 
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;; (setq themes '(zenburn sanityinc-solarized-light sanityinc-tomorrow-eighties sanityinc-tomorrow-day))
 ;; (setq themes-index 0)
 
