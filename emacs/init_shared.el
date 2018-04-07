@@ -51,6 +51,7 @@
 ;; (use-package company-emacs-eclim)
 ;; (use-package eclim)
 ;; (use-package flycheck-rtags)
+(use-package rainbow-delimiters)
 
 ;;(use-package ensime)
 ;;(use-package ess)
@@ -88,6 +89,7 @@
 ;;(twit)
 
 
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (setq request-backend 'url-retrieve)
 
