@@ -1,4 +1,9 @@
+;; (setq browse-url-browser-function 'browse-url-firefox)
 (setq browse-url-browser-function 'eww-browse-url)
+
+;; (setq browse-url-browser-function 'browse-url-generic)
+;; (setq browse-url-generic-program "firefox")
+;; (setq browse-url-generic-program "open -a /Applications/Firefox\ Developer\ Edition.app/")
 
 (setq eww-search-prefix "https://www.google.com/search?q=")
 

@@ -4,7 +4,61 @@
 
 (setq use-package-always-ensure t)
 
+(use-package ag)
+(use-package auctex-latexmk)
+(use-package auto-virtualenv)
+(use-package browse-at-remote)
+(use-package company-irony)
+(use-package company-irony-c-headers)
+(use-package company-rtags)
+(use-package company-terraform)
+(use-package docker)
+(use-package docker-compose-mode)
+(use-package dockerfile-mode)
+(use-package ensime)
+(use-package ess)
+(use-package flycheck-rtags)
+(use-package ghc)
+(use-package haskell-mode)
+(use-package helm)
+(use-package helm-ag)
+(use-package helm-ghc)
+(use-package helm-hoogle)
+(use-package helm-projectile)
+(use-package intero)
+(use-package irony)
+(use-package irony-eldoc)
+(use-package jdee)
+(use-package js2-mode)
+(use-package magit)
+(use-package markdown-mode)
+(use-package multi-web-mode)
+(use-package org)
+(use-package paredit)
+(use-package pdf-tools)
+(use-package psc-ide)
+(use-package purescript-mode)
+(use-package restclient)
+(use-package rtags)
+(use-package smartparens)
+(use-package sml-mode)
+(use-package sx)
+(use-package terraform-mode)
+(use-package twittering-mode)
+(use-package w3m)
+(use-package yaml-mode)
+;; (use-package auto-virtualenv)
+;; (use-package company-emacs-eclim)
+;; (use-package eclim)
+;; (use-package flycheck-rtags)
+
+;;(use-package ensime)
+;;(use-package ess)
+
+
 (require 'helm-config)
+
+(add-hook 'after-init-hook 'global-company-mode)
 
 ;; (setq themes '(zenburn sanityinc-solarized-light sanityinc-tomorrow-eighties sanityinc-tomorrow-day))
 ;; (setq themes-index 0)
@@ -33,10 +87,7 @@
 
 ;;(twit)
 
-(global-set-key (kbd "M-x") #'helm-M-x)
-(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-(global-set-key (kbd "C-x C-f") #'helm-find-files)
-(helm-mode 1)
+
 
 (setq request-backend 'url-retrieve)
 
@@ -63,9 +114,6 @@
 (defadvice load-theme (before theme-dont-propagate activate)
   (mapcar #'disable-theme custom-enabled-themes))
 
-
-;; http://stackoverflow.com/questions/2580650/how-can-i-reload-emacs-after-changing-it
-
 ;; https://noahfrederick.com/log/restclient-for-emacs
 ;; (use-package restclient
 ;;   :mode ("\\.http\\'" . restclient-mode))
@@ -74,28 +122,11 @@
 
 (setq emerge-diff-options "--ignore-all-space")
 
-;; (require 'multi-web-mode)
-;; (setq mweb-default-major-mode 'html-mode)
-;; (setq mweb-tags '((php-mode "<\\?php\\|<\\? \\|<\\?=" "\\?>")
-;;                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
-;;                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")))
-;; (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5"))
-;; (multi-web-global-mode 1)
-
 (setq column-number-mode t)
 
-(global-auto-complete-mode nil)
-;; (require 'auto-complete)
-;; (define-global-minor-mode my-global-auto-complete-mode auto-complete-mode
-;;   (lambda ()
-;;     (when (not (memq major-mode
-;; 		     (list 'scala-mode 'sbt-mode 'shell)))
-;;       (auto-complete-mode))))
-;; (my-global-auto-complete-mode 0)
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
@@ -119,16 +150,6 @@
 (when (fboundp 'winner-mode)
   (winner-mode 1))
 
-(defun kill-emacs-safe ()
-  "Only exit Emacs if this is a small session, otherwise prompt."
-  (interactive)
-  (if (daemonp)
-      (delete-frame)
-    (let ((count-buffers (length (buffer-list))))
-      (if (< count-buffers 10)
-          (save-buffers-kill-emacs)
-        (message-box "use 'M-x exit'")))))
-
 (setq resize-mini-windows t)
 ;; (setq max-mini-window-height 2)
 
@@ -149,40 +170,25 @@
 (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
   (add-hook hook (lambda () (flyspell-mode -1))))
 
+
 (load "~/dotfiles/emacs/areas/c.el")
+(load "~/dotfiles/emacs/areas/epub.el")
 (load "~/dotfiles/emacs/areas/git.el")
 (load "~/dotfiles/emacs/areas/haskell.el")
+(load "~/dotfiles/emacs/areas/helm.el")
 (load "~/dotfiles/emacs/areas/irc.el")
+(load "~/dotfiles/emacs/areas/java.el")
 (load "~/dotfiles/emacs/areas/javascript.el")
 (load "~/dotfiles/emacs/areas/lisp.el")
 (load "~/dotfiles/emacs/areas/markdown.el")
 (load "~/dotfiles/emacs/areas/org.el")
-(load "~/dotfiles/emacs/areas/purescript.el")
 (load "~/dotfiles/emacs/areas/proof-general.el")
+(load "~/dotfiles/emacs/areas/purescript.el")
 (load "~/dotfiles/emacs/areas/python.el")
 (load "~/dotfiles/emacs/areas/scala.el")
 (load "~/dotfiles/emacs/areas/shell.el")
-(load "~/dotfiles/emacs/areas/web.el")
 (load "~/dotfiles/emacs/areas/twitter.el")
-(load "~/dotfiles/emacs/areas/epub.el")
-(load "~/dotfiles/emacs/areas/java.el")
-
-(setq newsticker-url-list
-      (quote
-       (
-	("Reuters top news" "http://feeds.reuters.com/reuters/topNews" nil 1800 nil)
-	("Reuters US news" "http://feeds.reuters.com/Reuters/domesticNews" nil 1800 nil)
-	("Reuters World news" "http://feeds.reuters.com/Reuters/worldNews" nil 1800 nil)
-	("Google News Top Stories" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&output=rss" nil 1800 nil)
-	("Google News Los Angeles" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=Los+Angeles,+CA,+United+States&output=rss" nil 1800 nil)
-	("Google News nearby" "https://news.google.com/news?cf=all&hl=en&pz=1&ned=us&authuser=1&geo=detect_metro_area&output=rss" nil 1800 nil)
-	("Hacker News" "https://news.ycombinator.com/rss" nil 1800 nil)
-	("Slashdot" "http://rss.slashdot.org/Slashdot/slashdotMain" nil 1800 nil)
-	("The Hill most popular" "http://www.thehill.com/rss/syndicator/19110" nil 1800 nil)
-	("The Hill all news" "http://www.thehill.com/rss/syndicator/19109" nil 1800 nil)
-	("NYT" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" nil 1800 nil)
-	)
-       ))
+(load "~/dotfiles/emacs/areas/web.el")
 
 ;; (use-package zenburn-theme)
 ;; (use-package espresso-theme)
