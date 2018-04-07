@@ -47,6 +47,8 @@
 (use-package twittering-mode)
 (use-package w3m)
 (use-package yaml-mode)
+(use-package elscreen)
+(use-package helm-elscreen)
 ;; (use-package auto-virtualenv)
 ;; (use-package company-emacs-eclim)
 ;; (use-package eclim)
@@ -57,6 +59,7 @@
 ;;(use-package ess)
 
 
+(elscreen-start)
 (require 'helm-config)
 
 (add-hook 'after-init-hook 'global-company-mode)
