@@ -64,8 +64,9 @@
 (elscreen-start)
 (require 'helm-config)
 
+(setq sml/no-confirm-load-theme t)
 (sml/setup)
-(setq sml/theme 'light)
+(setq sml/theme 'dark)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
