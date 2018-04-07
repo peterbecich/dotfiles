@@ -1,5 +1,6 @@
 
 (add-hook 'haskell-mode-hook 'intero-mode)
+(add-hook 'haskell-mode-hook 'hlint-refactor-mode)
 
 
 ;; (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))

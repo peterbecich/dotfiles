@@ -49,6 +49,7 @@
 (use-package yaml-mode)
 (use-package elscreen)
 (use-package helm-elscreen)
+(use-package hlint-refactor)
 ;; (use-package auto-virtualenv)
 ;; (use-package company-emacs-eclim)
 ;; (use-package eclim)
