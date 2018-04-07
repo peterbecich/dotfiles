@@ -55,13 +55,17 @@
 ;; (use-package eclim)
 ;; (use-package flycheck-rtags)
 (use-package rainbow-delimiters)
-
+(use-package smart-mode-line)
+(use-package puppet-mode)
 ;;(use-package ensime)
 ;;(use-package ess)
 
 
 (elscreen-start)
 (require 'helm-config)
+
+(sml/setup)
+(setq sml/theme 'light)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
