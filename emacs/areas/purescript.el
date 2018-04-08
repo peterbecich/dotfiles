@@ -15,3 +15,7 @@
 
 ;;(eval-after-load 'flycheck
 ;;  '(flycheck-purescript-setup))
+
+ ;; '(psc-ide-purs-executable "/home/peterbecich/.npm-global/bin/purs")
+ ;; '(psc-ide-use-purs t)
+ ;; '(purescript-indent-offset 2)
