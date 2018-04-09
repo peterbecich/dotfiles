@@ -37,7 +37,7 @@
 (load "~/dotfiles/emacs/init_private_mac.el")
 
 
-(set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
+;; (set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
 
 
 (let ((gls "/opt/local/bin/gls"))
@@ -56,6 +56,6 @@
 
  )
 
-
+(set-face-attribute 'default nil :height 135)
 
 (put 'magit-clean 'disabled nil)

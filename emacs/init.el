@@ -191,7 +191,7 @@
 (global-set-key (kbd "C-c n")  'windmove-down)
 
 (global-visual-line-mode 1); Proper line wrapping
-(global-hl-line-mode 0); Highlight current row
+;; (global-hl-line-mode 0); Highlight current row
 (show-paren-mode 1); Matches parentheses and such in every mode
 
 ;; (setq visible-bell t); Flashes on error
@@ -369,7 +369,7 @@
 ;; (use-package leuven-theme)
 ;; (use-package moe-theme)
 ;; (use-package solarized-theme)
-(set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
+;;(set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
 
 
 
