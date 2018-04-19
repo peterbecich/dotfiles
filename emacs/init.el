@@ -2,12 +2,17 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+
+(setq load-prefer-newer t)
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
 
 (setq use-package-always-ensure t)
 
@@ -28,6 +33,9 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
+
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
 
 (use-package ag)
 (use-package auctex-latexmk)
@@ -67,6 +75,7 @@
 (use-package magit)
 (use-package markdown-mode)
 (use-package multi-web-mode)
+(use-package nlinum)
 (use-package org)
 (use-package paredit)
 (use-package pdf-tools)
@@ -90,6 +99,11 @@
 (use-package vue-mode)
 (use-package vue-html-mode)
 (use-package yaml-mode)
+(use-package emojify)
+
+
+
+(add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; (use-package auto-virtualenv)
 ;; (use-package company-emacs-eclim)
@@ -98,7 +112,7 @@
 
 ;;(use-package ess)
 
-
+(require 'smartparens-config)
 (elscreen-start)
 (require 'helm-config)
 
@@ -198,8 +212,10 @@
 
 (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
 
-(add-hook 'prog-mode-hook 'linum-mode)
-(setq linum-format "%d ")
+;; (add-hook 'prog-mode-hook 'linum-mode)
+;; (setq linum-format "%d ")
+
+(add-hook 'prog-mode-hook 'nlinum-mode)
 
 (yas-global-mode 0)
 
@@ -242,7 +258,7 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
    (quote
-    ("http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain")))
+    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain")))
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -281,7 +297,10 @@
  '(intero-debug nil)
  '(intero-extra-ghc-options nil)
  '(intero-extra-ghci-options nil)
- '(intero-stack-executable "stack")
+ '(magit-section-cache-visibility nil)
+ '(magithub-api-available-check-frequency 2)
+ '(magithub-api-timeout 10)
+ '(message-log-max 4096)
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
@@ -290,7 +309,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode intero ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
+    (emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode intero ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
@@ -372,15 +391,46 @@
 ;;(set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
 
 
+(defadvice message (before when-was-that activate)
+  "Add timestamps to `message' output."
+  (ad-set-arg 0 (concat (format-time-string "[%Y-%m-%d %T %Z] ") 
+			(ad-get-arg 0)) ))
 
-
-
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
 
 
 (setq-default line-spacing 0)
 
 
 (put 'magit-clean 'disabled nil)
+
+;; https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
+(define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
+(define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
+
+(define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
+(define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
+(define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
+(define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
+
+(define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
+(define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
+(define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+
+(define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
+(define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
+
+(define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+(define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+
+(define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
+(define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+
+(define-key smartparens-mode-map (kbd "C-<right>") 'sp-forward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "C-<left>") 'sp-forward-barf-sexp)
+(define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-backward-barf-sexp)
 
 
 (custom-set-faces

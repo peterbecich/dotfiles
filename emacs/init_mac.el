@@ -1,6 +1,6 @@
 
-(setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/.cabal/bin"))
-(setq exec-path (append exec-path '("/Users/peterbecich/.cabal/bin")))
+(setenv "PATH" (concat "/Users/peterbecich/.cabal/bin:" (getenv "PATH")))
+(setq exec-path (append '("/Users/peterbecich/.cabal/bin") exec-path))
 
 (setenv "PATH" (concat "/Users/peterbecich/.local/bin:" (getenv "PATH")))
 (setq exec-path (append '("/Users/peterbecich/.local/bin") exec-path ))

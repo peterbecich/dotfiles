@@ -8,6 +8,7 @@ auto-save-list
 tramp
 .\#*
 
+
 target/
 project/boot/
 sbt/boot/
