@@ -30,3 +30,5 @@
 (add-hook 'haskell-mode-hook (lambda ()
             (haskell-indentation-mode 0)))
 
+(require 'hindent)
+(add-hook 'haskell-mode-hook #'hindent-mode)

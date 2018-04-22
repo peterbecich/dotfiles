@@ -39,6 +39,7 @@
 
 (use-package ag)
 (use-package auctex-latexmk)
+(use-package auto-compile)
 (use-package auto-virtualenv)
 (use-package browse-at-remote)
 (use-package company-irony)
@@ -54,10 +55,11 @@
 (use-package emacsql-mysql)
 (use-package emacsql-psql)
 (use-package emacsql-sqlite)
+(use-package emojify)
 (use-package ensime)
 (use-package ess)
-(use-package flycheck-rtags)
 (use-package flycheck-haskell)
+(use-package flycheck-rtags)
 (use-package ghc)
 (use-package haskell-mode)
 (use-package helm)
@@ -72,6 +74,7 @@
 (use-package irony-eldoc)
 (use-package jdee)
 (use-package js2-mode)
+(use-package js2-refactor)
 (use-package magit)
 (use-package markdown-mode)
 (use-package multi-web-mode)
@@ -91,17 +94,18 @@
 (use-package smartparens)
 (use-package sml-mode)
 (use-package sx)
+(use-package symon)
 (use-package terraform-mode)
-(use-package typescript-mode)
 (use-package twittering-mode)
+(use-package typescript-mode)
+(use-package vue-html-mode)
+(use-package vue-mode)
 (use-package w3m)
 (use-package websocket)
-(use-package vue-mode)
-(use-package vue-html-mode)
 (use-package yaml-mode)
-(use-package emojify)
+(use-package js-format)
 
-
+;; (require 'symon)
 
 (add-hook 'after-init-hook #'global-emojify-mode)
 
@@ -252,6 +256,12 @@
    (quote
     ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(desktop-save-mode t)
+ '(display-time-day-and-date t)
+ '(display-time-mode t)
+ '(display-time-world-list
+   (quote
+    (("America/Los_Angeles" "Los Angeles")
+     ("America/New_York" "Boston"))))
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
  '(doc-view-resolution 200)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -297,9 +307,13 @@
  '(intero-debug nil)
  '(intero-extra-ghc-options nil)
  '(intero-extra-ghci-options nil)
+ '(intero-stack-executable "stack")
+ '(json-reformat:indent-width 2)
+ '(json-reformat:pretty-string\? t)
  '(magit-section-cache-visibility nil)
  '(magithub-api-available-check-frequency 2)
- '(magithub-api-timeout 10)
+ '(magithub-api-timeout 5)
+ '(magithub-issue-issue-filter-functions nil)
  '(message-log-max 4096)
  '(nrepl-message-colors
    (quote
@@ -309,7 +323,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode intero ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
+    (intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(safe-local-variable-values
@@ -324,6 +338,11 @@
  '(slack-prefer-current-team (quote true))
  '(slack-room-subscription nil)
  '(slack-typing-visibility (quote never))
+ '(symon-mode nil)
+ '(symon-monitors
+   (quote
+    (symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor symon-darwin-battery-monitor)))
+ '(symon-sparkline-type (quote boxed))
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
  '(twittering-timer-interval 300)
@@ -406,31 +425,31 @@
 (put 'magit-clean 'disabled nil)
 
 ;; https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
-(define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
-(define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
 
-(define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
-(define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
-(define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
-(define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
+;; (define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
+;; (define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
 
-(define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
-(define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
-(define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
 
-(define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
-(define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
 
-(define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
-(define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
 
-(define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
-(define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+;; (define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
+;; (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
 
-(define-key smartparens-mode-map (kbd "C-<right>") 'sp-forward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-<left>") 'sp-forward-barf-sexp)
-(define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+(define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-forward-barf-sexp)
+(define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
+(define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
 
 
 (custom-set-faces
@@ -440,3 +459,6 @@
  ;; If there is more than one, they won't work right.
  '(shm-current-face ((t (:background "#c7fbea"))))
  '(shm-quarantine-face ((t (:background "#ffd8e1")))))
+
+(let ((inhibit-message t))
+  (message "Invalid face reference: 1"))
