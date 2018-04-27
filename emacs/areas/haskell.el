@@ -32,3 +32,6 @@
 
 (require 'hindent)
 (add-hook 'haskell-mode-hook #'hindent-mode)
+(setq haskell-tags-on-save t)
+
+(setq tags-revert-without-query 1)

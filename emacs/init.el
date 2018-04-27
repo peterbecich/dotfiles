@@ -105,9 +105,28 @@
 (use-package yaml-mode)
 (use-package js-format)
 
+;; (use-package flx-ido)
+(use-package helm-flx)
+
+
+;; (require 'flx-ido)
+(ido-mode 0)
+(ido-everywhere 0)
+(flx-ido-mode 0)
+;; ;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching 0)
+;; (setq ido-use-faces nil)
+
+(setq ido-use-filename-at-point 'guess)
+(setq ido-ignore-extensions t)
+
+(helm-flx-mode +1)
+(setq helm-flx-for-helm-find-files t ;; t by default
+      helm-flx-for-helm-locate t) ;; nil by default
+
 ;; (require 'symon)
 
-(add-hook 'after-init-hook #'global-emojify-mode)
+;; (add-hook 'after-init-hook #'global-emojify-mode)
 
 ;; (use-package auto-virtualenv)
 ;; (use-package company-emacs-eclim)
@@ -296,12 +315,14 @@
  '(erc-truncate-mode t)
  '(erc-try-new-nick-p nil)
  '(erc-user-mode "+RZgi")
+ '(eshell-history-size 2048)
  '(fci-rule-color "#eee8d5")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(fringe-mode 0 nil (fringe))
  '(gnutls-trustfiles
    (quote
     ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/opt/local/share/curl/curl-ca-bundle.crt")))
+ '(haskell-tags-on-save t)
  '(helm-locate-command "glocate %s %s")
  '(helm-locate-create-db-command "gupdatedb --output='%s' --localpaths='%s'")
  '(intero-debug nil)
@@ -323,9 +344,13 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
+    (circe helm-flx intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode moe-theme monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(projectile-enable-idle-timer nil)
+ '(projectile-require-project-root nil)
+ '(projectile-tags-backend (quote etags-select))
+ '(projectile-tags-command "hasktags --ignore-close-implementation --ctags %s")
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
