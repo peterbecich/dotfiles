@@ -16,7 +16,8 @@
 (add-to-list 'completion-ignored-extensions ".hi")
 
 
-(define-key haskell-mode-map "\C-ch" 'haskell-hoogle)
+(define-key haskell-mode-map "\C-ch" 'helm-hoogle)
+(global-set-key (kbd "\C-cg") 'helm-google)
 
 (require 'shm)
 
