@@ -1,5 +1,5 @@
 
-;; (add-hook 'haskell-mode-hook 'hlint-refactor-mode)
+(add-hook 'haskell-mode-hook 'hlint-refactor-mode)
 (add-hook 'haskell-mode-hook #'smartparens-mode)
 ;; (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))
 (add-hook 'haskell-mode-hook 'intero-mode)
@@ -16,8 +16,13 @@
 (add-to-list 'completion-ignored-extensions ".hi")
 
 
-(define-key haskell-mode-map "\C-ch" 'helm-hoogle)
+;; (define-key haskell-mode-map "\C-ch" 'helm-hoogle)
+
+(global-set-key (kbd "\C-ch") 'helm-hoogle)
+
 (global-set-key (kbd "\C-cg") 'helm-google)
+
+(global-set-key (kbd "\C-cM") 'helm-make-projectile)
 
 (require 'shm)
 
@@ -36,3 +41,6 @@
 (setq haskell-tags-on-save t)
 
 (setq tags-revert-without-query 1)
+
+(require 'hasky-stack)
+

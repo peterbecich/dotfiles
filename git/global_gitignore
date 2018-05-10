@@ -60,3 +60,6 @@ prj.el
 TAGS
 ctags
 ~TAGS
+
+
+.DS_Store
