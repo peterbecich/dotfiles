@@ -20,9 +20,6 @@
 
 (global-set-key (kbd "\C-ch") 'helm-hoogle)
 
-(global-set-key (kbd "\C-cg") 'helm-google)
-
-(global-set-key (kbd "\C-cM") 'helm-make-projectile)
 
 (require 'shm)
 

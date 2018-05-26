@@ -21,17 +21,21 @@
 (setenv "WORKON_HOME" "/Users/peterbecich/.virtualenv/")
 
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; ;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; (setq exec-path (append exec-path '("/usr/local/bin")))
 
-(setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
-(setq exec-path (append exec-path '("/opt/local/bin")))
+;; ;; (setenv "PATH" (concat (getenv "PATH") ":/opt/local/bin"))
+;; (setq exec-path (append exec-path '("/opt/local/bin")))
 
-(setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/bin/spark-2.1.1-bin-hadoop2.7/bin"))
-(setq exec-path (append exec-path '("/Users/peterbecich/bin/spark-2.1.1-bin-hadoop2.7/bin")))
+;; ;; (setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/.local/bin/"))
+;; (setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
 
-(setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/.local/bin/"))
-(setq exec-path (append exec-path '("/Users/peterbecich/.local/bin/")))
+;; ;; (setenv "PATH" (concat (getenv "PATH") ":/Users/peterbecich/.npm-global/bin/"))
+;; (setq exec-path (append exec-path '("/Users/peterbecich/.npm-global/bin/")))
+
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 
 (load "~/dotfiles/emacs/init_private_mac.el")
