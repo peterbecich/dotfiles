@@ -189,6 +189,8 @@
 
 (setq global-auto-revert-mode 1)
 
+(setq docker-global-mode 1)
+
 (desktop-save-mode 0)
 
 (pdf-tools-install)
@@ -222,6 +224,8 @@
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+(global-set-key (kbd "C-M-m") 'imenu)
 
 (global-set-key (kbd "C-c b")  'windmove-left)
 (global-set-key (kbd "C-c f") 'windmove-right)
@@ -269,6 +273,8 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-clang-executable "clang")
+ '(compilation-always-kill nil)
+ '(compilation-auto-jump-to-first-error t)
  '(compilation-message-face (quote default))
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
@@ -289,7 +295,7 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
    (quote
-    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain")))
+    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -329,6 +335,11 @@
  '(haskell-tags-on-save t)
  '(helm-locate-command "glocate %s %s")
  '(helm-locate-create-db-command "gupdatedb --output='%s' --localpaths='%s'")
+ '(helm-make-arguments "")
+ '(helm-make-cache-targets t)
+ '(helm-make-named-buffer t)
+ '(helm-make-sort-targets t)
+ '(helm-top-poll-mode t)
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
    (quote
@@ -343,6 +354,7 @@
  '(intero-debug nil)
  '(intero-extra-ghc-options nil)
  '(intero-extra-ghci-options nil)
+ '(intero-global-mode t nil (intero))
  '(intero-stack-executable "stack")
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
@@ -360,7 +372,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (helm-make hasky-stack flycheck-hdevtools undo-tree circe helm-flx intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
+    (indium nvm smart-compile f3 restclient-helm ibuffer-projectile linum-relative reveal-in-osx-finder imenu-list helm-make hasky-stack flycheck-hdevtools undo-tree circe helm-flx intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
@@ -368,7 +380,7 @@
  '(projectile-enable-idle-timer nil)
  '(projectile-require-project-root nil)
  '(projectile-tags-backend (quote etags-select))
- '(projectile-tags-command "hasktags --ignore-close-implementation --ctags %s")
+ '(projectile-tags-command "hasktags --ignore-close-implementation -e -x %s")
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
@@ -413,9 +425,12 @@
      (340 . "#dc322f")
      (360 . "#cb4b16"))))
  '(vc-annotate-very-old-color nil)
+ '(vc-display-status nil)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
- )
+ '(whitespace-style
+   (quote
+    (face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))))
 
 (setq ring-bell-function 'ignore)
 
@@ -438,6 +453,7 @@
 (load "~/dotfiles/emacs/areas/irc.el")
 (load "~/dotfiles/emacs/areas/java.el")
 (load "~/dotfiles/emacs/areas/javascript.el")
+(load "~/dotfiles/emacs/areas/json.el")
 (load "~/dotfiles/emacs/areas/lisp.el")
 (load "~/dotfiles/emacs/areas/markdown.el")
 (load "~/dotfiles/emacs/areas/org.el")
@@ -469,7 +485,6 @@
 (setq-default line-spacing 0)
 
 
-(put 'magit-clean 'disabled nil)
 
 ;; https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
 ;; (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
@@ -514,4 +529,22 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box (:line-width -1 :color "#c46746" :style released-button)))))
+ '(region ((t (:background "#69874a"))))
  '(shm-current-face ((t (:background "Black")))))
+
+
+;;https://emacs.stackexchange.com/questions/1028/mark-and-open-multiple-files-with-helm-and-projectile
+(setq projectile-completion-system 'helm
+      projectile-switch-project-action 'helm-projectile)
+(put 'magit-clean 'disabled nil)
+
+(global-set-key (kbd "\C-cg") 'helm-google)
+
+(global-set-key (kbd "\C-cM") 'helm-make-projectile)
+
+(global-set-key (kbd "\C-cs") 'helm-elscreen)
+
+(global-set-key (kbd "\C-ci") 'helm-imenu)
+
+(setq-default indent-tabs-mode nil)
