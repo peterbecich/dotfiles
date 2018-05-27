@@ -52,15 +52,3 @@
 (setq-default line-spacing 0)
 
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- ;; '(default ((t (:inherit nil :stipple nil :background "#FFFFFF" :foreground "#333333" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight light :height 140 :width normal :foundry "nil" :family "Menlo"))))
- ;; '(mode-line ((t (:background "selectedKnobColor" :foreground "gray60" :inverse-video nil))))
- ;; '(mode-line-inactive ((t (:background "#d8d8d8" :foreground "gray60" :inverse-video nil))))
- '(shm-current-face ((t (:background "#c7fbea"))))
- '(shm-quarantine-face ((t (:background "#ffd8e1")))))
-
-;; (put 'magit-clean 'disabled nil)
