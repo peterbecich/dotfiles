@@ -118,6 +118,7 @@
 (use-package w3m)
 (use-package websocket)
 (use-package yaml-mode)
+(use-package ws-butler)
 
 ;; (require 'flx-ido)
 (ido-mode 0)
