@@ -48,7 +48,9 @@
 (use-package company-rtags)
 (use-package company-terraform)
 (use-package dired-du)
-(use-package docker)
+(use-package docker
+  :ensure t
+  :bind ("C-c d d" . docker))
 (use-package docker-compose-mode)
 (use-package dockerfile-mode)
 (use-package elfeed)
@@ -118,6 +120,11 @@
 (use-package w3m)
 (use-package websocket)
 (use-package yaml-mode)
+(use-package rjsx-mode)
+(use-package paradox)
+
+(require 'paradox)
+(paradox-enable)
 
 ;; (require 'flx-ido)
 (ido-mode 0)
@@ -196,7 +203,6 @@
 (setq request-backend 'url-retrieve)
 
 
-(setq global-auto-revert-mode 1)
 
 (setq docker-global-mode 1)
 
@@ -205,7 +211,7 @@
 (pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
-(add-hook 'dired-mode-hook 'auto-revert-mode)
+;;(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 ;;(global-flycheck-mode)
 
@@ -278,19 +284,20 @@
  '(async-bytecomp-allowed-packages (quote (quote (all))))
  '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
  '(auto-package-update-hide-results t)
+ '(auto-revert-verbose nil)
  '(beacon-color "#cc6666")
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-clang-executable "clang")
- '(compilation-always-kill nil)
- '(compilation-auto-jump-to-first-error t)
+ '(compilation-always-kill t)
+ '(compilation-auto-jump-to-first-error nil)
  '(compilation-message-face (quote default))
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "291588d57d863d0394a0d207647d9f24d1a8083bb0c9e8808280b46996f3eb83" "9fe1540491fcf692b8c639a3abacd32b29233bc4cb834a12a0fd1e01cbd0a128" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" "190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "291588d57d863d0394a0d207647d9f24d1a8083bb0c9e8808280b46996f3eb83" "9fe1540491fcf692b8c639a3abacd32b29233bc4cb834a12a0fd1e01cbd0a128" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(desktop-save-mode t)
  '(dired-du-on-find-dired-ok nil)
  '(dired-du-size-format t)
@@ -300,7 +307,10 @@
  '(display-time-world-list
    (quote
     (("America/Los_Angeles" "Los Angeles")
-     ("America/New_York" "Boston"))))
+     ("America/New_York" "Boston")
+     ("Europe/Zurich" "Zurich")
+     ("US/Hawaii" "Honolulu"))))
+ '(display-time-world-time-format "%A %d %B %I:%M %p %Z")
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
  '(doc-view-resolution 200)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -308,6 +318,7 @@
  '(elfeed-feeds
    (quote
     ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
+ '(elfeed-search-filter "@1-week-ago")
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -337,9 +348,12 @@
  '(erc-user-mode "+RZgi")
  '(eshell-buffer-maximum-lines 6000)
  '(eshell-history-size 2048)
- '(fci-rule-color "#eee8d5")
+ '(fci-rule-color "#383838")
+ '(fci-rule-width 2)
+ '(fill-column 100)
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(flycheck-hlint-args (quote ("-j")))
+ '(flycheck-idle-change-delay 0.1)
  '(frame-background-mode (quote dark))
  '(fringe-mode 0 nil (fringe))
  '(git-link-use-commit t)
@@ -367,6 +381,9 @@
  '(helm-make-sort-targets t)
  '(helm-mode-fuzzy-match t)
  '(helm-swoop-use-fuzzy-match t)
+ '(helm-time-zone-home-location "Los Angeles")
+ '(helm-top-command
+   "env COLUMNS=%s ps -raxo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
  '(helm-top-poll-mode t)
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
@@ -384,13 +401,17 @@
  '(intero-debug nil)
  '(intero-extra-ghc-options (quote ("-dppr-cols200")))
  '(intero-extra-ghci-options (quote ("-dppr-cols200")))
- '(intero-global-mode t nil (intero))
+ '(intero-global-mode nil nil (intero))
  '(intero-pop-to-repl nil)
  '(intero-stack-executable "stack")
+ '(isearch-allow-scroll t)
+ '(ispell-dictionary "english")
+ '(ispell-local-dictionary-alist nil)
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
  '(magit-diff-use-overlays nil)
  '(magit-section-cache-visibility nil)
+ '(magit-todos-mode t nil (magit-todos))
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(magithub-issue-issue-filter-functions nil)
@@ -404,7 +425,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (flx-isearch helm-flycheck helm-flyspell pretty-mode dired-du helm-eww highlight-thing git-link nlinum-relative ws-butler imenu-anywhere helm-swoop indium nvm smart-compile f3 restclient-helm ibuffer-projectile linum-relative reveal-in-osx-finder imenu-list helm-make hasky-stack flycheck-hdevtools undo-tree circe helm-flx intero js-format helm-dash kubernetes kubernetes-tramp symon emojify nlinum-mode nlinum auto-compile helm-descbinds helm-google magit-org-todos nix-mode elfeed-goodies multi-term jenkins whitespace-cleanup-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite shakespeare-mode typescript-mode vue-html-mode vue-mode websocket ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elfeed elm-mode elpy elscreen ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup exec-path-from-shell flx-ido flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-rtags flycheck-scala-sbt fold-this geiser ghc ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode haskell-mode helm helm-ag helm-company helm-elscreen helm-ghc helm-hoogle helm-projectile helm-tramp hide-comnt hindent hlint-refactor hlint-refactor-mode idris-mode ipython irony irony-eldoc jdee js2-mode js2-refactor keychain-environment latex-extra latex-math-preview latex-preview-pane leuven-theme magit magit-gh-pulls magithub maker-mode markdown-mode monokai-theme multi-web-mode nov org org-caldav org-pomodoro orgit paradox paredit pdf-tools powerline psc-ide psci puppet-mode purescript-mode rainbow-delimiters redprl restclient rtags scala-mode shm slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes sx terraform-mode twittering-mode use-package w3m wakatime-mode web-mode xterm-color yaml-mode zenburn-theme)))
+    (lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
@@ -435,28 +456,28 @@
  '(tool-bar-mode nil)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
- '(vc-annotate-background nil)
+ '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote
-    ((20 . "#dc322f")
-     (40 . "#cb4b16")
-     (60 . "#b58900")
-     (80 . "#859900")
-     (100 . "#2aa198")
-     (120 . "#268bd2")
-     (140 . "#d33682")
-     (160 . "#6c71c4")
-     (180 . "#dc322f")
-     (200 . "#cb4b16")
-     (220 . "#b58900")
-     (240 . "#859900")
-     (260 . "#2aa198")
-     (280 . "#268bd2")
-     (300 . "#d33682")
-     (320 . "#6c71c4")
-     (340 . "#dc322f")
-     (360 . "#cb4b16"))))
- '(vc-annotate-very-old-color nil)
+    ((20 . "#BC8383")
+     (40 . "#CC9393")
+     (60 . "#DFAF8F")
+     (80 . "#D0BF8F")
+     (100 . "#E0CF9F")
+     (120 . "#F0DFAF")
+     (140 . "#5F7F5F")
+     (160 . "#7F9F7F")
+     (180 . "#8FB28F")
+     (200 . "#9FC59F")
+     (220 . "#AFD8AF")
+     (240 . "#BFEBBF")
+     (260 . "#93E0E3")
+     (280 . "#6CA0A3")
+     (300 . "#7CB8BB")
+     (320 . "#8CD0D3")
+     (340 . "#94BFF3")
+     (360 . "#DC8CC3"))))
+ '(vc-annotate-very-old-color "#DC8CC3")
  '(vc-display-status nil)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
@@ -472,8 +493,8 @@
 
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
-(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
+;; (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+;;   (add-hook hook (lambda () (flyspell-mode -1))))
 
 
 (setq compilation-scroll-output 'first-error)
@@ -562,8 +583,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(mode-line ((t (:background "#2B2B2B" :foreground "#8FB28F" :box (:line-width -1 :color "#c46746" :style released-button)))))
- '(region ((t (:background "#69874a"))))
+ '(region ((t (:background "selectedKnobColor"))))
  '(shm-current-face ((t (:background "Black")))))
 
 (setq helm-projectile-fuzzy-match t)
@@ -573,7 +593,13 @@
 ;;https://emacs.stackexchange.com/questions/1028/mark-and-open-multiple-files-with-helm-and-projectile
 (setq projectile-completion-system 'helm
       projectile-switch-project-action 'helm-projectile)
-(put 'magit-clean 'disabled nil)
+
+(setq docker-arguments nil)
+
+(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+
+(global-set-key (kbd "\C-c d l") 'docker-logs)
+
 
 (global-set-key (kbd "\C-c g l") 'git-link)
 
@@ -581,9 +607,16 @@
 
 (global-set-key (kbd "\C-cM") 'helm-make-projectile)
 
-(global-set-key (kbd "\C-cs") 'helm-elscreen)
+(global-set-key (kbd "\C-c s n") 'helm-elscreen)
 
-(global-set-key (kbd "\C-cw") 'helm-eww)
+(global-set-key (kbd "\C-c s s") 'helm-spotify-plus)  ;; s for SEARCH
+(global-set-key (kbd "\C-c s f") 'helm-spotify-plus-next)
+(global-set-key (kbd "\C-c s b") 'helm-spotify-plus-previous)
+(global-set-key (kbd "\C-c s p") 'helm-spotify-plus-play)
+(global-set-key (kbd "\C-c s g") 'helm-spotify-plus-pause) ;; g cause you know.. C-g stop things :)
+
+(global-set-key (kbd "\C-cww") 'helm-eww)
+(global-set-key (kbd "\C-cwt") 'helm-world-time)
 
 
 (global-set-key (kbd "\C-ci") 'helm-imenu)
@@ -601,6 +634,9 @@
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 
+
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'flycheck-mode-hook 'flycheck-list-errors) ;; For wide screens
 
 
 ;; (remove-hook 'compilation-finish-functions
@@ -624,3 +660,129 @@
 ;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
 ;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
 ;; (global-set-key (kbd "C-x M-p") 'helm-multi-swoop-projectile)
+
+
+(setq gc-cons-threshold 20000000)
+
+;; (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-mode))
+
+
+(global-set-key (kbd "<kp-2>") 'end-of-defun)
+(global-set-key (kbd "<kp-8>") 'beginning-of-defun)
+(global-set-key (kbd "<kp-6>") 'elscreen-next)
+(global-set-key (kbd "<kp-4>") 'elscreen-previous)
+(global-set-key (kbd "<kp-5>") 'elscreen-swap)
+
+
+;; (defvar sql-last-prompt-pos 1
+;;   "position of last prompt when added recording started")
+;; (make-variable-buffer-local 'sql-last-prompt-pos)
+;; (put 'sql-last-prompt-pos 'permanent-local t)
+
+;; (defun sql-add-newline-first (output)
+;;   "Add newline to beginning of OUTPUT for `comint-preoutput-filter-functions'
+;;     This fixes up the display of queries sent to the inferior buffer
+;;     programatically."
+;;   (let ((begin-of-prompt
+;;          (or (and comint-last-prompt-overlay
+;;                   ;; sometimes this overlay is not on prompt
+;;                   (save-excursion
+;;                     (goto-char (overlay-start comint-last-prompt-overlay))
+;;                     (looking-at-p comint-prompt-regexp)
+;;                     (point)))
+;;              1)))
+;;     (if (> begin-of-prompt sql-last-prompt-pos)
+;;         (progn
+;;           (setq sql-last-prompt-pos begin-of-prompt)
+;;           (concat "\n" output))
+;;       output)))
+
+;; (defun sqli-add-hooks ()
+;;   "Add hooks to `sql-interactive-mode-hook'."
+;;   (add-hook 'comint-preoutput-filter-functions
+;;             'sql-add-newline-first))
+
+;; (add-hook 'sql-interactive-mode-hook 'sqli-add-hooks)
+
+
+;; https://emacs.stackexchange.com/questions/13315/sql-send-paragraph-results-in-mis-aligned-headers/18403#18403
+
+;; Silence compiler warnings
+(defvar sql-product)
+(defvar sql-prompt-regexp)
+(defvar sql-prompt-cont-regexp)
+
+(add-hook 'sql-interactive-mode-hook 'my-sql-interactive-mode-hook)
+(defun my-sql-interactive-mode-hook ()
+  "Custom interactive SQL mode behaviours. See `sql-interactive-mode-hook'."
+  (when (eq sql-product 'postgres)
+    ;; Allow symbol chars in database names in prompt.
+    ;; Default postgres pattern was: "^\\w*=[#>] " (see `sql-product-alist').
+    (setq sql-prompt-regexp "^\\(?:\\sw\\|\\s_\\)*=[#>] ")
+    ;; Ditto for continuation prompt: "^\\w*[-(][#>] "
+    (setq sql-prompt-cont-regexp "^\\(?:\\sw\\|\\s_\\)*[-(][#>] "))
+
+  ;; Deal with inline prompts in query output.
+  ;; Runs after `sql-interactive-remove-continuation-prompt'.
+  (add-hook 'comint-preoutput-filter-functions
+            'my-sql-comint-preoutput-filter :append :local))
+
+(defun my-sql-comint-preoutput-filter (output)
+  "Filter prompts out of SQL query output.
+
+Runs after `sql-interactive-remove-continuation-prompt' in
+`comint-preoutput-filter-functions'."
+  ;; If the entire output is simply the main prompt, return that.
+  ;; (i.e. When simply typing RET at the sqli prompt.)
+  (if (string-match (concat "\\`\\(" sql-prompt-regexp "\\)\\'") output)
+      output
+    ;; Otherwise filter all leading prompts from the output.
+    ;; Store the buffer-local prompt patterns before changing buffers.
+    (let ((main-prompt sql-prompt-regexp)
+          (any-prompt comint-prompt-regexp) ;; see `sql-interactive-mode'
+          (prefix-newline nil))
+      (with-temp-buffer
+        (insert output)
+        (goto-char (point-min))
+        (when (looking-at main-prompt)
+          (setq prefix-newline t))
+        (while (looking-at any-prompt)
+          (replace-match ""))
+        ;; Prepend a newline to the output, if necessary.
+        (when prefix-newline
+          (goto-char (point-min))
+          (unless (looking-at "\n")
+            (insert "\n")))
+        ;; Return the filtered output.
+        (buffer-substring-no-properties (point-min) (point-max))))))
+
+(defadvice sql-send-string (before my-prefix-newline-to-sql-string)
+  "Force all `sql-send-*' commands to include an initial newline.
+
+This is a trivial solution to single-line queries tripping up my
+custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
+  (ad-set-arg 0 (concat "\n" (ad-get-arg 0))))
+(ad-activate 'sql-send-string)
+
+
+(defun my-font-lock-everything-in-sql-interactive-mode ()
+  (unless (eq 'oracle sql-product)
+    (sql-product-font-lock nil nil)))
+(add-hook 'sql-interactive-mode-hook 'my-font-lock-everything-in-sql-interactive-mode)
+
+
+;; (browse-kill-ring-default-keybindings)
+(put 'magit-diff-edit-hunk-commit 'disabled nil)
+
+
+(setq global-auto-revert-mode 0)
+
+(persistent-scratch-setup-default)
+(setq helm-split-window-inside-p t)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+
+(add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
+(put 'magit-clean 'disabled nil)

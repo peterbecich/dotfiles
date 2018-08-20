@@ -19,8 +19,8 @@ test -r /sw/bin/init.sh && . /sw/bin/init.sh
 export LESSOPEN="| /opt/local/bin/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c"
+# export ALTERNATE_EDITOR=""
+# export EDITOR="emacsclient -t"
+# export VISUAL="emacsclient -c"
 
 
