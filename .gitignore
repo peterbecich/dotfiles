@@ -53,3 +53,5 @@ init_private_debian.el
 
 sbt/1.0/zinc/*
 sbt/0.13/staging/*
+
+credentials.sbt

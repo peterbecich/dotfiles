@@ -2,6 +2,8 @@
 (setq magit-auto-revert-mode 1)
 (setq magit-refresh-status-buffer 1)
 
+(require 'magit-todos)
+
 (global-set-key (kbd "C-c g g") 'browse-at-remote)
 
 ;;(remove-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
