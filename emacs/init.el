@@ -122,9 +122,11 @@
 (use-package yaml-mode)
 (use-package rjsx-mode)
 (use-package paradox)
-
 (require 'paradox)
 (paradox-enable)
+
+(use-package ws-butler)
+
 
 ;; (require 'flx-ido)
 (ido-mode 0)
@@ -529,7 +531,7 @@
 
 (defadvice message (before when-was-that activate)
   "Add timestamps to `message' output."
-  (ad-set-arg 0 (concat (format-time-string "[%Y-%m-%d %T %Z] ") 
+  (ad-set-arg 0 (concat (format-time-string "[%Y-%m-%d %T %Z] ")
 			(ad-get-arg 0)) ))
 
 (when (fboundp 'windmove-default-keybindings)
