@@ -232,7 +232,7 @@
 ;; (use-package restclient
 ;;   :mode ("\\.http\\'" . restclient-mode))
 
-(setq dired-dwim-target t)
+(setq dired-dwim-target nil)
 
 (setq emerge-diff-options "--ignore-all-space")
 
@@ -294,6 +294,7 @@
  '(compilation-always-kill t)
  '(compilation-auto-jump-to-first-error nil)
  '(compilation-message-face (quote default))
+ '(compilation-scroll-output t)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
  '(custom-enabled-themes (quote (zenburn)))
@@ -319,8 +320,10 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
    (quote
-    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
- '(elfeed-search-filter "@1-week-ago")
+    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://feeds.reuters.com/reuters/topNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "http://www.thehill.com/rss/syndicator/19110 " "https://news.ycombinator.com/rss" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain")))
+ '(elfeed-search-date-format (quote ("%Y-%m-%d %H:%M" 16 :left)))
+ '(elfeed-search-face-alist nil)
+ '(elfeed-search-filter "@1-day-ago")
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -357,7 +360,7 @@
  '(flycheck-hlint-args (quote ("-j")))
  '(flycheck-idle-change-delay 0.1)
  '(frame-background-mode (quote dark))
- '(fringe-mode 0 nil (fringe))
+ '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-link-use-commit t)
  '(global-highlight-thing-mode t)
  '(global-linum-mode nil)
@@ -382,7 +385,8 @@
  '(helm-make-named-buffer t)
  '(helm-make-sort-targets t)
  '(helm-mode-fuzzy-match t)
- '(helm-swoop-use-fuzzy-match t)
+ '(helm-swoop-speed-or-color t)
+ '(helm-swoop-use-fuzzy-match nil)
  '(helm-time-zone-home-location "Los Angeles")
  '(helm-top-command
    "env COLUMNS=%s ps -raxo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
@@ -427,7 +431,8 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode)))
+    (git-gutter-fringe restart-emacs golden-ratio highlight-indent-guides lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode)))
+ '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
@@ -499,7 +504,7 @@
 ;;   (add-hook hook (lambda () (flyspell-mode -1))))
 
 
-(setq compilation-scroll-output 'first-error)
+;; (setq compilation-scroll-output ')
 
 (load "~/dotfiles/emacs/areas/c.el")
 (load "~/dotfiles/emacs/areas/epub.el")
@@ -787,4 +792,17 @@ custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
 
 
 (add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
+
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+
+(setq redisplay-dont-pause t)
+
+;; " http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"
+
+
+;; (run-with-idle-timer 0 (* 15 60) 'elfeed-update)
 (put 'magit-clean 'disabled nil)
+
+(require 'git-gutter-fringe)
+(setq global-git-commit-mode t)
