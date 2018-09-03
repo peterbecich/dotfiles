@@ -1,7 +1,7 @@
 decorations all
 transparent false
 dockapp_mode none
-geometry 8x1-1200+400
+geometry 8x1-1920+0
 max_geometry 5x1-0+0
 background "#000000"
 #background "#FFFFFF"
