@@ -35,6 +35,7 @@
 (use-package auto-virtualenv)
 (use-package browse-at-remote)
 (use-package butler)
+(use-package cider)
 (use-package company-irony)
 (use-package company-irony-c-headers)
 (use-package company-rtags)
@@ -74,8 +75,10 @@
 (use-package helm-hoogle)
 (use-package helm-make)
 (use-package helm-projectile)
+(use-package helm-slime)
 (use-package helm-swoop)
 (use-package helm-tramp)
+(use-package highlight-defined)
 (use-package highlight-indent-guides)
 (use-package highlight-thing)
 (use-package hindent)
@@ -98,12 +101,13 @@
 (use-package nlinum)
 (use-package org)
 (use-package paradox)
-(use-package paredit)
+;; (use-package paredit)
 (use-package pdf-tools)
 (use-package persistent-scratch)
 (use-package psc-ide)
 (use-package puppet-mode)
 (use-package purescript-mode)
+(use-package racket-mode)
 (use-package rainbow-delimiters)
 (use-package restart-emacs)
 (use-package restclient)
@@ -113,6 +117,8 @@
 (use-package sbt-mode)
 (use-package shakespeare-mode)
 (use-package shm)
+(use-package slime)
+(use-package slime-company)
 (use-package smart-mode-line)
 (use-package smartparens)
 (use-package sml-mode)
@@ -375,7 +381,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred dired-du docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flatui-theme flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub ghub gist git git-commit git-gutter-fringe glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment kubernetes kubernetes-tramp latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit magit magit-gh-pulls magit-gh-pulls magit-todos magit-todos maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+    (highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred dired-du docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flatui-theme flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub ghub gist git git-commit git-gutter-fringe glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment kubernetes kubernetes-tramp latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit magit magit-gh-pulls magit-gh-pulls magit-todos magit-todos maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
@@ -462,11 +468,6 @@
 
 (setq helm-ag-insert-at-point 'symbol)
 
-(define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-forward-barf-sexp)
-(define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
-
 (setq helm-projectile-fuzzy-match t)
 (require 'helm-projectile)
 (helm-projectile-on)
@@ -512,8 +513,6 @@
 (setq global-whitespace-cleanup-mode t)
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
-
-(add-hook 'prog-mode-hook #'smartparens-mode)
 
 ;; Optional face for line numbers
 ;; Face name is `helm-swoop-line-number-face`
