@@ -158,10 +158,6 @@
 (elscreen-start)
 (require 'helm-config)
 
-(setq sml/no-confirm-load-theme t)
-(sml/setup)
-(setq sml/theme 'dark)
-
 (add-hook 'after-init-hook 'global-company-mode)
 
 
@@ -225,8 +221,8 @@
 	 auto-package-update-at-time "20:00")
    (auto-package-update-maybe))
 
-(defadvice load-theme (before theme-dont-propagate activate)
-  (mapcar #'disable-theme custom-enabled-themes))
+;; (defadvice load-theme (before theme-dont-propagate activate)
+;;   (mapcar #'disable-theme custom-enabled-themes))
 
 ;; https://noahfrederick.com/log/restclient-for-emacs
 ;; (use-package restclient
@@ -283,6 +279,8 @@
     ("--smart-case" "--stats" "-p '~/dotfiles/.agignore'")))
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(async-bytecomp-allowed-packages (quote (quote (all))))
  '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
  '(auto-package-update-hide-results t)
@@ -291,16 +289,17 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-clang-executable "clang")
+ '(company-quickhelp-color-background "#4F4F4F")
+ '(company-quickhelp-color-foreground "#DCDCCC")
  '(compilation-always-kill t)
  '(compilation-auto-jump-to-first-error nil)
  '(compilation-message-face (quote default))
- '(compilation-scroll-output t)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes
    (quote
-    ("89dd0329d536d389753111378f2425bd4e4652f892ae8a170841c3396f5ba2dd" "3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" "190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "291588d57d863d0394a0d207647d9f24d1a8083bb0c9e8808280b46996f3eb83" "9fe1540491fcf692b8c639a3abacd32b29233bc4cb834a12a0fd1e01cbd0a128" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" "e03d2f414fb109f3920752b10b92323697174f49d577da9e69979edbb147a921" "0c32e4f0789f567a560be625f239ee9ec651e524e46a4708eb4aba3b9cdc89c5" "89dd0329d536d389753111378f2425bd4e4652f892ae8a170841c3396f5ba2dd" "3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" "190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "291588d57d863d0394a0d207647d9f24d1a8083bb0c9e8808280b46996f3eb83" "9fe1540491fcf692b8c639a3abacd32b29233bc4cb834a12a0fd1e01cbd0a128" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(desktop-save-mode t)
  '(dired-du-on-find-dired-ok nil)
  '(dired-du-size-format t)
@@ -320,10 +319,8 @@
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
    (quote
-    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://feeds.reuters.com/reuters/topNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "http://www.thehill.com/rss/syndicator/19110 " "https://news.ycombinator.com/rss" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain")))
- '(elfeed-search-date-format (quote ("%Y-%m-%d %H:%M" 16 :left)))
- '(elfeed-search-face-alist nil)
- '(elfeed-search-filter "@1-day-ago")
+    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
+ '(elfeed-search-filter "@1-week-ago")
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -362,9 +359,10 @@
  '(frame-background-mode (quote dark))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-link-use-commit t)
+ '(global-git-gutter-mode t)
  '(global-highlight-thing-mode t)
  '(global-linum-mode nil)
- '(global-nlinum-mode nil)
+ '(global-nlinum-mode t)
  '(gnutls-trustfiles
    (quote
     ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/opt/local/share/curl/curl-ca-bundle.crt")))
@@ -385,23 +383,11 @@
  '(helm-make-named-buffer t)
  '(helm-make-sort-targets t)
  '(helm-mode-fuzzy-match t)
- '(helm-swoop-speed-or-color t)
- '(helm-swoop-use-fuzzy-match nil)
+ '(helm-swoop-use-fuzzy-match t)
  '(helm-time-zone-home-location "Los Angeles")
  '(helm-top-command
    "env COLUMNS=%s ps -raxo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
  '(helm-top-poll-mode t)
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
- '(highlight-tail-colors
-   (quote
-    (("#3C3D37" . 0)
-     ("#679A01" . 20)
-     ("#4BBEAE" . 30)
-     ("#1DB4D0" . 50)
-     ("#9A8F21" . 60)
-     ("#A75B00" . 70)
-     ("#F309DF" . 85)
-     ("#3C3D37" . 100))))
  '(highlight-thing-case-sensitive-p t)
  '(highlight-thing-exclude-thing-under-point t)
  '(intero-debug nil)
@@ -417,10 +403,10 @@
  '(json-reformat:pretty-string\? t)
  '(magit-diff-use-overlays nil)
  '(magit-section-cache-visibility nil)
- '(magit-todos-mode t nil (magit-todos))
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(magithub-issue-issue-filter-functions nil)
+ '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(nlinum-format "%d ")
  '(nrepl-message-colors
@@ -431,8 +417,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (git-gutter-fringe info-colors restart-emacs golden-ratio highlight-indent-guides lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode)))
- '(paradox-execute-asynchronously nil)
+    (magit magit-todos magithub proof-general highlight-indent-guides sage-shell-mode restart-emacs git-gutter-fringe info-colors lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode)))
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
@@ -525,13 +510,9 @@
 (load "~/dotfiles/emacs/areas/shell.el")
 (load "~/dotfiles/emacs/areas/twitter.el")
 (load "~/dotfiles/emacs/areas/web.el")
+(load "~/dotfiles/emacs/areas/sage.el")
 
-;; (use-package zenburn-theme)
-;; (use-package espresso-theme)
-;; (use-package leuven-theme)
-;; (use-package moe-theme)
-;; (use-package solarized-theme)
-;;(set-face-background hl-line-face "#dbdbdb"); Same color as greyness in gtk
+;;(set-face-background hl-line-face "dodger-blue"); Same color as greyness in gtk
 
 
 (defadvice message (before when-was-that activate)
@@ -574,24 +555,8 @@
 (define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
 (define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
 
-
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(shm-current-face ((t (:background "#c7fbea"))))
-;;  '(shm-quarantine-face ((t (:background "#ffd8e1")))))
-
-(let ((inhibit-message t))
-  (message "Invalid face reference: 1"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(region ((t (:background "selectedKnobColor"))))
- '(shm-current-face ((t (:background "Black")))))
+;; (let ((inhibit-message t))
+;;   (message "Invalid face reference: 1"))
 
 (setq helm-projectile-fuzzy-match t)
 (require 'helm-projectile)
@@ -771,7 +736,6 @@ custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
   (ad-set-arg 0 (concat "\n" (ad-get-arg 0))))
 (ad-activate 'sql-send-string)
 
-
 (defun my-font-lock-everything-in-sql-interactive-mode ()
   (unless (eq 'oracle sql-product)
     (sql-product-font-lock nil nil)))
@@ -806,3 +770,21 @@ custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
 
 (require 'git-gutter-fringe)
 (setq global-git-commit-mode t)
+
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))
+
+
+
+;;(setq sml/no-confirm-load-theme t)
+(sml/setup)
+(setq sml/theme 'dark)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight ((t (:background "dodger blue"))))
+ '(region ((t (:background "dodger blue"))))
+ '(shm-current-face ((t (:background "Black")))))

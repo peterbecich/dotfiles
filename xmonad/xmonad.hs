@@ -42,9 +42,9 @@ myKeys = [
   , ((mod4Mask, xK_c), swapNextScreen)
   , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
   , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
-  , ((mod4Mask, xK_F11 ), lowerVolume 3 >> return ())
-  , ((mod4Mask, xK_F12 ), raiseVolume 3 >> return ())
-  , ((mod4Mask, xK_F10), toggleMute    >> return ())
+  , ((0, 0x1008ff11), lowerVolume 3 >> return ())
+  , ((0, 0x1008ff13), raiseVolume 3 >> return ())
+  , ((0, 0x1008ff12), toggleMute    >> return ())
   , ((mod4Mask, xK_F7), spawn "setxkbmap -layout dvorak")          
   , ((mod4Mask, xK_F8), spawn "setxkbmap -layout us")
   ] ++ flipScreens
@@ -56,7 +56,7 @@ main = do
   _ <- spawn "sleep 10; xrandr --output DVI-D-0 --rotate normal --pos 1920x0"
   _ <- spawn "sleep 10; xrandr --output DP-4 --rotate normal --pos 0x0"
   h <- spawnPipe "~/bin/xmobar"
-  _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
+--  _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize ~/Pictures/wallpapers/landscape/*"
   _ <- spawnPipe "xscreensaver -no-splash &"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
@@ -69,8 +69,7 @@ main = do
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
         -- , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
-        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook myLayout
+        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook myLayoutQ
         -- , layoutHook = myLayout
         , layoutHook = avoidStruts $ smartBorders $ myLayout
         } `additionalKeys` myKeys
-
