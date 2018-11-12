@@ -10,6 +10,7 @@
 ;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;; (add-hook 'scala-mode-hook #'yas-minor-mode)
+(add-hook 'scala-mode-hook #'smartparens-mode)
 
 ;; (require 'ensime nil
 ;; 	 (lambda()
@@ -32,6 +33,9 @@
 
 (setq ensime-startup-notification nil)
 (setq ensime-startup-snapshot-notification nil)
+
+(add-hook 'scala-mode-hook 'flycheck-mode)
+
 
 ;; (require 'sbt-mode)
 
