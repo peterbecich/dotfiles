@@ -42,10 +42,6 @@
 ;; (setq exec-path (append exec-path '("/Users/peterbecich/.npm-global/bin/")))
 
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-
 (load "~/dotfiles/emacs/init_private_mac.el")
 
 
