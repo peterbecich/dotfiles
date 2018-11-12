@@ -1,4 +1,9 @@
 (require 'package) ;; You might already have this line
+(require 'tls)
+(setq gnutls-trustfiles
+  (quote
+    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/opt/local/share/curl/curl-ca-bundle.crt")))
+(setq tls-checktrust t)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
@@ -26,9 +31,7 @@
     (load "~/dotfiles/emacs/init_debian.el")
     )
 
-(require 'tls)
 
-(require 'paradox)
 (use-package ag)
 (use-package auctex-latexmk)
 (use-package auto-compile)
@@ -55,6 +58,7 @@
 (use-package ensime)
 (use-package ess)
 (use-package fill-column-indicator)
+(use-package flatui-theme)
 (use-package flx-ido)
 (use-package flycheck-haskell)
 (use-package flycheck-rtags)
@@ -135,7 +139,7 @@
 (use-package websocket)
 (use-package ws-butler)
 (use-package yaml-mode)
-
+(require 'paradox)
 (paradox-enable)
 
 
@@ -235,8 +239,6 @@
     ("--smart-case" "--stats" "-p '~/dotfiles/.agignore'")))
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(async-bytecomp-allowed-packages (quote (quote (all))))
  '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
  '(auto-package-update-hide-results t)
@@ -307,7 +309,6 @@
  '(erc-user-mode "+RZgi")
  '(eshell-buffer-maximum-lines 6000)
  '(eshell-history-size 2048)
- '(fci-rule-color "#dfdfdf")
  '(fci-rule-width 1)
  '(fill-column 100)
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
@@ -320,9 +321,6 @@
  '(global-highlight-thing-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode t)
- '(gnutls-trustfiles
-   (quote
-    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/opt/local/share/curl/curl-ca-bundle.crt")))
  '(haskell-font-lock-symbols nil)
  '(haskell-tags-on-save t)
  '(hasky-stack-auto-target t)
@@ -556,6 +554,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(shm-current-face ((t (:background "#dfdfdf"))))
- '(shm-quarantine-face ((t (:background "#ff8787")))))
+ )
 (put 'magit-clean 'disabled nil)
