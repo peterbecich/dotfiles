@@ -26,20 +26,21 @@
     (load "~/dotfiles/emacs/init_debian.el")
     )
 
+(require 'tls)
+
+(require 'paradox)
 (use-package ag)
 (use-package auctex-latexmk)
 (use-package auto-compile)
 (use-package auto-virtualenv)
-(use-package butler)
 (use-package browse-at-remote)
+(use-package butler)
 (use-package company-irony)
 (use-package company-irony-c-headers)
 (use-package company-rtags)
 (use-package company-terraform)
 (use-package dired-du)
-(use-package docker
-  :ensure t
-  :bind ("C-c d d" . docker))
+(use-package docker :ensure t :bind ("C-c d d" . docker))
 (use-package docker-compose-mode)
 (use-package dockerfile-mode)
 (use-package elfeed)
@@ -51,15 +52,13 @@
 (use-package emojify)
 (use-package ensime)
 (use-package ess)
+(use-package fill-column-indicator)
 (use-package flx-ido)
 (use-package flycheck-haskell)
 (use-package flycheck-rtags)
-(use-package fill-column-indicator)
 (use-package ghc)
-;; (use-package ghub)
-;; (use-package ghub+)
-(use-package git-link)
 (use-package git-gutter-fringe)
+(use-package git-link)
 (use-package haskell-mode)
 (use-package hasky-stack)
 (use-package helm)
@@ -76,9 +75,9 @@
 (use-package helm-projectile)
 (use-package helm-swoop)
 (use-package helm-tramp)
-(use-package hindent)
-(use-package highlight-thing)
 (use-package highlight-indent-guides)
+(use-package highlight-thing)
+(use-package hindent)
 (use-package hlint-refactor)
 (use-package intero)
 (use-package irony)
@@ -87,18 +86,15 @@
 (use-package js-format)
 (use-package js2-mode)
 (use-package js2-refactor)
-(use-package magit
-  :ensure t)
+(use-package magit :ensure t)
 (use-package magit-popup)
-(use-package magithub
-  :after magit
-  :ensure t
-  :config (magithub-feature-autoinject t))
 (use-package magit-todos)
+(use-package magithub :after magit :ensure t :config (magithub-feature-autoinject t))
 (use-package markdown-mode)
 (use-package multi-web-mode)
 (use-package nlinum)
 (use-package org)
+(use-package paradox)
 (use-package paredit)
 (use-package pdf-tools)
 (use-package persistent-scratch)
@@ -106,8 +102,9 @@
 (use-package puppet-mode)
 (use-package purescript-mode)
 (use-package rainbow-delimiters)
-(use-package restclient)
 (use-package restart-emacs)
+(use-package restclient)
+(use-package rjsx-mode)
 (use-package rtags)
 (use-package shakespeare-mode)
 (use-package shm)
@@ -125,14 +122,11 @@
 (use-package w3m)
 (use-package web-mode)
 (use-package websocket)
+(use-package ws-butler)
 (use-package yaml-mode)
-(use-package rjsx-mode)
-(use-package paradox)
-(require 'paradox)
+
 (paradox-enable)
 
-(use-package ws-butler)
-;;(use-package zenburn-theme)
 
 (require 'magit)
 (require 'magit-todos)
@@ -153,60 +147,24 @@
 (ido-mode 0)
 (ido-everywhere 0)
 (flx-ido-mode 0)
-;; ;; disable ido faces to see flx highlights.
-;; (setq ido-enable-flex-matching 0)
-;; (setq ido-use-faces nil)
-
-;; (setq ido-use-filename-at-point 'guess)
-;; (setq ido-ignore-extensions t)
-
-;; (helm-flx-mode +1)
-;; (setq helm-flx-for-helm-find-files t ;; t by default
-;;       helm-flx-for-helm-locate t) ;; nil by default
-
-;; (require 'symon)
-
-;; (add-hook 'after-init-hook #'global-emojify-mode)
-
-;; (use-package auto-virtualenv)
-;; (use-package company-emacs-eclim)
-;; (use-package eclim)
-;; (use-package flycheck-rtags)
-
-;;(use-package ess)
 
 (require 'smartparens-config)
 (elscreen-start)
 (require 'helm-config)
 
-;; (setq sml/no-confirm-load-theme t)
-(sml/setup)
-(setq sml/theme 'light)
 
 (add-hook 'after-init-hook 'global-company-mode)
-
-
 
 (eval-when-compile
   (require 'use-package))
 
-(require 'tls)
-
 (setq tramp-default-method "ssh")
 
-
 (async-bytecomp-package-mode 1)
-
-;;(newsticker-start)
-
-;;(twit)
-
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (setq request-backend 'url-retrieve)
-
-
 
 (setq docker-global-mode 1)
 
@@ -215,9 +173,6 @@
 (pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
-;;(add-hook 'dired-mode-hook 'auto-revert-mode)
-
-;;(global-flycheck-mode)
 
 (use-package auto-package-update
    :ensure t
@@ -227,10 +182,6 @@
 	 auto-package-update-at-time "20:00")
    (auto-package-update-maybe))
 
-
-;; https://noahfrederick.com/log/restclient-for-emacs
-;; (use-package restclient
-;;   :mode ("\\.http\\'" . restclient-mode))
 
 (setq dired-dwim-target nil)
 
@@ -242,26 +193,13 @@
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-;; (global-set-key (kbd "C-M-m") 'imenu)
-
-;; (global-set-key (kbd "C-c b")  'windmove-left)
-;; (global-set-key (kbd "C-c f") 'windmove-right)
-;; (global-set-key (kbd "C-c p")    'windmove-up)
-;; (global-set-key (kbd "C-c n")  'windmove-down)
-
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
 (global-visual-line-mode 1)             ; Proper line wrapping
-;; (global-hl-line-mode 0); Highlight current row
 (show-paren-mode 1); Matches parentheses and such in every mode
 
-;; (setq visible-bell t); Flashes on error
-
 (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
-
-;; (add-hook 'prog-mode-hook 'linum-mode)
-;; (setq linum-format "%d ")
 
 (add-hook 'prog-mode-hook 'nlinum-mode)
 
@@ -433,7 +371,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (git-gutter-fringe info-colors restart-emacs golden-ratio highlight-indent-guides lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode info-colors magit magit-todos ghub magit-gh-pulls sage-shell-mode proof-general)))
+    (flatui-theme git-gutter-fringe info-colors restart-emacs golden-ratio highlight-indent-guides lsp-typescript lsp-vue lsp-ui lsp-mode lsp-haskell fill-column-indicator apel apiwrap async auctex bind-key company company-math dash dash-functional deferred docker-tramp edit-indirect ensime ess flycheck-haskell git-commit helm helm-spotify-plus helm-tramp hl-todo julia-mode let-alist magit mmm-mode multi noflet pcre2el persistent-scratch pg popwin projectile sbt-mode seq spinner system-packages magit-todos butler intero adoc-mode elfeed oauth2 tide dired-du indium undo-tree circe kubernetes-tramp emojify nlinum-mode nlinum auto-compile nix-mode emacsql emacsql-mysql emacsql-psql emacsql-sqlite typescript-mode ac-rtags afternoon-theme ag alect-themes ample-theme anti-zenburn-theme auctex-latexmk auto-package-update auto-virtualenv auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status cider clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme docker docker-compose-mode dockerfile-mode eclim elm-mode elpy elscreen ereader espresso-theme ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub gist git glsl-mode go-autocomplete go-mode hamlet-mode hide-comnt hlint-refactor-mode idris-mode ipython keychain-environment latex-extra latex-math-preview latex-preview-pane magit-gh-pulls maker-mode markdown-mode monokai-theme nov org org-caldav org-pomodoro orgit psci redprl rtags slack smart-mode-line smartparens sml-mode solarized-theme sublime-themes twittering-mode wakatime-mode web-mode info-colors magit magit-todos ghub magit-gh-pulls sage-shell-mode proof-general)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
@@ -472,6 +410,11 @@
     (face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark)))
  '(ws-butler-keep-whitespace-before-point nil))
 
+
+(sml/setup)
+(setq sml/theme 'light)
+
+
 (setq ring-bell-function 'ignore)
 
 ;; https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources
@@ -479,11 +422,6 @@
 
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
-;; (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-;;   (add-hook hook (lambda () (flyspell-mode -1))))
-
-
-;; (setq compilation-scroll-output ')
 
 (load "~/dotfiles/emacs/areas/c.el")
 (load "~/dotfiles/emacs/areas/epub.el")
@@ -500,12 +438,12 @@
 (load "~/dotfiles/emacs/areas/proof-general.el")
 (load "~/dotfiles/emacs/areas/purescript.el")
 (load "~/dotfiles/emacs/areas/python.el")
+(load "~/dotfiles/emacs/areas/sage.el")
 (load "~/dotfiles/emacs/areas/scala.el")
 (load "~/dotfiles/emacs/areas/shell.el")
+(load "~/dotfiles/emacs/areas/sql.el")
 (load "~/dotfiles/emacs/areas/twitter.el")
 (load "~/dotfiles/emacs/areas/web.el")
-(load "~/dotfiles/emacs/areas/sage.el")
-
 
 (defadvice message (before when-was-that activate)
   "Add timestamps to `message' output."
@@ -520,35 +458,10 @@
 
 (setq helm-ag-insert-at-point 'symbol)
 
-;; https://github.com/Fuco1/.emacs.d/blob/master/files/smartparens.el
-;; (define-key smartparens-mode-map (kbd "C-M-f") 'sp-forward-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-b") 'sp-backward-sexp)
-
-;; (define-key smartparens-mode-map (kbd "C-M-d") 'sp-down-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-a") 'sp-backward-down-sexp)
-;; (define-key smartparens-mode-map (kbd "C-S-d") 'sp-beginning-of-sexp)
-;; (define-key smartparens-mode-map (kbd "C-S-a") 'sp-end-of-sexp)
-
-;; (define-key smartparens-mode-map (kbd "C-M-e") 'sp-up-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-u") 'sp-backward-up-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-t") 'sp-transpose-sexp)
-
-;; (define-key smartparens-mode-map (kbd "C-M-n") 'sp-forward-hybrid-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-p") 'sp-backward-hybrid-sexp)
-
-;; (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
-;; (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
-
-;; (define-key smartparens-mode-map (kbd "M-<delete>") 'sp-unwrap-sexp)
-;; (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
-
 (define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
 (define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-forward-barf-sexp)
 (define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
 (define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
-
-;; (let ((inhibit-message t))
-;;   (message "Invalid face reference: 1"))
 
 (setq helm-projectile-fuzzy-match t)
 (require 'helm-projectile)
@@ -563,7 +476,6 @@
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 
 (global-set-key (kbd "\C-c d l") 'docker-logs)
-
 
 (global-set-key (kbd "\C-c g l") 'git-link)
 
@@ -591,9 +503,6 @@
 (global-set-key (kbd "\C-cfc") 'helm-flycheck)
 (global-set-key (kbd "\C-cfs") 'helm-flyspell-correct)
 
-;; (global-set-key (kbd "\C-xb") 'helm-buffers-list)
-
-
 (setq-default indent-tabs-mode nil)
 
 (setq global-whitespace-cleanup-mode t)
@@ -602,33 +511,12 @@
 
 (add-hook 'prog-mode-hook #'smartparens-mode)
 
-
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;; (add-hook 'flycheck-mode-hook 'flycheck-list-errors) ;; For wide screens
-
-
-;; (remove-hook 'compilation-finish-functions
-;;           (lambda (buf strg)
-;;             (let ((win  (get-buffer-window buf 'visible)))
-;;               (when win (delete-window win)))))
-
-
 ;; Optional face for line numbers
 ;; Face name is `helm-swoop-line-number-face`
 (setq helm-swoop-use-line-number-face t)
 
 ;; If you prefer fuzzy matching
 (setq helm-swoop-use-fuzzy-match t)
-
-;; (require 'helm-swoop)
-
-;; Change the keybinds to whatever you like :)
-;; (global-set-key (kbd "M-i") 'helm-swoop)
-;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-;; (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
-;; (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
-;; (global-set-key (kbd "C-x M-p") 'helm-multi-swoop-projectile)
-
 
 (setq gc-cons-threshold (eval-when-compile (* 1024 1024 1024)))
 (run-with-idle-timer 2 t (lambda () (garbage-collect)))
@@ -637,114 +525,11 @@
 
 (setq auto-window-vscroll nil)
 
-;; (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-mode))
-
-
 (global-set-key (kbd "<kp-2>") 'end-of-defun)
 (global-set-key (kbd "<kp-8>") 'beginning-of-defun)
 (global-set-key (kbd "<kp-6>") 'elscreen-next)
 (global-set-key (kbd "<kp-4>") 'elscreen-previous)
 (global-set-key (kbd "<kp-5>") 'elscreen-swap)
-
-
-;; (defvar sql-last-prompt-pos 1
-;;   "position of last prompt when added recording started")
-;; (make-variable-buffer-local 'sql-last-prompt-pos)
-;; (put 'sql-last-prompt-pos 'permanent-local t)
-
-;; (defun sql-add-newline-first (output)
-;;   "Add newline to beginning of OUTPUT for `comint-preoutput-filter-functions'
-;;     This fixes up the display of queries sent to the inferior buffer
-;;     programatically."
-;;   (let ((begin-of-prompt
-;;          (or (and comint-last-prompt-overlay
-;;                   ;; sometimes this overlay is not on prompt
-;;                   (save-excursion
-;;                     (goto-char (overlay-start comint-last-prompt-overlay))
-;;                     (looking-at-p comint-prompt-regexp)
-;;                     (point)))
-;;              1)))
-;;     (if (> begin-of-prompt sql-last-prompt-pos)
-;;         (progn
-;;           (setq sql-last-prompt-pos begin-of-prompt)
-;;           (concat "\n" output))
-;;       output)))
-
-;; (defun sqli-add-hooks ()
-;;   "Add hooks to `sql-interactive-mode-hook'."
-;;   (add-hook 'comint-preoutput-filter-functions
-;;             'sql-add-newline-first))
-
-;; (add-hook 'sql-interactive-mode-hook 'sqli-add-hooks)
-
-
-;; https://emacs.stackexchange.com/questions/13315/sql-send-paragraph-results-in-mis-aligned-headers/18403#18403
-
-;; Silence compiler warnings
-(defvar sql-product)
-(defvar sql-prompt-regexp)
-(defvar sql-prompt-cont-regexp)
-
-(add-hook 'sql-interactive-mode-hook 'my-sql-interactive-mode-hook)
-(defun my-sql-interactive-mode-hook ()
-  "Custom interactive SQL mode behaviours. See `sql-interactive-mode-hook'."
-  (when (eq sql-product 'postgres)
-    ;; Allow symbol chars in database names in prompt.
-    ;; Default postgres pattern was: "^\\w*=[#>] " (see `sql-product-alist').
-    (setq sql-prompt-regexp "^\\(?:\\sw\\|\\s_\\)*=[#>] ")
-    ;; Ditto for continuation prompt: "^\\w*[-(][#>] "
-    (setq sql-prompt-cont-regexp "^\\(?:\\sw\\|\\s_\\)*[-(][#>] "))
-
-  ;; Deal with inline prompts in query output.
-  ;; Runs after `sql-interactive-remove-continuation-prompt'.
-  (add-hook 'comint-preoutput-filter-functions
-            'my-sql-comint-preoutput-filter :append :local))
-
-(defun my-sql-comint-preoutput-filter (output)
-  "Filter prompts out of SQL query output.
-
-Runs after `sql-interactive-remove-continuation-prompt' in
-`comint-preoutput-filter-functions'."
-  ;; If the entire output is simply the main prompt, return that.
-  ;; (i.e. When simply typing RET at the sqli prompt.)
-  (if (string-match (concat "\\`\\(" sql-prompt-regexp "\\)\\'") output)
-      output
-    ;; Otherwise filter all leading prompts from the output.
-    ;; Store the buffer-local prompt patterns before changing buffers.
-    (let ((main-prompt sql-prompt-regexp)
-          (any-prompt comint-prompt-regexp) ;; see `sql-interactive-mode'
-          (prefix-newline nil))
-      (with-temp-buffer
-        (insert output)
-        (goto-char (point-min))
-        (when (looking-at main-prompt)
-          (setq prefix-newline t))
-        (while (looking-at any-prompt)
-          (replace-match ""))
-        ;; Prepend a newline to the output, if necessary.
-        (when prefix-newline
-          (goto-char (point-min))
-          (unless (looking-at "\n")
-            (insert "\n")))
-        ;; Return the filtered output.
-        (buffer-substring-no-properties (point-min) (point-max))))))
-
-(defadvice sql-send-string (before my-prefix-newline-to-sql-string)
-  "Force all `sql-send-*' commands to include an initial newline.
-
-This is a trivial solution to single-line queries tripping up my
-custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
-  (ad-set-arg 0 (concat "\n" (ad-get-arg 0))))
-(ad-activate 'sql-send-string)
-
-(defun my-font-lock-everything-in-sql-interactive-mode ()
-  (unless (eq 'oracle sql-product)
-    (sql-product-font-lock nil nil)))
-(add-hook 'sql-interactive-mode-hook 'my-font-lock-everything-in-sql-interactive-mode)
-
-
-;; (browse-kill-ring-default-keybindings)
-
 
 (setq global-auto-revert-mode 0)
 
@@ -754,22 +539,14 @@ custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
 
-
 (add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
-
 (setq redisplay-dont-pause t)
-
-;; " http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"
-
-
-;; (run-with-idle-timer 0 (* 15 60) 'elfeed-update)
 
 (require 'git-gutter-fringe)
 (setq global-git-commit-mode t)
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
