@@ -53,8 +53,8 @@ myKeys = [
 
 main :: IO ()
 main = do
-  _ <- spawn "sleep 1; xrandr --output DVI-D-0 --rotate normal --pos 1920x0"
-  _ <- spawn "sleep 1; xrandr --output DP-4 --rotate normal --pos 0x0"
+  _ <- spawn "sleep 10; xrandr --output DVI-D-0 --rotate normal --pos 1920x0"
+  _ <- spawn "sleep 10; xrandr --output DP-4 --rotate normal --pos 0x0"
   h <- spawnPipe "~/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize ~/Pictures/wallpapers/landscape/*"
