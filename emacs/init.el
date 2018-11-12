@@ -368,7 +368,7 @@
  '(flycheck-navigation-minimum-level (quote warning))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-link-use-commit t)
- '(global-git-gutter-mode nil)
+ '(global-git-gutter-mode t)
  '(global-highlight-thing-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode nil)
