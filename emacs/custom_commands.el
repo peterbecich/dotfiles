@@ -3,6 +3,7 @@
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
+
 ;; (global-set-key (kbd "C-x r") 'shr-render-buffer)
 ;; (global-set-key (kbd "C-x r") 'w3m-buffer)
 

@@ -33,6 +33,9 @@
 
 (global-set-key (kbd "\C-ch") 'helm-hoogle)
 
+(define-key haskell-mode-map "\M-p" 'flycheck-previous-error)
+(define-key haskell-mode-map "\M-n" 'flycheck-next-error)
+
 
 ;; (require 'shm)
 
@@ -103,4 +106,4 @@
 ;; (current-buffer)))))
 
 
-(add-hook 'haskell-mode-hook 'fci-mode)
+;; (add-hook 'haskell-mode-hook 'fci-mode)

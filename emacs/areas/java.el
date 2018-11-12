@@ -19,3 +19,6 @@
 (setq auto-mode-alist
       (append '(("\\.java\\'" . jdee-mode)) auto-mode-alist))
  
+
+(add-hook 'java-mode-hook #'smartparens-mode)
+(add-hook 'java-mode-hook 'flycheck-mode)

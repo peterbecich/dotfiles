@@ -2,7 +2,7 @@
 // resolvers +=
 //   "Sonatype releases" at "https://oss.sonatype.org/content/repositories/releases"
 
-addSbtPlugin("org.ensime" % "sbt-ensime" % "2.5.1")
+addSbtPlugin("org.ensime" % "sbt-ensime" % "2.6.1")
 
 //addSbtPlugin("no.arktekk.sbt" % "aether-deploy" % "0.21")
 //addSbtPlugin("no.arktekk.sbt" % "aether-deploy" % "0.17")
