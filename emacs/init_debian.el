@@ -52,3 +52,4 @@
 (setq-default line-spacing 0)
 
 
+(setq jdee-server-dir "/home/peterbecich/java/jars")
