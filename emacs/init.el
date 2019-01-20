@@ -256,7 +256,7 @@
    (quote
     ((".*.stackexchange.com" . sx-open-link)
      ("stackoverflow.com" . sx-open-link)
-     ("*" . browse-url-default-browser))))
+     ("." . eww-browse-url))))
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-clang-executable "clang")
