@@ -22,9 +22,9 @@
 (setq load-prefer-newer t)
 
 
-;; (require 'auto-compile)
-;; (auto-compile-on-load-mode)
-;; (auto-compile-on-save-mode)
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
 
 (setq use-package-always-ensure t)
 
