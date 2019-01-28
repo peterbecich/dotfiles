@@ -20,15 +20,11 @@
 (require 'use-package)
 
 (setq load-prefer-newer t)
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;; (package-initialize)
 
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
+
+;; (require 'auto-compile)
+;; (auto-compile-on-load-mode)
+;; (auto-compile-on-save-mode)
 
 (setq use-package-always-ensure t)
 
@@ -45,9 +41,9 @@
 
 (use-package ag :ensure t)
 (use-package auctex-latexmk :ensure t)
-(use-package auto-compile :ensure t)
 (use-package auto-virtualenv :ensure t)
 (use-package browse-at-remote :ensure t)
+(use-package auto-compile :ensure t)
 (use-package butler :ensure t)
 (use-package cider :ensure t)
 (use-package company-irony :ensure t)
@@ -268,6 +264,11 @@
  '(battery-mode-line-limit 99)
  '(beacon-color "#cc6666")
  '(beacon-mode t)
+ '(browse-url-browser-function
+   (quote
+    ((".*.stackexchange.com" . sx-open-link)
+     ("stackoverflow.com" . sx-open-link)
+     ("." . eww-browse-url))))
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-clang-executable "clang")
@@ -284,7 +285,7 @@
  '(custom-enabled-themes (quote (espresso)))
  '(custom-safe-themes
    (quote
-    ("392395ee6e6844aec5a76ca4f5c820b97119ddc5290f4e0f58b38c9748181e8d" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "bf798e9e8ff00d4bf2512597f36e5a135ce48e477ce88a0764cfb5d8104e8163" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "e61752b5a3af12be08e99d076aedadd76052137560b7e684a8be2f8d2958edc3" "47ec21abaa6642fefec1b7ace282221574c2dd7ef7715c099af5629926eb4fd7" "ec5f697561eaf87b1d3b087dd28e61a2fc9860e4c862ea8e6b0b77bd4967d0ba" "e03d2f414fb109f3920752b10b92323697174f49d577da9e69979edbb147a921" "ddac2dc87d1c654578cde2340baff68f76c3ccd67b75ba9310993ed96e371d36" "fd825ffbcec8199cd08266a50441df9c68db831a4bdb9cb5d85dfbb2c59c96ae" "0c32e4f0789f567a560be625f239ee9ec651e524e46a4708eb4aba3b9cdc89c5" "89dd0329d536d389753111378f2425bd4e4652f892ae8a170841c3396f5ba2dd" "3f44e2d33b9deb2da947523e2169031d3707eec0426e78c7b8a646ef773a2077" "190a9882bef28d7e944aa610aa68fe1ee34ecea6127239178c7ac848754992df" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "c3d4af771cbe0501d5a865656802788a9a0ff9cf10a7df704ec8b8ef69017c68" "291588d57d863d0394a0d207647d9f24d1a8083bb0c9e8808280b46996f3eb83" "9fe1540491fcf692b8c639a3abacd32b29233bc4cb834a12a0fd1e01cbd0a128" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "9a155066ec746201156bb39f7518c1828a73d67742e11271e4f24b7b178c4710" "ba7917b02812fee8da4827fdf7867d3f6f282694f679b5d73f9965f45590843a" "c72a772c104710300103307264c00a04210c00f6cc419a79b8af7890478f380e" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "67e998c3c23fe24ed0fb92b9de75011b92f35d3e89344157ae0d544d50a63a72" "a0dc0c1805398db495ecda1994c744ad1a91a9455f2a17b59b716f72d3585dde" "f5512c02e0a6887e987a816918b7a684d558716262ac7ee2dd0437ab913eaec6" "2997ecd20f07b99259bddba648555335ffb7a7d908d8d3e6660ecbec415f6b95" "9d91458c4ad7c74cf946bd97ad085c0f6a40c370ac0a1cbeb2e3879f15b40553" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(desktop-save-mode t)
  '(display-battery-mode t)
  '(display-time-day-and-date t)
@@ -423,6 +424,7 @@
  '(projectile-require-project-root nil)
  '(projectile-tags-backend (quote etags-select))
  '(projectile-tags-command "fast-tags -e -R %s")
+ '(safe-local-variable-values (quote ((Syntax . Common-Lisp))))
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
