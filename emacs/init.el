@@ -1,3 +1,6 @@
+
+
+
 (require 'package) ;; You might already have this line
 ;; (require 'tls)
 (setq gnutls-trustfiles
@@ -7,13 +10,21 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+(package-initialize)
+
+(package-refresh-contents)
+
+(package-install 'use-package)
+
+
+(require 'use-package)
 
 (setq load-prefer-newer t)
 
 
-;; (require 'auto-compile)
-;; (auto-compile-on-load-mode)
-;; (auto-compile-on-save-mode)
+(require 'auto-compile)
+(auto-compile-on-load-mode)
+(auto-compile-on-save-mode)
 
 (setq use-package-always-ensure t)
 
@@ -95,10 +106,11 @@
 (use-package magit :ensure t)
 (use-package magit-popup :ensure t)
 (use-package magit-todos :ensure t)
-(use-package magithub
-  :after magit
-  :config
-  (magithub-feature-autoinject t))
+(use-package forge :ensure t)
+;; (use-package magithub
+;;   :after magit
+;;   :config
+;;   (magithub-feature-autoinject t))
 (use-package markdown-mode :ensure t)
 (use-package multi-web-mode :ensure t)
 (use-package nlinum :ensure t)
@@ -144,6 +156,7 @@
 (use-package ansible :ensure t)
 (use-package ansible-vault :ensure t)
 (use-package org :ensure t)
+(use-package emms :ensure t)
 (require 'paradox)
 (paradox-enable)
 
@@ -270,7 +283,8 @@
  '(compilation-skip-threshold 2)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
- '(custom-enabled-themes (quote (smart-mode-line-light)))
+ '(cursor-type t)
+ '(custom-enabled-themes (quote (espresso)))
  '(custom-safe-themes
    (quote
     ("1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
@@ -293,6 +307,8 @@
    (quote
     ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
  '(elfeed-search-filter "@1-week-ago")
+ '(emms-stream-default-action "play")
+ '(emms-stream-repeat-p t)
  '(ensime-sbt-perform-on-save "compile")
  '(erc-autojoin-domain-only nil)
  '(erc-autojoin-timing (quote ident))
@@ -329,6 +345,8 @@
  '(flycheck-hlint-args (quote ("-j")))
  '(flycheck-idle-change-delay 0.1)
  '(flycheck-navigation-minimum-level (quote warning))
+ '(forge-pull-notifications t)
+ '(forge-topic-list-limit (quote (5 . 5)))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-link-use-commit t)
  '(global-git-gutter-mode t)
@@ -341,6 +359,7 @@
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments (quote ("--fast")))
  '(helm-ag-insert-at-point (quote ##))
+ '(helm-autoresize-mode t)
  '(helm-buffers-fuzzy-matching t)
  '(helm-etags-fuzzy-match t)
  '(helm-flx-for-helm-find-files t)
@@ -389,6 +408,7 @@
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(magithub-issue-issue-filter-functions nil)
+ '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(nlinum-format "%d ")
  '(nrepl-message-colors
@@ -399,30 +419,40 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (ini-mode company-coq ansible-vault ansible iedit exec-path-from-shell yaml-imenu ws-butler websocket web-mode w3m vue-mode vue-html-mode twittering-mode tide symon sx sml-mode smartparens smart-mode-line slime-company shm shakespeare-mode sage-shell-mode rjsx-mode restclient restart-emacs rainbow-delimiters racket-mode purescript-mode puppet-mode psc-ide persistent-scratch pdf-tools paradox nlinum multi-web-mode magithub magit-todos kubernetes-tramp kubernetes js2-refactor js-format jdee irony-eldoc intero hlint-refactor hindent highlight-thing highlight-indent-guides highlight-defined helm-tramp helm-swoop helm-slime helm-projectile helm-make helm-hoogle helm-google helm-ghc helm-flyspell helm-flycheck helm-flx helm-eww helm-elscreen helm-ag helm hasky-stack git-timemachine git-link git-gutter-fringe ghc flycheck-rtags flycheck-haskell flx-ido flatui-theme fill-column-indicator ess ensime espresso-theme emojify emacsql-sqlite emacsql-psql emacsql-mysql emacsql elscreen elfeed dockerfile-mode docker-compose-mode docker csv-mode company-terraform company-rtags company-irony-c-headers company-irony cider butler auto-compile browse-at-remote auto-virtualenv auctex-latexmk ag beacon know-your-http-well all-the-icons reveal-in-osx-finder suggest ac-rtags adoc-mode afternoon-theme alect-themes ample-theme anti-zenburn-theme apel auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme buffer-move build-status circe color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-emacs-eclim company-ghc company-shell ctags ctags-update cyberpunk-theme eclim elm-mode elpy ereader ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm-spotify-plus hide-comnt hlint-refactor-mode idris-mode indium info-colors info-colors ipython keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode monokai-theme multi multi-line nix-mode nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pg popwin proof-general psci redprl seq slack solarized-theme sublime-themes system-packages undo-tree wakatime-mode)))
+    (ini-mode forge kubernetes kubernetes-helm magit magit-todos flx-isearch flycheck-inline helm-emms emms beacon ansible ansible-vault yaml-mode know-your-http-well all-the-icons iedit git-timemachine yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser ghub ghub gist git git-commit git-gutter-fringe glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment kubernetes-tramp latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
+ '(projectile-enable-caching t)
  '(projectile-enable-idle-timer t)
  '(projectile-idle-timer-seconds 30)
  '(projectile-require-project-root nil)
  '(projectile-tags-backend (quote etags-select))
  '(projectile-tags-command "fast-tags -e -R %s")
- '(safe-local-variable-values (quote ((Syntax . Common-Lisp))))
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
  '(shr-max-image-proportion 1.0)
+ '(show-smartparens-global-mode t)
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
  '(slack-room-subscription nil)
  '(slack-typing-visibility (quote never))
+ '(smartparens-global-strict-mode nil)
  '(sml/active-background-color "#34495e")
  '(sml/active-foreground-color "#ecf0f1")
  '(sml/inactive-background-color "#dfe4ea")
  '(sml/inactive-foreground-color "#34495e")
+ '(sp-base-key-bindings (quote sp))
+ '(sp-navigate-reindent-after-up
+   (quote
+    ((interactive cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode common-lisp-mode emacs-lisp-mode eshell-mode geiser-repl-mode gerbil-mode inf-clojure-mode inferior-emacs-lisp-mode inferior-lisp-mode inferior-scheme-mode lisp-interaction-mode lisp-mode monroe-mode racket-mode racket-repl-mode scheme-interaction-mode scheme-mode slime-repl-mode stumpwm-mode haskell-mode))))
+ '(sp-navigate-reindent-after-up-in-string nil)
+ '(sp-no-reindent-after-kill-modes
+   (quote
+    (python-mode coffee-mode asm-mode makefile-gmake-mode haml-mode haskell-mode)))
  '(symon-mode nil)
  '(symon-monitors
    (quote
@@ -599,8 +629,29 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 119 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 119 :width normal))))
+ '(compilation-error ((t (:inherit error :weight normal))))
+ '(compilation-info ((t (:inherit success :weight normal))))
+ '(compilation-warning ((t (:inherit warning :weight normal)))))
 
 (setq tags-add-tables nil)
 (setq tags-revert-without-query t)
+
+
+;; (require 'emms-setup)
+;; (require 'emms-player-vlc)
+;; (emms-standard)
+;; (emms-default-players)
+;; (setq emms-player-vlc-command-name
+;;       "/Applications/VLC.app/Contents/MacOS/VLC")
+
+
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+
+(global-set-key (kbd "C-M-s") #'flx-isearch-forward)
+(global-set-key (kbd "C-M-r") #'flx-isearch-backward)
+
+
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (put 'magit-clean 'disabled nil)
