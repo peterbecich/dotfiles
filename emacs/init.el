@@ -275,7 +275,6 @@
    (quote
     ("1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(desktop-save-mode t)
- '(display-battery-mode t)
  '(display-time-day-and-date t)
  '(display-time-mode t)
  '(display-time-world-list
@@ -390,7 +389,6 @@
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(magithub-issue-issue-filter-functions nil)
- '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(nlinum-format "%d ")
  '(nrepl-message-colors
@@ -401,7 +399,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (company-coq ansible-vault ansible iedit exec-path-from-shell yaml-imenu ws-butler websocket web-mode w3m vue-mode vue-html-mode twittering-mode tide symon sx sml-mode smartparens smart-mode-line slime-company shm shakespeare-mode sage-shell-mode rjsx-mode restclient restart-emacs rainbow-delimiters racket-mode purescript-mode puppet-mode psc-ide persistent-scratch pdf-tools paradox nlinum multi-web-mode magithub magit-todos kubernetes-tramp kubernetes js2-refactor js-format jdee irony-eldoc intero hlint-refactor hindent highlight-thing highlight-indent-guides highlight-defined helm-tramp helm-swoop helm-slime helm-projectile helm-make helm-hoogle helm-google helm-ghc helm-flyspell helm-flycheck helm-flx helm-eww helm-elscreen helm-ag helm hasky-stack git-timemachine git-link git-gutter-fringe ghc flycheck-rtags flycheck-haskell flx-ido flatui-theme fill-column-indicator ess ensime espresso-theme emojify emacsql-sqlite emacsql-psql emacsql-mysql emacsql elscreen elfeed dockerfile-mode docker-compose-mode docker csv-mode company-terraform company-rtags company-irony-c-headers company-irony cider butler auto-compile browse-at-remote auto-virtualenv auctex-latexmk ag beacon know-your-http-well all-the-icons reveal-in-osx-finder suggest ac-rtags adoc-mode afternoon-theme alect-themes ample-theme anti-zenburn-theme apel auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme buffer-move build-status circe color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-emacs-eclim company-ghc company-shell ctags ctags-update cyberpunk-theme eclim elm-mode elpy ereader ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm-spotify-plus hide-comnt hlint-refactor-mode idris-mode indium info-colors info-colors ipython keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode monokai-theme multi multi-line nix-mode nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pg popwin proof-general psci redprl seq slack solarized-theme sublime-themes system-packages undo-tree wakatime-mode)))
+    (ini-mode company-coq ansible-vault ansible iedit exec-path-from-shell yaml-imenu ws-butler websocket web-mode w3m vue-mode vue-html-mode twittering-mode tide symon sx sml-mode smartparens smart-mode-line slime-company shm shakespeare-mode sage-shell-mode rjsx-mode restclient restart-emacs rainbow-delimiters racket-mode purescript-mode puppet-mode psc-ide persistent-scratch pdf-tools paradox nlinum multi-web-mode magithub magit-todos kubernetes-tramp kubernetes js2-refactor js-format jdee irony-eldoc intero hlint-refactor hindent highlight-thing highlight-indent-guides highlight-defined helm-tramp helm-swoop helm-slime helm-projectile helm-make helm-hoogle helm-google helm-ghc helm-flyspell helm-flycheck helm-flx helm-eww helm-elscreen helm-ag helm hasky-stack git-timemachine git-link git-gutter-fringe ghc flycheck-rtags flycheck-haskell flx-ido flatui-theme fill-column-indicator ess ensime espresso-theme emojify emacsql-sqlite emacsql-psql emacsql-mysql emacsql elscreen elfeed dockerfile-mode docker-compose-mode docker csv-mode company-terraform company-rtags company-irony-c-headers company-irony cider butler auto-compile browse-at-remote auto-virtualenv auctex-latexmk ag beacon know-your-http-well all-the-icons reveal-in-osx-finder suggest ac-rtags adoc-mode afternoon-theme alect-themes ample-theme anti-zenburn-theme apel auto-virtualenvwrapper birds-of-paradise-plus-theme boron-theme buffer-move build-status circe color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company-c-headers company-emacs-eclim company-ghc company-shell ctags ctags-update cyberpunk-theme eclim elm-mode elpy ereader ess-R-data-view ess-R-object-popup flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm-spotify-plus hide-comnt hlint-refactor-mode idris-mode indium info-colors info-colors ipython keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode monokai-theme multi multi-line nix-mode nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pg popwin proof-general psci redprl seq slack solarized-theme sublime-themes system-packages undo-tree wakatime-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
@@ -415,6 +413,7 @@
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
+ '(shr-max-image-proportion 1.0)
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
@@ -600,7 +599,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 119 :width normal)))))
 
 (setq tags-add-tables nil)
 (setq tags-revert-without-query t)
