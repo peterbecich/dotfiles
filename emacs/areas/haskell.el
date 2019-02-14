@@ -39,7 +39,7 @@
 
 ;; (require 'shm)
 
-(add-hook 'haskell-mode-hook 'structured-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 ;; https://github.com/haskell/haskell-mode/issues/90
 
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)

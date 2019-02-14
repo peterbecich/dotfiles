@@ -12,6 +12,10 @@
 (setenv "PATH" (concat "/opt/local/lib/postgresql96/bin:" (getenv "PATH")))
 (setq exec-path (append '("/opt/local/lib/postgresql96/bin") exec-path ))
 
+
+(setenv "PATH" (concat "/opt/local/lib/postgresql95/bin:" (getenv "PATH")))
+(setq exec-path (append '("/opt/local/lib/postgresql95/bin") exec-path ))
+
 (setenv "PATH" (concat "/Users/peterbecich/bin:" (getenv "PATH")))
 (setq exec-path (append '("/Users/peterbecich/bin") exec-path ))
 

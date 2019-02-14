@@ -19,7 +19,7 @@
 
 (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
 
-(setq comint-buffer-maximum-size 8192)
+(setq comint-buffer-maximum-size 1024)
 
 (setq comint-scroll-to-bottom-on-input t)
 (setq comint-scroll-to-bottom-on-output t)

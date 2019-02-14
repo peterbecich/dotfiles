@@ -19,9 +19,9 @@
 (add-hook 'clojure-mode-hook  #'smartparens-strict-mode)
 
 
-(define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-forward-barf-sexp)
-(define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
-(define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-<right>") 'sp-forward-slurp-sexp)
+;; (define-key smartparens-mode-map (kbd "C-M-<left>") 'sp-forward-barf-sexp)
+;; (define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
+;; (define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
 
-(add-hook 'prog-mode-hook #'smartparens-mode)
+(add-hook 'prog-mode-hook #'smartparens-strict-mode)
