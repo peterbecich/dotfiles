@@ -53,23 +53,13 @@ myKeys = [
 
 main :: IO ()
 main = do
-  _ <- spawn "sleep 10; xrandr --output DVI-D-0 --rotate normal --pos 1920x0"
-  _ <- spawn "sleep 10; xrandr --output DP-4 --rotate normal --pos 0x0"
   h <- spawnPipe "~/bin/xmobar"
---  _ <- spawnPipe "setxkbmap -option ctrl:nocaps"
-  _ <- spawnPipe "sleep 2; feh --bg-fill --randomize ~/Pictures/wallpapers/landscape/*"
-  _ <- spawnPipe "xscreensaver -no-splash &"
-  _ <- spawnPipe "/usr/bin/pkill stalonetray"
-  _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
-  _ <- spawnPipe "sleep 2; nm-applet n &"
+  _ <- spawnPipe "~/dotfiles/bin/init.sh"
   xmonad $ docks defaultConfig {
         modMask = mod4Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
-        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
-        -- , layoutHook = avoidStruts $ smartBorders $ layoutHook myLayoutQ
-        -- , layoutHook = myLayout
         , layoutHook = avoidStruts $ smartBorders $ myLayout
         } `additionalKeys` myKeys

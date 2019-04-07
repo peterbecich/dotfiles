@@ -39,7 +39,7 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;;https://www.emacswiki.org/emacs/CompanyMode#toc6
-(global-set-key (kbd "C-;") 'company-complete)
+;; (global-set-key (kbd "C-;") 'company-complete)
 
 
 (menu-bar-mode -1)
