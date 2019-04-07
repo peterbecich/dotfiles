@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.ManageDocks ( avoidStruts , docks)
@@ -62,4 +63,5 @@ main = do
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
         , manageHook = manageHook defaultConfig
         , layoutHook = avoidStruts $ smartBorders $ myLayout
+        , handleEventHook = fullscreenEventHook
         } `additionalKeys` myKeys
