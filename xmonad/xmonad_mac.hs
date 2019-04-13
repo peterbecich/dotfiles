@@ -20,7 +20,7 @@ import System.IO
 
 main :: IO ()
 main = do
-  h <- spawnPipe "/usr/bin/xmobar"
+  h <- spawnPipe "~/.local/bin/xmobar"
   _ <- spawnPipe "setxkbmap -option ctrl:nocaps,altwin:swap_lalt_lwin"
   _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
