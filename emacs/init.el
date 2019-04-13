@@ -476,8 +476,8 @@
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
- '(shr-max-image-proportion 1.0)
  '(show-smartparens-global-mode t)
+ '(shr-max-image-proportion 1.0)
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
@@ -709,7 +709,6 @@
 
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(put 'magit-clean 'disabled nil)
 
 
 (defun htop ()
@@ -758,3 +757,4 @@
 (setq warning-minimum-level :emergency)
 
 ;; /Users/peter/.emacs.d/tramp
+(put 'magit-clean 'disabled nil)
