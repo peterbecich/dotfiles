@@ -9,5 +9,4 @@
 ;;(remove-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
-(add-hook 'magit-mode-hook 'magit-todos-mode)
-
+;; (add-hook 'magit-mode-hook 'magit-todos-mode)

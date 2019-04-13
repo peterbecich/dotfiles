@@ -1,6 +1,6 @@
 
-(add-hook 'haskell-mode-hook 'hlint-refactor-mode)
-(add-hook 'haskell-mode-hook #'smartparens-mode)
+;; (add-hook 'haskell-mode-hook 'hlint-refactor-mode)
+;; (add-hook 'haskell-mode-hook #'smartparens-mode)
 (setq haskell-process-args-stack-ghci '("--ghci-options=-ferror-spans"))
 (add-hook 'haskell-mode-hook 'intero-mode)
 (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
@@ -33,8 +33,8 @@
 
 (global-set-key (kbd "\C-ch") 'helm-hoogle)
 
-(define-key haskell-mode-map "\M-p" 'flycheck-previous-error)
-(define-key haskell-mode-map "\M-n" 'flycheck-next-error)
+;; (define-key haskell-mode-map "\M-p" 'flycheck-previous-error)
+;; (define-key haskell-mode-map "\M-n" 'flycheck-next-error)
 
 
 ;; (require 'shm)
@@ -42,15 +42,16 @@
 ;; (add-hook 'haskell-mode-hook 'structured-haskell-mode)
 ;; https://github.com/haskell/haskell-mode/issues/90
 
-(remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(remove-hook 'haskell-mode-hook 'haskell-indentation-mode)
-(remove-hook 'haskell-mode-hook 'haskell-indent-mode)
+;; (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (remove-hook 'haskell-mode-hook 'haskell-indentation-mode)
+;; (remove-hook 'haskell-mode-hook 'haskell-indent-mode)
 
-(add-hook 'haskell-mode-hook (lambda ()
-            (haskell-indentation-mode 0)))
+;; (add-hook 'haskell-mode-hook (lambda ()
+;;             (haskell-indentation-mode 0)))
 
-(require 'hindent)
-(add-hook 'haskell-mode-hook #'hindent-mode)
+;; (require 'hindent)
+;; (add-hook 'haskell-mode-hook #'hindent-mode)
+
 (setq haskell-tags-on-save t)
 
 (setq tags-revert-without-query 1)
@@ -107,3 +108,6 @@
 
 
 ;; (add-hook 'haskell-mode-hook 'fci-mode)
+
+(add-hook 'haskell-mode-hook 'intero-mode)
+(add-hook 'haskell-mode-hook 'intero-mode-whitelist)
