@@ -1,28 +1,28 @@
 
 ;; (setq erc-join-buffer 'bury)
 
-(setq erc-autojoin-channels-alist
-      '(("freenode.net" "#emacs" "#wikipedia" "#hackerrank" "#lesswrong" "#wikipedia-en"
-	 "#debian" "#ubuntu" "#linux"
-	 "#haskell" "#haskell-beginners" "#xmonad" "#haskell-distributed" "#haskell-lens" "#nicta-course" "#yesod"
-	 "#purescript"
-	 "#scala" "#scalaz" "#apache-spark"
-	 "#racket" "#clojure" "#erlang"
-	 "##c"
-	 "#go-nuts"
-	 "#postgresql" "#cassandra" "#redis" "#rust" "#go-nuts"
-	 "##javascript" "#node.js"
-	 "#python"
-	 "##math" "#mathematics" "##machinelearning"
-	 "#startups")
-	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
-	)
-      )
+;; (setq erc-autojoin-channels-alist
+;;       '(("freenode.net" "#emacs" "#wikipedia" "#hackerrank" "#lesswrong" "#wikipedia-en"
+;; 	 "#debian" "#ubuntu" "#linux"
+;; 	 "#haskell" "#haskell-beginners" "#xmonad" "#haskell-distributed" "#haskell-lens" "#nicta-course" "#yesod"
+;; 	 "#purescript"
+;; 	 "#scala" "#scalaz" "#apache-spark"
+;; 	 "#racket" "#clojure" "#erlang"
+;; 	 "##c"
+;; 	 "#go-nuts"
+;; 	 "#postgresql" "#cassandra" "#redis" "#rust" "#go-nuts"
+;; 	 "##javascript" "#node.js"
+;; 	 "#python"
+;; 	 "##math" "#mathematics" "##machinelearning"
+;; 	 "#startups")
+;; 	;; ("gitter.im"  "#fs2" "#http4s/http4s" "#tpolecat/doobie" "#shapeless" "#magit/magit" "#fpinscala/fpinscala" "#typelevel/cats" "#matryoshka")
+;; 	)
+;;       )
 
 
-(setq erc-log-channels-directory "~/.erc/logs/")
-(setq erc-save-buffer-on-part t)
-(setq erc-hide-list '("JOIN" "PART" "QUIT"))
+;; (setq erc-log-channels-directory "~/.erc/logs/")
+;; (setq erc-save-buffer-on-part t)
+;; (setq erc-hide-list '("JOIN" "PART" "QUIT"))
 
 ;; (setq erc-format-query-as-channel-p t
 ;;       erc-track-priority-faces-only 'all
