@@ -100,7 +100,7 @@
 (use-package intero :ensure t)
 (use-package irony :ensure t)
 (use-package irony-eldoc :ensure t)
-(use-package jdee :ensure t)
+;; (use-package jdee :ensure t)
 ;; (use-package js-format :ensure t)
 (use-package js2-mode :ensure t)
 (use-package js2-refactor :ensure t)
@@ -128,7 +128,17 @@
 (use-package rjsx-mode :ensure t)
 (use-package rtags :ensure t)
 (use-package sage-shell-mode :ensure t)
-(use-package sbt-mode :ensure t)
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
 (use-package shakespeare-mode :ensure t)
 (use-package shm :ensure t)
 (use-package slime :ensure t)
@@ -146,6 +156,7 @@
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 (use-package twittering-mode :ensure t)
+(use-package flycheck-ensime :ensure t)
 (use-package typescript-mode :ensure t)
 (use-package vue-html-mode :ensure t)
 (use-package vue-mode :ensure t)
@@ -158,12 +169,13 @@
 (use-package exec-path-from-shell :ensure t)
 (use-package iedit :ensure t)
 (use-package ansible :ensure t)
-(use-package ansible-vault :ensure t)
 (use-package org :ensure t)
 (use-package emms :ensure t)
 (use-package proof-general :ensure t)
 (use-package helpful :ensure t)
 (use-package flycheck-inline :ensure t)
+(use-package logview :ensure t)
+(use-package diredfl :ensure t)
 (require 'paradox)
 (paradox-enable)
 
@@ -189,6 +201,8 @@
 (ido-everywhere 0)
 (flx-ido-mode 0)
 
+(ace-popup-menu-mode 1)
+
 (require 'smartparens-config)
 (elscreen-start)
 (require 'helm-config)
@@ -204,6 +218,7 @@
 (async-bytecomp-package-mode 1)
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook #'auto-revert-mode)
 
 (setq request-backend 'url-retrieve)
 
@@ -238,7 +253,7 @@
 ;; (windmove-default-keybindings)
 ;; (setq framemove-hook-into-windmove t)
 
-(global-visual-line-mode 1)             ; Proper line wrapping
+                                        ; Proper line wrapping
 (show-paren-mode 1); Matches parentheses and such in every mode
 
 (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
@@ -271,6 +286,7 @@
  '(async-bytecomp-allowed-packages (quote (quote (all))))
  '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
  '(auto-package-update-hide-results t)
+ '(auto-revert-remote-files t)
  '(auto-revert-verbose nil)
  '(battery-mode-line-limit 99)
  '(beacon-color "#cc6666")
@@ -295,7 +311,7 @@
  '(company-tooltip-idle-delay 0.1)
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
- '(compilation-auto-jump-to-first-error t)
+ '(compilation-auto-jump-to-first-error nil)
  '(compilation-message-face (quote default))
  '(compilation-scroll-output (quote first-error))
  '(compilation-skip-threshold 2)
@@ -306,6 +322,7 @@
  '(custom-safe-themes
    (quote
     ("1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(datetime-timezone (quote US/Pacific))
  '(desktop-save t)
  '(desktop-save-mode t)
  '(diredfl-global-mode t nil (diredfl))
@@ -319,11 +336,17 @@
      ("America/New_York" "Boston")
      ("America/Chicago" "Chicago")
      ("America/Los_Angeles" "Los Angeles")
-     ("US/Hawaii" "Honolulu"))))
+     ("US/Hawaii" "Honolulu")
+     ("Etc/UTC" "UTC"))))
  '(display-time-world-time-format "%A %d %B %I:%M %p %Z")
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key (quote ("Tag")))
+ '(eclim-executable "/Users/peter/.p2/pool/plugins/org.eclim_2.8.0/bin/eclim")
+ '(eclimd-autostart-with-default-workspace t)
+ '(eclimd-executable
+   "/Users/peter/eclipse/java-2019-03/Eclipse.app/Contents/Eclipse/eclimd")
+ '(eclimd-wait-for-process nil)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
@@ -332,33 +355,10 @@
  '(elfeed-search-filter "@1-week-ago")
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
+ '(ensime-auto-generate-config t)
+ '(ensime-company-idle-delay 0.1)
  '(ensime-sbt-perform-on-save "compile")
- '(erc-autojoin-domain-only nil)
- '(erc-autojoin-timing (quote ident))
- '(erc-dcc-chat-request (quote ignore))
- '(erc-dcc-send-request (quote ignore))
- '(erc-email-userid "peterbecich@gmail.com")
- '(erc-join-buffer (quote bury))
- '(erc-log-insert-log-on-open nil)
- '(erc-log-write-after-insert t)
- '(erc-log-write-after-send t)
- '(erc-modules
-   (quote
-    (autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring stamp spelling)))
- '(erc-nick "peterbecich")
- '(erc-notifications-mode nil)
- '(erc-notify-mode t)
- '(erc-public-away-p t)
- '(erc-rename-buffers t)
- '(erc-reuse-frames nil)
- '(erc-server-reconnect-attempts 6)
- '(erc-server-reconnect-timeout 15)
- '(erc-track-minor-mode nil)
- '(erc-track-mode nil)
- '(erc-track-position-in-mode-line t)
- '(erc-truncate-mode t)
- '(erc-try-new-nick-p nil)
- '(erc-user-mode "+RZgi")
+ '(ensime-typecheck-idle-interval 0.1)
  '(eshell-buffer-maximum-lines 6000)
  '(eshell-history-size 2048)
  '(fci-rule-color "#f1c40f")
@@ -379,11 +379,16 @@
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-link-use-commit t)
  '(global-company-mode t)
+ '(global-display-line-numbers-mode nil)
  '(global-git-gutter-mode t)
  '(global-highlight-thing-mode t)
  '(global-hl-todo-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode t)
+ '(global-visual-line-mode t)
+ '(gradle-gradlew-executable "./gradlew")
+ '(gradle-mode nil)
+ '(gradle-use-gradlew t)
  '(haskell-font-lock-symbols nil)
  '(haskell-tags-on-save t)
  '(hasky-stack-auto-newest-version t)
@@ -419,7 +424,7 @@
  '(highlight-thing-exclude-thing-under-point t)
  '(hl-paren-background-colors (quote ("#2492db" "#95a5a6" nil)))
  '(hl-paren-colors (quote ("#ecf0f1" "#ecf0f1" "#c0392b")))
- '(ibuffer-default-sorting-mode (quote alphabetic))
+ '(ibuffer-default-sorting-mode (quote recency))
  '(imenu-sort-function (quote imenu--sort-by-name))
  '(intero-debug nil)
  '(intero-extra-ghc-options (quote ("-dppr-cols200")))
@@ -432,12 +437,21 @@
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
+ '(jdee-jdk-registry
+   (quote
+    (("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/"))))
  '(jit-lock-debug-mode nil)
  '(jit-lock-defer-time 0.05)
  '(jit-lock-stealth-nice 0.05)
  '(jit-lock-stealth-verbose nil)
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
+ '(kubernetes-pod-restart-warning-threshold 5)
+ '(kubernetes-poll-frequency 100)
+ '(kubernetes-redraw-frequency 100)
+ '(line-number-display-limit-width 1024)
+ '(logview-additional-level-mappings nil)
+ '(logview-auto-revert-mode (quote auto-revert-tail-mode))
  '(magit-diff-refine-hunk (quote all))
  '(magit-diff-use-overlays nil)
  '(magit-section-cache-visibility nil)
@@ -456,14 +470,14 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible ansible-vault yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+    (ace-popup-menu font-lock-studio flycheck-gradle gradle-mode flycheck-ensime logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(projectile-enable-caching t)
  '(projectile-enable-idle-timer t)
  '(projectile-idle-timer-seconds 30)
- '(projectile-require-project-root nil)
+ '(projectile-require-project-root t)
  '(projectile-sort-order (quote recently-active))
  '(projectile-tags-backend (quote etags-select))
  '(projectile-tags-command "fast-tags -e -R %s")
@@ -476,8 +490,8 @@
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
- '(shr-max-image-proportion 1.0)
  '(show-smartparens-global-mode t)
+ '(shr-max-image-proportion 1.0)
  '(slack-buffer-create-on-notify (quote true))
  '(slack-buffer-emojify (quote true))
  '(slack-prefer-current-team (quote true))
@@ -512,23 +526,6 @@
  '(tramp-verbose 6 nil (tramp))
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
- '(vc-annotate-background "#ecf0f1")
- '(vc-annotate-color-map
-   (quote
-    ((30 . "#e74c3c")
-     (60 . "#c0392b")
-     (90 . "#e67e22")
-     (120 . "#d35400")
-     (150 . "#f1c40f")
-     (180 . "#d98c10")
-     (210 . "#2ecc71")
-     (240 . "#27ae60")
-     (270 . "#1abc9c")
-     (300 . "#16a085")
-     (330 . "#2492db")
-     (360 . "#0a74b9"))))
- '(vc-annotate-very-old-color "#0a74b9")
- '(vc-display-status nil)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style
@@ -536,6 +533,24 @@
     (face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark)))
  '(ws-butler-keep-whitespace-before-point nil))
 
+
+ ;; '(vc-annotate-background "#ecf0f1")
+ ;; '(vc-annotate-color-map
+ ;;   (quote
+ ;;    ((30 . "#e74c3c")
+ ;;     (60 . "#c0392b")
+ ;;     (90 . "#e67e22")
+ ;;     (120 . "#d35400")
+ ;;     (150 . "#f1c40f")
+ ;;     (180 . "#d98c10")
+ ;;     (210 . "#2ecc71")
+ ;;     (240 . "#27ae60")
+ ;;     (270 . "#1abc9c")
+ ;;     (300 . "#16a085")
+ ;;     (330 . "#2492db")
+ ;;     (360 . "#0a74b9"))))
+ ;; '(vc-annotate-very-old-color "#0a74b9")
+ ;; '(vc-display-status nil)
 
 (sml/setup)
 (setq sml/theme 'light)
@@ -607,7 +622,7 @@
 
 (global-set-key (kbd "\C-cM") 'helm-make-projectile)
 
-(global-set-key (kbd "\C-c s n") 'helm-elscreen)
+(global-set-key (kbd "\C-z h") 'helm-elscreen)
 
 (global-set-key (kbd "\C-c s s") 'helm-spotify-plus)  ;; s for SEARCH
 (global-set-key (kbd "\C-c s f") 'helm-spotify-plus-next)
@@ -634,6 +649,8 @@
 (setq global-whitespace-cleanup-mode t)
 (require 'ws-butler)
 (add-hook 'prog-mode-hook #'ws-butler-mode)
+
+(add-hook 'yaml-mode-hook #'ws-butler-mode)
 
 ;; Optional face for line numbers
 ;; Face name is `helm-swoop-line-number-face`
@@ -679,7 +696,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 119 :width normal))))
  '(compilation-error ((t (:inherit error :weight normal))))
  '(compilation-info ((t (:inherit success :weight normal))))
  '(compilation-warning ((t (:inherit warning :weight normal)))))
@@ -709,7 +725,6 @@
 
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(put 'magit-clean 'disabled nil)
 
 
 (defun htop ()
@@ -758,3 +773,24 @@
 (setq warning-minimum-level :emergency)
 
 ;; /Users/peter/.emacs.d/tramp
+
+
+
+(setq tramp-default-method "ssh")
+(define-key global-map (kbd "C-c s") 'helm-tramp)
+(add-hook 'helm-tramp-pre-command-hook '(lambda ()
+				     (projectile-mode 0)
+				     ))
+(add-hook 'helm-tramp-quit-hook '(lambda ()
+			      (projectile-mode 1)
+			      ))
+
+
+
+(add-hook 'logview-mode-hook 'auto-revert-tail-mode)
+(put 'magit-clean 'disabled nil)
+
+(setq x-wait-for-event-timeout nil)
+
+
+(add-hook 'after-save-hook 'magit-after-save-refresh-status)

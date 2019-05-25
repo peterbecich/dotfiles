@@ -60,4 +60,4 @@
 
 (setq markdown-command "/opt/local/bin/pandoc")
 
-(setq jdee-server-dir "/Users/peter/java/jars")
+;; (setq jdee-server-dir "/Users/peter/java/jars")
