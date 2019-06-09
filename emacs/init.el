@@ -123,6 +123,7 @@
 (use-package pdf-tools :ensure t)
 (use-package persistent-scratch :ensure t)
 (use-package psc-ide :ensure t)
+(use-package psci :ensure t)
 (use-package puppet-mode :ensure t)
 (use-package purescript-mode :ensure t)
 (use-package racket-mode :ensure t)
@@ -180,8 +181,8 @@
 (use-package flycheck-inline :ensure t)
 (use-package logview :ensure t)
 (use-package diredfl :ensure t)
-(require 'paradox)
-(paradox-enable)
+;;(require 'paradox)
+;;(paradox-enable)
 
 
 (require 'magit)
@@ -479,7 +480,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (gcmh ace-popup-menu font-lock-studio flycheck-gradle gradle-mode flycheck-ensime logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+    (gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode flycheck-ensime logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
@@ -491,6 +492,14 @@
  '(projectile-tags-backend (quote etags-select))
  '(projectile-tags-command "fast-tags -e -R %s")
  '(projectile-use-git-grep t)
+ '(purescript-mode-hook
+   (quote
+    (turn-on-purescript-indent
+     (lambda nil
+       (psc-ide-mode)
+       (company-mode)
+       (flycheck-mode)
+       (turn-on-purescript-indentation)))))
  '(rm-blacklist
    (quote
     (" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " Intero" " company")))
