@@ -21,7 +21,7 @@ import System.IO
 main :: IO ()
 main = do
   h <- spawnPipe "~/.local/bin/xmobar"
-  _ <- spawnPipe "setxkbmap -option ctrl:nocaps,altwin:swap_lalt_lwin"
+  --_ <- spawnPipe "setxkbmap -option ctrl:nocaps"
   _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
   _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
@@ -29,8 +29,8 @@ main = do
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
   _ <- spawnPipe "~/dotfiles/bin/init.sh"
   _ <- spawnPipe "sleep 1; /usr/bin/nm-applet &"
-  xmonad $ docks defaultConfig {
-        modMask = mod4Mask
+  xmonad $ docks defaultConfig
+        { modMask = mod1Mask
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         , borderWidth = 2
@@ -38,21 +38,21 @@ main = do
         , manageHook = manageHook defaultConfig
         , layoutHook = avoidStruts $ smartBorders $ layoutHook defaultConfig
         } `additionalKeys`
-        [ ((mod4Mask, xK_m), spawn "emacsclient -c")
-          , ((mod4Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend")
-          , ((mod4Mask .|. shiftMask, xK_s), spawn "xscreensaver-command -lock")
-          -- ((mod4Mask, xK_p), spawn "xset dpms force suspend"),
-          , ((mod4Mask, xK_n), spawn "nautilus -w")
-          , ((mod4Mask, xK_f), spawn "firefox --new-window")
-          , ((mod4Mask, xK_0), viewEmptyWorkspace)
-          , ((mod4Mask, xK_c), swapNextScreen)
-          , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
-          , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
-          , ((mod4Mask, xK_F11 ), lowerVolume 3 >> return ())
-          , ((mod4Mask, xK_F12 ), raiseVolume 3 >> return ())
-          , ((mod4Mask, xK_F10), toggleMute    >> return ())
-          , ((mod4Mask, xK_F7), spawn "setxkbmap -layout dvorak")          
-          , ((mod4Mask, xK_F8), spawn "setxkbmap -layout us")
+        [ ((mod1Mask, xK_m), spawn "emacsclient -c")
+          , ((mod1Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend")
+          , ((mod1Mask .|. shiftMask, xK_s), spawn "xscreensaver-command -lock")
+          -- ((mod1Mask, xK_p), spawn "xset dpms force suspend"),
+          , ((mod1Mask, xK_n), spawn "nautilus -w")
+          , ((mod1Mask, xK_f), spawn "firefox --new-window")
+          , ((mod1Mask, xK_0), viewEmptyWorkspace)
+          , ((mod1Mask, xK_c), swapNextScreen)
+          , ((mod1Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
+          , ((mod1Mask, xK_g), goToSelected defaultGSConfig)
+          , ((mod1Mask, xK_F11 ), lowerVolume 3 >> return ())
+          , ((mod1Mask, xK_F12 ), raiseVolume 3 >> return ())
+          , ((mod1Mask, xK_F10), toggleMute    >> return ())
+          , ((mod1Mask, xK_F7), spawn "setxkbmap -layout dvorak")
+          , ((mod1Mask, xK_F8), spawn "setxkbmap -layout us")
           
         ]
 
