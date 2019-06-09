@@ -181,6 +181,7 @@
 (use-package flycheck-inline :ensure t)
 (use-package logview :ensure t)
 (use-package diredfl :ensure t)
+(use-package repl-toggle :ensure t)
 ;;(require 'paradox)
 ;;(paradox-enable)
 
