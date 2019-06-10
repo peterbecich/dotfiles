@@ -24,4 +24,5 @@
 ;; (define-key smartparens-mode-map (kbd "C-S-M-<left>") 'sp-backward-slurp-sexp)
 ;; (define-key smartparens-mode-map (kbd "C-S-M-<right>") 'sp-backward-barf-sexp)
 
-(add-hook 'prog-mode-hook #'smartparens-strict-mode)
+;; (add-hook 'prog-mode-hook #'smartparens-strict-mode)
+(add-hook 'prog-mode-hook #'smartparens-mode)
