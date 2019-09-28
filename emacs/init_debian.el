@@ -19,6 +19,9 @@
 (setenv "PATH" (concat "/home/peterbecich/.local/bin:" (getenv "PATH")))
 (setq exec-path (append '("/home/peterbecich/.local/bin") exec-path ))
 
+(setenv "PATH" (concat "/opt/ghc/bin:" (getenv "PATH")))
+(setq exec-path (append '("/opt/ghc/bin") exec-path ))
+
 (setenv "GOPATH" "/home/peterbecich/go")
 (setenv "SPARK_HOME" "/home/peterbecich/bin/spark")
 
@@ -56,3 +59,7 @@
 
 
 ;; (setq jdee-server-dir "/home/peterbecich/java/jars")
+
+
+(global-set-key (kbd "<home>") 'beginning-of-buffer)
+(global-set-key (kbd "<end>") 'end-of-buffer)
