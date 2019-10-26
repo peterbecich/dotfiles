@@ -3,9 +3,9 @@ export SPARK_HOME=/home/peterbecich/bin/spark
 
 export PATH=/home/peterbecich/bin:$PATH
 
-export PATH=/home/peterbecich/.nix-profile/bin:$PATH
+# export PATH=/home/peterbecich/.nix-profile/bin:$PATH
 
-export PATH=/home/peterbecich/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/:$PATH
+# export PATH=/home/peterbecich/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/:$PATH
 
 export PATH=/home/peterbecich/.local/bin:$PATH
 
@@ -34,8 +34,10 @@ export CUDA_PATH=/usr/local/cuda-8.0
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64/
 
-export GOPATH=/home/peterbecich/go
+# export GOPATH=/home/peterbecich/go
 
-export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$GOPATH/bin
 
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+
+export PATH=$PATH:/opt/ghc/bin
