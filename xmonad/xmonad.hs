@@ -58,7 +58,7 @@ main = do
   _ <- spawnPipe "~/dotfiles/bin/init.sh"
   xmonad $ docks defaultConfig
         { modMask = mod4Mask
-        , borderWidth = 3
+        , borderWidth = 4
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }

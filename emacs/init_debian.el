@@ -28,6 +28,12 @@
 (setenv "PATH" (concat "/home/peterbecich/bin/spark/bin/:" (getenv "PATH")))
 (setq exec-path (append '("/home/peterbecich/bin/spark/bin/") exec-path ))
 
+(setenv "PATH" (concat "/opt/cabal/bin/:" (getenv "PATH")))
+(setq exec-path (append '("/opt/cabal/bin/") exec-path ))
+
+(setenv "PATH" (concat "/opt/ghc/bin/:" (getenv "PATH")))
+(setq exec-path (append '("/opt/ghc/bin/") exec-path ))
+
 
 (setenv "PATH" (concat (getenv "PATH")     (concat ":" (concat (getenv "GOPATH") "/bin"))))
 (setq exec-path (append exec-path '((concat (getenv "GOPATH") "/bin"))))
