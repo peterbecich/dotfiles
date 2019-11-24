@@ -13,6 +13,10 @@ export PATH=$HOME/.npm-global/bin:$PATH
 
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 
+export PATH=$PATH:/opt/cabal/bin
+export PATH=$PATH:/opt/ghc/bin
+
+
 export PATH=$PATH:$SPARK_HOME/bin
 
 

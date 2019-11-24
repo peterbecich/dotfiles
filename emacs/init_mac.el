@@ -19,6 +19,8 @@
 (setenv "PATH" (concat "/Users/peterbecich/bin:" (getenv "PATH")))
 (setq exec-path (append '("/Users/peterbecich/bin") exec-path ))
 
+(setenv "PATH" (concat "/opt/local/libexec/gnubin:" (getenv "PATH")))
+(setq exec-path (append '("/opt/local/libexec/gnubin") exec-path ))
 
 (setenv "PATH" (concat "/Applications/Firefox Developer Edition.app/Contents/MacOS:" (getenv "PATH")))
 (setq exec-path (append '("/Applications/Firefox Developer Edition.app/Contents/MacOS") exec-path ))
