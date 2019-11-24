@@ -37,3 +37,5 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64/
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 
 export PATH=$PATH:/opt/ghc/bin
+
+export PATH=$PATH:/usr/lib/llvm-7/bin
