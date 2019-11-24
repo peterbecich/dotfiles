@@ -41,7 +41,7 @@
 
 (use-package gcmh :ensure t)
 
-(require 'gcmh)
+;; (require 'gcmh)
 (gcmh-mode 0)
 
 (use-package ag :ensure t)
@@ -102,6 +102,16 @@
 (use-package hindent :ensure t)
 (use-package hlint-refactor :ensure t)
 (use-package intero :ensure t)
+(use-package dante)
+  ;; :ensure t
+  ;; :after haskell-mode
+  ;; :commands 'dante-mode
+  ;; :init
+  ;; (add-hook 'haskell-mode-hook 'flycheck-mode)
+  ;; ;; OR:
+  ;; ;; (add-hook 'haskell-mode-hook 'flymake-mode)
+  ;; (add-hook 'haskell-mode-hook 'dante-mode)
+  ;; )
 (use-package irony :ensure t)
 (use-package irony-eldoc :ensure t)
 ;; (use-package jdee :ensure t)
@@ -191,6 +201,16 @@
 ;;(paradox-enable)
 (use-package vagrant :ensure)
 (use-package vagrant-tramp :ensure)
+;;(use-package lsp-mode :ensure)
+(use-package lsp-mode
+  :hook (haskell-mode . lsp)
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package company-lsp :commands company-lsp)
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 
 (require 'magit)
@@ -250,7 +270,7 @@
 (eval-when-compile
   (require 'use-package))
 
-(setq tramp-default-method "ssh")
+;; (setq tramp-default-method "ssh")
 
 (async-bytecomp-package-mode 1)
 
@@ -507,15 +527,25 @@
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
  '(kubernetes-pod-restart-warning-threshold 5)
- '(kubernetes-poll-frequency 100)
- '(kubernetes-redraw-frequency 100)
+ '(kubernetes-poll-frequency 30)
+ '(kubernetes-redraw-frequency 30)
  '(line-number-display-limit-width 1024)
  '(linum-format "%d ")
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode (quote auto-revert-tail-mode))
+ '(lsp-imenu-sort-methods (quote (name)))
+ '(lsp-prefer-flymake nil)
+ '(lsp-restart (quote auto-restart))
+ '(lsp-ui-doc-enable nil)
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-imenu-enable t)
+ '(lsp-ui-peek-enable nil)
+ '(lsp-ui-sideline-enable t)
  '(magit-diff-refine-hunk (quote all))
  '(magit-diff-use-overlays nil)
+ '(magit-fetch-modules-jobs 8)
  '(magit-log-auto-more t)
+ '(magit-pull-or-fetch t)
  '(magit-section-cache-visibility nil)
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
@@ -534,12 +564,14 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (vagrant diff-hl nlinum-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode flycheck-ensime logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+    (dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl nlinum-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode flycheck-ensime logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-elscreen helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy elscreen emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ensime ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors intero ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nix-mode nlinum nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(projectile-enable-caching nil)
- '(projectile-enable-idle-timer t)
+ '(projectile-enable-idle-timer nil)
+ '(projectile-file-exists-local-cache-expire 0)
+ '(projectile-files-cache-expire 0)
  '(projectile-idle-timer-seconds 30)
  '(projectile-require-project-root t)
  '(projectile-sort-order (quote recently-active))
@@ -595,8 +627,9 @@
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
  '(tramp-copy-size-limit 5240 nil (tramp))
+ '(tramp-default-method "scp" nil (tramp))
  '(tramp-persistency-file-name "/Users/peter/.emacs.d/tramp" nil (tramp))
- '(tramp-verbose 6 nil (tramp))
+ '(tramp-verbose 2 nil (tramp))
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
  '(w3m-confirm-leaving-secure-page nil)
@@ -712,7 +745,7 @@
 ;; If you prefer fuzzy matching
 (setq helm-swoop-use-fuzzy-match t)
 
-(setq gc-cons-threshold (eval-when-compile (* 4 800000)))
+(setq gc-cons-threshold (eval-when-compile (* 12 800000)))
 ;; (run-with-idle-timer 2 t (lambda () (garbage-collect)))
 
 (setq garbage-collection-messages nil)
@@ -753,7 +786,8 @@
  ;; If there is more than one, they won't work right.
  '(compilation-error ((t (:inherit error :weight normal))))
  '(compilation-info ((t (:inherit success :weight normal))))
- '(compilation-warning ((t (:inherit warning :weight normal)))))
+ '(compilation-warning ((t (:inherit warning :weight normal))))
+ '(lsp-ui-sideline-code-action ((t (:foreground "systemGreenColor")))))
 
 (setq tags-add-tables nil)
 (setq tags-revert-without-query t)
@@ -831,7 +865,7 @@
 
 
 
-(setq tramp-default-method "ssh")
+;; (setq tramp-default-method "ssh")
 (define-key global-map (kbd "C-c s") 'helm-tramp)
 (add-hook 'helm-tramp-pre-command-hook '(lambda ()
 				     (projectile-mode 0)
@@ -848,7 +882,7 @@
 
 
 (add-hook 'after-save-hook 'magit-after-save-refresh-status)
-(put 'magit-clean 'disabled nil)
 
 
 (setq ring-bell-function #'ignore)
+(put 'magit-clean 'disabled nil)
