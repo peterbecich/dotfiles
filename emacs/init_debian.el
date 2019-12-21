@@ -19,6 +19,9 @@
 (setenv "PATH" (concat "/home/peterbecich/.local/bin:" (getenv "PATH")))
 (setq exec-path (append '("/home/peterbecich/.local/bin") exec-path ))
 
+(setenv "PATH" (concat "/usr/lib/llvm-7/bin:" (getenv "PATH")))
+(setq exec-path (append '("/usr/lib/llvm-7/bin") exec-path ))
+
 (setenv "PATH" (concat "/opt/ghc/bin:" (getenv "PATH")))
 (setq exec-path (append '("/opt/ghc/bin") exec-path ))
 
@@ -71,3 +74,5 @@
 (global-set-key (kbd "<end>") 'end-of-buffer)
 ;; (set-frame-font "Helvetica 12" nil t)
 ;; (set-frame-font "Liberation Mono-14:antialias=1")
+
+(set-face-attribute 'default nil :height 120)
