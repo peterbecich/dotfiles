@@ -47,3 +47,7 @@
     (org-latex-export-to-latex)))
 
 (add-hook 'after-save-hook 'kdm/org-save-and-export nil)
+
+
+(require 'epa-file)
+(epa-file-enable)

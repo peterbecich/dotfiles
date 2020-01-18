@@ -114,6 +114,7 @@
   ;; )
 (use-package irony :ensure t)
 (use-package irony-eldoc :ensure t)
+(use-package lsp-haskell :ensure t)
 ;; (use-package jdee :ensure t)
 ;; (use-package js-format :ensure t)
 (use-package js2-mode :ensure t)
@@ -535,12 +536,13 @@
  '(logview-auto-revert-mode (quote auto-revert-tail-mode))
  '(lsp-imenu-sort-methods (quote (name)))
  '(lsp-prefer-flymake nil)
- '(lsp-restart (quote auto-restart))
+ '(lsp-response-timeout 30)
+ '(lsp-restart (quote interactive))
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-imenu-enable t)
  '(lsp-ui-peek-enable nil)
- '(lsp-ui-sideline-enable t)
+ '(lsp-ui-sideline-enable nil)
  '(magit-diff-refine-hunk (quote all))
  '(magit-diff-use-overlays nil)
  '(magit-fetch-modules-jobs 8)
@@ -549,7 +551,6 @@
  '(magit-section-cache-visibility nil)
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
- '(magithub-issue-issue-filter-functions nil)
  '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(network-security-level (quote high))
@@ -673,10 +674,10 @@
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 
-(defadvice message (before when-was-that activate)
-  "Add timestamps to `message' output."
-  (ad-set-arg 0 (concat (format-time-string "[%Y-%m-%d %T %Z] ")
-			(ad-get-arg 0)) ))
+;; (defadvice message (before when-was-that activate)
+;;   "Add timestamps to `message' output."
+;;   (ad-set-arg 0 (concat (format-time-string "[%Y-%m-%d %T %Z] ")
+;; 			(ad-get-arg 0)) ))
 
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))

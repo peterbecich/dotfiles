@@ -58,7 +58,7 @@
   (if (file-exists-p gls) (setq insert-directory-program gls)))
 (put 'erase-buffer 'disabled nil)
 
-(set-face-attribute 'default nil :height 135)
+(set-face-attribute 'default nil :height 160)
 
 (setq markdown-command "/opt/local/bin/pandoc")
 
