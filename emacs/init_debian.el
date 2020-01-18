@@ -72,5 +72,7 @@
 
 (global-set-key (kbd "<home>") 'beginning-of-buffer)
 (global-set-key (kbd "<end>") 'end-of-buffer)
+;; (set-frame-font "Helvetica 12" nil t)
+;; (set-frame-font "Liberation Mono-14:antialias=1")
 
 (set-face-attribute 'default nil :height 120)
