@@ -63,3 +63,5 @@
 (setq markdown-command "/opt/local/bin/pandoc")
 
 ;; (setq jdee-server-dir "/Users/peter/java/jars")
+
+(setq  magit-git-executable "/opt/local/bin/git")
