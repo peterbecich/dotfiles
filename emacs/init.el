@@ -47,6 +47,7 @@
 (use-package ag :ensure t)
 (use-package auctex-latexmk :ensure t)
 (use-package auto-virtualenv :ensure t)
+(use-package mustache-mode :ensure t)
 (use-package browse-at-remote :ensure t)
 (use-package auto-compile :ensure t)
 (use-package butler :ensure t)
