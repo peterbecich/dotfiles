@@ -68,3 +68,6 @@ ctags
 *.min.js
 
 .hgignore
+
+
+workbench.xmi
