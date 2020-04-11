@@ -76,3 +76,7 @@
 ;; (set-frame-font "Liberation Mono-14:antialias=1")
 
 (set-face-attribute 'default nil :height 120)
+
+
+(setenv "PATH" (concat  "/usr/local/n/bin:" (getenv "PATH")))
+(setq exec-path (append '("/usr/local/n/bin") exec-path))
