@@ -1,5 +1,5 @@
 
-(setq ensime-eldoc-hints 'all)
+;; (setq ensime-eldoc-hints 'all)
 
 ;;(setq ess-use-auto-complete t)
 ;; (require 'ensime)
@@ -31,8 +31,8 @@
 ;;        (scala-mode-feature-electric-mode)
 ;;           ))
 
-(setq ensime-startup-notification nil)
-(setq ensime-startup-snapshot-notification nil)
+;; (setq ensime-startup-notification nil)
+;; (setq ensime-startup-snapshot-notification nil)
 
 (add-hook 'scala-mode-hook 'flycheck-mode)
 
