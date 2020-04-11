@@ -197,7 +197,7 @@
 (use-package lsp-mode
   :hook (haskell-mode . lsp)
   :commands lsp)
-(use-package snakefile-mode :ensure t)
+(use-package snakemake-mode :ensure t)
 
 ;; optionally
 (use-package lsp-ui :commands lsp-ui-mode)
@@ -794,14 +794,13 @@
 
 (eyebrowse-mode t)
 (eyebrowse-setup-opinionated-keys)
+
+(sml/setup)
+;; (setq sml/theme 'respectful)
+(put 'magit-clean 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c")))))
-
-(sml/setup)
-;; (setq sml/theme 'respectful)
-(put 'magit-clean 'disabled nil)
