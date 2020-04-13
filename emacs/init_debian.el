@@ -63,8 +63,8 @@
 
 (setq-default line-spacing 0)
 
-(setq helm-top-command
-   "env COLUMNS=%s ps --sort=-pcpu -axo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
+;; (setq helm-top-command
+;;    "env COLUMNS=%s ps --sort=-pcpu -axo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
 
 
 ;; (setq jdee-server-dir "/home/peterbecich/java/jars")

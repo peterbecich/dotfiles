@@ -20,7 +20,10 @@
  ;; '(psc-ide-use-purs t)
  ;; '(purescript-indent-offset 2)
 
-(add-hook 'purescript-mode-hook 'inferior-psci-mode)
-(require 'repl-toggle)
-(require 'psci)
-(add-to-list 'rtog/mode-repl-alist '(purescript-mode . psci))
+;; (add-hook 'purescript-mode-hook 'inferior-psci-mode)
+;; (require 'repl-toggle)
+;; (require 'psci)
+;;(add-to-list 'rtog/mode-repl-alist '(purescript-mode . psci))
+
+
+;; (add-hook 'purescript-mode-hook 'purescript-decl-scan-mode)

@@ -458,7 +458,7 @@
  '(helm-swoop-use-fuzzy-match t)
  '(helm-time-zone-home-location "Los Angeles")
  '(helm-top-command
-   "env COLUMNS=%s ps -raxo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
+   "env COLUMNS=%s ps --sort=-pcpu -axo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
  '(helm-top-poll-mode t)
  '(highlight-thing-all-visible-buffers-p t)
  '(highlight-thing-case-sensitive-p t)
@@ -528,12 +528,13 @@
  '(projectile-use-git-grep t)
  '(purescript-mode-hook
    (quote
-    (turn-on-purescript-indent
-     (lambda nil
-       (psc-ide-mode)
-       (company-mode)
-       (flycheck-mode)
-       (turn-on-purescript-indentation)))))
+    (turn-on-eldoc-mode turn-on-purescript-indent
+                        (lambda nil
+                          (psc-ide-mode)
+                          (company-mode)
+                          (flycheck-mode)
+                          (purescript-decl-scan-mode)
+                          (turn-on-purescript-indentation)))))
  '(rm-blacklist
    (quote
     (" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " company")))
