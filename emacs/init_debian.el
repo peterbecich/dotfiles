@@ -75,7 +75,7 @@
 ;; (set-frame-font "Helvetica 12" nil t)
 ;; (set-frame-font "Liberation Mono-14:antialias=1")
 
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 140)
 
 
 (setenv "PATH" (concat  "/usr/local/n/bin:" (getenv "PATH")))
