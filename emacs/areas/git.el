@@ -14,3 +14,8 @@
 
 (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
 (setq dgi-auto-hide-details-p t)
+
+
+(setq vc-handled-backends nil)
+
+(remove-hook 'server-switch-hook 'magit-commit-diff)
