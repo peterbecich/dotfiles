@@ -16,6 +16,6 @@
 (setq dgi-auto-hide-details-p t)
 
 
-(setq vc-handled-backends nil)
+;; (setq vc-handled-backends nil)
 
-(remove-hook 'server-switch-hook 'magit-commit-diff)
+;; (remove-hook 'server-switch-hook 'magit-commit-diff)
