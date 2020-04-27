@@ -189,12 +189,9 @@
 (use-package vagrant-tramp :ensure t)
 (use-package visual-fill-column :ensure t)
 (use-package diff-hl :ensure t)
-;;(require 'paradox)
-;;(paradox-enable)
 (use-package eglot :ensure t)
 (use-package vagrant :ensure)
 (use-package vagrant-tramp :ensure)
-;;(use-package lsp-mode :ensure)
 (use-package lsp-mode
   :hook (haskell-mode . lsp)
   :commands lsp)
