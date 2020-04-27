@@ -664,8 +664,8 @@
 ;; If you prefer fuzzy matching
 (setq helm-swoop-use-fuzzy-match t)
 
-(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 128)) gc-cons-percentage 0.5)
-;; (run-with-idle-timer 2 t (lambda () (garbage-collect)))
+(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
+(run-with-idle-timer 10 t (lambda () (garbage-collect)))
 
 (setq garbage-collection-messages nil)
 
