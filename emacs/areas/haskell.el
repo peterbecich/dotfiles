@@ -18,7 +18,7 @@
 (global-set-key (kbd "\C-ch") 'helm-hoogle)
 
 
-(setq haskell-tags-on-save t)
+;; (setq haskell-tags-on-save t)
 
 (setq tags-revert-without-query 1)
 

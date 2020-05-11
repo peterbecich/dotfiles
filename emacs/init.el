@@ -357,6 +357,7 @@
  '(coq-compile-parallel-in-background t)
  '(cursor-type t)
  '(custom-enabled-themes (quote (alect-light)))
+ '(custom-file "~/dotfiles/emacs/init.el")
  '(custom-safe-themes
    (quote
     ("5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
@@ -437,7 +438,6 @@
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments (quote ("")))
- '(helm-ag-insert-at-point (quote ##))
  '(helm-autoresize-mode t)
  '(helm-buffers-fuzzy-matching t)
  '(helm-completion-in-region-fuzzy-match t)
@@ -460,8 +460,6 @@
  '(helm-projectile-truncate-lines t)
  '(helm-swoop-use-fuzzy-match t)
  '(helm-time-zone-home-location "Los Angeles")
- '(helm-top-command
-   "env COLUMNS=%s ps --sort=-pcpu -axo pid,user,pri,nice,ucomm,tty,start_time,vsz,%%cpu,%%mem,etime")
  '(helm-top-poll-mode t)
  '(highlight-thing-all-visible-buffers-p t)
  '(highlight-thing-case-sensitive-p t)
@@ -488,11 +486,14 @@
  '(line-number-display-limit-width 1024)
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode (quote auto-revert-tail-mode))
+ '(lsp-auto-guess-root t)
+ '(lsp-enable-imenu t)
  '(lsp-haskell-process-args-hie (quote ("-l" "/tmp/hie.log")))
  '(lsp-imenu-sort-methods (quote (name)))
  '(lsp-prefer-flymake nil)
- '(lsp-response-timeout 30)
+ '(lsp-print-performance t)
  '(lsp-restart (quote ignore))
+ '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-imenu-enable t)
@@ -602,7 +603,6 @@
 
 (setq-default line-spacing 0)
 
-(setq helm-ag-insert-at-point 'symbol)
 
 (setq helm-projectile-fuzzy-match t)
 (require 'helm-projectile)
@@ -807,4 +807,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c")))))
+
+(setq helm-ag-insert-at-point 'symbol)
+
+(add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
+
+(setq lsp-document-sync-method 'full)

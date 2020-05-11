@@ -74,3 +74,8 @@
  ;; If there is more than one, they won't work right.
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c")))))
+
+
+;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
+
+(set-face-attribute 'default nil :font "Menlo" :height 180 :weight 'normal)
