@@ -189,12 +189,9 @@
 (use-package vagrant-tramp :ensure t)
 (use-package visual-fill-column :ensure t)
 (use-package diff-hl :ensure t)
-;;(require 'paradox)
-;;(paradox-enable)
 (use-package eglot :ensure t)
 (use-package vagrant :ensure)
 (use-package vagrant-tramp :ensure)
-;;(use-package lsp-mode :ensure)
 (use-package lsp-mode
   :hook (haskell-mode . lsp)
   :commands lsp)
@@ -666,8 +663,8 @@
 ;; If you prefer fuzzy matching
 (setq helm-swoop-use-fuzzy-match t)
 
-(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 128)) gc-cons-percentage 0.5)
-;; (run-with-idle-timer 2 t (lambda () (garbage-collect)))
+(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
+(run-with-idle-timer 10 t (lambda () (garbage-collect)))
 
 (setq garbage-collection-messages nil)
 
