@@ -78,4 +78,6 @@
 
 ;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
 
-(set-face-attribute 'default nil :font "Menlo" :height 180 :weight 'normal)
+(set-face-attribute 'default nil :font "Menlo" :height 200 :weight 'normal)
+
+(setq ns-antialiased-text nil)

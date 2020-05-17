@@ -2,7 +2,13 @@
 ;; (require 'tls)
 (setq gnutls-trustfiles
   (quote
-    ("/etc/ssl/certs/ca-certificates.crt" "/etc/pki/tls/certs/ca-bundle.crt" "/etc/ssl/ca-bundle.pem" "/usr/ssl/certs/ca-bundle.crt" "/usr/local/share/certs/ca-root-nss.crt" "/opt/local/share/curl/curl-ca-bundle.crt")))
+   ( "/etc/ssl/certs/ca-certificates.crt"
+     "/etc/pki/tls/certs/ca-bundle.crt"
+     "/etc/ssl/ca-bundle.pem"
+     "/usr/ssl/certs/ca-bundle.crt"
+     "/usr/local/share/certs/ca-root-nss.crt"
+     "/opt/local/share/curl/curl-ca-bundle.crt"
+     )))
 (setq tls-checktrust t)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
@@ -10,13 +16,14 @@
 
 (package-initialize)
 (setq load-prefer-newer t)
+
+(use-package auto-compile :ensure t)
+
 (require 'auto-compile)
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
 
 (setq use-package-always-ensure t)
-
-;; https://stackoverflow.com/questions/1817257/how-to-determine-operating-system-in-elisp
 
 (if (eq system-type 'darwin)
     (load "~/dotfiles/emacs/init_mac.el")
@@ -27,7 +34,6 @@
 
 (use-package gcmh :ensure t)
 
-;; (require 'gcmh)
 (gcmh-mode 0)
 
 (use-package ag :ensure t)
@@ -37,19 +43,22 @@
 (use-package browse-at-remote :ensure t)
 (use-package auto-compile :ensure t)
 (use-package butler :ensure t)
+(use-package ace-popup-menu :ensure t)
 (use-package cider :ensure t)
 (use-package company :ensure t)
 (use-package company-irony :ensure t)
+(use-package company-coq :ensure t)
 (use-package company-irony-c-headers :ensure t)
 (use-package company-rtags :ensure t)
 (use-package company-terraform :ensure t)
 (use-package csv-mode :ensure t)
-(use-package docker :ensure t :bind ("C-c d d" . docker))
+(use-package docker :ensure t)
 (use-package docker-compose-mode :ensure t)
 (use-package dockerfile-mode :ensure t)
 (use-package elfeed :ensure t)
 ;; (use-package elscreen :ensure t)
 (use-package emacsql :ensure t)
+;; (use-package gcmh :ensure t)
 (use-package emacsql-mysql :ensure t)
 (use-package emacsql-psql :ensure t)
 (use-package emacsql-sqlite :ensure t)
@@ -314,9 +323,6 @@
 (setq resize-mini-windows t)
 ;; (setq max-mini-window-height 2)
 
-(require 'eclim)
-(setq eclimd-autostart t)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -341,7 +347,7 @@
  '(column-number-mode t)
  '(company-backends
    (quote
-    (company-tide company-psc-ide-backend company-bbdb company-eclim company-semantic company-clang company-xcode company-cmake company-capf company-files
+    (company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-xcode company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
                   company-oddmuse company-dabbrev)))
  '(company-clang-executable "clang")
@@ -386,11 +392,6 @@
  '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key (quote ("Tag")))
- '(eclim-executable "/Users/peter/.p2/pool/plugins/org.eclim_2.8.0/bin/eclim")
- '(eclimd-autostart-with-default-workspace t)
- '(eclimd-executable
-   "/Users/peter/eclipse/java-2019-03/Eclipse.app/Contents/Eclipse/eclimd")
- '(eclimd-wait-for-process nil)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(elfeed-feeds
@@ -422,7 +423,6 @@
  '(git-link-use-commit t)
  '(global-company-mode t)
  '(global-display-line-numbers-mode t)
- '(global-eclim-mode t)
  '(global-git-gutter-mode nil)
  '(global-highlight-thing-mode t)
  '(global-hl-todo-mode t)
@@ -434,7 +434,7 @@
  '(gradle-use-gradlew t)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
- '(haskell-tags-on-save t)
+ '(haskell-tags-on-save nil)
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments (quote ("")))
@@ -517,7 +517,7 @@
     (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
  '(package-selected-packages
    (quote
-    (fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder helm-rg uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-emacs-eclim company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode eclim edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+    (fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder helm-rg uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview ini-mode forge kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package forge ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(projectile-enable-caching nil)
@@ -808,10 +808,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-selection ((t (:background "#90ee90"))))
- '(linum ((t (:background "black" :foreground "#6c6c6c"))))
- '(region ((t (:background "#87cefa"))))
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
- '(linum ((t (:background "black" :foreground "#6c6c6c")))))
+ '(linum ((t (:background "black" :foreground "#6c6c6c"))))
+ '(region ((t (:background "#87cefa")))))
 
 (setq helm-ag-insert-at-point 'symbol)
 
