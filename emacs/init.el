@@ -215,6 +215,7 @@
 (use-package eyebrowse :ensure t)
 (use-package dhall-mode :ensure t)
 (use-package omnisharp :ensure t)
+(use-package xterm-color :ensure t)
 
 (use-package fsharp-mode :ensure t)
 
