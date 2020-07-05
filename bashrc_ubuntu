@@ -1,11 +1,5 @@
 
-export SPARK_HOME=/home/peterbecich/bin/spark
-
-export PATH=/home/peterbecich/bin:$PATH
-
-# export PATH=/home/peterbecich/.nix-profile/bin:$PATH
-
-# export PATH=/home/peterbecich/.stack/programs/x86_64-linux/ghcjs-0.2.1.9007019_ghc-8.0.1/bin/:$PATH
+# export PATH=/home/peterbecich/bin:$PATH
 
 export PATH=/home/peterbecich/.local/bin:$PATH
 
@@ -13,14 +7,11 @@ export PATH=$HOME/.npm-global/bin:$PATH
 
 export PATH=/home/peterbecich/.cabal/bin:$PATH
 
-export PATH=$PATH:/opt/cabal/bin
-export PATH=$PATH:/opt/ghc/bin
+# export PATH=$PATH:/opt/cabal/bin
+# export PATH=$PATH:/opt/ghc/bin
 
 
 export PATH=$PATH:$SPARK_HOME/bin
-
-
-export PATH=$PATH:/usr/local/cuda-8.0/bin
 
 export WORKON_HOME=$HOME/virtualenv
 
@@ -30,9 +21,9 @@ export CABAL_HOME=/home/peterbecich/.cabal/
 
 SSH_ENV="$HOME/.ssh/environment"
 
-export CUDA_PATH=/usr/local/cuda-8.0
+# export CUDA_PATH=/usr/local/cuda-8.0
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64/
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-8.0/lib64/
 
 # export GOPATH=/home/peterbecich/go
 

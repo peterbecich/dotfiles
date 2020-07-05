@@ -54,7 +54,7 @@ myKeys = [
 
 main :: IO ()
 main = do
-  h <- spawnPipe "~/bin/xmobar"
+  h <- spawnPipe "~/.cabal/bin/xmobar"
   _ <- spawnPipe "~/dotfiles/bin/init.sh"
   xmonad $ docks defaultConfig
         { modMask = mod4Mask
