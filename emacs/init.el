@@ -821,9 +821,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-selection ((t (:background "#90ee90"))))
- '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
  '(region ((t (:background "#87cefa")))))
+
+;;  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
 
 (setq helm-ag-insert-at-point 'symbol)
 
