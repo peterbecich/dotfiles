@@ -489,12 +489,13 @@
  '(logview-auto-revert-mode (quote auto-revert-tail-mode))
  '(lsp-auto-guess-root t)
  '(lsp-enable-file-watchers t)
- '(lsp-enable-imenu t)
+ '(lsp-enable-imenu nil)
+ '(lsp-enable-semantic-highlighting t)
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
  '(lsp-imenu-sort-methods (quote (name)))
  '(lsp-prefer-flymake nil)
- '(lsp-print-performance t)
+ '(lsp-print-performance nil)
  '(lsp-restart (quote ignore))
  '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
@@ -538,6 +539,7 @@
  '(projectile-file-exists-local-cache-expire 0)
  '(projectile-files-cache-expire 0)
  '(projectile-idle-timer-seconds 30)
+ '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
  '(projectile-sort-order (quote recently-active))
  '(projectile-tags-backend (quote etags-select))
@@ -821,6 +823,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-selection ((t (:background "#90ee90"))))
+ '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
  '(region ((t (:background "#87cefa")))))
 
@@ -832,7 +835,7 @@
 
 (setq lsp-document-sync-method 'full)
 
-(setq lsp-file-watch-threshold nil)
+;; (setq lsp-file-watch-threshold nil)
 
 (diminish 'dired-async--modeline-mode)
 (diminish 'helm-ff--delete-async-modeline-mode)
