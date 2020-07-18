@@ -839,5 +839,6 @@
 
 (diminish 'dired-async--modeline-mode)
 (diminish 'helm-ff--delete-async-modeline-mode)
+(diminish 'helm-ff-cache-mode)
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
