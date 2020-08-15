@@ -329,51 +329,46 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ag-arguments
-   (quote
-    ("--smart-case" "--stats" "-p '~/dotfiles/.agignore'")))
- '(async-bytecomp-allowed-packages (quote (quote (all))))
- '(auth-sources (quote ("~/.authinfo.gpg" "~/.authinfo" "~/.netrc")))
+ '(ag-arguments '("--smart-case" "--stats" "-p '~/dotfiles/.agignore'"))
+ '(async-bytecomp-allowed-packages ''(all))
+ '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
  '(auto-revert-remote-files t)
  '(auto-revert-verbose nil)
  '(battery-mode-line-limit 99)
  '(blink-cursor-blinks 0)
  '(browse-url-browser-function
-   (quote
-    ((".*.stackexchange.com" . sx-open-link)
+   '((".*.stackexchange.com" . sx-open-link)
      ("stackoverflow.com" . sx-open-link)
-     ("." . eww-browse-url))))
+     ("." . eww-browse-url)))
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-backends
-   (quote
-    (company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-xcode company-cmake company-capf company-files
+   '(company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-xcode company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dabbrev)))
+                  company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
  '(company-idle-delay 0.1)
  '(company-tooltip-idle-delay 0.1)
  '(compilation-always-kill t)
  '(compilation-ask-about-save nil)
  '(compilation-auto-jump-to-first-error nil)
- '(compilation-message-face (quote default))
- '(compilation-scroll-output (quote first-error))
+ '(compilation-message-face 'default)
+ '(compilation-scroll-output 'first-error)
  '(compilation-skip-threshold 2)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
  '(cursor-type t)
- '(custom-enabled-themes (quote (alect-light)))
+ '(custom-enabled-themes '(smart-mode-line-respectful alect-light))
  '(custom-file "~/dotfiles/emacs/init.el")
  '(custom-safe-themes
-   (quote
-    ("5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(datetime-timezone (quote US/Pacific))
+   '("5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
+ '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
  '(desktop-save t)
  '(desktop-save-mode t)
  '(dgi-commit-message-format "%cr %s ")
- '(diff-hl-side (quote left))
+ '(diff-hl-side 'left)
  '(dired-async--modeline-mode t)
  '(diredfl-global-mode t nil (diredfl))
  '(display-battery-mode t)
@@ -382,23 +377,21 @@
  '(display-time-format nil)
  '(display-time-mode t)
  '(display-time-world-list
-   (quote
-    (("Europe/Zurich" "Zurich")
+   '(("Europe/Zurich" "Zurich")
      ("America/New_York" "Boston")
      ("America/Chicago" "Chicago")
      ("US/Arizona" "Phoenix")
      ("America/Los_Angeles" "Los Angeles")
      ("US/Hawaii" "Honolulu")
-     ("Etc/UTC" "UTC"))))
+     ("Etc/UTC" "UTC")))
  '(display-time-world-time-format "%A %d %B %I:%M %p %Z")
- '(doc-view-pdf->png-converter-function (quote doc-view-pdf->png-converter-mupdf))
+ '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
- '(docker-image-default-sort-key (quote ("Tag")))
- '(ediff-split-window-function (quote split-window-horizontally))
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(docker-image-default-sort-key '("Tag"))
+ '(ediff-split-window-function 'split-window-horizontally)
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(elfeed-feeds
-   (quote
-    ("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml")))
+   '("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"))
  '(elfeed-search-filter "@1-week-ago")
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
@@ -406,20 +399,19 @@
  '(eshell-history-size 2048)
  '(eyebrowse-keymap-prefix "")
  '(eyebrowse-mode t)
- '(eyebrowse-mode-line-style (quote smart))
+ '(eyebrowse-mode-line-style 'smart)
  '(eyebrowse-new-workspace t)
  '(eyebrowse-wrap-around t)
  '(fill-column 120)
  '(flycheck-buffer-switch-check-intermediate-buffers t)
  '(flycheck-check-syntax-automatically
-   (quote
-    (save idle-change idle-buffer-switch new-line mode-enabled)))
+   '(save idle-change idle-buffer-switch new-line mode-enabled))
  '(flycheck-display-errors-delay 0.1)
- '(flycheck-hlint-args (quote ("-j")))
+ '(flycheck-hlint-args '("-j"))
  '(flycheck-idle-buffer-switch-delay 0.1)
  '(flycheck-idle-change-delay 0.1)
- '(flycheck-navigation-minimum-level (quote warning))
- '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(flycheck-navigation-minimum-level 'warning)
+ '(fringe-mode '(nil . 0) nil (fringe))
  '(git-link-use-commit t)
  '(global-company-mode t)
  '(global-display-line-numbers-mode t)
@@ -437,24 +429,26 @@
  '(haskell-tags-on-save t)
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
- '(hasky-stack-build-arguments (quote ("")))
+ '(hasky-stack-build-arguments '(""))
+ '(helm-ag-fuzzy-match t)
+ '(helm-ag-use-agignore t)
  '(helm-autoresize-mode t)
  '(helm-buffers-fuzzy-matching t)
  '(helm-completion-in-region-fuzzy-match t)
- '(helm-completion-style (quote emacs))
+ '(helm-completion-style 'emacs)
  '(helm-etags-fuzzy-match t)
  '(helm-ff--delete-async-modeline-mode t)
  '(helm-flx-for-helm-find-files t)
  '(helm-flx-for-helm-locate t)
  '(helm-flx-mode t)
- '(helm-fuzzy-match-fn (quote helm-fuzzy-match))
+ '(helm-fuzzy-match-fn 'helm-fuzzy-match)
  '(helm-imenu-fuzzy-match t)
  '(helm-locate-command "glocate %s %s")
  '(helm-locate-create-db-command "gupdatedb --output='%s' --localpaths='%s'")
  '(helm-make-arguments "")
  '(helm-make-cache-targets t)
  '(helm-make-fuzzy-matching t)
- '(helm-make-list-target-method (quote qp))
+ '(helm-make-list-target-method 'qp)
  '(helm-make-named-buffer t)
  '(helm-make-sort-targets t)
  '(helm-mode-fuzzy-match t)
@@ -465,15 +459,14 @@
  '(highlight-thing-all-visible-buffers-p t)
  '(highlight-thing-case-sensitive-p t)
  '(highlight-thing-exclude-thing-under-point t)
- '(ibuffer-default-sorting-mode (quote recency))
- '(imenu-sort-function (quote imenu--sort-by-name))
- '(initial-major-mode (quote fundamental-mode))
+ '(ibuffer-default-sorting-mode 'recency)
+ '(imenu-sort-function 'imenu--sort-by-name)
+ '(initial-major-mode 'fundamental-mode)
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
  '(jdee-jdk-registry
-   (quote
-    (("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/"))))
+   '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(jit-lock-chunk-size 1000)
  '(jit-lock-debug-mode nil)
  '(jit-lock-defer-time 0.2)
@@ -486,24 +479,25 @@
  '(kubernetes-redraw-frequency 30)
  '(line-number-display-limit-width 1024)
  '(logview-additional-level-mappings nil)
- '(logview-auto-revert-mode (quote auto-revert-tail-mode))
+ '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
- '(lsp-enable-file-watchers t)
+ '(lsp-document-sync-method 'full)
+ '(lsp-enable-file-watchers nil)
  '(lsp-enable-imenu nil)
  '(lsp-enable-semantic-highlighting t)
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
- '(lsp-imenu-sort-methods (quote (name)))
+ '(lsp-imenu-sort-methods '(name))
  '(lsp-prefer-flymake nil)
  '(lsp-print-performance nil)
- '(lsp-restart (quote ignore))
+ '(lsp-restart 'ignore)
  '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-imenu-enable t)
  '(lsp-ui-peek-enable nil)
  '(lsp-ui-sideline-enable nil)
- '(magit-diff-refine-hunk (quote all))
+ '(magit-diff-refine-hunk 'all)
  '(magit-diff-use-overlays nil)
  '(magit-fetch-modules-jobs 8)
  '(magit-log-auto-more t)
@@ -514,23 +508,20 @@
  '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(mode-line-format
-   (quote
-    ("%e"
+   '("%e"
      (eyebrowse-mode
       (:eval
        (eyebrowse-mode-line-indicator)))
      mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-auto-compile mode-line-remote mode-line-frame-identification mode-line-buffer-identification sml/pos-id-separator mode-line-position
      (vc-mode vc-mode)
-     sml/pre-modes-separator mode-line-modes mode-line-misc-info mode-line-end-spaces)))
- '(network-security-level (quote high))
+     sml/pre-modes-separator mode-line-modes mode-line-misc-info mode-line-end-spaces))
+ '(network-security-level 'high)
  '(ns-antialias-text t)
  '(ns-confirm-quit t)
  '(org-modules
-   (quote
-    (org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m)))
+   '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m))
  '(package-selected-packages
-   (quote
-    (diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder helm-rg uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview ini-mode kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode)))
+   '(diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder helm-rg uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview ini-mode kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
@@ -541,22 +532,20 @@
  '(projectile-idle-timer-seconds 30)
  '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
- '(projectile-sort-order (quote recently-active))
- '(projectile-tags-backend (quote etags-select))
+ '(projectile-sort-order 'recently-active)
+ '(projectile-tags-backend 'etags-select)
  '(projectile-tags-command "fast-tags -e -R %s")
  '(projectile-use-git-grep t)
  '(purescript-mode-hook
-   (quote
-    (turn-on-eldoc-mode turn-on-purescript-indent
+   '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
                           (psc-ide-mode)
                           (company-mode)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
-                          (turn-on-purescript-indentation)))))
+                          (turn-on-purescript-indentation))))
  '(rm-blacklist
-   (quote
-    (" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " company")))
+   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " company"))
  '(rm-whitelist nil)
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
@@ -564,31 +553,28 @@
  '(show-paren-mode t)
  '(show-smartparens-global-mode t)
  '(shr-max-image-proportion 1.0)
- '(slack-buffer-create-on-notify (quote true))
- '(slack-buffer-emojify (quote true))
- '(slack-prefer-current-team (quote true))
+ '(slack-buffer-create-on-notify 'true)
+ '(slack-buffer-emojify 'true)
+ '(slack-prefer-current-team 'true)
  '(slack-room-subscription nil)
- '(slack-typing-visibility (quote never))
+ '(slack-typing-visibility 'never)
  '(smartparens-global-strict-mode nil)
  '(sml/extra-filler 0)
- '(sml/mode-width (quote full))
+ '(sml/mode-width 'full)
  '(sml/shorten-modes t)
- '(sml/theme (quote respectful))
- '(sp-base-key-bindings (quote sp))
+ '(sml/theme 'respectful)
+ '(sp-base-key-bindings 'sp)
  '(sp-navigate-reindent-after-up
-   (quote
-    ((interactive cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode common-lisp-mode emacs-lisp-mode eshell-mode geiser-repl-mode gerbil-mode inf-clojure-mode inferior-emacs-lisp-mode inferior-lisp-mode inferior-scheme-mode lisp-interaction-mode lisp-mode monroe-mode racket-mode racket-repl-mode scheme-interaction-mode scheme-mode slime-repl-mode stumpwm-mode haskell-mode))))
+   '((interactive cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode common-lisp-mode emacs-lisp-mode eshell-mode geiser-repl-mode gerbil-mode inf-clojure-mode inferior-emacs-lisp-mode inferior-lisp-mode inferior-scheme-mode lisp-interaction-mode lisp-mode monroe-mode racket-mode racket-repl-mode scheme-interaction-mode scheme-mode slime-repl-mode stumpwm-mode haskell-mode)))
  '(sp-navigate-reindent-after-up-in-string nil)
  '(sp-no-reindent-after-kill-modes
-   (quote
-    (python-mode coffee-mode asm-mode makefile-gmake-mode haml-mode haskell-mode)))
+   '(python-mode coffee-mode asm-mode makefile-gmake-mode haml-mode haskell-mode))
  '(split-height-threshold 120)
  '(split-width-threshold 120)
  '(symon-mode nil)
  '(symon-monitors
-   (quote
-    (symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor symon-darwin-battery-monitor)))
- '(symon-sparkline-type (quote boxed))
+   '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor symon-darwin-battery-monitor))
+ '(symon-sparkline-type 'boxed)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
  '(tramp-copy-size-limit 5240 nil (tramp))
@@ -600,8 +586,7 @@
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style
-   (quote
-    (face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark)))
+   '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
  '(ws-butler-keep-whitespace-before-point nil))
 
 (setq ring-bell-function 'ignore)
@@ -798,7 +783,7 @@
 
 
 
-(add-hook 'logview-mode-hook 'auto-revert-tail-mode)
+;; (add-hook 'logview-mode-hook 'auto-revert-tail-mode)
 
 (setq x-wait-for-event-timeout nil)
 
@@ -822,6 +807,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(helm-rg-file-match-face ((t (:foreground "OliveDrab4" :underline t))))
  '(helm-selection ((t (:background "#90ee90"))))
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
