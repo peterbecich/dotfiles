@@ -363,12 +363,13 @@
  '(display-time-mode t)
  '(display-time-world-list
    '(("Europe/Zurich" "Zurich")
+     ("Europe/Madrid" "Madrid")
+     ("Etc/UTC" "UTC")
      ("America/New_York" "Boston")
      ("America/Chicago" "Chicago")
      ("US/Arizona" "Phoenix")
      ("America/Los_Angeles" "Los Angeles")
-     ("US/Hawaii" "Honolulu")
-     ("Etc/UTC" "UTC")))
+     ("US/Hawaii" "Honolulu")))
  '(display-time-world-time-format "%A %d %B %I:%M %p %Z")
  '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
@@ -530,6 +531,7 @@
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
                           (turn-on-purescript-indentation))))
+ '(ring-bell-function nil)
  '(rm-blacklist
    '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " company"))
  '(rm-whitelist nil)
@@ -569,13 +571,14 @@
  '(tramp-verbose 2 nil (tramp))
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
+ '(visible-bell nil)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
  '(ws-butler-keep-whitespace-before-point nil))
 
-(setq ring-bell-function 'ignore)
+;; (setq ring-bell-function 'ignore)
 
 ;; https://www.masteringemacs.org/article/keeping-secrets-in-emacs-gnupg-auth-sources
 (setq epg-gpg-program "gpg2")
@@ -777,8 +780,6 @@
 (add-hook 'after-save-hook 'magit-after-save-refresh-status)
 
 
-(setq ring-bell-function #'ignore)
-
 
 (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
 
@@ -795,6 +796,7 @@
  ;; If there is more than one, they won't work right.
  '(helm-rg-file-match-face ((t (:foreground "OliveDrab4" :underline t))))
  '(helm-selection ((t (:background "#90ee90"))))
+ '(helm-time-zone-current ((t (:extend t :foreground "systemGreenColor"))))
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
  '(region ((t (:extend t :background "light green")))))
