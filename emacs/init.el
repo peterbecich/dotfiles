@@ -320,7 +320,7 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-backends
-   '(company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-xcode company-cmake company-capf company-files
+   '(company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
                   company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
