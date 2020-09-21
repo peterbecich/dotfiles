@@ -73,21 +73,6 @@
 (use-package git-timemachine :ensure t)
 (use-package haskell-mode :ensure t)
 (use-package hasky-stack :ensure t)
-(use-package helm :ensure t)
-(use-package helm-ag :ensure t)
-(use-package helm-descbinds :ensure t)
-(use-package helm-eww :ensure t)
-(use-package helm-flx :ensure t)
-(use-package helm-flycheck :ensure t)
-(use-package helm-flyspell :ensure t)
-(use-package helm-ghc :ensure t)
-(use-package helm-google :ensure t)
-(use-package helm-hoogle :ensure t)
-(use-package helm-make :ensure t)
-(use-package helm-projectile :ensure t)
-(use-package helm-slime :ensure t)
-(use-package helm-swoop :ensure t)
-(use-package helm-tramp :ensure t)
 (use-package highlight-defined :ensure t)
 (use-package highlight-indent-guides :ensure t)
 (use-package highlight-thing :ensure t)
@@ -191,7 +176,6 @@
 (use-package magit-lfs :ensure t)
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package company-lsp :commands company-lsp)
-(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package alect-themes :ensure t)
 (use-package eyebrowse :ensure t)
@@ -203,6 +187,10 @@
 (use-package nix-mode :ensure t
   :mode "\\.nix\\'")
 
+(use-package counsel :ensure t)
+(use-package counsel-projectile :ensure t)
+(use-package ivy :ensure t)
+(use-package swiper :ensure t)
 
 (require 'magit)
 ;; (require 'magit-todos)
@@ -238,8 +226,11 @@
 (load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
-(require 'helm-descbinds)
-(helm-descbinds-mode)
+(projectile-mode 1)
+
+
+;; (require 'helm-descbinds)
+;; (helm-descbinds-mode)
 
 (autoload 'dired-async-mode "dired-async.el" nil t)
 (dired-async-mode 1)
@@ -254,7 +245,7 @@
 
 (require 'smartparens-config)
 ;; (elscreen-start)
-(require 'helm-config)
+;; (require 'helm-config)
 
 
 ;; (add-hook 'after-init-hook 'global-company-mode)
@@ -343,6 +334,8 @@
  '(compilation-skip-threshold 2)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
+ '(counsel-mode t)
+ '(counsel-search-engine 'google)
  '(cursor-type t)
  '(custom-enabled-themes '(smart-mode-line-respectful alect-light))
  '(custom-file "~/dotfiles/emacs/init.el")
@@ -357,7 +350,6 @@
  '(dired-async--modeline-mode t)
  '(diredfl-global-mode t nil (diredfl))
  '(display-battery-mode t)
- '(display-buffer-reuse-frames nil)
  '(display-line-numbers-grow-only t)
  '(display-time-day-and-date t)
  '(display-time-format nil)
@@ -417,32 +409,6 @@
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments '(""))
- '(helm-ag-fuzzy-match t)
- '(helm-ag-use-agignore t)
- '(helm-autoresize-mode t)
- '(helm-buffers-fuzzy-matching t)
- '(helm-completion-in-region-fuzzy-match t)
- '(helm-completion-style 'emacs)
- '(helm-etags-fuzzy-match t)
- '(helm-ff--delete-async-modeline-mode t)
- '(helm-flx-for-helm-find-files t)
- '(helm-flx-for-helm-locate t)
- '(helm-flx-mode t)
- '(helm-fuzzy-match-fn 'helm-fuzzy-match)
- '(helm-imenu-fuzzy-match t)
- '(helm-locate-command "glocate %s %s")
- '(helm-locate-create-db-command "gupdatedb --output='%s' --localpaths='%s'")
- '(helm-make-arguments "")
- '(helm-make-cache-targets t)
- '(helm-make-fuzzy-matching t)
- '(helm-make-list-target-method 'qp)
- '(helm-make-named-buffer t)
- '(helm-make-sort-targets t)
- '(helm-mode-fuzzy-match t)
- '(helm-projectile-truncate-lines t)
- '(helm-swoop-use-fuzzy-match t)
- '(helm-time-zone-home-location "Los Angeles")
- '(helm-top-poll-mode t)
  '(highlight-thing-all-visible-buffers-p t)
  '(highlight-thing-case-sensitive-p t)
  '(highlight-thing-exclude-thing-under-point t)
@@ -509,10 +475,9 @@
  '(org-modules
    '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m))
  '(package-selected-packages
-   '(magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder helm-rg uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs helm-lsp company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview ini-mode kubernetes-helm git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage helm-descbinds k8s-mode kubernetes-helm ace-window helm-system-packages rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack helm-ag helm-core helm-eww helm-flx helm-flycheck helm-flyspell helm-ghc helm-google helm-hoogle helm-make helm-projectile helm-swoop highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline helm-emms emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode helm-slime slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode helm helm-spotify-plus helm-tramp hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
+   '(swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
- '(pop-up-frames nil)
  '(proced-auto-update-flag t)
  '(projectile-enable-caching nil)
  '(projectile-enable-idle-timer nil)
@@ -535,7 +500,7 @@
                           (turn-on-purescript-indentation))))
  '(ring-bell-function nil)
  '(rm-blacklist
-   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " Helm" " company"))
+   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap"  " company"))
  '(rm-whitelist nil)
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
@@ -594,15 +559,6 @@
 
 (setq-default line-spacing 0)
 
-
-(setq helm-projectile-fuzzy-match t)
-(require 'helm-projectile)
-(helm-projectile-on)
-
-;;https://emacs.stackexchange.com/questions/1028/mark-and-open-multiple-files-with-helm-and-projectile
-(setq projectile-completion-system 'helm
-      projectile-switch-project-action 'helm-projectile)
-
 (setq docker-arguments nil)
 
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
@@ -611,31 +567,7 @@
 
 (global-set-key (kbd "\C-c g l") 'git-link)
 
-(global-set-key (kbd "\C-c g g") 'helm-google)
-
 (global-set-key (kbd "\C-c s x") 'sx-search)
-
-(global-set-key (kbd "\C-cM") 'helm-make-projectile)
-
-;; (global-set-key (kbd "\C-z h") 'helm-elscreen)
-
-(global-set-key (kbd "\C-c s s") 'helm-spotify-plus)  ;; s for SEARCH
-(global-set-key (kbd "\C-c s f") 'helm-spotify-plus-next)
-(global-set-key (kbd "\C-c s b") 'helm-spotify-plus-previous)
-(global-set-key (kbd "\C-c s p") 'helm-spotify-plus-play)
-(global-set-key (kbd "\C-c s g") 'helm-spotify-plus-pause) ;; g cause you know.. C-g stop things :)
-
-(global-set-key (kbd "\C-cww") 'helm-eww)
-(global-set-key (kbd "\C-cwt") 'helm-world-time)
-
-
-(global-set-key (kbd "\C-ci") 'helm-imenu)
-
-(global-set-key (kbd "\C-co") 'helm-multi-swoop-projectile)
-
-
-(global-set-key (kbd "\C-cfc") 'helm-flycheck)
-(global-set-key (kbd "\C-cfs") 'helm-flyspell-correct)
 
 (global-set-key (kbd "\C-xrh") 'git-gutter:revert-hunk)
 
@@ -646,13 +578,6 @@
 (add-hook 'prog-mode-hook #'ws-butler-mode)
 
 (add-hook 'yaml-mode-hook #'ws-butler-mode)
-
-;; Optional face for line numbers
-;; Face name is `helm-swoop-line-number-face`
-(setq helm-swoop-use-line-number-face t)
-
-;; If you prefer fuzzy matching
-(setq helm-swoop-use-fuzzy-match t)
 
 (setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
 (run-with-idle-timer 10 t (lambda () (garbage-collect)))
@@ -670,10 +595,6 @@
 (setq global-auto-revert-mode 0)
 
 (persistent-scratch-setup-default)
-(setq helm-split-window-inside-p t)
-(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-(setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t)
 
 (add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
 
@@ -709,10 +630,6 @@
 
 (global-set-key (kbd "C-M-s") #'flx-isearch-forward)
 (global-set-key (kbd "C-M-r") #'flx-isearch-backward)
-
-
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-
 
 (defun htop ()
   (interactive)
@@ -764,15 +681,6 @@
 
 
 ;; (setq tramp-default-method "ssh")
-(define-key global-map (kbd "C-c s") 'helm-tramp)
-(add-hook 'helm-tramp-pre-command-hook '(lambda ()
-				     (projectile-mode 0)
-				     ))
-(add-hook 'helm-tramp-quit-hook '(lambda ()
-			      (projectile-mode 1)
-			      ))
-
-
 
 ;; (add-hook 'logview-mode-hook 'auto-revert-tail-mode)
 
@@ -796,16 +704,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-rg-file-match-face ((t (:foreground "OliveDrab4" :underline t))))
- '(helm-selection ((t (:background "#90ee90"))))
- '(helm-time-zone-current ((t (:extend t :foreground "systemGreenColor"))))
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
  '(region ((t (:extend t :background "light green")))))
 
 ;;  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
-
-(setq helm-ag-insert-at-point 'symbol)
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
@@ -814,7 +717,30 @@
 ;; (setq lsp-file-watch-threshold nil)
 
 (diminish 'dired-async--modeline-mode)
-(diminish 'helm-ff--delete-async-modeline-mode)
-(diminish 'helm-ff-cache-mode)
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
+
+
+
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+(setq search-default-mode #'char-fold-to-regexp)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)

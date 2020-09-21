@@ -15,9 +15,9 @@
 
 (define-key haskell-mode-map (kbd "\C-cb") 'hasky-stack-build)
 
-(define-key haskell-mode-map "\C-ch" 'helm-hoogle)
+;; (define-key haskell-mode-map "\C-ch" 'helm-hoogle)
 
-(global-set-key (kbd "\C-ch") 'helm-hoogle)
+;; (global-set-key (kbd "\C-ch") 'helm-hoogle)
 
 
 (setq haskell-tags-on-save nil)
