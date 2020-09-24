@@ -21,12 +21,12 @@
 
 (setq comint-buffer-maximum-size 2048)
 
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq eshell-scroll-to-bottom-on-input t)
-(setq eshell-scroll-to-bottom-on-output t)
+;; (setq comint-scroll-to-bottom-on-input t)
+;; (setq comint-scroll-to-bottom-on-output t)
+;; (setq eshell-scroll-to-bottom-on-input t)
+;; (setq eshell-scroll-to-bottom-on-output t)
 
-(setq comint-move-point-for-output t)
+;; (setq comint-move-point-for-output t)
 
 ;; (defun clear-shell ()
 ;;    (interactive)
@@ -100,4 +100,4 @@
 
 
 ;; ;; https://github.com/syl20bnr/spacemacs/issues/6854
-(add-hook 'compilation-mode-hook (lambda() (font-lock-mode -1)))
+;; (add-hook 'compilation-mode-hook (lambda() (font-lock-mode -1)))
