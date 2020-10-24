@@ -36,161 +36,140 @@
 
 (gcmh-mode 0)
 
-(use-package ag :ensure t)
-(use-package auctex-latexmk :ensure t)
-(use-package auto-virtualenv :ensure t)
-(use-package mustache-mode :ensure t)
-(use-package browse-at-remote :ensure t)
-(use-package auto-compile :ensure t)
-(use-package butler :ensure t)
 (use-package ace-popup-menu :ensure t)
+(use-package ag :ensure t)
+(use-package alect-themes :ensure t)
+(use-package ansible :ensure t)
+(use-package auctex-latexmk :ensure t)
+(use-package auto-compile :ensure t)
+(use-package auto-virtualenv :ensure t)
+(use-package browse-at-remote :ensure t)
+(use-package butler :ensure t)
+(use-package cask :ensure t)
+(use-package cask-mode :ensure t)
 (use-package cider :ensure t)
 (use-package company :ensure t)
-(use-package company-irony :ensure t)
 (use-package company-coq :ensure t)
+(use-package company-irony :ensure t)
 (use-package company-irony-c-headers :ensure t)
+(use-package company-lsp :commands company-lsp)
 (use-package company-rtags :ensure t)
 (use-package company-terraform :ensure t)
+(use-package counsel :ensure t)
+(use-package counsel-projectile :ensure t)
 (use-package csv-mode :ensure t)
+(use-package dante)
+(use-package dhall-mode :ensure t)
+(use-package diff-hl :ensure t)
+(use-package diminish :ensure t)
+(use-package dired-git-info :ensure t)
+(use-package diredfl :ensure t)
 (use-package docker :ensure t)
 (use-package docker-compose-mode :ensure t)
 (use-package dockerfile-mode :ensure t)
+(use-package eglot :ensure t)
 (use-package elfeed :ensure t)
 (use-package emacsql :ensure t)
 (use-package emacsql-mysql :ensure t)
 (use-package emacsql-psql :ensure t)
 (use-package emacsql-sqlite :ensure t)
+(use-package emms :ensure t)
 (use-package emojify :ensure t)
 (use-package espresso-theme :ensure t)
 (use-package ess :ensure t)
+(use-package exec-path-from-shell :ensure t)
+(use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
-(use-package flx-ido :ensure t)
 (use-package flycheck-haskell :ensure t)
+(use-package flycheck-inline :ensure t)
 (use-package flycheck-rtags :ensure t)
+(use-package forge :ensure t)
+(use-package fsharp-mode :ensure t)
 (use-package ghc :ensure t)
 (use-package git-gutter-fringe :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
+(use-package groovy-mode :ensure t)
 (use-package haskell-mode :ensure t)
 (use-package hasky-stack :ensure t)
+(use-package helpful :ensure t)
 (use-package highlight-defined :ensure t)
 (use-package highlight-indent-guides :ensure t)
 (use-package highlight-thing :ensure t)
 (use-package hindent :ensure t)
 (use-package hlint-refactor :ensure t)
-(use-package dante)
+(use-package iedit :ensure t)
 (use-package irony :ensure t)
 (use-package irony-eldoc :ensure t)
-(use-package lsp-haskell :ensure t)
+(use-package ivy :ensure t)
 (use-package js2-mode :ensure t)
 (use-package js2-refactor :ensure t)
+(use-package julia-mode :ensure t)
+(use-package julia-repl :ensure t)
 (use-package kubernetes :ensure t)
 (use-package kubernetes-tramp :ensure t)
+(use-package logview :ensure t)
+(use-package lsp-haskell :ensure t)
+(use-package lsp-mode :hook (haskell-mode . lsp) :commands lsp)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+(use-package lsp-ui :commands lsp-ui-mode)
 (use-package magit :ensure t)
+(use-package magit-lfs :ensure t)
 (use-package magit-popup :ensure t)
 (use-package magit-todos :ensure t)
-(use-package forge :ensure t)
 (use-package markdown-mode :ensure t)
-(use-package uuidgen :ensure t)
 (use-package multi-web-mode :ensure t)
-(use-package dired-git-info :ensure t)
+(use-package mustache-mode :ensure t)
+(use-package nix-mode :ensure t :mode "\\.nix\\'")
+(use-package nix-mode :ensure t)
+(use-package omnisharp :ensure t)
 (use-package org :ensure t)
 (use-package paradox :ensure t)
 (use-package pdf-tools :ensure t)
 (use-package persistent-scratch :ensure t)
+(use-package proof-general :ensure t)
+(use-package protobuf-mode :ensure t)
 (use-package psc-ide :ensure t)
 (use-package psci :ensure t)
 (use-package puppet-mode :ensure t)
 (use-package purescript-mode :ensure t)
 (use-package racket-mode :ensure t)
 (use-package rainbow-delimiters :ensure t)
+(use-package repl-toggle :ensure t)
 (use-package restart-emacs :ensure t)
 (use-package restclient :ensure t)
 (use-package rjsx-mode :ensure t)
 (use-package rtags :ensure t)
 (use-package sage-shell-mode :ensure t)
-(use-package sbt-mode
-  :ensure t
-  :commands sbt-start sbt-command
-  :config
-  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-  ;; allows using SPACE when in the minibuffer
-  (substitute-key-definition
-   'minibuffer-complete-word
-   'self-insert-command
-   minibuffer-local-completion-map))
 (use-package shakespeare-mode :ensure t)
 (use-package shm :ensure t)
 (use-package slime :ensure t)
-(use-package protobuf-mode :ensure t)
 (use-package slime-company :ensure t)
 (use-package smart-mode-line :ensure t)
 (use-package smartparens :ensure t)
 (use-package sml-mode :ensure t)
+(use-package snakemake-mode :ensure t)
+(use-package swiper :ensure t)
 (use-package sx :ensure t)
 (use-package symon :ensure t)
 (use-package terraform-mode :ensure t)
-(use-package tide
-  :ensure t
-  :after (typescript-mode company flycheck)
-  :hook ((typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
+(use-package tide :ensure t :after (typescript-mode company flycheck) :hook ((typescript-mode . tide-setup) (typescript-mode . tide-hl-identifier-mode) (before-save . tide-format-before-save)))
 (use-package twittering-mode :ensure t)
 (use-package typescript-mode :ensure t)
+(use-package uuidgen :ensure t)
+(use-package vagrant :ensure)
+(use-package vagrant-tramp :ensure t)
+(use-package vagrant-tramp :ensure)
+(use-package visual-fill-column :ensure t)
 (use-package vue-html-mode :ensure t)
 (use-package vue-mode :ensure t)
 (use-package w3m :ensure t)
 (use-package web-mode :ensure t)
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package yaml-imenu :ensure t)
-(use-package exec-path-from-shell :ensure t)
-(use-package iedit :ensure t)
-(use-package ansible :ensure t)
-(use-package nix-mode :ensure t)
-(use-package cask-mode :ensure t)
-(use-package julia-mode :ensure t)
-(use-package julia-repl :ensure t)
-(use-package cask :ensure t)
-(use-package org :ensure t)
-(use-package emms :ensure t)
-(use-package proof-general :ensure t)
-(use-package helpful :ensure t)
-(use-package flycheck-inline :ensure t)
-(use-package logview :ensure t)
-(use-package diredfl :ensure t)
-(use-package repl-toggle :ensure t)
-(use-package groovy-mode :ensure t)
-(use-package vagrant-tramp :ensure t)
-(use-package visual-fill-column :ensure t)
-(use-package diff-hl :ensure t)
-(use-package eglot :ensure t)
-(use-package vagrant :ensure)
-(use-package vagrant-tramp :ensure)
-(use-package lsp-mode
-  :hook (haskell-mode . lsp)
-  :commands lsp)
-(use-package snakemake-mode :ensure t)
-(use-package magit-lfs :ensure t)
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package company-lsp :commands company-lsp)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-(use-package alect-themes :ensure t)
-(use-package eyebrowse :ensure t)
-(use-package dhall-mode :ensure t)
-(use-package omnisharp :ensure t)
 (use-package xterm-color :ensure t)
-(use-package diminish :ensure t)
-(use-package fsharp-mode :ensure t)
-(use-package nix-mode :ensure t
-  :mode "\\.nix\\'")
-
-(use-package counsel :ensure t)
-(use-package counsel-projectile :ensure t)
-(use-package ivy :ensure t)
-(use-package swiper :ensure t)
+(use-package yaml-imenu :ensure t)
+(use-package yaml-mode :ensure t)
 
 (require 'magit)
 ;; (require 'magit-todos)
@@ -243,7 +222,7 @@
 
 (ace-popup-menu-mode 1)
 
-(require 'smartparens-config)
+;; (require 'smartparens-config)
 ;; (elscreen-start)
 ;; (require 'helm-config)
 
@@ -261,8 +240,6 @@
 (add-hook 'prog-mode-hook #'auto-revert-mode)
 
 (setq request-backend 'url-retrieve)
-
-(setq docker-global-mode 1)
 
 (desktop-save-mode 0)
 
@@ -290,8 +267,6 @@
 (show-paren-mode 1); Matches parentheses and such in every mode
 
 (add-to-list 'default-frame-alist '(height . 59)); Default frame height.
-
-(yas-global-mode 0)
 
 ;; http://www.emacswiki.org/emacs/WinnerMode
 (when (fboundp 'winner-mode)
@@ -428,11 +403,6 @@
  '(ispell-local-dictionary-alist nil)
  '(jdee-jdk-registry
    '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
- '(jit-lock-chunk-size 1000)
- '(jit-lock-debug-mode nil)
- '(jit-lock-defer-time 0.2)
- '(jit-lock-stealth-nice 0.2)
- '(jit-lock-stealth-verbose nil)
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
  '(kubernetes-pod-restart-warning-threshold 5)
@@ -571,13 +541,11 @@
 
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 
-(global-set-key (kbd "\C-c d l") 'docker-logs)
+;; (global-set-key (kbd "\C-c d l") 'docker-logs)
 
-(global-set-key (kbd "\C-c g l") 'git-link)
+(global-set-key (kbd "\C-c l") 'git-link)
 
-(global-set-key (kbd "\C-c s x") 'sx-search)
-
-(global-set-key (kbd "\C-xrh") 'git-gutter:revert-hunk)
+(global-set-key (kbd "\C-x r h") 'git-gutter:revert-hunk)
 
 (setq-default indent-tabs-mode nil)
 
@@ -587,8 +555,8 @@
 
 (add-hook 'yaml-mode-hook #'ws-butler-mode)
 
-(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
-(run-with-idle-timer 10 t (lambda () (garbage-collect)))
+;; (setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
+;; (run-with-idle-timer 10 t (lambda () (garbage-collect)))
 
 (setq garbage-collection-messages nil)
 
@@ -633,19 +601,8 @@
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
 
-;; (with-eval-after-load 'flycheck
-;;   (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
-
-(global-set-key (kbd "C-M-s") #'flx-isearch-forward)
-(global-set-key (kbd "C-M-r") #'flx-isearch-backward)
-
-(defun htop ()
-  (interactive)
-  (if (get-buffer "*htop*")
-      (switch-to-buffer "*htop*")
-    (ansi-term "/bin/bash" "htop")
-    (comint-send-string "*htop*" "htop\n")))
-
+;; (global-set-key (kbd "C-M-s") #'flx-isearch-forward)
+;; (global-set-key (kbd "C-M-r") #'flx-isearch-backward)
 
 
 ;; Note that the built-in `describe-function' includes both functions
@@ -712,6 +669,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(error ((t (:foreground "#f71010" :weight normal))))
  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
  '(region ((t (:extend t :background "light green")))))

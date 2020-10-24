@@ -22,7 +22,7 @@
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 
-(require 'web-mode)
+;; (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()

@@ -4,7 +4,7 @@
 
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-(require 'rtags)
+;; (require 'rtags)
 
 (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
 (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
