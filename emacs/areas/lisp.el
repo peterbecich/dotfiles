@@ -11,7 +11,7 @@
 ;; (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 ;; (add-hook 'clojure-mode-hook           #'enable-paredit-mode)
 
-(require 'slime)
+;; (require 'slime)
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (setq slime-contribs '(slime-fancy))
 

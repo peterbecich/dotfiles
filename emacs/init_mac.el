@@ -60,7 +60,7 @@
 
 (set-face-attribute 'default nil :height 160)
 
-(setq markdown-command "/opt/local/bin/pandoc")
+(setq markdown-command "pandoc")
 
 ;; (setq jdee-server-dir "/Users/peter/java/jars")
 

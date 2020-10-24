@@ -12,7 +12,7 @@
 ;; (add-hook 'magit-mode-hook 'magit-todos-mode)
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
-(add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
+;; (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
 (setq dgi-auto-hide-details-p t)
 
 
