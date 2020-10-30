@@ -311,6 +311,7 @@
  '(confirm-kill-processes nil)
  '(coq-compile-before-require t)
  '(coq-compile-parallel-in-background t)
+ '(counsel-ag-base-command "ag --nocolor --nogroup %s")
  '(counsel-mode t)
  '(counsel-mode-override-describe-bindings t)
  '(counsel-projectile-ag-initial-input '(projectile-symbol-or-selection-at-point))
@@ -402,6 +403,11 @@
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
+ '(ivy-initial-inputs-alist nil)
+ '(ivy-sort-matches-functions-alist
+   '((t . ivy--shorter-matches-first)
+     (ivy-completion-in-region . ivy--shorter-matches-first)
+     (ivy-switch-buffer . ivy-sort-function-buffer)))
  '(jdee-jdk-registry
    '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(json-reformat:indent-width 2)
@@ -518,6 +524,7 @@
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
  '(visible-bell nil)
+ '(vterm-buffer-name-string "vterm %s")
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style

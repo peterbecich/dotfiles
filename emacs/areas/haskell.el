@@ -33,3 +33,10 @@
 
 (setq haskell-stylish-on-save nil)
 ;; (setq lsp-haskell-process-path-hie "hie-wrapper")
+
+
+(defun haskell-mode-format-imports ()
+  "Format the imports by aligning and sorting them."
+  (interactive)
+  (haskell-mode-stylish-buffer)
+)
