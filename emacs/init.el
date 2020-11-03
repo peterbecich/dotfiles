@@ -111,6 +111,7 @@
 (use-package logview :ensure t)
 (use-package lsp-haskell :ensure t)
 (use-package lsp-mode :hook (haskell-mode . lsp) :commands lsp)
+;; (use-package lsp-mode :commands lsp)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package magit :ensure t)
@@ -361,6 +362,7 @@
  '(emms-stream-repeat-p t)
  '(eshell-buffer-maximum-lines 2048)
  '(eshell-history-size 2048)
+ '(explicit-shell-file-name "zsh")
  '(eyebrowse-keymap-prefix "")
  '(eyebrowse-mode t)
  '(eyebrowse-mode-line-style 'smart)
@@ -378,7 +380,7 @@
  '(fringe-mode '(nil . 0) nil (fringe))
  '(git-link-use-commit t)
  '(global-company-mode t)
- '(global-display-line-numbers-mode t)
+ '(global-display-line-numbers-mode nil)
  '(global-git-gutter-mode nil)
  '(global-highlight-thing-mode t)
  '(global-hl-todo-mode t)
@@ -525,6 +527,7 @@
  '(twittering-use-icon-storage t)
  '(visible-bell nil)
  '(vterm-buffer-name-string "vterm %s")
+ '(vterm-shell "/bin/zsh")
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style
@@ -608,6 +611,9 @@
 
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
 
 ;; (global-set-key (kbd "C-M-s") #'flx-isearch-forward)
 ;; (global-set-key (kbd "C-M-r") #'flx-isearch-backward)
