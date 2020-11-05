@@ -1,33 +1,23 @@
+;; (setenv "PATH" (concat "/Users/peterbecich/.ghcup/bin:" (getenv "PATH")))
+;; (setq exec-path (append '("/Users/peterbecich/.ghcup/bin") exec-path))
 
-(setenv "PATH" (concat "/Users/peterbecich/.cabal/bin:" (getenv "PATH")))
-(setq exec-path (append '("/Users/peterbecich/.cabal/bin") exec-path))
+;; (setenv "PATH" (concat "/Users/peterbecich/.cabal/bin:" (getenv "PATH")))
+;; (setq exec-path (append '("/Users/peterbecich/.cabal/bin") exec-path))
 
-(setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
-(setq exec-path (append '("/opt/local/bin") exec-path))
+;; (setenv "PATH" (concat "/Users/peterbecich/.local/bin:" (getenv "PATH")))
+;; (setq exec-path (append '("/Users/peterbecich/.local/bin") exec-path))
 
+;; (setenv "PATH" (concat "/opt/local/bin:" (getenv "PATH")))
+;; (setq exec-path (append '("/opt/local/bin") exec-path))
 
-(setenv "PATH" (concat "/Users/peterbecich/.local/bin:" (getenv "PATH")))
-(setq exec-path (append '("/Users/peterbecich/.local/bin") exec-path ))
+;; (setenv "PATH" (concat "/Users/peterbecich/bin:" (getenv "PATH")))
+;; (setq exec-path (append '("/Users/peterbecich/bin") exec-path ))
 
-(setenv "PATH" (concat "/opt/local/lib/postgresql96/bin:" (getenv "PATH")))
-(setq exec-path (append '("/opt/local/lib/postgresql96/bin") exec-path ))
+;; (setenv "PATH" (concat "/opt/local/libexec/gnubin:" (getenv "PATH")))
+;; (setq exec-path (append '("/opt/local/libexec/gnubin") exec-path ))
 
-
-(setenv "PATH" (concat "/opt/local/lib/postgresql95/bin:" (getenv "PATH")))
-(setq exec-path (append '("/opt/local/lib/postgresql95/bin") exec-path ))
-
-(setenv "PATH" (concat "/Users/peterbecich/bin:" (getenv "PATH")))
-(setq exec-path (append '("/Users/peterbecich/bin") exec-path ))
-
-(setenv "PATH" (concat "/opt/local/libexec/gnubin:" (getenv "PATH")))
-(setq exec-path (append '("/opt/local/libexec/gnubin") exec-path ))
-
-(setenv "PATH" (concat "/Applications/Firefox Developer Edition.app/Contents/MacOS:" (getenv "PATH")))
-(setq exec-path (append '("/Applications/Firefox Developer Edition.app/Contents/MacOS") exec-path ))
-
-
-(setenv "PATH" (concat "/opt/local/libexec/gnubin/:" (getenv "PATH")))
-(setq exec-path (append '("/opt/local/libexec/gnubin") exec-path ))
+;; (setenv "PATH" (concat "/opt/local/libexec/gnubin/:" (getenv "PATH")))
+;; (setq exec-path (append '("/opt/local/libexec/gnubin") exec-path ))
 
 (setq use-package-always-ensure t)
 

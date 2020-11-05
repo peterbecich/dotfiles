@@ -419,6 +419,7 @@
  '(kubernetes-redraw-frequency 30)
  '(large-file-warning-threshold 100000000)
  '(line-number-display-limit-width 1024)
+ '(line-number-mode nil)
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
@@ -614,6 +615,9 @@
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
+
+(add-hook 'prog-mode-hook #'line-number-mode)
+(add-hook 'text-mode-hook #'line-number-mode)
 
 ;; (global-set-key (kbd "C-M-s") #'flx-isearch-forward)
 ;; (global-set-key (kbd "C-M-r") #'flx-isearch-backward)
