@@ -111,7 +111,7 @@
 (use-package logview :ensure t)
 (use-package lsp-haskell :ensure t)
 (use-package lsp-mode :hook (haskell-mode . lsp) :commands lsp)
-;; (use-package lsp-mode :commands lsp)
+;;(use-package lsp-mode :commands lsp)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package magit :ensure t)
@@ -406,10 +406,6 @@
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
  '(ivy-initial-inputs-alist nil)
- '(ivy-sort-matches-functions-alist
-   '((t . ivy--shorter-matches-first)
-     (ivy-completion-in-region . ivy--shorter-matches-first)
-     (ivy-switch-buffer . ivy-sort-function-buffer)))
  '(jdee-jdk-registry
    '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(json-reformat:indent-width 2)
@@ -423,6 +419,9 @@
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
+ '(lsp-diagnostics-attributes
+   '((unnecessary :foreground "dim gray")
+     (deprecated :strike-through t)))
  '(lsp-document-sync-method 'full)
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-imenu t)
@@ -432,7 +431,7 @@
  '(lsp-imenu-sort-methods '(name))
  '(lsp-prefer-flymake nil)
  '(lsp-print-performance nil)
- '(lsp-restart 'ignore)
+ '(lsp-restart 'interactive)
  '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
@@ -467,6 +466,7 @@
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
+ '(proced-format 'verbose)
  '(projectile-enable-caching nil)
  '(projectile-enable-idle-timer nil)
  '(projectile-file-exists-local-cache-expire 0)
@@ -528,12 +528,14 @@
  '(twittering-use-icon-storage t)
  '(visible-bell nil)
  '(vterm-buffer-name-string "vterm %s")
+ '(vterm-max-scrollback 2000)
  '(vterm-shell "/bin/zsh")
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
- '(ws-butler-keep-whitespace-before-point nil))
+ '(ws-butler-keep-whitespace-before-point nil)
+ '(yas-global-mode t))
 
 ;; (setq ring-bell-function 'ignore)
 
