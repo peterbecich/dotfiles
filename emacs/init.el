@@ -379,6 +379,7 @@
  '(flycheck-navigation-minimum-level 'warning)
  '(fringe-mode '(nil . 0) nil (fringe))
  '(git-link-use-commit t)
+ '(global-auto-revert-mode t)
  '(global-company-mode t)
  '(global-display-line-numbers-mode nil)
  '(global-git-gutter-mode nil)
@@ -392,7 +393,7 @@
  '(gradle-use-gradlew t)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
- '(haskell-tags-on-save t)
+ '(haskell-tags-on-save nil)
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments '(""))
@@ -431,7 +432,7 @@
  '(lsp-imenu-sort-methods '(name))
  '(lsp-prefer-flymake nil)
  '(lsp-print-performance nil)
- '(lsp-restart 'interactive)
+ '(lsp-restart 'ignore)
  '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
@@ -582,7 +583,6 @@
 ;; (global-set-key (kbd "<kp-4>") 'elscreen-previous)
 ;; (global-set-key (kbd "<kp-5>") 'elscreen-swap)
 
-(setq global-auto-revert-mode 0)
 
 (persistent-scratch-setup-default)
 
@@ -672,7 +672,7 @@
 (setq x-wait-for-event-timeout nil)
 
 
-(add-hook 'after-save-hook 'magit-after-save-refresh-status)
+;; (add-hook 'after-save-hook 'magit-after-save-refresh-status)
 
 
 
