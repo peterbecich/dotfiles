@@ -16,6 +16,16 @@ HISTSIZE=5000
 SAVEHIST=5000
 HISTFILE=~/.zsh_history
 
+N_PREFIX=/usr/local/n
+
+
+
+path=($N_PREFIX/bin $path)
+
+path+=($HOME/.npm-global/bin)
+
+export PATH
+
 autoload -Uz compinit promptinit
 compinit
 promptinit
