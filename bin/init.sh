@@ -17,11 +17,12 @@ pkill nm-applet
 sleep 1
 nm-applet n
 sleep 1
-dropbox stop
-sleep 1
-dropbox start
-
+xrandr --output DP-2 --auto --panning 3840x2160+3840+0 --output DP-4 --panning 3840x2160+0+0 --right-of DP-2
+# sleep 1
+# dropbox stop
+# sleep 1
+# dropbox start
 sleep 1
 pkill redshift-gtk
 sleep 1
-redshift-gtk
+redshift-gtk -P
