@@ -16,7 +16,8 @@ HISTSIZE=5000
 SAVEHIST=5000
 HISTFILE=~/.zsh_history
 
-N_PREFIX=/usr/local/n
+# N_PREFIX=/usr/local/n
+export N_PREFIX=~/.n
 
 
 
