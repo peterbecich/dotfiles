@@ -496,6 +496,8 @@ static char *gnus-pointer[] = {
  '(projectile-tags-backend 'auto)
  '(projectile-tags-command "fast-tags -e -R %s")
  '(projectile-use-git-grep t)
+ '(psc-ide-rebuild-on-save t)
+ '(psc-ide-server-extra-args '("--polling"))
  '(purescript-mode-hook
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
