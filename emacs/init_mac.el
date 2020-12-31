@@ -57,17 +57,10 @@
 (setq  magit-git-executable "/opt/local/bin/git")
 
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
- '(linum ((t (:background "black" :foreground "#6c6c6c")))))
 
 
 ;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
 
 (set-face-attribute 'default nil :font "Menlo" :height 200 :weight 'normal)
 
-(setq ns-antialiased-text nil)
+;; (setq ns-antialiased-text nil)

@@ -40,7 +40,6 @@
 (use-package ag :ensure t)
 (use-package alect-themes :ensure t)
 (use-package ansible :ensure t)
-(use-package auctex-latexmk :ensure t)
 (use-package auto-compile :ensure t)
 (use-package auto-virtualenv :ensure t)
 (use-package browse-at-remote :ensure t)
@@ -59,6 +58,7 @@
 (use-package counsel-projectile :ensure t)
 (use-package csv-mode :ensure t)
 (use-package dante)
+(use-package darktooth-theme :ensure t)
 (use-package dhall-mode :ensure t)
 (use-package diff-hl :ensure t)
 (use-package diminish :ensure t)
@@ -86,7 +86,6 @@
 (use-package forge :ensure t)
 (use-package fsharp-mode :ensure t)
 (use-package ghc :ensure t)
-(use-package git-gutter-fringe :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
 (use-package groovy-mode :ensure t)
@@ -110,8 +109,7 @@
 (use-package kubernetes-tramp :ensure t)
 (use-package logview :ensure t)
 (use-package lsp-haskell :ensure t)
-;;(use-package lsp-mode :hook (haskell-mode . lsp) :commands lsp)
-(use-package lsp-mode :commands lsp)
+(use-package lsp-mode :hook (haskell-mode . lsp) :commands lsp)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package magit :ensure t)
@@ -204,37 +202,17 @@
 (load "~/dotfiles/emacs/init_private.el")
 
 (load "~/dotfiles/emacs/custom_commands.el")
-(load "~/dotfiles/emacs/auctex_related.el")
 (load "~/dotfiles/emacs/package_list.el")
 
 (projectile-mode 1)
 
-
-;; (require 'helm-descbinds)
-;; (helm-descbinds-mode)
-
 (autoload 'dired-async-mode "dired-async.el" nil t)
 (dired-async-mode 1)
 
-
-;; (require 'flx-ido)
-(ido-mode 0)
-(ido-everywhere 0)
-(flx-ido-mode 0)
-
 (ace-popup-menu-mode 1)
-
-;; (require 'smartparens-config)
-;; (elscreen-start)
-;; (require 'helm-config)
-
-
-;; (add-hook 'after-init-hook 'global-company-mode)
 
 (eval-when-compile
   (require 'use-package))
-
-;; (setq tramp-default-method "ssh")
 
 (async-bytecomp-package-mode 1)
 
@@ -254,7 +232,6 @@
    :config
    (setq auto-package-update-delete-old-versions t)
    )
-
 
 (setq dired-dwim-target t)
 
@@ -325,15 +302,17 @@
  '(counsel-projectile-sort-projects t)
  '(counsel-search-engine 'google)
  '(cursor-type t)
- '(custom-enabled-themes '(smart-mode-line-respectful alect-light))
+ '(custom-enabled-themes '(smart-mode-line-respectful darktooth))
  '(custom-file "~/dotfiles/emacs/init.el")
  '(custom-safe-themes
-   '("5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
+   '("d2e0c53dbc47b35815315fae5f352afd2c56fa8e69752090990563200daae434" "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64" "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481" "0feb7052df6cfc1733c1087d3876c26c66410e5f1337b039be44cb406b6187c6" "eb3ef63dc31fbebb37df3646fbc1e07f25159d19bb1cade2a80000a2764690de" "d94a55a07623ee474ddb4a0a5dca9a250ea4dcebe554249ce305560c3340ec57" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "e1d09f1b2afc2fed6feb1d672be5ec6ae61f84e058cb757689edb669be926896" "b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa" "5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6" "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
  '(desktop-save t)
  '(desktop-save-mode t)
  '(dgi-commit-message-format "%cr %s ")
+ '(diary-entry-marker 'font-lock-variable-name-face)
+ '(diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-pos)
  '(diff-hl-side 'left)
  '(dired-async--modeline-mode t)
  '(diredfl-global-mode t nil (diredfl))
@@ -360,6 +339,7 @@
  '(elfeed-feeds
    '("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"))
  '(elfeed-search-filter "@1-week-ago")
+ '(emms-mode-line-icon-color "#1fb3b3")
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
  '(eshell-buffer-maximum-lines 2048)
@@ -370,6 +350,7 @@
  '(eyebrowse-mode-line-style 'smart)
  '(eyebrowse-new-workspace t)
  '(eyebrowse-wrap-around t)
+ '(fci-rule-color "#222222")
  '(fill-column 120)
  '(flycheck-buffer-switch-check-intermediate-buffers t)
  '(flycheck-check-syntax-automatically
@@ -383,13 +364,38 @@
  '(git-link-use-commit t)
  '(global-auto-revert-mode t)
  '(global-company-mode t)
+ '(global-diff-hl-mode t)
  '(global-display-line-numbers-mode nil)
+ '(global-git-commit-mode t)
  '(global-git-gutter-mode nil)
  '(global-highlight-thing-mode t)
  '(global-hl-todo-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode nil)
  '(global-visual-line-mode t)
+ '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
+ '(gnus-mode-line-image-cache
+   '(image :type xpm :ascent center :data "/* XPM */
+static char *gnus-pointer[] = {
+/* width height num_colors chars_per_pixel */
+\"    18    13        2            1\",
+/* colors */
+\". c #1fb3b3\",
+\"# c None s None\",
+/* pixels */
+\"##################\",
+\"######..##..######\",
+\"#####........#####\",
+\"#.##.##..##...####\",
+\"#...####.###...##.\",
+\"#..###.######.....\",
+\"#####.########...#\",
+\"###########.######\",
+\"####.###.#..######\",
+\"######..###.######\",
+\"###....####.######\",
+\"###..######.######\",
+\"###########.######\" };") t)
  '(gradle-gradlew-executable "./gradlew")
  '(gradle-mode nil)
  '(gradle-use-gradlew t)
@@ -399,6 +405,8 @@
  '(hasky-stack-auto-newest-version t)
  '(hasky-stack-auto-target t)
  '(hasky-stack-build-arguments '(""))
+ '(highlight-symbol-colors
+   '("#FFF68F" "#B7EB8F" "#76DDBA" "#91D5FF" "#ADC6FF" "#D3ADF7" "#FFADD2" "#FFA39E" "#FFD591"))
  '(highlight-thing-all-visible-buffers-p t)
  '(highlight-thing-case-sensitive-p t)
  '(highlight-thing-exclude-thing-under-point t)
@@ -428,7 +436,7 @@
  '(lsp-document-sync-method 'full)
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-imenu t)
- '(lsp-enable-semantic-highlighting t)
+ '(lsp-enable-semantic-tokens t)
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
  '(lsp-imenu-sort-methods '(name))
@@ -466,21 +474,26 @@
  '(ns-confirm-quit t)
  '(org-modules
    '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m))
+ '(org-src-block-faces
+   '(("emacs-lisp"
+      (:background "#F0FFF0"))
+     ("dot"
+      (:foreground "gray50"))))
  '(package-selected-packages
-   '(vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-gutter git-gutter-fringe git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auctex auctex-latexmk auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
+   '(darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor js2-mode kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages tide twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
  '(proced-format 'verbose)
  '(projectile-enable-caching nil)
- '(projectile-enable-idle-timer nil)
+ '(projectile-enable-idle-timer t)
  '(projectile-file-exists-local-cache-expire 0)
  '(projectile-files-cache-expire 0)
  '(projectile-idle-timer-seconds 30)
  '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
  '(projectile-sort-order 'recently-active)
- '(projectile-tags-backend 'etags-select)
+ '(projectile-tags-backend 'auto)
  '(projectile-tags-command "fast-tags -e -R %s")
  '(projectile-use-git-grep t)
  '(purescript-mode-hook
@@ -523,6 +536,7 @@
  '(symon-monitors
    '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor symon-darwin-battery-monitor))
  '(symon-sparkline-type 'boxed)
+ '(tags-revert-without-query t)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
  '(tramp-copy-size-limit 5240 nil (tramp))
@@ -531,6 +545,27 @@
  '(tramp-verbose 2 nil (tramp))
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
+ '(vc-annotate-background "#222222")
+ '(vc-annotate-color-map
+   '((20 . "#fa5151")
+     (40 . "#ea3838")
+     (60 . "#f8ffa0")
+     (80 . "#e8e815")
+     (100 . "#fe8b04")
+     (120 . "#e5c900")
+     (140 . "#32cd32")
+     (160 . "#8ce096")
+     (180 . "#7fb07f")
+     (200 . "#3cb370")
+     (220 . "#099709")
+     (240 . "#2fdbde")
+     (260 . "#1fb3b3")
+     (280 . "#8cf1f1")
+     (300 . "#94bff3")
+     (320 . "#62b6ea")
+     (340 . "#30a5f5")
+     (360 . "#e353b9")))
+ '(vc-annotate-very-old-color "#e353b9")
  '(visible-bell nil)
  '(vterm-buffer-name-string "vterm %s")
  '(vterm-max-scrollback 2000)
@@ -598,13 +633,7 @@
 
 (setq redisplay-dont-pause t)
 
-(setq global-git-commit-mode t)
-
-(global-diff-hl-mode)
-
 (setq tags-add-tables nil)
-(setq tags-revert-without-query t)
-
 
 ;; (require 'emms-setup)
 ;; (require 'emms-player-vlc)
@@ -693,18 +722,28 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(diff-added ((t nil)))
+ '(diff-changed ((t nil)))
+ '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
+ '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
+ '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
+ '(diff-removed ((t nil)))
  '(error ((t (:foreground "#f71010" :weight normal))))
- '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
+ '(fringe ((t nil)))
+ '(line-number ((t nil)))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
- '(region ((t (:extend t :background "light green")))))
+ '(region ((t nil))))
 
-;;  '(line-number ((t (:inherit (shadow default) :background "windowBackgroundColor"))))
+ ;; '(diff-added ((t (:background darktooth-neutral_green))))
+ ;; '(diff-refine-added ((t (:background darktooth-bright_green))))
+ ;; '(diff-changed ((t (:background darktooth-light1))))
+ ;; '(diff-removed ((t (:background darktooth-neutral_red))))
+ ;; '(diff-refine-removed ((t (:background darktooth-bright_red))))
+
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
 (setq lsp-document-sync-method 'full)
-
-;; (setq lsp-file-watch-threshold nil)
 
 (diminish 'dired-async--modeline-mode)
 (diminish 'smartparens-mode)
