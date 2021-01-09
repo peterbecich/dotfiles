@@ -83,7 +83,7 @@
 (use-package flycheck-haskell :ensure t)
 (use-package flycheck-inline :ensure t)
 (use-package flycheck-rtags :ensure t)
-(use-package forge :ensure t)
+(use-package forge :ensure t :after magit)
 (use-package fsharp-mode :ensure t)
 (use-package ghc :ensure t)
 (use-package git-link :ensure t)
