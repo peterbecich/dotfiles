@@ -59,6 +59,7 @@ main = do
   xmonad $ docks defaultConfig
         { modMask = mod4Mask
         , borderWidth = 4
+        , focusedBorderColor = "#A61D00"
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
         , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
