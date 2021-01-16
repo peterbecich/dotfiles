@@ -7,11 +7,6 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/node/bin"))
-(setq exec-path (append exec-path '("/home/peterbecich/node/bin")))
-
-(setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/.npm-global/bin"))
-(setq exec-path (append exec-path '("/home/peterbecich/.npm-global/bin")))
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/.cabal/bin"))
 (setq exec-path (append exec-path '("/home/peterbecich/.cabal/bin")))
@@ -19,27 +14,8 @@
 (setenv "PATH" (concat "/home/peterbecich/.local/bin:" (getenv "PATH")))
 (setq exec-path (append '("/home/peterbecich/.local/bin") exec-path ))
 
-(setenv "PATH" (concat "/usr/lib/llvm-7/bin:" (getenv "PATH")))
-(setq exec-path (append '("/usr/lib/llvm-7/bin") exec-path ))
-
-(setenv "PATH" (concat "/opt/ghc/bin:" (getenv "PATH")))
-(setq exec-path (append '("/opt/ghc/bin") exec-path ))
-
-(setenv "GOPATH" "/home/peterbecich/go")
-(setenv "SPARK_HOME" "/home/peterbecich/bin/spark")
-
-(setenv "PATH" (concat "/home/peterbecich/bin/spark/bin/:" (getenv "PATH")))
-(setq exec-path (append '("/home/peterbecich/bin/spark/bin/") exec-path ))
-
-(setenv "PATH" (concat "/opt/cabal/bin/:" (getenv "PATH")))
-(setq exec-path (append '("/opt/cabal/bin/") exec-path ))
-
-(setenv "PATH" (concat "/opt/ghc/bin/:" (getenv "PATH")))
-(setq exec-path (append '("/opt/ghc/bin/") exec-path ))
-
-
-(setenv "PATH" (concat (getenv "PATH")     (concat ":" (concat (getenv "GOPATH") "/bin"))))
-(setq exec-path (append exec-path '((concat (getenv "GOPATH") "/bin"))))
+(setenv "PATH" (concat "/home/peterbecich/.ghcup/bin:" (getenv "PATH")))
+(setq exec-path (append '("/home/peterbecich/.ghcup/bin") exec-path ))
 
 
 (eval-when-compile
