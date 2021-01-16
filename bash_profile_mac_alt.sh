@@ -16,6 +16,10 @@ export PATH=~/.local/bin:$PATH
 
 export PATH=~/.ghcup/bin:$PATH
 
+export PATH=~/.npm-packages/bin:$PATH
+
+export PATH=~/.node_n/bin:$PATH
+
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
 export CLICOLOR=1
 
