@@ -25,6 +25,8 @@ path=($N_PREFIX/bin $path)
 
 path+=($HOME/.npm-global/bin)
 
+path+=($HOME/.local/bin)
+
 export PATH
 
 autoload -Uz compinit promptinit

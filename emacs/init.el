@@ -254,7 +254,6 @@
   (winner-mode 1))
 
 (setq resize-mini-windows t)
-;; (setq max-mini-window-height 2)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -622,10 +621,6 @@ static char *gnus-pointer[] = {
 
 (global-set-key (kbd "<kp-2>") 'end-of-defun)
 (global-set-key (kbd "<kp-8>") 'beginning-of-defun)
-;; (global-set-key (kbd "<kp-6>") 'elscreen-next)
-;; (global-set-key (kbd "<kp-4>") 'elscreen-previous)
-;; (global-set-key (kbd "<kp-5>") 'elscreen-swap)
-
 
 (persistent-scratch-setup-default)
 
@@ -634,17 +629,9 @@ static char *gnus-pointer[] = {
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
 
-
 (setq redisplay-dont-pause t)
 
 (setq tags-add-tables nil)
-
-;; (require 'emms-setup)
-;; (require 'emms-player-vlc)
-;; (emms-standard)
-;; (emms-default-players)
-;; (setq emms-player-vlc-command-name
-;;       "/Applications/VLC.app/Contents/MacOS/VLC")
 
 (require 'flycheck)
 (add-hook 'prog-mode-hook #'flycheck-mode)
@@ -733,6 +720,7 @@ static char *gnus-pointer[] = {
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
  '(diff-removed ((t nil)))
  '(error ((t (:foreground "#f71010" :weight normal))))
+ '(eyebrowse-mode-line-active ((t (:inherit mode-line-emphasis :foreground "#b22222"))))
  '(fringe ((t nil)))
  '(line-number ((t nil)))
  '(linum ((t (:background "black" :foreground "#6c6c6c"))))
