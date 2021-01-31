@@ -27,3 +27,11 @@
 
 
 ;; (add-hook 'purescript-mode-hook 'purescript-decl-scan-mode)
+
+(eval-after-load 'js-mode
+  '(add-hook 'js-mode-hook #'add-node-modules-path))
+
+;; (eval-after-load 'purescript-mode
+;;   '(add-hook 'purescript-mode-hook #'add-node-modules-path))
+
+(add-hook 'purescript-mode-hook #'add-node-modules-path)
