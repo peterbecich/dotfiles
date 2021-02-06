@@ -19,13 +19,11 @@ HISTFILE=~/.zsh_history
 # N_PREFIX=/usr/local/n
 export N_PREFIX=~/.n
 
-
+path+=($HOME/.local/bin)
 
 path=($N_PREFIX/bin $path)
 
-path+=($HOME/.npm-global/bin)
-
-path+=($HOME/.local/bin)
+path=($HOME/.npm-global/bin $path)
 
 export PATH
 

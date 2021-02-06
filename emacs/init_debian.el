@@ -1,26 +1,11 @@
-
-
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-
-(setenv "PATH" (concat (getenv "PATH") ":/home/peterbecich/.cabal/bin"))
-(setq exec-path (append exec-path '("/home/peterbecich/.cabal/bin")))
-
-(setenv "PATH" (concat "/home/peterbecich/.local/bin:" (getenv "PATH")))
-(setq exec-path (append '("/home/peterbecich/.local/bin") exec-path ))
-
-(setenv "PATH" (concat "/home/peterbecich/.ghcup/bin:" (getenv "PATH")))
-(setq exec-path (append '("/home/peterbecich/.ghcup/bin") exec-path ))
-
-
 (eval-when-compile
   (require 'use-package))
-
 
 (load "~/dotfiles/emacs/init_private_debian.el")
 
@@ -28,7 +13,6 @@
 
 ;;https://www.emacswiki.org/emacs/CompanyMode#toc6
 ;; (global-set-key (kbd "C-;") 'company-complete)
-
 
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
@@ -52,7 +36,3 @@
 ;; (set-frame-font "Liberation Mono-14:antialias=1")
 
 (set-face-attribute 'default nil :height 140)
-
-
-(setenv "PATH" (concat  "/usr/local/n/bin:" (getenv "PATH")))
-(setq exec-path (append '("/usr/local/n/bin") exec-path))

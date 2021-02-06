@@ -1,24 +1,6 @@
 source ~/dotfiles/bash_aliases_mac.sh
 
-
 export PATH=/opt/local/bin:$PATH
-# export PATH=$PATH:/usr/local/opt
-
-# export PATH=~/.npm-packages/bin:$PATH
-
-# export PATH=~/.cabal/bin:$PATH
-# export PATH=~/.local/bin:$PATH
-
-
-export PATH=/opt/local/libexec/gnubin:$PATH
-
-export PATH=~/.local/bin:$PATH
-
-export PATH=~/.ghcup/bin:$PATH
-
-export PATH=~/.npm-packages/bin:$PATH
-
-export PATH=~/.node_n/bin:$PATH
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
 export CLICOLOR=1
@@ -34,5 +16,3 @@ export LESS=' -R '
 # export ALTERNATE_EDITOR=""
 # export EDITOR="emacsclient -t"
 # export VISUAL="emacsclient -c"
-
-
