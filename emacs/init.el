@@ -504,6 +504,7 @@ static char *gnus-pointer[] = {
  '(purescript-mode-hook
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
+                          (lsp)
                           (company-mode)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
