@@ -1,6 +1,6 @@
 source ~/dotfiles/bash_aliases_mac.sh
 
-export PATH=/opt/local/bin:$PATH
+# export PATH=/opt/local/bin:$PATH
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
 export CLICOLOR=1

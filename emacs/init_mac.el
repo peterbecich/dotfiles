@@ -57,7 +57,8 @@
 (setq  magit-git-executable "/opt/local/bin/git")
 
 
-
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 ;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
 
