@@ -462,6 +462,7 @@ static char *gnus-pointer[] = {
  '(magit-pull-or-fetch t)
  '(magit-refresh-status-buffer nil)
  '(magit-section-cache-visibility nil)
+ '(magit-status-show-hashes-in-headers t)
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(menu-bar-mode nil)
