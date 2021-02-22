@@ -46,8 +46,6 @@
 (use-package auto-virtualenv :ensure t)
 (use-package browse-at-remote :ensure t)
 (use-package butler :ensure t)
-(use-package cask :ensure t)
-(use-package cask-mode :ensure t)
 (use-package cider :ensure t)
 (use-package company :ensure t)
 (use-package company-coq :ensure t)
@@ -79,7 +77,7 @@
 (use-package emojify :ensure t)
 (use-package espresso-theme :ensure t)
 (use-package ess :ensure t)
-;; (use-package exec-path-from-shell :ensure t)
+(use-package exec-path-from-shell :ensure t)
 (use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
 (use-package flycheck-haskell :ensure t)
@@ -108,7 +106,7 @@
 (use-package kubernetes :ensure t)
 (use-package kubernetes-tramp :ensure t)
 (use-package logview :ensure t)
-;;(use-package lsp-haskell :ensure t)
+(use-package lsp-haskell :ensure t)
 (use-package lsp-mode
   :hook
   ((haskell-mode . lsp)
@@ -128,7 +126,6 @@
 (use-package multi-web-mode :ensure t)
 (use-package mustache-mode :ensure t)
 (use-package nix-mode :ensure t :mode "\\.nix\\'")
-(use-package nix-mode :ensure t)
 (use-package omnisharp :ensure t)
 (use-package org :ensure t)
 (use-package paradox :ensure t)
@@ -143,7 +140,6 @@
 (use-package repl-toggle :ensure t)
 (use-package restart-emacs :ensure t)
 (use-package restclient :ensure t)
-(use-package rjsx-mode :ensure t)
 (use-package rtags :ensure t)
 (use-package sage-shell-mode :ensure t)
 (use-package shakespeare-mode :ensure t)
@@ -163,7 +159,6 @@
 (use-package uuidgen :ensure t)
 (use-package vagrant :ensure)
 (use-package vagrant-tramp :ensure t)
-(use-package vagrant-tramp :ensure)
 (use-package visual-fill-column :ensure t)
 (use-package vterm :ensure t)
 (use-package vue-html-mode :ensure t)
@@ -280,7 +275,7 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-backends
-   '(company-tide company-bbdb company-semantic company-clang company-cmake company-capf company-files
+   '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords)
                   company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
@@ -343,7 +338,7 @@
  '(elfeed-feeds
    '("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"))
  '(elfeed-search-filter "@1-week-ago")
- '(emms-mode-line-icon-color "#1fb3b3")
+ '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
  '(eshell-buffer-maximum-lines 2048)
@@ -451,6 +446,7 @@ static char *gnus-pointer[] = {
  '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-imenu-auto-refresh t)
  '(lsp-ui-imenu-enable t)
  '(lsp-ui-peek-enable t)
  '(lsp-ui-sideline-enable t)
@@ -462,6 +458,7 @@ static char *gnus-pointer[] = {
  '(magit-pull-or-fetch t)
  '(magit-refresh-status-buffer nil)
  '(magit-section-cache-visibility nil)
+ '(magit-status-show-hashes-in-headers t)
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
  '(menu-bar-mode nil)
@@ -485,7 +482,7 @@ static char *gnus-pointer[] = {
      ("dot"
       (:foreground "gray50"))))
  '(package-selected-packages
-   '(jenkinsfile-mode darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode cask cask-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
+   '(exec-path-from-shell irony-eldoc forge flycheck-rtags eglot add-node-modules-path commander jenkinsfile-mode darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general psci redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
@@ -716,17 +713,7 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-added ((t nil)))
- '(diff-changed ((t nil)))
- '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
- '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
- '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
- '(diff-removed ((t nil)))
- '(error ((t (:foreground "#f71010" :weight normal))))
- '(fringe ((t nil)))
- '(line-number ((t nil)))
- '(linum ((t (:background "black" :foreground "#6c6c6c"))))
- '(region ((t nil))))
+ )
 
  ;; '(diff-added ((t (:background darktooth-neutral_green))))
  ;; '(diff-refine-added ((t (:background darktooth-bright_green))))
