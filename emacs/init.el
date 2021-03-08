@@ -428,7 +428,7 @@ static char *gnus-pointer[] = {
  '(line-number-mode nil)
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
- '(lsp-auto-guess-root t)
+ '(lsp-auto-guess-root nil)
  '(lsp-diagnostics-attributes
    '((unnecessary :foreground "dim gray")
      (deprecated :strike-through t)))
