@@ -437,7 +437,6 @@ static char *gnus-pointer[] = {
  '(lsp-enable-semantic-tokens t)
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
- '(lsp-haskell-server-args nil)
  '(lsp-imenu-sort-methods '(name))
  '(lsp-prefer-flymake nil)
  '(lsp-print-performance nil)
@@ -485,10 +484,8 @@ static char *gnus-pointer[] = {
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
  '(proced-format 'verbose)
- '(projectile-enable-caching nil)
+ '(projectile-enable-caching t)
  '(projectile-enable-idle-timer nil)
- '(projectile-file-exists-local-cache-expire 0)
- '(projectile-files-cache-expire 0)
  '(projectile-idle-timer-seconds 30)
  '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
@@ -499,7 +496,6 @@ static char *gnus-pointer[] = {
  '(purescript-mode-hook
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
-                          (lsp)
                           (company-mode)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
