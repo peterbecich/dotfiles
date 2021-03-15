@@ -19,7 +19,7 @@
 
 (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
 
-(setq comint-buffer-maximum-size 2048)
+(setq comint-buffer-maximum-size 40960)
 
 (define-key vterm-mode-map (kbd "<C-backspace>")
   (lambda () (interactive) (vterm-send-key (kbd "C-w"))))

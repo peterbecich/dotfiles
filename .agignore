@@ -12,3 +12,5 @@
 /.purs*
 /.psa*
 /.spago
+
+node_modules

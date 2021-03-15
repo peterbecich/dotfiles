@@ -397,6 +397,15 @@ static char *gnus-pointer[] = {
  '(gradle-gradlew-executable "./gradlew")
  '(gradle-mode nil)
  '(gradle-use-gradlew t)
+ '(grep-command "grep  -h --null -e ")
+ '(grep-find-command
+   '("find . -type f -exec grep  -nH --null -e  \\{\\} +" . 42))
+ '(grep-find-ignored-directories
+   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" ".yarn" "webpack"))
+ '(grep-find-template
+   "find <D> <X> -type f <F> -exec grep <C> -nH -P -C 2 --null -e <R> \\{\\} +")
+ '(grep-highlight-matches 'auto)
+ '(grep-scroll-output t)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
@@ -427,7 +436,7 @@ static char *gnus-pointer[] = {
  '(line-number-mode nil)
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
- '(lsp-auto-guess-root nil)
+ '(lsp-auto-guess-root t)
  '(lsp-diagnostics-attributes
    '((unnecessary :foreground "dim gray")
      (deprecated :strike-through t)))
@@ -479,7 +488,7 @@ static char *gnus-pointer[] = {
      ("dot"
       (:foreground "gray50"))))
  '(package-selected-packages
-   '(forge ws-butler websocket w3m vue-mode vue-html-mode symon shm shakespeare-mode restclient rainbow-delimiters purescript-mode puppet-mode paradox multi-web-mode irony-eldoc flycheck-rtags exec-path-from-shell eglot add-node-modules-path jenkinsfile-mode darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
+   '(vdiff forge ws-butler websocket w3m vue-mode vue-html-mode symon shm shakespeare-mode restclient rainbow-delimiters purescript-mode puppet-mode paradox multi-web-mode irony-eldoc flycheck-rtags exec-path-from-shell eglot add-node-modules-path jenkinsfile-mode darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs omnisharp dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode xterm-color jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubernetes-tramp kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode hasky-stack highlight-thing hindent hlint-refactor kubernetes kubernetes-tramp magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap async auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smart-mode-line smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
@@ -563,6 +572,7 @@ static char *gnus-pointer[] = {
      (340 . "#30a5f5")
      (360 . "#e353b9")))
  '(vc-annotate-very-old-color "#e353b9")
+ '(vdiff-diff-algorithm 'git-diff)
  '(visible-bell nil)
  '(vterm-buffer-name-string "vterm %s")
  '(vterm-max-scrollback 2000)
@@ -606,7 +616,8 @@ static char *gnus-pointer[] = {
 
 (add-hook 'yaml-mode-hook #'ws-butler-mode)
 
-;; (setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)) gc-cons-percentage 0.5)
+(setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)))
+(setq garbage-collection-messages nil)
 ;; (run-with-idle-timer 10 t (lambda () (garbage-collect)))
 
 (setq garbage-collection-messages nil)
@@ -668,9 +679,9 @@ static char *gnus-pointer[] = {
 ;; look at interactive functions.
 (global-set-key (kbd "C-h C") #'helpful-command)
 
-(global-set-key "\M-P" 'flycheck-previous-error)
-(global-set-key "\M-N" 'flycheck-next-error)
-(global-set-key "\M-L" 'flycheck-list-errors)
+;; (global-set-key "\M-P" 'flycheck-previous-error)
+;; (global-set-key "\M-N" 'flycheck-next-error)
+;; (global-set-key "\M-L" 'flycheck-list-errors)
 
 ;; (global-set-key "\M-o" 'ace-window)
 
@@ -762,3 +773,7 @@ static char *gnus-pointer[] = {
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 (global-set-key (kbd "C-c i") 'counsel-imenu)
+
+
+(require 'vdiff)
+(define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
