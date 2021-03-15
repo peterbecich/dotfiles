@@ -36,7 +36,7 @@ flipScreens = [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (win
 
 myKeys = [
   ((mod4Mask, xK_m), spawn "emacsclient -c")
-  , ((mod4Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend")
+  , ((mod4Mask, xK_s), spawn "xscreensaver-command -lock; sleep 2; systemctl suspend; sleep 2; xrandr --output DP-2 --auto --panning 3840x2160+3840+0 --output DP-4 --panning 3840x2160+0+0 --right-of DP-2")
   , ((mod4Mask, xK_n), spawn "nautilus -w")
   , ((mod4Mask, xK_f), spawn "firefox --new-window")
   , ((mod4Mask, xK_0), viewEmptyWorkspace)

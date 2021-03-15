@@ -51,7 +51,7 @@
 (use-package company-coq :ensure t)
 (use-package company-irony :ensure t)
 (use-package company-irony-c-headers :ensure t)
-(use-package company-lsp :commands company-lsp)
+;; (use-package company-lsp :commands company-lsp)
 (use-package company-rtags :ensure t)
 (use-package company-terraform :ensure t)
 (use-package counsel :ensure t)
@@ -497,6 +497,7 @@ static char *gnus-pointer[] = {
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
                           (company-mode)
+                          (lsp)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
                           (turn-on-purescript-indentation))))
@@ -729,6 +730,9 @@ static char *gnus-pointer[] = {
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
 (setq lsp-document-sync-method 'full)
+
+;; (require 'company-lsp)
+;; (push 'company-lsp company-backends)
 
 (diminish 'dired-async--modeline-mode)
 (diminish 'smartparens-mode)
