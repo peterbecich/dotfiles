@@ -250,6 +250,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ag-arguments '("--smart-case" "--stats" "-p '~/dotfiles/.agignore'"))
+ '(ag-ignore-list '("*.js"))
  '(async-bytecomp-allowed-packages ''(all))
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
@@ -266,9 +267,9 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-backends
-   '(company-tide company-psc-ide-backend company-bbdb company-semantic company-clang company-cmake company-capf company-files
-                  (company-dabbrev-code company-gtags company-etags company-keywords)
-                  company-oddmuse company-dabbrev))
+   '(company-psc-ide-backend company-bbdb company-semantic company-clang company-cmake company-capf company-files
+                             (company-dabbrev-code company-gtags company-etags company-keywords)
+                             company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
  '(company-idle-delay 0.1)
  '(company-tooltip-idle-delay 0.1)
@@ -332,8 +333,7 @@
  '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
- '(eshell-buffer-maximum-lines 2048)
- '(eshell-history-size 2048)
+ '(eshell-buffer-maximum-lines 4096)
  '(explicit-shell-file-name "zsh")
  '(eyebrowse-keymap-prefix "")
  '(eyebrowse-mode t)
@@ -436,6 +436,7 @@ static char *gnus-pointer[] = {
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
  '(lsp-imenu-sort-methods '(name))
+ '(lsp-modeline-workspace-status-enable t)
  '(lsp-prefer-flymake nil)
  '(lsp-print-performance nil)
  '(lsp-restart 'ignore)
@@ -482,9 +483,11 @@ static char *gnus-pointer[] = {
  '(paradox-github-token t)
  '(proced-auto-update-flag t)
  '(proced-format 'verbose)
+ '(projectile-dynamic-mode-line nil)
  '(projectile-enable-caching t)
  '(projectile-enable-idle-timer nil)
  '(projectile-idle-timer-seconds 30)
+ '(projectile-mode-line-function '(lambda nil ("")))
  '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
  '(projectile-sort-order 'recently-active)
@@ -495,13 +498,12 @@ static char *gnus-pointer[] = {
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
                           (company-mode)
-                          (lsp)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
                           (turn-on-purescript-indentation))))
  '(ring-bell-function nil)
  '(rm-blacklist
-   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company"))
+   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
  '(rm-whitelist nil)
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
@@ -766,7 +768,6 @@ static char *gnus-pointer[] = {
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 (global-set-key (kbd "C-c i") 'counsel-imenu)
-
 
 (require 'vdiff)
 (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
