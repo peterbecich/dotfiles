@@ -2,6 +2,7 @@
 
 EDITOR=emacs
 
+# export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 # Aliases
 alias ls='ls --color=auto'
 alias ll='ls -lah --color=auto'
@@ -23,9 +24,13 @@ path+=($HOME/.local/bin)
 
 path=($N_PREFIX/bin $path)
 
+# path=($HOME/bin $path)
+
 path=($HOME/.npm-global/bin $path)
 
 export PATH
+
+export MINIKUBE_HOME=/var/lib/docker/minikube
 
 autoload -Uz compinit promptinit
 compinit

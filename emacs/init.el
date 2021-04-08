@@ -329,7 +329,7 @@
  '(elfeed-feeds
    '("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"))
  '(elfeed-search-filter "@1-week-ago")
- '(emms-mode-line-icon-color "#1fb3b3")
+ '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
  '(eshell-buffer-maximum-lines 2048)
@@ -420,9 +420,6 @@ static char *gnus-pointer[] = {
    '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
- '(kubernetes-pod-restart-warning-threshold 5)
- '(kubernetes-poll-frequency 30)
- '(kubernetes-redraw-frequency 30)
  '(large-file-warning-threshold 100000000)
  '(line-number-display-limit-width 1024)
  '(line-number-mode nil)
