@@ -40,3 +40,5 @@
   (interactive)
   (haskell-mode-stylish-buffer)
 )
+
+(setq haskell-font-lock-quasi-quote-modes nil)
