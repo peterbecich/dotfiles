@@ -280,7 +280,7 @@
  '(byte-compile-warnings nil)
  '(column-number-mode t)
  '(company-backends
-   '(company-psc-ide-backend company-bbdb company-semantic company-clang company-cmake company-capf company-files
+   '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
                              (company-dabbrev-code company-gtags company-etags company-keywords)
                              company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
@@ -512,6 +512,7 @@ static char *gnus-pointer[] = {
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil
                           (company-mode)
+                          (lsp)
                           (flycheck-mode)
                           (purescript-decl-scan-mode)
                           (turn-on-purescript-indentation))))
