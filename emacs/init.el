@@ -448,6 +448,7 @@ static char *gnus-pointer[] = {
  '(lsp-enable-semantic-tokens t)
  '(lsp-haskell-process-args-hie nil)
  '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+ '(lsp-haskell-server-args nil)
  '(lsp-imenu-sort-methods '(name))
  '(lsp-modeline-workspace-status-enable t)
  '(lsp-prefer-flymake nil)
