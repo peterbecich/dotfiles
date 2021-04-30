@@ -281,8 +281,8 @@
  '(column-number-mode t)
  '(company-backends
    '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
-                             (company-dabbrev-code company-gtags company-etags company-keywords)
-                             company-oddmuse company-dabbrev))
+                  (company-dabbrev-code company-gtags company-etags company-keywords)
+                  company-oddmuse company-dabbrev))
  '(company-clang-executable "clang")
  '(company-idle-delay 0.1)
  '(company-tooltip-idle-delay 0.1)
@@ -520,6 +520,7 @@ static char *gnus-pointer[] = {
  '(rm-blacklist
    '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
  '(rm-whitelist nil)
+ '(safe-local-variable-values '((TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
