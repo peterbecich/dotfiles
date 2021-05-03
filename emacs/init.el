@@ -272,6 +272,7 @@
  '(auto-revert-remote-files t)
  '(auto-revert-verbose nil)
  '(battery-mode-line-limit 99)
+ '(bidi-paragraph-direction 'left-to-right)
  '(blink-cursor-blinks 0)
  '(browse-url-browser-function
    '((".*.stackexchange.com" . sx-open-link)
@@ -365,6 +366,7 @@
  '(global-hl-todo-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode nil)
+ '(global-so-long-mode t)
  '(global-visual-line-mode t)
  '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
  '(gnus-mode-line-image-cache
@@ -713,7 +715,6 @@ static char *gnus-pointer[] = {
 
 ;; (sml/setup)
 ;; (setq sml/theme 'respectful)
-(put 'magit-clean 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -770,3 +771,4 @@ static char *gnus-pointer[] = {
 
 (require 'vdiff)
 (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
+(put 'magit-clean 'disabled nil)
