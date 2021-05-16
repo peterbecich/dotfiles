@@ -163,6 +163,7 @@
 (use-package uuidgen :ensure t)
 (use-package vagrant :ensure)
 (use-package vagrant-tramp :ensure t)
+(use-package vdiff :ensure t)
 (use-package visual-fill-column :ensure t)
 (use-package vterm :ensure t)
 (use-package vue-html-mode :ensure t)
