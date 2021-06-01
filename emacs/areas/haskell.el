@@ -5,7 +5,9 @@
 
 ;; (add-hook 'haskell-mode-hook #'lsp)
 
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+
+(add-hook 'lsp-mode 'lsp-ui-sideline-mode)
 
 (add-hook 'haskell-mode-hook 'flycheck-mode)
 
