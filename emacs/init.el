@@ -318,6 +318,7 @@
  '(desktop-save-mode t)
  '(dgi-commit-message-format "%cr %s ")
  '(diary-entry-marker 'font-lock-variable-name-face)
+ '(diff-hl-draw-borders t)
  '(diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-pos)
  '(diff-hl-side 'left)
  '(dired-async--modeline-mode nil)
@@ -722,7 +723,9 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
+ '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
+ '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))
 
  ;; '(diff-added ((t (:background darktooth-neutral_green))))
  ;; '(diff-refine-added ((t (:background darktooth-bright_green))))
