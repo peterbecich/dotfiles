@@ -52,7 +52,6 @@
          (scala-mode . lsp)
          ) :commands lsp)
 
-
 (use-package ace-popup-menu :ensure t)
 (use-package add-node-modules-path :ensure t)
 (use-package ag :ensure t)
@@ -178,7 +177,6 @@
 (use-package yaml-mode :ensure t)
 
 (require 'magit)
-;; (require 'magit-todos)
 
 (load "~/dotfiles/emacs/areas/c.el")
 (load "~/dotfiles/emacs/areas/csharp.el")
