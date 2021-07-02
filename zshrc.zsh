@@ -28,6 +28,8 @@ path=($N_PREFIX/bin $path)
 
 path=($HOME/.npm-global/bin $path)
 
+path=(/opt/swift/usr/bin $path)
+
 export PATH
 
 export MINIKUBE_HOME=/var/lib/docker/minikube
