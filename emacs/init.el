@@ -747,6 +747,12 @@ static char *gnus-pointer[] = {
 
 (diminish 'counsel-mode)
 (diminish 'ivy-mode)
+(diminish 'highlight-indent-guides-mode)
+(diminish 'highlight-thing-mode)
+(diminish 'yas-global-mode)
+(diminish 'ws-butler-mode)
+(diminish 'eldoc-mode)
+(diminish 'yas-minor-mode)
 
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)

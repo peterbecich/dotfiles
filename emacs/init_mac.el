@@ -60,8 +60,10 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
+ ;; (set-face-attribute 'default nil :height 210 :font "Andale Mono")
 
 (set-face-attribute 'default nil :font "Menlo" :height 180 :weight 'normal)
 
+ ;; (set-face-attribute 'default nil
+ ;;                :family "Inconsolata" :height 180 :weight 'normal)
 ;; (setq ns-antialiased-text nil)
