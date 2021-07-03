@@ -13,10 +13,8 @@
      )))
 (setq tls-checktrust t)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-             '("melpa-kent" . "https://www.mirrorservice.org/sites/melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 
-(package-initialize)
 (setq load-prefer-newer t)
 
 (use-package auto-compile :ensure t)
@@ -201,24 +199,16 @@
 (load "~/dotfiles/emacs/areas/twitter.el")
 (load "~/dotfiles/emacs/areas/web.el")
 (load "~/dotfiles/emacs/areas/yaml.el")
-
-
 (load "~/dotfiles/emacs/init_private.el")
-
 (load "~/dotfiles/emacs/custom_commands.el")
 (load "~/dotfiles/emacs/package_list.el")
 
 (projectile-mode 1)
 
-;; (autoload 'dired-async-mode "dired-async.el" nil t)
-;; (dired-async-mode 1)
-
 (ace-popup-menu-mode 1)
 
 (eval-when-compile
   (require 'use-package))
-
-;; (async-bytecomp-package-mode 1)
 
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'auto-revert-mode)
@@ -334,8 +324,6 @@
  '(docker-image-default-sort-key '("Tag"))
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
- '(elfeed-feeds
-   '("http://www.wsj.com/xml/rss/3_7455.xml" "http://www.wsj.com/xml/rss/3_7031.xml" "http://www.wsj.com/xml/rss/3_7014.xml" "http://www.wsj.com/xml/rss/3_7085.xml" "http://www.wsj.com/xml/rss/3_7041.xml" "http://feeds.reuters.com/reuters/topNews" "http://feeds.reuters.com/Reuters/domesticNews" "http://feeds.reuters.com/Reuters/worldNews" "https://news.google.com/news/rss/headlines?ned=us&gl=US&hl=en" "https://news.ycombinator.com/rss" "http://www.thehill.com/rss/syndicator/19110" "http://www.thehill.com/rss/syndicator/19109" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.slashdot.org/Slashdot/slashdotMain" "http://www.latimes.com/local/rss2.0.xml" "http://feeds.marketwatch.com/marketwatch/topstories/" "http://feeds.marketwatch.com/marketwatch/realtimeheadlines/" "https://thediplomat.com/feed/" "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml" "http://rss.nytimes.com/services/xml/rss/nyt/World.xml" "http://rss.nytimes.com/services/xml/rss/nyt/US.xml"))
  '(elfeed-search-filter "@1-week-ago")
  '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
@@ -601,14 +589,11 @@ static char *gnus-pointer[] = {
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
 
-
 (setq-default line-spacing 0)
 
 (setq docker-arguments nil)
 
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-
-;; (global-set-key (kbd "\C-c d l") 'docker-logs)
 
 (global-set-key (kbd "\C-c l") 'git-link)
 
@@ -639,8 +624,6 @@ static char *gnus-pointer[] = {
 
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
-
-;; (setq redisplay-dont-pause t)
 
 (setq tags-add-tables nil)
 
@@ -685,66 +668,26 @@ static char *gnus-pointer[] = {
 ;; look at interactive functions.
 (global-set-key (kbd "C-h C") #'helpful-command)
 
-;; (global-set-key "\M-P" 'flycheck-previous-error)
-;; (global-set-key "\M-N" 'flycheck-next-error)
-;; (global-set-key "\M-L" 'flycheck-list-errors)
-
-;; (global-set-key "\M-o" 'ace-window)
-
 (global-set-key "\C-xO" 'other-frame)
 
-
-(setq warning-minimum-level :emergency)
-
-;; /Users/peter/.emacs.d/tramp
-
-
-
-;; (setq tramp-default-method "ssh")
-
-;; (add-hook 'logview-mode-hook 'auto-revert-tail-mode)
-
 (setq x-wait-for-event-timeout nil)
-
-
-;; (add-hook 'after-save-hook 'magit-after-save-refresh-status)
-
-
 
 (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
 
 (eyebrowse-mode t)
 (eyebrowse-setup-opinionated-keys)
 
-;; (sml/setup)
-;; (setq sml/theme 'respectful)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))
-
- ;; '(diff-added ((t (:background darktooth-neutral_green))))
- ;; '(diff-refine-added ((t (:background darktooth-bright_green))))
- ;; '(diff-changed ((t (:background darktooth-light1))))
- ;; '(diff-removed ((t (:background darktooth-neutral_red))))
- ;; '(diff-refine-removed ((t (:background darktooth-bright_red))))
-
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
 (setq lsp-document-sync-method 'full)
 
-;; (require 'company-lsp)
-;; (push 'company-lsp company-backends)
-
-;; (diminish 'dired-async--modeline-mode)
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
-
 (diminish 'counsel-mode)
 (diminish 'ivy-mode)
 (diminish 'highlight-indent-guides-mode)
@@ -775,7 +718,6 @@ static char *gnus-pointer[] = {
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
-;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 (global-set-key (kbd "C-c i") 'counsel-imenu)
