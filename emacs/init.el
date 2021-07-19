@@ -425,19 +425,12 @@ static char *gnus-pointer[] = {
  '(lsp-diagnostics-attributes
    '((unnecessary :foreground "dim gray")
      (deprecated :strike-through t)))
- '(lsp-document-sync-method 'full)
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-imenu t)
  '(lsp-enable-semantic-tokens t)
- '(lsp-haskell-process-args-hie nil)
- '(lsp-haskell-process-path-hie "haskell-language-server-wrapper")
- '(lsp-haskell-server-args nil)
  '(lsp-imenu-sort-methods '(name))
  '(lsp-modeline-workspace-status-enable t)
- '(lsp-prefer-flymake nil)
- '(lsp-print-performance nil)
  '(lsp-restart 'ignore)
- '(lsp-semantic-highlighting :deferred)
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-imenu-enable t)
@@ -678,13 +671,15 @@ static char *gnus-pointer[] = {
 (eyebrowse-setup-opinionated-keys)
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
-
-(setq lsp-document-sync-method 'full)
 
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
@@ -696,6 +691,9 @@ static char *gnus-pointer[] = {
 (diminish 'ws-butler-mode)
 (diminish 'eldoc-mode)
 (diminish 'yas-minor-mode)
+(diminish 'company-mode)
+(diminish 'projectile-mode)
+
 
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
