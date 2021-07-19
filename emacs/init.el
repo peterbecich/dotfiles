@@ -678,6 +678,10 @@ static char *gnus-pointer[] = {
 (eyebrowse-setup-opinionated-keys)
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))

@@ -7,22 +7,28 @@ sleep .1; feh --bg-scale --no-xinerama ~/Pictures/wallpaper.png
 xscreensaver -no-splash &
 
 /usr/bin/pkill stalonetray
-sleep 1; stalonetray
+sleep .1; stalonetray
 
 # sleep 2; feh --bg-scale --no-xinerama --randomize ~/Pictures/wallpaper.png
 sleep 2; feh --bg-scale --no-xinerama ~/Pictures/wallpaper.png
 
-sleep 1
+sleep .1
+setxkbmap -option "ctrl:nocaps"
+sleep .1
+pkill volumeicon
+sleep .1
+volumeicon
+sleep .1
 pkill nm-applet
-sleep 1
+sleep .1
 nm-applet n
-sleep 1
+sleep .1
 xrandr --output DP-2 --auto --panning 3840x2160+3840+0 --output DP-4 --panning 3840x2160+0+0 --right-of DP-2
 # sleep 1
 # dropbox stop
 # sleep 1
 # dropbox start
-sleep 1
+sleep .1
 pkill redshift-gtk
-sleep 1
+sleep .1
 redshift-gtk -P
