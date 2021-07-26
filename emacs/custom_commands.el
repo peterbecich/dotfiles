@@ -1,7 +1,11 @@
 
 ;; http://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs
 ;; Magit
-(global-set-key (kbd "C-x g") 'magit-status)
+;; (global-set-key (kbd "C-x g") 'magit-status)
+
+(global-set-key (kbd "C-x M-g") 'magit-dispatch)
+
+;; (global-set-key (kbd "C-c b") 'magit-blame)
 
 
 ;; (global-set-key (kbd "C-x r") 'shr-render-buffer)

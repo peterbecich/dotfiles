@@ -449,6 +449,14 @@ static char *gnus-pointer[] = {
  '(magithub-api-timeout 10)
  '(menu-bar-mode nil)
  '(message-log-max 4096)
+ '(mode-line-format
+   '("%e"
+     (eyebrowse-mode
+      (:eval
+       (eyebrowse-mode-line-indicator)))
+     mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-auto-compile mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+     (vc-mode vc-mode)
+     "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
  '(network-security-level 'high)
  '(ns-antialias-text t)
  '(ns-confirm-quit t)
