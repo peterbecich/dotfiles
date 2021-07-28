@@ -146,6 +146,7 @@
 (use-package restclient :ensure t)
 (use-package rtags :ensure t)
 (use-package sage-shell-mode :ensure t)
+(use-package sbt-mode :ensure t)
 (use-package shakespeare-mode :ensure t)
 (use-package shm :ensure t)
 (use-package slime :ensure t)
