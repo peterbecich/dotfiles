@@ -3,7 +3,8 @@ import           XMonad                            (Full (Full), Tall (Tall),
                                                     defaultConfig, mod4Mask,
                                                     screenWorkspace, shiftMask,
                                                     spawn, whenJust, windows,
-                                                    xK_0, xK_F7, xK_F8, xK_c,
+                                                    xK_0, xK_F10, xK_F11,
+                                                    xK_F12, xK_F7, xK_F8, xK_c,
                                                     xK_e, xK_f, xK_g, xK_m,
                                                     xK_n, xK_r, xK_s, xK_t,
                                                     xK_w, xmonad, (.|.), (|||))
@@ -47,6 +48,9 @@ myKeys = [
   , ((0, 0x1008ff11), lowerVolume 3 >> return ())
   , ((0, 0x1008ff13), raiseVolume 3 >> return ())
   , ((0, 0x1008ff12), toggleMute    >> return ())
+  , ((mod4Mask, xK_F11), lowerVolume 3 >> return ())
+  , ((mod4Mask, xK_F12), raiseVolume 3 >> return ())
+  , ((mod4Mask, xK_F10), toggleMute    >> return ())
   , ((mod4Mask, xK_F7), spawn "setxkbmap -layout dvorak")
   , ((mod4Mask, xK_F8), spawn "setxkbmap -layout us")
   ] ++ flipScreens
