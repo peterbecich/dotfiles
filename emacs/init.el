@@ -47,7 +47,6 @@
          (dockerfile-mode . lsp)
          (java-mode . lsp)
          (python-mode . lsp)
-         (scala-mode . lsp)
          ) :commands lsp)
 
 (use-package ace-popup-menu :ensure t)
@@ -155,6 +154,7 @@
 (use-package smartparens :ensure t)
 (use-package snakemake-mode :ensure t)
 (use-package swift-mode :ensure t)
+(use-package scala-mode :ensure t)
 (use-package swiper :ensure t)
 (use-package symon :ensure t)
 (use-package terraform-mode :ensure t)
