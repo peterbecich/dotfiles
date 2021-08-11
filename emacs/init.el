@@ -320,7 +320,7 @@
  '(display-time-day-and-date nil)
  '(display-time-default-load-average nil)
  '(display-time-format nil)
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key '("Tag"))
