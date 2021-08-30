@@ -688,7 +688,8 @@ static char *gnus-pointer[] = {
  ;; If there is more than one, they won't work right.
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
- '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))
+ '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
+ '(eyebrowse-mode-line-active ((t (:inverse-video t :weight bold)))))
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
