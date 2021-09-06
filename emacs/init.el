@@ -47,7 +47,10 @@
          (dockerfile-mode . lsp)
          (java-mode . lsp)
          (python-mode . lsp)
+<<<<<<< HEAD
          (scala-mode . lsp)
+=======
+>>>>>>> b06dfee916f4e93f556f33e052fd6d6b2b0c1155
          (nix-mode . lsp)
          ) :commands lsp)
 
@@ -156,6 +159,7 @@
 (use-package smartparens :ensure t)
 (use-package snakemake-mode :ensure t)
 (use-package swift-mode :ensure t)
+(use-package scala-mode :ensure t)
 (use-package swiper :ensure t)
 (use-package symon :ensure t)
 (use-package terraform-mode :ensure t)
@@ -689,7 +693,8 @@ static char *gnus-pointer[] = {
  ;; If there is more than one, they won't work right.
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
- '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26")))))
+ '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
+ '(eyebrowse-mode-line-active ((t (:inverse-video t :weight bold)))))
 
 (add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
