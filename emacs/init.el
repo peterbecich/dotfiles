@@ -48,6 +48,7 @@
          (java-mode . lsp)
          (python-mode . lsp)
          (scala-mode . lsp)
+         (nix-mode . lsp)
          ) :commands lsp)
 
 (use-package ace-popup-menu :ensure t)
@@ -353,6 +354,7 @@
  '(global-company-mode t)
  '(global-diff-hl-mode t)
  '(global-display-line-numbers-mode nil)
+ '(global-emojify-mode t)
  '(global-git-commit-mode t)
  '(global-git-gutter-mode nil)
  '(global-highlight-thing-mode t)
