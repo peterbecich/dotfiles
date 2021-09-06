@@ -47,10 +47,6 @@
          (dockerfile-mode . lsp)
          (java-mode . lsp)
          (python-mode . lsp)
-<<<<<<< HEAD
-         (scala-mode . lsp)
-=======
->>>>>>> b06dfee916f4e93f556f33e052fd6d6b2b0c1155
          (nix-mode . lsp)
          ) :commands lsp)
 
