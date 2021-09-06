@@ -48,6 +48,7 @@
          (java-mode . lsp)
          (python-mode . lsp)
          (nix-mode . lsp)
+         (json-mode . lsp)
          ) :commands lsp)
 
 (use-package ace-popup-menu :ensure t)
