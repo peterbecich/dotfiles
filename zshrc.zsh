@@ -30,6 +30,8 @@ path=($HOME/.npm-global/bin $path)
 
 path=(/opt/swift/usr/bin $path)
 
+path=(/usr/local/go/bin $path)
+
 export PATH
 
 export MINIKUBE_HOME=/var/lib/docker/minikube
@@ -38,3 +40,4 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
+if [ -e /home/peterbecich/.nix-profile/etc/profile.d/nix.sh ]; then . /home/peterbecich/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

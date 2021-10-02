@@ -1,4 +1,6 @@
-import           XMonad                            (Full (Full), Tall (Tall),
+import           XMonad                            (Full (Full),
+                                                    Mirror (Mirror),
+                                                    Tall (Tall),
                                                     XConfig (borderWidth, focusFollowsMouse, focusedBorderColor, handleEventHook, layoutHook, logHook, manageHook, modMask, terminal),
                                                     defaultConfig, mod4Mask,
                                                     screenWorkspace, shiftMask,
@@ -22,6 +24,7 @@ import           XMonad.Layout.NoBorders           (smartBorders)
 import           XMonad.Layout.Spiral              (spiral)
 import           XMonad.Util.EZConfig              (additionalKeys)
 import           XMonad.Util.Run                   (hPutStrLn, spawnPipe)
+import           XMonad.Layout.Reflect (reflectHoriz)
 
 import qualified XMonad.StackSet                   as W
 
@@ -29,7 +32,7 @@ import qualified XMonad.StackSet                   as W
 -- myLayout = mosaic 2 [3,2] ||| Full ||| Tall
 -- https://github.com/xmonad/xmonad/wiki/Layouts
 -- myLayout = mosaic 2 [3,2] ||| Full ||| Tall 1 (3/100) (1/2) ||| Grid
-myLayout = Tall 1 (3/100) (1/2) ||| Full ||| spiral (6/7)
+myLayout = Tall 1 (3/100) (1/2) ||| reflectHoriz (Tall 1 (3/100) (1/2)) ||| Full ||| spiral (6/7)
 
 -- https://wiki.haskell.org/Xmonad/Frequently_asked_questions#Screens_are_in_wrong_order
 flipScreens = [((m .|. mod4Mask, key), screenWorkspace sc >>= flip whenJust (windows . f))
