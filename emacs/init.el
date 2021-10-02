@@ -348,6 +348,7 @@
  '(flycheck-buffer-switch-check-intermediate-buffers t)
  '(flycheck-check-syntax-automatically
    '(save idle-change idle-buffer-switch new-line mode-enabled))
+ '(flycheck-checker-error-threshold 800)
  '(flycheck-display-errors-delay 0.1)
  '(flycheck-hlint-args '("-j"))
  '(flycheck-idle-buffer-switch-delay 0.1)
@@ -741,3 +742,5 @@ static char *gnus-pointer[] = {
 (require 'vdiff)
 (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
 (put 'magit-clean 'disabled nil)
+
+;; (setq mode-require-final-newline nil)
