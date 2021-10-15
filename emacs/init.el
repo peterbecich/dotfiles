@@ -348,7 +348,7 @@
  '(flycheck-buffer-switch-check-intermediate-buffers t)
  '(flycheck-check-syntax-automatically
    '(save idle-change idle-buffer-switch new-line mode-enabled))
- '(flycheck-checker-error-threshold 800)
+ '(flycheck-checker-error-threshold 3000)
  '(flycheck-display-errors-delay 0.1)
  '(flycheck-hlint-args '("-j"))
  '(flycheck-idle-buffer-switch-delay 0.1)
@@ -404,6 +404,7 @@ static char *gnus-pointer[] = {
    "find <D> <X> -type f <F> -exec grep <C> -nH -P -C 2 --null -e <R> \\{\\} +")
  '(grep-highlight-matches 'auto)
  '(grep-scroll-output t)
+ '(groovy-indent-offset 2)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
