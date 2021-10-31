@@ -38,19 +38,21 @@
 
 (use-package lsp-mode
   :hook (
-         (haskell-mode . lsp)
-         (typescript-mode . lsp)
-         (purescript-mode . lsp)
-         (js-mode . lsp)
+         (c++-mode . lsp)
          (c-mode . lsp)
-         (sh-mode . lsp)
          (csharp-mode . lsp)
          (dhall-mode . lsp)
          (dockerfile-mode . lsp)
+         (haskell-mode . lsp)
          (java-mode . lsp)
-         (python-mode . lsp)
-         (nix-mode . lsp)
+         (js-mode . lsp)
          (json-mode . lsp)
+         (latex-mode . lsp)
+         (nix-mode . lsp)
+         (purescript-mode . lsp)
+         (python-mode . lsp)
+         (sh-mode . lsp)
+         (typescript-mode . lsp)
          ) :commands lsp)
 
 (use-package ace-popup-menu :ensure t)
