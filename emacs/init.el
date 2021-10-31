@@ -42,6 +42,8 @@
          (typescript-mode . lsp)
          (purescript-mode . lsp)
          (js-mode . lsp)
+         (c-mode . lsp)
+         (sh-mode . lsp)
          (csharp-mode . lsp)
          (dhall-mode . lsp)
          (dockerfile-mode . lsp)
