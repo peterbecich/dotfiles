@@ -15,8 +15,6 @@
 ;; Ignore compiled Haskell files in filename completions
 (add-to-list 'completion-ignored-extensions ".hi")
 
-(define-key haskell-mode-map (kbd "\C-cb") 'hasky-stack-build)
-
 
 (setq haskell-tags-on-save nil)
 
