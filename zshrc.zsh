@@ -41,3 +41,5 @@ compinit
 promptinit
 
 if [ -e /home/peterbecich/.nix-profile/etc/profile.d/nix.sh ]; then . /home/peterbecich/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+eval "$(direnv hook zsh)"
