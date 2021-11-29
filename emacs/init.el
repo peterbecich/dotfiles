@@ -53,7 +53,7 @@
          (python-mode . lsp)
          (sh-mode . lsp)
          (typescript-mode . lsp)
-         (groovy-mode . lsp)
+         ;; (groovy-mode . lsp)
          ) :commands lsp)
 
 (use-package ace-popup-menu :ensure t)
