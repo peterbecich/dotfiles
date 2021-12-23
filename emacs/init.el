@@ -375,7 +375,7 @@
  '(global-hl-todo-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode nil)
- '(global-so-long-mode t)
+ '(global-so-long-mode nil)
  '(global-visual-line-mode t)
  '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
  '(gnus-mode-line-image-cache
@@ -455,7 +455,7 @@ static char *gnus-pointer[] = {
  '(magit-auto-revert-mode t)
  '(magit-diff-refine-hunk 'all)
  '(magit-diff-use-overlays nil)
- '(magit-fetch-modules-jobs 8)
+ '(magit-fetch-modules-jobs 8 t)
  '(magit-log-auto-more t)
  '(magit-pull-or-fetch t)
  '(magit-refresh-status-buffer nil)

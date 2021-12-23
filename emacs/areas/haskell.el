@@ -1,7 +1,7 @@
 
 ;; (setq lsp-haskell-process-path-hie "hie-wrapper")
 (require 'lsp)
-(require 'lsp-haskell)
+;;(require 'lsp-haskell)
 
 ;; (add-hook 'haskell-mode-hook #'lsp)
 
