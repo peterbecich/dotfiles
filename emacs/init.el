@@ -112,7 +112,7 @@
 (use-package fsharp-mode :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
-(use-package groovy-mode :ensure t)
+(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
 (use-package haskell-mode :ensure t)
 (use-package helpful :ensure t)
 (use-package highlight-defined :ensure t)
