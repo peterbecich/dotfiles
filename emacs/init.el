@@ -135,7 +135,7 @@
 (use-package fsharp-mode :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
-(use-package groovy-mode :ensure t)
+(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
 (use-package haskell-mode :ensure t)
 (use-package helpful :ensure t)
 (use-package highlight-defined :ensure t)
@@ -397,7 +397,7 @@
  '(global-hl-todo-mode t)
  '(global-linum-mode nil)
  '(global-nlinum-mode nil)
- '(global-so-long-mode t)
+ '(global-so-long-mode nil)
  '(global-visual-line-mode t)
  '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
  '(gnus-mode-line-image-cache
