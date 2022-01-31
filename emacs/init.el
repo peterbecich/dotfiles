@@ -36,6 +36,8 @@
 
 (gcmh-mode 0)
 
+;;         (lsp-mode . lsp-lens-mode)
+
 (use-package lsp-mode
   :hook (
          (c++-mode . lsp)
@@ -52,10 +54,21 @@
          (purescript-mode . lsp)
          (python-mode . lsp)
          (sh-mode . lsp)
+         (scala-mode . lsp)
          (typescript-mode . lsp)
          (rust-mode . lsp)
          ;; (groovy-mode . lsp)
-         ) :commands lsp)
+         )
+  :commands lsp
+  :config
+  ;; Uncomment following section if you would like to tune lsp-mode performance according to
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  (setq gc-cons-threshold 100000000) ;; 100mb
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
+  ;;       (setq lsp-log-io nil)
+  (setq lsp-completion-provider :capf)
+  (setq lsp-prefer-flymake nil))
 
 (use-package ace-popup-menu :ensure t)
 (use-package add-node-modules-path :ensure t)
@@ -68,7 +81,11 @@
 (use-package browse-at-remote :ensure t)
 (use-package butler :ensure t)
 (use-package cider :ensure t)
-(use-package company :ensure t)
+(use-package company
+  :hook (scala-mode . company-mode)
+  :config (setq lsp-completion-provider :capf)
+  :ensure t
+  )
 (use-package company-coq :ensure t)
 (use-package company-irony :ensure t)
 (use-package company-irony-c-headers :ensure t)
@@ -77,6 +94,11 @@
 (use-package counsel :ensure t)
 (use-package counsel-projectile :ensure t)
 (use-package csv-mode :ensure t)
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode)
+  )
 (use-package dante)
 (use-package darktooth-theme :ensure t)
 (use-package dhall-mode :ensure t)
@@ -104,6 +126,7 @@
 (use-package exec-path-from-shell :ensure t)
 (use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
+(use-package flycheck :init (global-flycheck-mode))
 (use-package flycheck-haskell :ensure t)
 (use-package flycheck-inline :ensure t)
 (use-package flycheck-rtags :ensure t)
@@ -132,6 +155,7 @@
 (use-package logview :ensure t)
 (use-package lsp-haskell :ensure t)
 (use-package lsp-java :ensure t)
+(use-package lsp-metals)
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 (use-package lsp-ui :commands lsp-ui-mode)
 (use-package magit :ensure t)
@@ -157,7 +181,6 @@
 (use-package restclient :ensure t)
 (use-package rtags :ensure t)
 (use-package sage-shell-mode :ensure t)
-(use-package sbt-mode :ensure t)
 (use-package shakespeare-mode :ensure t)
 (use-package shm :ensure t)
 (use-package slime :ensure t)
@@ -165,7 +188,6 @@
 (use-package smartparens :ensure t)
 (use-package snakemake-mode :ensure t)
 (use-package swift-mode :ensure t)
-(use-package scala-mode :ensure t)
 (use-package swiper :ensure t)
 (use-package symon :ensure t)
 (use-package terraform-mode :ensure t)
@@ -445,6 +467,7 @@ static char *gnus-pointer[] = {
  '(lsp-enable-imenu t)
  '(lsp-enable-semantic-tokens t)
  '(lsp-imenu-sort-methods '(name))
+ '(lsp-lens-enable nil)
  '(lsp-modeline-workspace-status-enable t)
  '(lsp-restart 'ignore)
  '(lsp-ui-doc-enable nil)
@@ -455,7 +478,7 @@ static char *gnus-pointer[] = {
  '(magit-auto-revert-mode t)
  '(magit-diff-refine-hunk 'all)
  '(magit-diff-use-overlays nil)
- '(magit-fetch-modules-jobs 8)
+ '(magit-fetch-modules-jobs 8 t)
  '(magit-log-auto-more t)
  '(magit-pull-or-fetch t)
  '(magit-refresh-status-buffer nil)
@@ -516,7 +539,9 @@ static char *gnus-pointer[] = {
  '(rm-blacklist
    '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
  '(rm-whitelist nil)
- '(safe-local-variable-values '((TeX-master . t)))
+ '(safe-local-variable-values
+   '((buffer-file-coding-system . utf-8-unix)
+     (TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
