@@ -42,6 +42,7 @@
   :hook (
          (c++-mode . lsp)
          (c-mode . lsp)
+         (css-mode . lsp)
          (csharp-mode . lsp)
          (dhall-mode . lsp)
          (dockerfile-mode . lsp)
