@@ -59,6 +59,7 @@
          (typescript-mode . lsp)
          (rust-mode . lsp)
          ;; (groovy-mode . lsp)
+         (yaml-mode . lsp)
          )
   :commands lsp
   :config
