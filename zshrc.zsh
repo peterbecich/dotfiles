@@ -32,6 +32,8 @@ path=(/opt/swift/usr/bin $path)
 
 path=(/usr/local/go/bin $path)
 
+path=($HOME/.cabal/bin $path)
+
 export PATH
 
 export MINIKUBE_HOME=/var/lib/docker/minikube

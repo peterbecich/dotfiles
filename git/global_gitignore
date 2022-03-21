@@ -65,7 +65,6 @@ ctags
 .DS_Store
 
 
-*.min.js
 
 .hgignore
 

@@ -2,7 +2,7 @@ import           XMonad                            (Full (Full),
                                                     Mirror (Mirror),
                                                     Tall (Tall),
                                                     XConfig (borderWidth, focusFollowsMouse, focusedBorderColor, handleEventHook, layoutHook, logHook, manageHook, modMask, terminal),
-                                                    defaultConfig, mod4Mask,
+                                                    def, mod4Mask,
                                                     screenWorkspace, shiftMask,
                                                     spawn, whenJust, windows,
                                                     xK_0, xK_F10, xK_F11,
@@ -12,13 +12,13 @@ import           XMonad                            (Full (Full),
                                                     xK_w, xmonad, (.|.), (|||))
 import           XMonad.Actions.CycleWS            (swapNextScreen)
 import           XMonad.Actions.FindEmptyWorkspace (viewEmptyWorkspace)
-import           XMonad.Actions.GridSelect         (defaultGSConfig,
-                                                    goToSelected)
+import           XMonad.Actions.GridSelect         (goToSelected)
 import           XMonad.Actions.Volume             (lowerVolume, raiseVolume,
                                                     toggleMute)
-import           XMonad.Hooks.DynamicLog           (PP (ppOutput), defaultPP,
+import           XMonad.Hooks.DynamicLog           (PP (ppOutput),
                                                     dynamicLogWithPP)
-import           XMonad.Hooks.EwmhDesktops         (fullscreenEventHook)
+import qualified XMonad.Hooks.DynamicLog  as DynamicLog
+import           XMonad.Hooks.EwmhDesktops         (ewmhFullscreen)
 import           XMonad.Hooks.ManageDocks          (avoidStruts, docks)
 import           XMonad.Layout.NoBorders           (smartBorders)
 import           XMonad.Layout.Spiral              (spiral)
@@ -47,7 +47,7 @@ myKeys = [
   , ((mod4Mask, xK_0), viewEmptyWorkspace)
   , ((mod4Mask, xK_c), swapNextScreen)
   , ((mod4Mask .|. shiftMask, xK_t), spawn "gnome-terminal")
-  , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
+  -- , ((mod4Mask, xK_g), goToSelected defaultGSConfig)
   , ((0, 0x1008ff11), lowerVolume 3 >> return ())
   , ((0, 0x1008ff13), raiseVolume 3 >> return ())
   , ((0, 0x1008ff12), toggleMute    >> return ())
@@ -64,14 +64,14 @@ main :: IO ()
 main = do
   h <- spawnPipe "~/.cabal/bin/xmobar"
   _ <- spawnPipe "~/dotfiles/bin/init.sh"
-  xmonad $ docks defaultConfig
+  xmonad $ docks def
         { modMask = mod4Mask
         , borderWidth = 4
         , focusedBorderColor = "#A61D00"
         , XMonad.focusFollowsMouse = False
         , terminal = "gnome-terminal"
-        , logHook = dynamicLogWithPP $ defaultPP { ppOutput = hPutStrLn h }
-        , manageHook = manageHook defaultConfig
+        , logHook = dynamicLogWithPP $ DynamicLog.def { ppOutput = hPutStrLn h }
+        , manageHook = manageHook def
         , layoutHook = avoidStruts $ smartBorders $ myLayout
-        , handleEventHook = fullscreenEventHook
+        -- , handleEventHook = ewmhFullscreen
         } `additionalKeys` myKeys
