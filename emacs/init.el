@@ -609,6 +609,7 @@ static char *gnus-pointer[] = {
  '(vterm-always-compile-module t)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
+ '(warning-suppress-types '((comp) (comp) (comp)))
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
  '(world-clock-list
