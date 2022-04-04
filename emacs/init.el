@@ -546,6 +546,7 @@ static char *gnus-pointer[] = {
    '((buffer-file-coding-system . utf-8-unix)
      (TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
+ '(scala-indent:default-run-on-strategy 0)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
