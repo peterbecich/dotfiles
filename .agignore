@@ -14,3 +14,5 @@
 /.spago
 
 node_modules
+
+materialized

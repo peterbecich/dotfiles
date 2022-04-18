@@ -38,6 +38,9 @@ export PATH
 
 export MINIKUBE_HOME=/var/lib/docker/minikube
 
+export TERM=xterm-color
+set +e
+
 autoload -Uz compinit promptinit
 compinit
 promptinit
