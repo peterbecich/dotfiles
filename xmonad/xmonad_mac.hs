@@ -20,10 +20,12 @@ import System.IO
 
 main :: IO ()
 main = do
-  h <- spawnPipe "~/.local/bin/xmobar"
+  h <- spawnPipe "~/.cabal/bin/xmobar"
   --_ <- spawnPipe "setxkbmap -option ctrl:nocaps"
-  _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
-  _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
+  -- _ <- spawnPipe "xrandr --output DP-2 --brightness 0.9"
+  -- _ <- spawnPipe "sleep 2; feh --bg-fill --randomize  ~/Pictures/wallpapers/*"
+  _ <- spawnPipe "xrandr --setprovideroutputsource modesetting NVIDIA-0"
+  _ <- spawnPipe "xrandr --auto"
   _ <- spawnPipe "/usr/bin/pkill stalonetray"
   _ <- spawnPipe "xscreensaver -no-splash &"
   _ <- spawnPipe "sleep 1; /usr/bin/stalonetray &"
