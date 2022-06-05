@@ -496,7 +496,7 @@ static char *gnus-pointer[] = {
      (eyebrowse-mode
       (:eval
        (eyebrowse-mode-line-indicator)))
-     mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-auto-compile mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+     mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
  '(network-security-level 'high)
@@ -610,7 +610,7 @@ static char *gnus-pointer[] = {
  '(vterm-always-compile-module t)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
- '(warning-suppress-types '((comp) (comp) (comp)))
+ '(warning-suppress-types '((frameset) (frameset) (comp) (comp) (comp)))
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark newline-mark))
  '(world-clock-list
@@ -785,3 +785,7 @@ static char *gnus-pointer[] = {
 ;; (setq mode-require-final-newline nil)
 
 (add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
+
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
