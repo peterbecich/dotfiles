@@ -1,4 +1,8 @@
+# [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
+
 export ZSH="$HOME/.oh-my-zsh"
+export MOZ_ENABLE_WAYLAND=1
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -6,6 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 ZSH_THEME="gnzh"
+# ZSH_THEME="simple"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
@@ -66,6 +71,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 EDITOR=emacs
+KUBE_EDITOR=emacs
+
 
 # export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 # Aliases
@@ -87,6 +94,12 @@ plugins=(git)
 export N_PREFIX=~/.n
 
 path=($N_PREFIX/bin $path)
+
+path=(~/.npm-global/bin $path)
+
+path=(~/.local/bin $path)
+
+path=(~/bin $path)
 
 path=(/opt/swift/usr/bin $path)
 
@@ -118,3 +131,11 @@ vterm_printf(){
 }
 
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
+
+export KEYCLOAK_SOURCE=~/libraries/keycloak/
+
+
+
+source <(kubectl completion zsh)
+
+eval $(minikube -p minikube docker-env)

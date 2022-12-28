@@ -1,6 +1,14 @@
 (setq comp-deferred-compilation t)
+;; (setq shell-prompt-pattern '"^[^#$%>\n]*~?[#$%>] *")
+
+;; (setq tramp-shell-prompt-pattern       "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
+;; (setq tramp-shell-prompt-pattern  "[-a-z0-9]+{[a-z0-9]+}[0-9]+: *")
 
 (require 'package) ;; You might already have this line
+
+(require 'treemacs-extensions)
+
 ;; (require 'tls)
 (setq gnutls-trustfiles
   (quote
@@ -212,6 +220,8 @@
 (use-package yaml-mode :ensure t)
 (use-package ztree :ensure t)
 (use-package rust-mode :ensure t)
+(use-package envrc :ensure t)
+(use-package direnv :ensure t :config (direnv-mode))
 
 (require 'magit)
 
@@ -369,6 +379,7 @@
  '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
+ '(envrc-global-mode t)
  '(eshell-buffer-maximum-lines 4096)
  '(explicit-shell-file-name "zsh")
  '(eyebrowse-keymap-prefix "")
@@ -473,6 +484,7 @@ static char *gnus-pointer[] = {
  '(lsp-lens-enable nil)
  '(lsp-modeline-workspace-status-enable t)
  '(lsp-restart 'ignore)
+ '(lsp-sqls-server "~/go/bin/sqls")
  '(lsp-ui-doc-enable nil)
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-imenu-enable t)
@@ -511,7 +523,7 @@ static char *gnus-pointer[] = {
       (:foreground "gray50"))))
  '(package-native-compile t)
  '(package-selected-packages
-   '(osm rust-mode xterm-color lsp-metals ztree editorconfig swift-mode lsp-java kubernetes kubernetes-tramp format-all vdiff forge ws-butler websocket vue-mode vue-html-mode symon shm shakespeare-mode restclient rainbow-delimiters purescript-mode puppet-mode paradox multi-web-mode irony-eldoc flycheck-rtags exec-path-from-shell eglot add-node-modules-path darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode highlight-thing hindent hlint-refactor magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
+   '(cmake-mode envrc direnv tramp osm rust-mode xterm-color lsp-metals ztree editorconfig swift-mode lsp-java kubernetes kubernetes-tramp format-all vdiff forge ws-butler websocket vue-mode vue-html-mode symon shm shakespeare-mode restclient rainbow-delimiters purescript-mode puppet-mode paradox multi-web-mode irony-eldoc flycheck-rtags exec-path-from-shell eglot add-node-modules-path darktooth-theme gruvbox-theme moe-theme organic-green-theme vterm counsel-world-clock avy-menu swiper counsel counsel-projectile ivy magit-todos protobuf-mode scala-mode diminish fsharp-mode magit-lfs dhall-mode snakemake-mode julia-repl lsp-julia eyebrowse reveal-in-folder uuidgen mustache-mode nix-mode dante lsp-treemacs company-lsp strace-mode vagrant diff-hl visual-fill-column vagrant-tramp groovy-mode jtags gcmh repl-toggle ace-popup-menu font-lock-studio flycheck-gradle gradle-mode logview git-commit kubel dired-filter dired-git-info diredfl disk-usage k8s-mode kubernetes-helm ace-window rich-minority flx flx-ido flycheck git-link git-timemachine haskell-mode highlight-thing hindent hlint-refactor magit magit-popup pdf-tools use-package ghub helpful flx-isearch flycheck-inline emms beacon ansible yaml-mode know-your-http-well all-the-icons iedit yaml-imenu reveal-in-osx-finder highlight-defined suggest racket-mode slime slime-company ac-rtags adoc-mode afternoon-theme ag alect-themes ample-theme anti-zenburn-theme apel apiwrap auto-compile auto-package-update auto-virtualenv auto-virtualenvwrapper bind-key birds-of-paradise-plus-theme boron-theme browse-at-remote buffer-move build-status butler cider circe clojure-mode color-identifiers-mode color-theme-actress color-theme-approximate color-theme-buffer-local color-theme-cobalt color-theme-complexity color-theme-dg color-theme-dpaste color-theme-eclipse color-theme-emacs-revert-theme color-theme-github color-theme-gruber-darker color-theme-heroku color-theme-ir-black color-theme-library color-theme-molokai color-theme-monokai color-theme-railscasts color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow color-theme-solarized color-theme-tango color-theme-tangotango color-theme-twilight color-theme-vim-insert-mode color-theme-wombat color-theme-zenburn colormaps company company-c-headers company-coq company-ghc company-irony company-irony-c-headers company-math company-rtags company-shell company-terraform csv-mode ctags ctags-update cyberpunk-theme dash dash-functional deferred docker docker-compose-mode docker-tramp dockerfile-mode edit-indirect elfeed elm-mode elpy emacsql emacsql-mysql emacsql-psql emacsql-sqlite emojify ereader espresso-theme ess ess-R-data-view ess-R-object-popup fill-column-indicator flycheck-haskell flycheck-irony flycheck-ocaml flycheck-purescript flycheck-scala-sbt fold-this geiser gist git glsl-mode go-autocomplete go-mode golden-ratio hamlet-mode hide-comnt highlight-indent-guides hl-todo hlint-refactor-mode idris-mode indium info-colors info-colors ipython julia-mode keychain-environment latex-extra latex-math-preview latex-preview-pane let-alist lsp-haskell lsp-mode lsp-typescript lsp-ui lsp-vue magit-gh-pulls magit-gh-pulls maker-mode markdown-mode mmm-mode monokai-theme multi multi-line nlinum-mode noflet nov oauth2 org org-caldav org-pomodoro orgit pcre2el persistent-scratch pg popwin projectile proof-general redprl restart-emacs rtags sage-shell-mode sbt-mode seq slack smartparens sml-mode solarized-theme spinner sublime-themes system-packages twittering-mode typescript-mode undo-tree wakatime-mode web-mode))
  '(paradox-execute-asynchronously nil)
  '(paradox-github-token t)
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
@@ -543,7 +555,8 @@ static char *gnus-pointer[] = {
    '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
  '(rm-whitelist nil)
  '(safe-local-variable-values
-   '((buffer-file-coding-system . utf-8-unix)
+   '((eval add-hook 'before-save-hook 'time-stamp)
+     (buffer-file-coding-system . utf-8-unix)
      (TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
  '(scala-indent:default-run-on-strategy 0)
@@ -577,10 +590,6 @@ static char *gnus-pointer[] = {
  '(tags-revert-without-query t)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
- '(tramp-copy-size-limit 5240 nil (tramp))
- '(tramp-default-method "scp" nil (tramp))
- '(tramp-persistency-file-name "/Users/peter/.emacs.d/tramp" nil (tramp))
- '(tramp-verbose 2 nil (tramp))
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
  '(typescript-indent-level 2)
@@ -608,6 +617,7 @@ static char *gnus-pointer[] = {
  '(vdiff-diff-algorithm 'git-diff)
  '(visible-bell nil)
  '(vterm-always-compile-module t)
+ '(vterm-min-window-width 60)
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
  '(warning-suppress-types '((frameset) (frameset) (comp) (comp) (comp)))
@@ -789,3 +799,9 @@ static char *gnus-pointer[] = {
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+;; (define-key key-translation-map (kbd "<home>") #'event-apply-super-modifier)
+
+;; (setq shell-prompt-pattern '"^[^#$%>\n]*~?[#$%>] *")
+
+;; (setq ns-command-modifier nil)
