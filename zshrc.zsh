@@ -101,9 +101,11 @@ path=(~/.local/bin $path)
 
 path=(~/bin $path)
 
-path=(/opt/swift/usr/bin $path)
+path=(~/.gem/ruby/2.7.0/bin $path)
 
-path=(/usr/local/go/bin $path)
+# path=(/opt/swift/usr/bin $path)
+
+# path=(/usr/local/go/bin $path)
 
 [ -f "/home/peterbecich/.ghcup/env" ] && source "/home/peterbecich/.ghcup/env" # ghcup-env
 
