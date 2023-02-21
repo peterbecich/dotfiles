@@ -101,7 +101,7 @@ path=(~/.local/bin $path)
 
 path=(~/bin $path)
 
-path=(~/.gem/ruby/2.7.0/bin $path)
+path=(~/.gem/ruby/3.2.0/bin $path)
 
 # path=(/opt/swift/usr/bin $path)
 
@@ -145,3 +145,5 @@ eval $(minikube -p minikube docker-env)
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
+
+eval "$(rbenv init -)"
