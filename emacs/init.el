@@ -394,15 +394,10 @@
  '(fci-rule-color "#222222")
  '(fill-column 120)
  '(fringe-mode '(nil . 0) nil (fringe))
- '(git-link-remote-alist
-   '(("git.sr.ht" git-link-sourcehut) ("codeberg.org" git-link-codeberg) ("github" git-link-github)
-     ("bitbucket" git-link-bitbucket) ("gitorious" git-link-gitorious) ("gitlab" git-link-gitlab)
-     ("git\\.\\(sv\\|savannah\\)\\.gnu\\.org" git-link-savannah) ("googlesource.com" git-link-googlesource)
-     ("visualstudio\\|azure" git-link-azure) ("sourcegraph" git-link-sourcegraph)
-     ("\\(amazonaws\\|amazon\\)\\.com" git-link-codecommit) ("gerrit.ikarem.io" git-link-googlesource)))
  '(git-link-use-commit nil)
  '(global-auto-revert-mode t)
- '(global-company-mode nil)
+ '(global-company-mode t)
+ '(global-completion-preview-mode t)
  '(global-diff-hl-mode t)
  '(global-display-line-numbers-mode t)
  '(global-git-commit-mode t)
@@ -416,6 +411,7 @@
    '(image :type xpm :ascent center :data
            "/* XPM */\12static char *gnus-pointer[] = {\12/* width height num_colors chars_per_pixel */\12\"    18    13        2            1\",\12/* colors */\12\". c #1fb3b3\",\12\"# c None s None\",\12/* pixels */\12\"##################\",\12\"######..##..######\",\12\"#####........#####\",\12\"#.##.##..##...####\",\12\"#...####.###...##.\",\12\"#..###.######.....\",\12\"#####.########...#\",\12\"###########.######\",\12\"####.###.#..######\",\12\"######..###.######\",\12\"###....####.######\",\12\"###..######.######\",\12\"###########.######\" };") t)
  '(gptel-default-mode 'org-mode)
+ '(gptel-org-branching-context t)
  '(gradle-gradlew-executable "./gradlew")
  '(gradle-mode nil)
  '(gradle-use-gradlew t)
@@ -482,16 +478,10 @@
  '(org-format-latex-options
    '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale
                  1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
- '(org-hide-emphasis-markers t)
+ '(org-hide-emphasis-markers nil)
+ '(org-imenu-depth 6)
  '(package-native-compile t)
- '(package-selected-packages
-   '(ag alect-themes ansible auctex auto-compile auto-package-update auto-virtualenv browse-at-remote company-terraform
-        counsel csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker docker-compose-mode
-        dockerfile-mode dotenv-mode emacsql espresso-theme exec-path-from-shell eyebrowse feature-mode
-        fill-column-indicator flycheck flycheck-gradle format-all gcmh git-link git-timemachine go-mode gptel
-        gruvbox-theme haskell-mode helpful hlint-refactor lsp-ivy lsp-metals lsp-ui magit mustache-mode
-        persistent-scratch projectile protobuf-mode restart-emacs restclient rg rust-mode smartparens smarty-mode tramp
-        typescript-mode vdiff vterm web-mode websocket ws-butler xterm-color yasnippet))
+ '(package-selected-packages nil)
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
@@ -829,7 +819,31 @@
 (defun my/gptel-org-latex-preview (beg end)
   "Preview LaTeX fragments after GPTel response in org-mode."
   (when (derived-mode-p 'org-mode)
-    (org-latex-preview (list beg end))))  ;; 16 = preview whole buffer
+    (org-latex-preview '16)))  ;; 16 = preview whole buffer
+    ;;(org-latex-preview (list 1 beg end))))  ;; 16 = preview whole buffer
 
 (add-hook 'gptel-post-response-functions #'my/gptel-org-latex-preview)
 (setq org-preview-latex-default-process 'dvisvgm) ;No blur when scaling
+
+
+
+;; (setq org-preview-latex-default-process 'convert) ;No blur when scaling
+;; (setq org-latex-create-formula-image-program 'imagemagick)
+
+;; (setq org-latex-create-formula-image-program 'imagemagick)
+
+;; (add-to-list 'org-preview-latex-process-alist
+;; 	     '(tectonic :programs ("tectonic" "magick")
+;; 			:description "pdf > png"
+;; 			:message "you need install the programs: tectonic and imagemagick."
+;; 			:image-input-type "pdf"
+;; 			:image-output-type "png"
+;; 			:image-size-adjust (1.0 . 1.0)
+;; 			:latex-compiler
+;; 			("tectonic -Z shell-escape-cwd=%o --outfmt pdf --outdir %o %f")
+;; 			:image-converter
+;; 			("magick -density %D -trim -antialias %f -quality 300 %O")))
+;; (setq org-preview-latex-default-process 'tectonic)
+
+(setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
+(setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
