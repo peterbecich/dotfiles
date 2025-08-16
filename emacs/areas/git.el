@@ -26,9 +26,18 @@
 ;; (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 ;; (add-hook 'dired-after-readin-hook 'dired-git-info-auto-enable)
-(setq dgi-auto-hide-details-p t)
+;; (setq dgi-auto-hide-details-p t)
 
 
 ;; (setq vc-handled-backends nil)
 
 ;; (remove-hook 'server-switch-hook 'magit-commit-diff)
+
+
+;; (defun run-projectile-invalidate-cache (&rest _args)
+;;   ;; We ignore the args to `magit-checkout'.
+;;   (projectile-invalidate-cache nil))
+;; (advice-add 'magit-checkout
+;;             :after #'run-projectile-invalidate-cache)
+;; (advice-add 'magit-branch-and-checkout ; This is `b c'.
+;;             :after #'run-projectile-invalidate-cache)
