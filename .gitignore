@@ -44,7 +44,7 @@ flycheck_*.el
 /server/
 
 # projectiles files
-.projectile
+# .projectile
 
 init_private.el
 init_private_mac.el
