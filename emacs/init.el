@@ -1,4 +1,24 @@
-(require 'package) ;; You might already have this line
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; (straight-use-package 'use-package)
+
+
+;; (require 'package) ;; You might already have this line
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
@@ -26,50 +46,34 @@
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
 
-(setq use-package-always-ensure t)
 
 (if (eq system-type 'darwin)
     (load "~/dotfiles/emacs/init_mac.el")
     )
 
 
-(use-package lsp-mode
-;;   :hook (
-;;          (c++-mode . lsp-deferred)
-;;          (c-mode . lsp-deferred)
-;;          (css-mode . lsp-deferred)
-;;          (csharp-mode . lsp-deferred)
-;;          (dhall-mode . lsp-deferred)
-;;          (dockerfile-mode . lsp-deferred)
-;;          (haskell-mode . lsp-deferred)
-;;          (java-mode . lsp-deferred)
-;;          (js-mode . lsp-deferred)
-;;          (json-mode . lsp-deferred)
-;;          (latex-mode . lsp-deferred)
-;;          (nix-mode . lsp-deferred)
-;;          (purescript-mode . lsp-deferred)
-;;          (python-mode . lsp-deferred)
-;;          (sh-mode . lsp-deferred)
-;;          (scala-mode . lsp-deferred)
-;;          (typescript-mode . lsp-deferred)
-;;          (rust-mode . lsp-deferred)
-;;          ;; (ruby-mode . lsp-deferred)
-;;          (terraform-mode . lsp-deferred)
-;;          ;; (groovy-mode . lsp-deferred)
-;;          ;; (yaml-mode . lsp-deferred)
-;;          )
-  :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  ;; (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.500)
-  ;;       (setq lsp-log-io nil)
-  ;; (setq lsp-completion-provider :capf)
-  ;; (setq lsp-prefer-flymake nil)
+(use-package lsp-bridge
+  :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+            :files (:defaults "*.el" "*.py" "*.rb" ".scala" "acm" "core" "langserver" "multiserver" "resources")
+            :build (:not compile))
   )
 
+;; (use-package lsp-mode
+;;   :config
+;;   ;; Uncomment following section if you would like to tune lsp-mode performance according to
+;;   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+;;   ;; (setq gc-cons-threshold 100000000) ;; 100mb
+;;   (setq read-process-output-max (* 1024 1024)) ;; 1mb
+;;   (setq lsp-idle-delay 0.500)
+;;   ;;       (setq lsp-log-io nil)
+;;   ;; (setq lsp-completion-provider :capf)
+;;   ;; (setq lsp-prefer-flymake nil)
+;;   )
+
 (use-package lsp-ui :commands lsp-ui-mode)
+
+
+(use-package projectile :ensure t)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
@@ -208,10 +212,14 @@
 
 (use-package eglot :ensure t)
 
+(use-package gcmh :ensure t)
+
 (use-package tramp :ensure t)
 
 
 (use-package gptel :ensure t)
+
+(use-package exec-path-from-shell :ensure t)
 
 ;; (use-package tramp :ensure t)
 ;; (use-package envrc :ensure t)
@@ -442,6 +450,7 @@
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
  '(lsp-auto-select-workspace nil)
+ '(lsp-bridge-remote-start-automatically t)
  '(lsp-disabled-clients '(vue-semantic-server-tramp))
  '(lsp-enable-file-watchers nil)
  '(lsp-keep-workspace-alive nil)
@@ -481,7 +490,15 @@
  '(org-hide-emphasis-markers nil)
  '(org-imenu-depth 6)
  '(package-native-compile t)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(ag alect-themes ansible auto-compile auto-package-update auto-virtualenv browse-at-remote cdlatex company-terraform
+        counsel csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker docker-compose-mode
+        dockerfile-mode dotenv-mode emacsql espresso-theme exec-path-from-shell eyebrowse feature-mode
+        fill-column-indicator flycheck-gradle format-all gcmh git-link git-timemachine go-mode gptel gruvbox-theme
+        haskell-mode helpful hlint-refactor latex-extra latex-math-preview lsp-ivy lsp-metals lsp-ui magit mustache-mode
+        org-appear org-side-tree org-xlatex persistent-scratch preview-auto projectile protobuf-mode restart-emacs
+        restclient rg rust-mode smartparens smarty-mode tramp typescript-mode vdiff vterm web-mode websocket ws-butler
+        xterm-color yasnippet))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
@@ -794,7 +811,7 @@
 ;; don't show git variables in magit branch
 (setq magit-branch-direct-configure nil)
 ;; don't automatically refresh the status buffer after running a git command
-(setq magit-refresh-status-buffer nil)
+;; (setq magit-refresh-status-buffer nil)
 
 
 (gptel-make-gh-copilot "Copilot")
