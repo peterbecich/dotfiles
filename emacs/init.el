@@ -32,10 +32,10 @@
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 
-(setq vc-ignore-dir-regexp
-      (format "\\(%s\\)\\|\\(%s\\)"
-              vc-ignore-dir-regexp
-              tramp-file-name-regexp))
+;; (setq vc-ignore-dir-regexp
+;;       (format "\\(%s\\)\\|\\(%s\\)"
+;;               vc-ignore-dir-regexp
+;;               tramp-file-name-regexp))
 
 
 (setq load-prefer-newer t)
@@ -52,23 +52,26 @@
     )
 
 
-(use-package lsp-bridge
-  :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-            :files (:defaults "*.el" "*.py" "*.rb" ".scala" "acm" "core" "langserver" "multiserver" "resources")
-            :build (:not compile))
-  )
-
-;; (use-package lsp-mode
-;;   :config
-;;   ;; Uncomment following section if you would like to tune lsp-mode performance according to
-;;   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-;;   ;; (setq gc-cons-threshold 100000000) ;; 100mb
-;;   (setq read-process-output-max (* 1024 1024)) ;; 1mb
-;;   (setq lsp-idle-delay 0.500)
-;;   ;;       (setq lsp-log-io nil)
-;;   ;; (setq lsp-completion-provider :capf)
-;;   ;; (setq lsp-prefer-flymake nil)
+;; (use-package lsp-bridge
+;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
+;;             :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+;;             :build (:not compile))
 ;;   )
+
+;; (global-lsp-bridge-mode)
+
+(use-package lsp-mode
+  :ensure t
+  :config
+  ;; Uncomment following section if you would like to tune lsp-mode performance according to
+  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+  ;; (setq gc-cons-threshold 100000000) ;; 100mb
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.500)
+  ;;       (setq lsp-log-io nil)
+  ;; (setq lsp-completion-provider :capf)
+  ;; (setq lsp-prefer-flymake nil)
+  )
 
 (use-package lsp-ui :commands lsp-ui-mode)
 
@@ -217,6 +220,8 @@
 (use-package tramp :ensure t)
 
 
+(use-package crontab-mode :ensure t)
+
 (use-package gptel :ensure t)
 
 (use-package exec-path-from-shell :ensure t)
@@ -305,6 +310,7 @@
    ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
+ '(auto-revert-avoid-polling t)
  '(auto-revert-check-vc-info t)
  '(auto-revert-remote-files t)
  '(battery-mode-line-limit 99)
@@ -451,6 +457,7 @@
  '(lsp-auto-guess-root t)
  '(lsp-auto-select-workspace nil)
  '(lsp-bridge-remote-start-automatically t)
+ '(lsp-bridge-user-ssh-agent t)
  '(lsp-disabled-clients '(vue-semantic-server-tramp))
  '(lsp-enable-file-watchers nil)
  '(lsp-keep-workspace-alive nil)
@@ -547,11 +554,17 @@
  '(split-width-threshold 120)
  '(symon-mode nil)
  '(symon-monitors
-   '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor symon-darwin-battery-monitor))
+   '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor
+                                 symon-darwin-battery-monitor))
  '(symon-sparkline-type 'boxed)
  '(tags-revert-without-query t)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
+ '(tramp-remote-path
+   '("/home/becich/npm-global/bin/" "/home/becich/.gem/bin/" "/usr/local/bin/" "/home/becich/bin/"
+     "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
+     "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin"
+     "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin" "/opt/homebrew/sbin"))
  '(tramp-use-connection-share t)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
@@ -789,16 +802,16 @@
       tramp-use-scp-direct-remote-copying t
       remote-file-name-inhibit-auto-save-visited t)
 
-(setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
-      tramp-verbose 2)
+;; (setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
+;;       tramp-verbose 2)
 
 (connection-local-set-profile-variables
  'remote-direct-async-process
  '((tramp-direct-async-process . t)))
 
-(connection-local-set-profiles
- '(:application tramp :protocol "scp")
- 'remote-direct-async-process)
+;; (connection-local-set-profiles
+;;  '(:application tramp :protocol "scp")
+;;  'remote-direct-async-process)
 
 (setq magit-tramp-pipe-stty-settings 'pty)
 
