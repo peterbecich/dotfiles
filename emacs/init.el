@@ -1,4 +1,20 @@
 
+(setq network-security-level 'high)
+
+(defvar my/emacs-config-directory
+  (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
+  "Directory containing this Emacs configuration.")
+
+(defun my/config-file (path)
+  "Return PATH expanded inside `my/emacs-config-directory'."
+  (expand-file-name path my/emacs-config-directory))
+
+(defun my/load-config-file (path &optional noerror)
+  "Load PATH from `my/emacs-config-directory'."
+  (load (my/config-file path) noerror 'nomessage))
+
+(setq custom-file (my/config-file "custom.el"))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -15,15 +31,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; (straight-use-package 'use-package)
-
-
 ;; (require 'package) ;; You might already have this line
-
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-;; (setq network-security-level 'high)
+(require 'package)
 
 ;; (setq tls-checktrust t)
 (add-to-list 'package-archives
@@ -31,6 +40,18 @@
 ;; (add-to-list 'package-archives
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+(unless (require 'use-package nil 'noerror)
+  (straight-use-package 'use-package)
+  (require 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
 
 ;; (setq vc-ignore-dir-regexp
 ;;       (format "\\(%s\\)\\|\\(%s\\)"
@@ -47,9 +68,8 @@
 (auto-compile-on-save-mode)
 
 
-(if (eq system-type 'darwin)
-    (load "~/dotfiles/emacs/init_mac.el")
-    )
+(when (eq system-type 'darwin)
+  (load "~/dotfiles/emacs/init_mac.el"))
 
 
 ;; (use-package lsp-bridge
@@ -102,6 +122,7 @@
 ;;   :config (setq lsp-completion-provider :capf)
 ;;   :ensure t
 ;;   )
+(use-package company :ensure t :defer t)
 (use-package company-terraform :ensure t)
 (use-package counsel :ensure t)
 ;; (use-package counsel-projectile :ensure t)
@@ -124,7 +145,6 @@
 ;; (use-package emojify :ensure t)
 (use-package espresso-theme :ensure t)
 ;; (use-package ess :ensure t)
-(use-package exec-path-from-shell :ensure t)
 (use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
 (use-package flycheck :ensure t)
@@ -132,6 +152,10 @@
 (use-package format-all :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
+(use-package git-gutter
+  :ensure t
+  :defer t
+  :commands git-gutter:revert-hunk)
 ;;(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
 (use-package haskell-mode :ensure t)
 (use-package helpful :ensure t)
@@ -146,6 +170,9 @@
   :custom
   (lsp-metals-enable-semantic-highlighting t)
   )
+(use-package logview
+  :ensure t
+  :mode ("\\.out\\'" . logview-mode))
 ;; (use-package lsp-metals
 ;;   :ensure t
 ;;   :custom
@@ -206,6 +233,10 @@
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
 (use-package xterm-color :ensure t)
+(use-package adoc-mode
+  :ensure t
+  :mode (("\\.adoc\\'" . adoc-mode)
+         ("\\.asciidoc\\'" . adoc-mode)))
 ;; (use-package yaml-imenu :ensure t)
 (use-package yaml-mode :ensure t)
 (use-package rust-mode :ensure t)
@@ -223,8 +254,6 @@
 (use-package crontab-mode :ensure t)
 
 (use-package gptel :ensure t)
-
-(use-package exec-path-from-shell :ensure t)
 
 ;; (use-package tramp :ensure t)
 ;; (use-package envrc :ensure t)
@@ -332,7 +361,7 @@
  '(counsel-projectile-mode nil)
  '(cursor-type t)
  '(custom-enabled-themes '(wombat))
- '(custom-file "~/dotfiles/emacs/init.el")
+ '(custom-file "~/dotfiles/emacs/custom.el")
  '(custom-safe-themes
    '("c23446c6dd105f7eda80655f500e8554d701c7729867a1ad578c211b47a25482"
      "d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87"
@@ -459,7 +488,7 @@
  '(lsp-disabled-clients '(rubocop-ls-tramp vue-semantic-server-tramp))
  '(lsp-enable-file-watchers nil)
  '(lsp-keep-workspace-alive nil)
- '(lsp-log-io t)
+ '(lsp-log-io nil)
  '(lsp-metals-ammonite-jvm-properties ["-Xmx12g" "-Xms1g"])
  '(lsp-metals-bloop-sbt-already-installed t)
  '(lsp-metals-enable-semantic-highlighting t)
@@ -498,14 +527,14 @@
  '(org-imenu-depth 6)
  '(package-native-compile t)
  '(package-selected-packages
-   '(ag alect-themes ansible auto-compile auto-package-update auto-virtualenv browse-at-remote cdlatex company-terraform
-        counsel csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker docker-compose-mode
-        dockerfile-mode dotenv-mode emacsql espresso-theme exec-path-from-shell eyebrowse feature-mode
-        fill-column-indicator flycheck-gradle format-all gcmh git-link git-timemachine go-mode gptel gruvbox-theme
-        haskell-mode helpful hlint-refactor latex-extra latex-math-preview lsp-ivy lsp-metals lsp-ui magit mustache-mode
-        org-appear org-side-tree org-xlatex persistent-scratch preview-auto projectile protobuf-mode restart-emacs
-        restclient rg rust-mode smartparens smarty-mode tramp typescript-mode vdiff vterm web-mode websocket ws-butler
-        xterm-color yasnippet))
+   '(adoc-mode ag alect-themes ansible auto-compile auto-package-update auto-virtualenv browse-at-remote cdlatex company
+        company-terraform counsel csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker
+        docker-compose-mode dockerfile-mode dotenv-mode emacsql espresso-theme exec-path-from-shell eyebrowse feature-mode
+        fill-column-indicator flycheck-gradle format-all gcmh git-gutter git-link git-timemachine go-mode gptel gruvbox-theme
+        haskell-mode helpful hlint-refactor latex-extra latex-math-preview logview lsp-ivy lsp-metals lsp-ui magit
+        mustache-mode org-appear org-side-tree org-xlatex persistent-scratch preview-auto projectile protobuf-mode
+        restart-emacs restclient rg rust-mode smartparens smarty-mode tramp typescript-mode vdiff vterm web-mode websocket
+        ws-butler xterm-color yasnippet))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
@@ -604,9 +633,6 @@
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
 (setq-default line-spacing 0)
 
 (setq docker-arguments nil)
@@ -637,8 +663,6 @@
 (global-set-key (kbd "<kp-8>") 'beginning-of-defun)
 
 (persistent-scratch-setup-default)
-
-(add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
 
 ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 ;; (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
@@ -707,8 +731,6 @@
 
 ;; (setq x-wait-for-event-timeout nil)
 
-(add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
-
 (eyebrowse-mode t)
 (eyebrowse-setup-opinionated-keys)
 
@@ -721,8 +743,6 @@
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
  '(eyebrowse-mode-line-active ((t (:inverse-video t :weight bold)))))
-
-(add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
 
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
@@ -781,7 +801,12 @@
 
 (setq lsp-semgrep-languages nil)
 
-(advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
+(defun my/lsp-clear-session-folders (&rest _args)
+  "Clear remembered LSP workspace folders before starting LSP."
+  (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
+
+(advice-remove 'lsp #'my/lsp-clear-session-folders)
+(advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
 
 (gcmh-mode 1)
@@ -822,8 +847,6 @@
 ;;  '(:application tramp :protocol "scp")
 ;;  'remote-direct-async-process)
 
-(setq magit-tramp-pipe-stty-settings 'pty)
-
 (with-eval-after-load 'tramp
   (with-eval-after-load 'compile
     (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options)))
@@ -836,8 +859,6 @@
 ;; (setq magit-refresh-status-buffer nil)
 
 
-(gptel-make-gh-copilot "Copilot")
-;; OPTIONAL configuration
 (setq gptel-backend (gptel-make-gh-copilot "Copilot"))
 
 ;; (let ((major-mode 'org-mode))
@@ -854,10 +875,10 @@
 ;; (add-hook 'gptel-post-response-functions ('org-latex-preview ()))
 
 
-(defun my/gptel-org-latex-preview (beg end)
+(defun my/gptel-org-latex-preview (_beg _end)
   "Preview LaTeX fragments after GPTel response in org-mode."
   (when (derived-mode-p 'org-mode)
-    (org-latex-preview '16)))  ;; 16 = preview whole buffer
+    (org-latex-preview 16)))  ;; 16 = preview whole buffer
     ;;(org-latex-preview (list 1 beg end))))  ;; 16 = preview whole buffer
 
 (add-hook 'gptel-post-response-functions #'my/gptel-org-latex-preview)
@@ -892,3 +913,6 @@
 (setq tramp-backup-directory-alist nil)
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 (customize-set-variable 'tramp-use-connection-share nil)
+
+(when (file-exists-p custom-file)
+  (load custom-file nil 'nomessage))

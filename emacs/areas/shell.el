@@ -1,15 +1,20 @@
 (defun my/truncate-eshell-buffers ()
-  "Truncates all eshell buffers"
+  "Truncate all eshell buffers."
   (interactive)
-  (save-current-buffer
-    (dolist (buffer (buffer-list t))
-      (set-buffer buffer)
+  (dolist (buffer (buffer-list t))
+    (with-current-buffer buffer
       (when (eq major-mode 'eshell-mode)
         (eshell-truncate-buffer)))))
 
 ;; After being idle for 5 seconds, truncate all the eshell-buffers if
 ;; needed. If this needs to be canceled, you can run `(cancel-timer
 ;; my/eshell-truncate-timer)'
+(defvar my/eshell-truncate-timer nil
+  "Idle timer used to truncate eshell buffers.")
+
+(when (timerp my/eshell-truncate-timer)
+  (cancel-timer my/eshell-truncate-timer))
+
 (setq my/eshell-truncate-timer
       (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
 
@@ -50,15 +55,14 @@
 
 (with-eval-after-load 'esh-mode
   (add-hook 'eshell-mode-hook
-          (lambda () (progn
-            (setq xterm-color-preserve-properties t)
-            (setenv "TERM" "xterm-256color"))))
+            (lambda ()
+              (setq xterm-color-preserve-properties t)
+              (setenv "TERM" "xterm-256color")))
 
   (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
 
   (setq eshell-output-filter-functions
-  (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
-)
+        (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
 
 
 
