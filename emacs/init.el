@@ -311,8 +311,6 @@
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
  '(auto-revert-avoid-polling t)
- '(auto-revert-check-vc-info t)
- '(auto-revert-remote-files t)
  '(battery-mode-line-limit 99)
  '(bidi-paragraph-direction 'left-to-right)
  '(blink-cursor-blinks 0)
@@ -382,10 +380,10 @@
  '(diredfl-global-mode t nil (diredfl))
  '(display-battery-mode t)
  '(display-line-numbers-grow-only t)
- '(display-time-day-and-date nil)
+ '(display-time-day-and-date t)
  '(display-time-default-load-average nil)
  '(display-time-format nil)
- '(display-time-mode nil)
+ '(display-time-mode t)
  '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key '("Tag"))
@@ -397,6 +395,7 @@
  '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
+ '(enable-remote-dir-locals t)
  '(envrc-global-mode nil)
  '(eshell-buffer-maximum-lines 4096)
  '(explicit-shell-file-name "zsh")
@@ -432,6 +431,7 @@
  '(grep-command "grep  -h --null -e ")
  '(grep-highlight-matches 'auto)
  '(grep-scroll-output t)
+ '(groovy-highlight-assignments t)
  '(groovy-indent-offset 2)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
@@ -456,9 +456,7 @@
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
  '(lsp-auto-select-workspace nil)
- '(lsp-bridge-remote-start-automatically t)
- '(lsp-bridge-user-ssh-agent t)
- '(lsp-disabled-clients '(vue-semantic-server-tramp))
+ '(lsp-disabled-clients '(rubocop-ls-tramp vue-semantic-server-tramp))
  '(lsp-enable-file-watchers nil)
  '(lsp-keep-workspace-alive nil)
  '(lsp-log-io t)
@@ -468,6 +466,7 @@
  '(lsp-metals-install-scala-version "2.12")
  '(lsp-metals-show-inferred-type t)
  '(lsp-restart 'auto-restart)
+ '(lsp-rubocop-use-bundler nil)
  '(lsp-ruby-lsp-use-bundler nil)
  '(lsp-semgrep-metrics-enabled nil)
  '(magit-auto-revert-mode t)
@@ -488,6 +487,7 @@
    '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
      mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
      "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+ '(mouse-wheel-progressive-speed nil)
  '(network-security-level 'high)
  '(ns-antialias-text t)
  '(ns-confirm-quit t)
@@ -517,7 +517,6 @@
  '(projectile-tags-command "echo foo")
  '(recentf-auto-cleanup 300)
  '(recentf-keep '(recentf-keep-default-predicate file-remote-p))
- '(remote-file-name-access-timeout 10)
  '(rich-minority-mode t)
  '(ring-bell-function nil)
  '(rm-blacklist
@@ -560,12 +559,14 @@
  '(tags-revert-without-query t)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
+ '(tramp-default-method "ssh")
  '(tramp-remote-path
-   '("/home/becich/npm-global/bin/" "/home/becich/.gem/bin/" "/usr/local/bin/" "/home/becich/bin/"
-     "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin"
-     "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin"
-     "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin" "/opt/homebrew/sbin"))
- '(tramp-use-connection-share t)
+   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/npm-global/bin/" "/home/becich/.gem/bin/" "/usr/local/bin/"
+     "/home/becich/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin"
+     "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
+     "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin"
+     "/opt/homebrew/sbin"))
+ '(tramp-use-connection-share nil)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
  '(typescript-indent-level 2)
@@ -768,7 +769,7 @@
 (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
 
 
-(add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
 
 
 
@@ -798,9 +799,9 @@
 
 ;; (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
 
-(setq remote-file-name-inhibit-locks t
-      tramp-use-scp-direct-remote-copying t
-      remote-file-name-inhibit-auto-save-visited t)
+;; (setq remote-file-name-inhibit-locks t
+;;       tramp-use-scp-direct-remote-copying t
+;;       remote-file-name-inhibit-auto-save-visited t)
 
 ;; (setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
 ;;       tramp-verbose 2)
@@ -808,6 +809,14 @@
 (connection-local-set-profile-variables
  'remote-direct-async-process
  '((tramp-direct-async-process . t)))
+
+
+(connection-local-set-profiles
+ '(:application tramp :machine "remotehost")
+ 'remote-direct-async-process)
+
+
+(setq magit-tramp-pipe-stty-settings 'pty)
 
 ;; (connection-local-set-profiles
 ;;  '(:application tramp :protocol "scp")
@@ -829,8 +838,7 @@
 
 (gptel-make-gh-copilot "Copilot")
 ;; OPTIONAL configuration
-(setq gptel-model 'gpt-4.1 ;;'claude-3.7-sonnet
-      gptel-backend (gptel-make-gh-copilot "Copilot"))
+(setq gptel-backend (gptel-make-gh-copilot "Copilot"))
 
 ;; (let ((major-mode 'org-mode))
 ;;   (org-latex-preview))
@@ -877,3 +885,10 @@
 
 (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
 (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
+
+
+
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+(setq tramp-backup-directory-alist nil)
+(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
+(customize-set-variable 'tramp-use-connection-share nil)
