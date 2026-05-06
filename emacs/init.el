@@ -1,5 +1,6 @@
 
 (setq network-security-level 'high)
+(setq package-enable-at-startup nil)
 
 (defvar my/emacs-config-directory
   (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
@@ -15,23 +16,6 @@
 
 (setq custom-file (my/config-file "custom.el"))
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
-;; (require 'package) ;; You might already have this line
 (require 'package)
 
 ;; (setq tls-checktrust t)
@@ -41,8 +25,15 @@
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (unless (require 'use-package nil 'noerror)
-  (straight-use-package 'use-package)
+  (unless package--initialized
+    (package-initialize))
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
   (require 'use-package))
+
+(unless package--initialized
+  (package-initialize))
 
 (eval-when-compile
   (require 'use-package))
