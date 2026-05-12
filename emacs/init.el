@@ -44,12 +44,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-;; (setq vc-ignore-dir-regexp
-;;       (format "\\(%s\\)\\|\\(%s\\)"
-;;               vc-ignore-dir-regexp
-;;               tramp-file-name-regexp))
-
-
 (setq load-prefer-newer t)
 
 (use-package auto-compile :ensure t)
@@ -586,7 +580,7 @@
      "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
      "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin"
      "/opt/homebrew/sbin"))
- '(tramp-use-connection-share nil)
+ '(tramp-use-connection-share t)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
  '(typescript-indent-level 2)
@@ -813,14 +807,23 @@
 (setq lsp-copilot-enabled nil)
 
 
-;; (customize-set-variable 'tramp-use-ssh-controlmaster-options nil)
+;; TRAMP responsiveness: avoid extra remote probes, keep SSH sessions warm,
+;; and use out-of-band copy only after the inline path becomes expensive.
+(setq remote-file-name-inhibit-locks t
+      remote-file-name-inhibit-auto-save-visited t
+      tramp-use-connection-share t
+      tramp-use-scp-direct-remote-copying t
+      tramp-copy-size-limit (* 1024 1024) ;; 1MB
+      tramp-verbose 1)
 
-;; (setq remote-file-name-inhibit-locks t
-;;       tramp-use-scp-direct-remote-copying t
-;;       remote-file-name-inhibit-auto-save-visited t)
-
-;; (setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
-;;       tramp-verbose 2)
+;; (with-eval-after-load 'tramp
+;;   (with-eval-after-load 'vc
+;;     (unless (string-match-p (regexp-quote tramp-file-name-regexp)
+;;                             vc-ignore-dir-regexp)
+;;       (setq vc-ignore-dir-regexp
+;;             (format "\\(%s\\)\\|\\(%s\\)"
+;;                     vc-ignore-dir-regexp
+;;                     tramp-file-name-regexp)))))
 
 (connection-local-set-profile-variables
  'remote-direct-async-process
@@ -828,7 +831,7 @@
 
 
 (connection-local-set-profiles
- '(:application tramp :machine "remotehost")
+ '(:application tramp :protocol "ssh")
  'remote-direct-async-process)
 
 
@@ -903,7 +906,6 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
 (setq tramp-backup-directory-alist nil)
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
-(customize-set-variable 'tramp-use-connection-share nil)
 
 (when (file-exists-p custom-file)
   (load custom-file nil 'nomessage))
