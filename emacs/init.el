@@ -46,11 +46,34 @@
 
 (setq load-prefer-newer t)
 
-(use-package auto-compile :ensure t)
+;; Subprocess-heavy packages (LSP servers, shells, TRAMP, ripgrep, GPTel) are
+;; where Emacs gets most of its useful parallelism.
+(setenv "LSP_USE_PLISTS" "true")
+(setq lsp-use-plists t
+      read-process-output-max (* 4 1024 1024)
+      process-adaptive-read-buffering nil
+      async-shell-command-buffer 'new-buffer
+      async-shell-command-display-buffer nil
+      async-shell-command-width 200
+      auto-revert-remote-files nil
+      auto-revert-use-notify t)
+
+(use-package auto-compile
+  :ensure t
+  :custom
+  (auto-compile-native-compile t))
 
 (require 'auto-compile)
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
+
+(use-package async
+  :ensure t
+  :config
+  (require 'dired-async)
+  (require 'async-bytecomp)
+  (dired-async-mode 1)
+  (async-bytecomp-package-mode 1))
 
 
 (when (eq system-type 'darwin)
@@ -71,8 +94,9 @@
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
   ;; (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.500)
+  (setq read-process-output-max (* 4 1024 1024)) ;; 4mb
+  (setq lsp-idle-delay 0.2
+        lsp-response-timeout 30)
   ;;       (setq lsp-log-io nil)
   ;; (setq lsp-completion-provider :capf)
   ;; (setq lsp-prefer-flymake nil)
@@ -92,6 +116,9 @@
 ;; (add-hook 'bash-mode-hook #'lsp-deferred)
 
 
+(use-package tramp :ensure t)
+
+(use-package agent-shell :ensure t)
 
 ;; (use-package ace-popup-menu :ensure t)
 ;; (use-package add-node-modules-path :ensure t)
@@ -114,7 +141,10 @@
 (use-package csv-mode :ensure t)
 (use-package darktooth-theme :ensure t)
 (use-package dhall-mode :ensure t)
-(use-package diff-hl :ensure t)
+(use-package diff-hl
+  :ensure t
+  :custom
+  (diff-hl-update-async t))
 (use-package diminish :ensure t)
 (use-package dired-git-info :ensure t)
 (use-package diredfl :ensure t)
@@ -182,7 +212,7 @@
 (use-package markdown-mode :ensure t)
 (use-package mustache-mode :ensure t)
 ;; (use-package nix-mode :ensure t :mode "\\.nix\\'")
-(use-package rg :ensure t)
+;;(use-package rg :ensure t)
 (use-package org :ensure t)
 ;; (use-package pdf-tools :ensure t)
 (use-package persistent-scratch :ensure t)
@@ -229,9 +259,18 @@
 (use-package scala-mode :ensure t)
 (use-package go-mode :ensure t)
 
-(use-package eglot :ensure t)
+(use-package eglot
+  :ensure t
+  :custom
+  (eglot-sync-connect nil)
+  (eglot-events-buffer-size 0))
 
-(use-package gcmh :ensure t)
+(use-package gcmh
+  :ensure t
+  :custom
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 256 1024 1024))
+  (gcmh-low-cons-threshold (* 32 1024 1024)))
 
 (use-package tramp :ensure t)
 
@@ -802,7 +841,7 @@
                   (unless (frame-focus-state)
                     (garbage-collect)))))
 
-(rg-enable-menu)
+;;(rg-enable-menu)
 
 (setq lsp-copilot-enabled nil)
 
@@ -830,16 +869,13 @@
  '((tramp-direct-async-process . t)))
 
 
-(connection-local-set-profiles
- '(:application tramp :protocol "ssh")
- 'remote-direct-async-process)
+(dolist (method '("ssh" "scp" "rsync"))
+  (connection-local-set-profiles
+   `(:application tramp :protocol ,method)
+   'remote-direct-async-process))
 
 
 (setq magit-tramp-pipe-stty-settings 'pty)
-
-;; (connection-local-set-profiles
-;;  '(:application tramp :protocol "scp")
-;;  'remote-direct-async-process)
 
 (with-eval-after-load 'tramp
   (with-eval-after-load 'compile
@@ -854,6 +890,10 @@
 
 
 (setq gptel-backend (gptel-make-gh-copilot "Copilot"))
+
+;;(setq gptel-stream nil)
+;
+;; (setq gptel-curl-extra-args '("--http1.1"))
 
 ;; (let ((major-mode 'org-mode))
 ;;   (org-latex-preview))
@@ -909,3 +949,12 @@
 
 (when (file-exists-p custom-file)
   (load custom-file nil 'nomessage))
+
+
+;; (setq gptel-use-curl "/opt/local/bin/curl")
+
+
+
+;; (setq gptel-proxy "")
+
+;; (setq gptel-stream nil)
