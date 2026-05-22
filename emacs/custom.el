@@ -4,6 +4,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(agent-shell-preferred-agent-config 'codex)
  '(ansi-color-names-vector
    ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
@@ -201,8 +202,8 @@
                dired-git-info diredfl docker docker-compose-mode dockerfile-mode emacsql espresso-theme
                exec-path-from-shell eyebrowse fill-column-indicator flycheck format-all gcmh git-gutter git-link
                git-timemachine go-mode gptel haskell-mode helpful hlint-refactor logview lsp-metals lsp-ui magit
-               mustache-mode persistent-scratch projectile protobuf-mode restart-emacs restclient rust-mode smartparens
-               typescript-mode vdiff vterm web-mode websocket ws-butler xterm-color yasnippet))
+               mustache-mode persistent-scratch projectile protobuf-mode restart-emacs restclient rg rust-mode
+               smartparens typescript-mode vdiff vterm web-mode websocket ws-butler xterm-color yasnippet))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
