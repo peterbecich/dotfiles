@@ -135,7 +135,6 @@
 (use-package vdiff :ensure t)
 (use-package visual-fill-column :ensure t)
 (use-package vterm :ensure t)
-(use-package web-mode :ensure t)
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
 (use-package xterm-color :ensure t)
@@ -310,7 +309,6 @@
 (use-package vterm :ensure t)
 ;; (use-package vue-html-mode :ensure t)
 ;; (use-package vue-mode :ensure t)
-(use-package web-mode :ensure t)
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
 (use-package xterm-color :ensure t)
@@ -421,7 +419,8 @@
    '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords) company-oddmuse company-dabbrev))
  '(connection-local-criteria-alist
-   '(((:application tramp) tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)
+   '(((:application tramp :protocol "scp") remote-direct-async-process)
+     ((:application tramp) tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)
      ((:application eshell) eshell-connection-default-profile)))
  '(counsel-ag-base-command "ag --nocolor --nogroup %s")
  '(counsel-mode t)
@@ -596,7 +595,7 @@
                     magit mustache-mode nix-mode persistent-scratch protobuf-mode puppet-mode purescript-mode
                     racket-mode rainbow-delimiters repl-toggle restart-emacs restclient rg rust-mode sbt-mode slime
                     smartparens snakemake-mode swift-mode typescript-mode uuidgen vagrant vagrant-tramp vdiff
-                    visual-fill-column vterm web-mode websocket ws-butler xterm-color yasnippet))
+                    visual-fill-column vterm websocket ws-butler xterm-color yasnippet))
  '(package-vc-selected-packages
    '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
