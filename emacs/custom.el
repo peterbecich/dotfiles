@@ -201,8 +201,8 @@
                company-terraform counsel crontab-mode csv-mode darktooth-theme dhall-mode diff-hl diminish
                dired-git-info diredfl docker docker-compose-mode dockerfile-mode emacsql espresso-theme
                exec-path-from-shell eyebrowse fill-column-indicator flycheck format-all gcmh git-gutter git-link
-               git-timemachine go-mode gptel haskell-mode helpful hlint-refactor logview lsp-metals lsp-ui magit
-               mustache-mode persistent-scratch projectile protobuf-mode restart-emacs restclient rg rust-mode
+               git-timemachine go-mode gptel groovy-mode haskell-mode helpful hlint-refactor logview lsp-metals lsp-ui
+               magit mustache-mode persistent-scratch projectile protobuf-mode restart-emacs restclient rg rust-mode
                smartparens typescript-mode vdiff vterm web-mode websocket ws-butler xterm-color yasnippet))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")

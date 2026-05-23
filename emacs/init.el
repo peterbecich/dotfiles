@@ -259,6 +259,8 @@
 (use-package scala-mode :ensure t)
 (use-package go-mode :ensure t)
 
+(use-package groovy-mode :ensure t)
+
 (use-package eglot
   :ensure t
   :custom
