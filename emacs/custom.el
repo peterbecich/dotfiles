@@ -196,14 +196,9 @@
  '(org-hide-emphasis-markers nil)
  '(org-imenu-depth 6)
  '(package-native-compile t)
- '(package-selected-packages
-   '(adoc-mode ag agent-shell alect-themes ansible async auto-compile auto-package-update auto-virtualenv browse-at-remote
-               company-terraform counsel crontab-mode csv-mode darktooth-theme dhall-mode diff-hl diminish
-               dired-git-info diredfl docker docker-compose-mode dockerfile-mode emacsql espresso-theme
-               exec-path-from-shell eyebrowse fill-column-indicator flycheck format-all gcmh git-gutter git-link
-               git-timemachine go-mode gptel groovy-mode haskell-mode helpful hlint-refactor logview lsp-metals lsp-ui
-               magit mustache-mode persistent-scratch projectile protobuf-mode restart-emacs restclient rg rust-mode
-               smartparens typescript-mode vdiff vterm web-mode websocket ws-butler xterm-color yasnippet))
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((tramp-rpc :url "https://github.com/ArthurHeymans/emacs-tramp-rpc" :lisp-dir "lisp")))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
@@ -259,11 +254,11 @@
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(tramp-remote-path
-   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/npm-global/bin/" "/home/becich/.gem/bin/" "/usr/local/bin/"
-     "/home/becich/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin"
-     "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
-     "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin"
-     "/opt/homebrew/sbin"))
+   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/.cargo/bin" "/home/becich/npm-global/bin/" "/home/becich/.gem/bin/"
+     "/usr/local/bin/" "/home/becich/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin"
+     "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
+     "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"
+     "/opt/homebrew/bin" "/opt/homebrew/sbin"))
  '(tramp-use-connection-share t)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)

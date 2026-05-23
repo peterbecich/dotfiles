@@ -16,6 +16,22 @@
 
 (setq custom-file (my/config-file "custom.el"))
 
+;; Bootstrap straight.el before `use-package' so explicit :straight recipes work.
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir) user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 (require 'package)
 
 ;; (setq tls-checktrust t)
@@ -118,7 +134,24 @@
 
 (use-package tramp :ensure t)
 
+
+(use-package tramp-rpc
+  :after tramp
+  :vc (:url "https://github.com/ArthurHeymans/emacs-tramp-rpc"
+       :rev :newest
+       :lisp-dir "lisp"))
+
 (use-package agent-shell :ensure t)
+
+(use-package acp
+  :straight (:host github :repo "xenodium/acp.el"))
+
+
+(use-package agent-shell-tramp-rpc
+  :straight (:host github :repo "csheaff/agent-shell-tramp-rpc")
+  :after agent-shell
+  :config
+  (agent-shell-tramp-rpc-mode 1))
 
 ;; (use-package ace-popup-menu :ensure t)
 ;; (use-package add-node-modules-path :ensure t)
@@ -960,3 +993,6 @@
 ;; (setq gptel-proxy "")
 
 ;; (setq gptel-stream nil)
+
+
+(setq tramp-rpc-deploy-git-build-policy 'release)
