@@ -5,7 +5,6 @@
 (defvar sql-prompt-regexp)
 (defvar sql-prompt-cont-regexp)
 
-(add-hook 'sql-interactive-mode-hook 'my-sql-interactive-mode-hook)
 (defun my-sql-interactive-mode-hook ()
   "Custom interactive SQL mode behaviours. See `sql-interactive-mode-hook'."
   (when (eq sql-product 'postgres)
@@ -19,6 +18,8 @@
   ;; Runs after `sql-interactive-remove-continuation-prompt'.
   (add-hook 'comint-preoutput-filter-functions
             'my-sql-comint-preoutput-filter :append :local))
+
+(add-hook 'sql-interactive-mode-hook #'my-sql-interactive-mode-hook)
 
 (defun my-sql-comint-preoutput-filter (output)
   "Filter prompts out of SQL query output.
@@ -49,15 +50,17 @@ Runs after `sql-interactive-remove-continuation-prompt' in
         ;; Return the filtered output.
         (buffer-substring-no-properties (point-min) (point-max))))))
 
-(defadvice sql-send-string (before my-prefix-newline-to-sql-string)
+(defun my-prefix-newline-to-sql-string (args)
   "Force all `sql-send-*' commands to include an initial newline.
 
 This is a trivial solution to single-line queries tripping up my
 custom output filter.  (See `my-sql-comint-preoutput-filter'.)"
-  (ad-set-arg 0 (concat "\n" (ad-get-arg 0))))
-(ad-activate 'sql-send-string)
+  (cons (concat "\n" (car args)) (cdr args)))
+
+(advice-remove 'sql-send-string #'my-prefix-newline-to-sql-string)
+(advice-add 'sql-send-string :filter-args #'my-prefix-newline-to-sql-string)
 
 (defun my-font-lock-everything-in-sql-interactive-mode ()
   (unless (eq 'oracle sql-product)
     (sql-product-font-lock nil nil)))
-(add-hook 'sql-interactive-mode-hook 'my-font-lock-everything-in-sql-interactive-mode)
+(add-hook 'sql-interactive-mode-hook #'my-font-lock-everything-in-sql-interactive-mode)

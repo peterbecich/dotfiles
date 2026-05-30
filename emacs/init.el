@@ -1,4 +1,7 @@
-(require 'package) ;; You might already have this line
+
+(setq network-security-level 'high)
+(setq package-enable-at-startup nil)
+(setq tls-checktrust t)
 
 
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
@@ -6,38 +9,101 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+(defvar my/emacs-config-directory
+  (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
+  "Directory containing this Emacs configuration.")
+
+(defun my/config-file (path)
+  "Return PATH expanded inside `my/emacs-config-directory'."
+  (expand-file-name path my/emacs-config-directory))
+
+(defun my/load-config-file (path &optional noerror)
+  "Load PATH from `my/emacs-config-directory'."
+  (load (my/config-file path) noerror 'nomessage))
+
+(setq custom-file (my/config-file "custom.el"))
+
+;; Bootstrap straight.el before `use-package' so explicit :straight recipes work.
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir) user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 
-(setq tls-checktrust t)
-(setq network-security-level 'high)
+(require 'package)
+
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
+(unless (require 'use-package nil 'noerror)
+  (unless package--initialized
+    (package-initialize))
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (require 'use-package))
 
-(setq vc-ignore-dir-regexp
-      (format "\\(%s\\)\\|\\(%s\\)"
-              vc-ignore-dir-regexp
-              tramp-file-name-regexp))
+(unless package--initialized
+  (package-initialize))
 
+(eval-when-compile
+  (require 'use-package))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (exec-path-from-shell-initialize))
 
 (setq load-prefer-newer t)
 
-(use-package auto-compile :ensure t)
+;; Subprocess-heavy packages (LSP servers, shells, TRAMP, ripgrep, GPTel) are
+;; where Emacs gets most of its useful parallelism.
+(setenv "LSP_USE_PLISTS" "true")
+(setq lsp-use-plists t
+      read-process-output-max (* 4 1024 1024)
+      process-adaptive-read-buffering nil
+      async-shell-command-buffer 'new-buffer
+      async-shell-command-display-buffer nil
+      async-shell-command-width 200
+      auto-revert-remote-files nil
+      auto-revert-use-notify t)
+
+(use-package auto-compile
+  :ensure t
+  :custom
+  (auto-compile-native-compile t))
 
 (require 'auto-compile)
 (auto-compile-on-load-mode)
 (auto-compile-on-save-mode)
 
-(setq use-package-always-ensure t)
+(use-package async
+  :ensure t
+  :config
+  (require 'dired-async)
+  (require 'async-bytecomp)
+  (dired-async-mode 1)
+  (async-bytecomp-package-mode 1))
 
-(if (eq system-type 'darwin)
-    (load "~/dotfiles/emacs/init_mac.el")
-    )
 
 (if (eq system-type 'gnu/linux)
     (load "~/dotfiles/emacs/init_debian.el")
     )
+
+(when (eq system-type 'darwin)
+  (load "~/dotfiles/emacs/init_mac.el"))
 
 
 
@@ -150,40 +216,16 @@
             :rev :newest
             :branch "main"))
 
-;; (when (memq window-system '(mac ns x))
-;;   (exec-path-from-shell-initialize))
 
 (use-package lsp-mode
-;;   :hook (
-;;          (c++-mode . lsp-deferred)
-;;          (c-mode . lsp-deferred)
-;;          (css-mode . lsp-deferred)
-;;          (csharp-mode . lsp-deferred)
-;;          (dhall-mode . lsp-deferred)
-;;          (dockerfile-mode . lsp-deferred)
-;;          (haskell-mode . lsp-deferred)
-;;          (java-mode . lsp-deferred)
-;;          (js-mode . lsp-deferred)
-;;          (json-mode . lsp-deferred)
-;;          (latex-mode . lsp-deferred)
-;;          (nix-mode . lsp-deferred)
-;;          (purescript-mode . lsp-deferred)
-;;          (python-mode . lsp-deferred)
-;;          (sh-mode . lsp-deferred)
-;;          (scala-mode . lsp-deferred)
-;;          (typescript-mode . lsp-deferred)
-;;          (rust-mode . lsp-deferred)
-;;          ;; (ruby-mode . lsp-deferred)
-;;          (terraform-mode . lsp-deferred)
-;;          ;; (groovy-mode . lsp-deferred)
-;;          ;; (yaml-mode . lsp-deferred)
-;;          )
+  :ensure t
   :config
   ;; Uncomment following section if you would like to tune lsp-mode performance according to
   ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
   ;; (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.500)
+  (setq read-process-output-max (* 4 1024 1024)) ;; 4mb
+  (setq lsp-idle-delay 0.2
+        lsp-response-timeout 30)
   ;;       (setq lsp-log-io nil)
   ;; (setq lsp-completion-provider :capf)
   ;; (setq lsp-prefer-flymake nil)
@@ -192,12 +234,15 @@
 (use-package lsp-ui :commands lsp-ui-mode)
 
 
+
 (use-package lsp-nix
   :ensure lsp-mode
   :after (lsp-mode)
   :demand t
   :custom
   (lsp-nix-nil-formatter ["nixfmt"]))
+
+(use-package projectile :ensure t)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
@@ -210,18 +255,45 @@
 
 
 
+(use-package tramp :ensure t)
+
+(use-package tramp-rpc
+  :after tramp
+  :vc (:url "https://github.com/ArthurHeymans/emacs-tramp-rpc"
+       :rev :newest
+       :lisp-dir "lisp"))
+
+(use-package agent-shell :ensure t)
+
+(use-package acp
+  :straight (:host github :repo "xenodium/acp.el"))
+
+
+(use-package agent-shell-tramp-rpc
+  :straight (:host github :repo "csheaff/agent-shell-tramp-rpc")
+  :after agent-shell
+  :config
+  (agent-shell-tramp-rpc-mode 1))
+
+
 (use-package ag :ensure t)
 (use-package alect-themes :ensure t)
 (use-package ansible :ensure t)
 (use-package auto-virtualenv :ensure t)
 (use-package browse-at-remote :ensure t)
+
+(use-package company :ensure t :defer t)
+
 (use-package company-terraform :ensure t)
 (use-package counsel :ensure t)
-;; (use-package counsel-projectile :ensure t)
+
 (use-package csv-mode :ensure t)
 (use-package darktooth-theme :ensure t)
 (use-package dhall-mode :ensure t)
-(use-package diff-hl :ensure t)
+(use-package diff-hl
+  :ensure t
+  :custom
+  (diff-hl-update-async t))
 (use-package diminish :ensure t)
 (use-package dired-git-info :ensure t)
 (use-package diredfl :ensure t)
@@ -235,6 +307,7 @@
 ;; (use-package elfeed :ensure t)
 (use-package emacsql :ensure t)
 (use-package espresso-theme :ensure t)
+
 (use-package exec-path-from-shell :ensure t)
 (use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
@@ -244,6 +317,10 @@
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
 
+(use-package git-gutter
+  :ensure t
+  :defer t
+  :commands git-gutter:revert-hunk)
 (use-package haskell-mode :ensure t)
 (use-package helpful :ensure t)
 (use-package hlint-refactor :ensure t)
@@ -253,33 +330,17 @@
   :custom
   (lsp-metals-enable-semantic-highlighting t)
   )
-;; (use-package lsp-metals
-;;   :ensure t
-;;   :custom
-;;   ;; You might set metals server options via -J arguments. This might not always work, for instance when
-;;   ;; metals is installed using nix. In this case you can use JAVA_TOOL_OPTIONS environment variable.
-;;   (lsp-metals-server-args '(;; Metals claims to support range formatting by default but it supports range
-;;                             ;; formatting of multiline strings only. You might want to disable it so that
-;;                             ;; emacs can use indentation provided by scala-mode.
-;;                             "-J-Dmetals.allow-multiline-string-formatting=off"
-;;                             ;; Enable unicode icons. But be warned that emacs might not render unicode
-;;                             ;; correctly in all cases.
-;;                             "-J-Dmetals.icons=unicode"))
-;;   ;; In case you want semantic highlighting. This also has to be enabled in lsp-mode using
-;;   ;; `lsp-semantic-tokens-enable' variable. Also you might want to disable highlighting of modifiers
-;;   ;; setting `lsp-semantic-tokens-apply-modifiers' to `nil' because metals sends `abstract' modifier
-;;   ;; which is mapped to `keyword' face.
-;;   (lsp-metals-enable-semantic-highlighting t)
-;;   ;; :hook (scala-mode . lsp)
-;;   )
+(use-package logview
+  :ensure t
+  :mode ("\\.out\\'" . logview-mode))
 (use-package magit :ensure t)
 (use-package transient :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package mustache-mode :ensure t)
-;; (use-package nix-mode :ensure t :mode "\\.nix\\'")
+
 (use-package rg :ensure t)
 (use-package org :ensure t)
-;; (use-package pdf-tools :ensure t)
+(use-package pdf-tools :ensure t)
 (use-package persistent-scratch :ensure t)
 ;; (use-package proof-general :ensure t)
 (use-package protobuf-mode :ensure t)
@@ -312,6 +373,10 @@
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
 (use-package xterm-color :ensure t)
+(use-package adoc-mode
+  :ensure t
+  :mode (("\\.adoc\\'" . adoc-mode)
+         ("\\.asciidoc\\'" . adoc-mode)))
 ;; (use-package yaml-imenu :ensure t)
 (use-package yaml-mode :ensure t)
 (use-package rust-mode :ensure t)
@@ -319,18 +384,32 @@
 (use-package scala-mode :ensure t)
 (use-package go-mode :ensure t)
 
-(use-package eglot :ensure t)
+(use-package groovy-mode :ensure t)
+
+(use-package eglot
+  :ensure t
+  :custom
+  (eglot-sync-connect nil)
+  (eglot-events-buffer-size 0))
+
+(use-package gcmh
+  :ensure t
+  :custom
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 256 1024 1024))
+  (gcmh-low-cons-threshold (* 32 1024 1024)))
 
 (use-package tramp :ensure t)
 
+
+(use-package crontab-mode :ensure t)
 
 (use-package gptel :ensure t)
 
 (use-package gcmh :ensure t)
 
-;; (use-package tramp :ensure t)
-;; (use-package envrc :ensure t)
-;; (use-package direnv :ensure t :config (direnv-mode))
+
+(use-package envrc :ensure t)
 
 ;; (load "~/dotfiles/emacs/areas/c.el")
 ;;(load "~/dotfiles/emacs/areas/csharp.el")
@@ -434,7 +513,7 @@
  '(counsel-projectile-sort-projects t)
  '(cursor-type t)
  '(custom-enabled-themes '(darktooth))
- '(custom-file "~/dotfiles/emacs/init.el")
+ '(custom-file "~/dotfiles/emacs/custom.el")
  '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
  '(desktop-save t)
@@ -585,19 +664,21 @@
    '(("emacs-lisp" (:background "#F0FFF0")) ("dot" (:foreground "gray50"))))
  '(package-native-compile t)
  '(package-selected-packages
-   '(ace-popup-menu ag alect-themes ansible auto-compile auto-package-update auto-virtualenv browse-at-remote cider
-                    company-terraform copilot copilot-chat counsel-projectile csv-mode darktooth-theme dhall-mode
-                    diff-hl diminish dired-git-info diredfl docker docker-compose-mode dockerfile-mode emacsql envrc
-                    espresso-theme ess exec-path-from-shell eyebrowse fill-column-indicator flycheck-haskell
-                    flycheck-inline flycheck-rtags format-all fsharp-mode gcmd gcmh git-link git-timemachine go-mode
-                    gptel groovy-mode gruvbox-theme helpful highlight-defined highlight-indent-guides highlight-thing
-                    hindent hlint-refactor iedit julia-mode julia-repl logview lsp-haskell lsp-ivy lsp-metals lsp-ui
-                    magit mustache-mode nix-mode persistent-scratch protobuf-mode puppet-mode purescript-mode
-                    racket-mode rainbow-delimiters repl-toggle restart-emacs restclient rg rust-mode sbt-mode slime
-                    smartparens snakemake-mode swift-mode typescript-mode uuidgen vagrant vagrant-tramp vdiff
-                    visual-fill-column vterm websocket ws-butler xterm-color yasnippet))
+   '(ace-popup-menu adoc-mode ag agent-shell alect-themes ansible async auto-compile auto-package-update auto-virtualenv
+                    browse-at-remote cider company-terraform copilot copilot-chat counsel-projectile crontab-mode
+                    csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker
+                    docker-compose-mode dockerfile-mode emacsql envrc espresso-theme ess exec-path-from-shell eyebrowse
+                    fill-column-indicator flycheck-haskell flycheck-inline flycheck-rtags format-all fsharp-mode gcmd
+                    gcmh git-gutter git-link git-timemachine go-mode gptel groovy-mode gruvbox-theme helpful
+                    highlight-defined highlight-indent-guides highlight-thing hindent hlint-refactor iedit julia-mode
+                    julia-repl logview lsp-haskell lsp-ivy lsp-metals lsp-ui magit mustache-mode nix-mode pdf-tools
+                    persistent-scratch protobuf-mode puppet-mode purescript-mode racket-mode rainbow-delimiters
+                    repl-toggle restart-emacs restclient rg rust-mode sbt-mode slime smartparens snakemake-mode
+                    swift-mode typescript-mode uuidgen vagrant vagrant-tramp vdiff visual-fill-column vterm websocket
+                    ws-butler xterm-color yasnippet))
  '(package-vc-selected-packages
-   '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
+   '((tramp-rpc :url "https://github.com/ArthurHeymans/emacs-tramp-rpc" :lisp-dir "lisp")
+     (copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
@@ -690,9 +771,6 @@
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-
 (setq-default line-spacing 0)
 
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
@@ -721,8 +799,6 @@
 (global-set-key (kbd "<kp-8>") 'beginning-of-defun)
 
 (persistent-scratch-setup-default)
-
-(add-to-list 'auto-mode-alist (cons "\\.asciidoc\\'" 'adoc-mode))
 
 ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 ;; (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
@@ -805,8 +881,6 @@
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
  '(eyebrowse-mode-line-active ((t (:inverse-video t :weight bold)))))
 
-(add-to-list 'auto-mode-alist '("\\.out\\'" . logview-mode))
-
 (diminish 'smartparens-mode)
 (diminish 'auto-revert-mode)
 (diminish 'counsel-mode)
@@ -837,7 +911,7 @@
 (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
 
 
-(add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
 
 
 
@@ -849,8 +923,13 @@
 (envrc-global-mode)
 
 (setq lsp-semgrep-languages nil)
-(advice-add 'lsp :before (lambda (&rest _args) (eval '(setf (lsp-session-server-id->folders (lsp-session)) (ht)))))
 
+(defun my/lsp-clear-session-folders (&rest _args)
+  "Clear remembered LSP workspace folders before starting LSP."
+  (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
+
+(advice-remove 'lsp #'my/lsp-clear-session-folders)
+(advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
 
 (gcmh-mode 1)
@@ -861,24 +940,27 @@
                   (unless (frame-focus-state)
                     (garbage-collect)))))
 
-(rg-enable-menu)
+;;(rg-enable-menu)
 
 (setq lsp-copilot-enabled nil)
 
 (setq remote-file-name-inhibit-locks t
+      remote-file-name-inhibit-auto-save-visited t
+      tramp-use-connection-share t
       tramp-use-scp-direct-remote-copying t
-      remote-file-name-inhibit-auto-save-visited t)
-
-(setq tramp-copy-size-limit (* 1024 1024) ;; 1MB
-      tramp-verbose 2)
+      tramp-copy-size-limit (* 1024 1024) ;; 1MB
+      tramp-verbose 1)
 
 (connection-local-set-profile-variables
  'remote-direct-async-process
  '((tramp-direct-async-process . t)))
 
-(connection-local-set-profiles
- '(:application tramp :protocol "scp")
- 'remote-direct-async-process)
+
+(dolist (method '("ssh" "scp" "rsync"))
+  (connection-local-set-profiles
+   `(:application tramp :protocol ,method)
+   'remote-direct-async-process))
+
 
 (setq magit-tramp-pipe-stty-settings 'pty)
 
@@ -891,13 +973,13 @@
 ;; don't show git variables in magit branch
 (setq magit-branch-direct-configure nil)
 ;; don't automatically refresh the status buffer after running a git command
-(setq magit-refresh-status-buffer nil)
+;; (setq magit-refresh-status-buffer nil)
 
 
 (gptel-make-gh-copilot "Copilot")
 
-(setq gptel-model 'gpt-4.1 ;;'claude-3.7-sonnet
-      gptel-backend (gptel-make-gh-copilot "Copilot"))
+(setq gptel-backend (gptel-make-gh-copilot "Copilot"))
+
 
 ;; (let ((major-mode 'org-mode))
 ;;   (org-latex-preview))
@@ -913,10 +995,10 @@
 ;; (add-hook 'gptel-post-response-functions ('org-latex-preview ()))
 
 
-(defun my/gptel-org-latex-preview (beg end)
+(defun my/gptel-org-latex-preview (_beg _end)
   "Preview LaTeX fragments after GPTel response in org-mode."
   (when (derived-mode-p 'org-mode)
-    (org-latex-preview '16)))  ;; 16 = preview whole buffer
+    (org-latex-preview 16)))  ;; 16 = preview whole buffer
     ;;(org-latex-preview (list 1 beg end))))  ;; 16 = preview whole buffer
 
 (add-hook 'gptel-post-response-functions #'my/gptel-org-latex-preview)
@@ -944,3 +1026,24 @@
 
 (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
 (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
+
+
+
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+(setq tramp-backup-directory-alist nil)
+(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
+
+(when (file-exists-p custom-file)
+  (load custom-file nil 'nomessage))
+
+
+;; (setq gptel-use-curl "/opt/local/bin/curl")
+
+
+
+;; (setq gptel-proxy "")
+
+;; (setq gptel-stream nil)
+
+
+(setq tramp-rpc-deploy-git-build-policy 'release)
