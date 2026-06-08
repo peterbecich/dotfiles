@@ -1,6 +1,13 @@
 
 (setq network-security-level 'high)
 (setq package-enable-at-startup nil)
+(setq tls-checktrust t)
+
+
+(autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (defvar my/emacs-config-directory
   (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
@@ -32,13 +39,12 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+
 (require 'package)
 
-;; (setq tls-checktrust t)
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-;; (add-to-list 'package-archives
-;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (unless (require 'use-package nil 'noerror)
   (unless package--initialized
@@ -92,17 +98,124 @@
   (async-bytecomp-package-mode 1))
 
 
+(if (eq system-type 'gnu/linux)
+    (load "~/dotfiles/emacs/init_debian.el")
+    )
+
 (when (eq system-type 'darwin)
   (load "~/dotfiles/emacs/init_mac.el"))
 
 
-;; (use-package lsp-bridge
-;;   :straight '(lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-;;             :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-;;             :build (:not compile))
-;;   )
 
-;; (global-lsp-bridge-mode)
+(use-package ace-popup-menu :ensure t)
+(use-package ag :ensure t)
+(use-package alect-themes :ensure t)
+(use-package ansible :ensure t)
+(use-package auto-compile :ensure t)
+(use-package browse-at-remote :ensure t)
+(use-package cider :ensure t)
+(use-package company
+  :hook (scala-mode . company-mode)
+  :config (setq lsp-completion-provider :capf)
+  :ensure t
+  )
+(use-package company-terraform :ensure t)
+(use-package counsel :ensure t)
+(use-package counsel-projectile :ensure t)
+(use-package csv-mode :ensure t)
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode)
+  )
+(use-package darktooth-theme :ensure t)
+(use-package dhall-mode :ensure t)
+(use-package diff-hl :ensure t)
+(use-package diminish :ensure t)
+(use-package dired-git-info :ensure t)
+(use-package diredfl :ensure t)
+(use-package docker :ensure t)
+(use-package docker-compose-mode :ensure t)
+(use-package dockerfile-mode :ensure t)
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+(use-package emacsql :ensure t)
+(use-package espresso-theme :ensure t)
+(use-package ess :ensure t)
+(use-package exec-path-from-shell :ensure t)
+(use-package eyebrowse :ensure t)
+(use-package fill-column-indicator :ensure t)
+(use-package flycheck :init (global-flycheck-mode))
+(use-package flycheck-haskell :ensure t)
+(use-package flycheck-inline :ensure t)
+(use-package flycheck-rtags :ensure t)
+(use-package fsharp-mode :ensure t)
+(use-package git-link :ensure t)
+(use-package git-timemachine :ensure t)
+(use-package go-mode :ensure t)
+(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
+(use-package haskell-mode :ensure t)
+(use-package helpful :ensure t)
+(use-package highlight-defined :ensure t)
+(use-package highlight-indent-guides :ensure t)
+(use-package highlight-thing :ensure t)
+(use-package hindent :ensure t)
+(use-package hlint-refactor :ensure t)
+(use-package iedit :ensure t)
+(use-package ivy :ensure t)
+(use-package julia-mode :ensure t)
+(use-package julia-repl :ensure t)
+;; (use-package kubernetes :ensure t)
+(use-package logview :ensure t)
+(use-package lsp-haskell :ensure t)
+;; (use-package lsp-java :ensure t)
+(use-package lsp-metals)
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package magit :ensure t)
+(use-package transient :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package nix-mode :ensure t :mode "\\.nix\\'")
+(use-package org :ensure t)
+;; (use-package pdf-tools :ensure t)
+(use-package persistent-scratch :ensure t)
+(use-package protobuf-mode :ensure t)
+(use-package puppet-mode :ensure t)
+(use-package purescript-mode :ensure t)
+(use-package racket-mode :ensure t)
+(use-package rainbow-delimiters :ensure t)
+(use-package repl-toggle :ensure t)
+(use-package restart-emacs :ensure t)
+(use-package restclient :ensure t)
+(use-package slime :ensure t)
+(use-package smartparens :ensure t)
+(use-package snakemake-mode :ensure t)
+(use-package swift-mode :ensure t)
+(use-package swiper :ensure t)
+(use-package terraform-mode :ensure t)
+(use-package typescript-mode :ensure t)
+(use-package uuidgen :ensure t)
+(use-package vagrant :ensure)
+(use-package vagrant-tramp :ensure t)
+(use-package vdiff :ensure t)
+(use-package visual-fill-column :ensure t)
+(use-package vterm :ensure t)
+(use-package websocket :ensure t)
+(use-package ws-butler :ensure t)
+(use-package xterm-color :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package rust-mode :ensure t)
+(use-package envrc :ensure t
+  :after (lsp-mode flycheck)
+  :init (envrc-global-mode)
+  )
+
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main"))
+
 
 (use-package lsp-mode
   :ensure t
@@ -121,19 +234,28 @@
 (use-package lsp-ui :commands lsp-ui-mode)
 
 
+
+(use-package lsp-nix
+  :ensure lsp-mode
+  :after (lsp-mode)
+  :demand t
+  :custom
+  (lsp-nix-nil-formatter ["nixfmt"]))
+
 (use-package projectile :ensure t)
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
+
+(use-package nix-mode
+  :hook (nix-mode . lsp-deferred)
+  :ensure t)
+
 ;; (add-hook 'prog-mode-hook #'lsp-deferred)
 
-;; (add-hook 'json-mode-hook #'lsp-deferred)
-;; (add-hook 'yaml-mode-hook #'lsp-deferred)
-;; (add-hook 'bash-mode-hook #'lsp-deferred)
 
 
 (use-package tramp :ensure t)
-
 
 (use-package tramp-rpc
   :after tramp
@@ -153,24 +275,18 @@
   :config
   (agent-shell-tramp-rpc-mode 1))
 
-;; (use-package ace-popup-menu :ensure t)
-;; (use-package add-node-modules-path :ensure t)
+
 (use-package ag :ensure t)
 (use-package alect-themes :ensure t)
-;; (use-package all-the-icons :ensure t)
 (use-package ansible :ensure t)
 (use-package auto-virtualenv :ensure t)
 (use-package browse-at-remote :ensure t)
-;; (use-package butler :ensure t)
-;; (use-package cider :ensure t)
-;; (use-package company
-;;   :config (setq lsp-completion-provider :capf)
-;;   :ensure t
-;;   )
+
 (use-package company :ensure t :defer t)
+
 (use-package company-terraform :ensure t)
 (use-package counsel :ensure t)
-;; (use-package counsel-projectile :ensure t)
+
 (use-package csv-mode :ensure t)
 (use-package darktooth-theme :ensure t)
 (use-package dhall-mode :ensure t)
@@ -190,29 +306,25 @@
 ;;   (editorconfig-mode 1))
 ;; (use-package elfeed :ensure t)
 (use-package emacsql :ensure t)
-;; (use-package emojify :ensure t)
 (use-package espresso-theme :ensure t)
-;; (use-package ess :ensure t)
+
+(use-package exec-path-from-shell :ensure t)
 (use-package eyebrowse :ensure t)
 (use-package fill-column-indicator :ensure t)
 (use-package flycheck :ensure t)
-;; (use-package flycheck-rtags :ensure t)
+
 (use-package format-all :ensure t)
 (use-package git-link :ensure t)
 (use-package git-timemachine :ensure t)
+
 (use-package git-gutter
   :ensure t
   :defer t
   :commands git-gutter:revert-hunk)
-;;(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
 (use-package haskell-mode :ensure t)
 (use-package helpful :ensure t)
 (use-package hlint-refactor :ensure t)
 (use-package ivy :ensure t)
-;; (use-package jenkinsfile-mode :ensure t)
-;; (use-package kubernetes :ensure t)
-;; (use-package lsp-haskell :ensure t)
-;; (use-package lsp-java :ensure t)
 (use-package lsp-metals
   :ensure t
   :custom
@@ -221,33 +333,14 @@
 (use-package logview
   :ensure t
   :mode ("\\.out\\'" . logview-mode))
-;; (use-package lsp-metals
-;;   :ensure t
-;;   :custom
-;;   ;; You might set metals server options via -J arguments. This might not always work, for instance when
-;;   ;; metals is installed using nix. In this case you can use JAVA_TOOL_OPTIONS environment variable.
-;;   (lsp-metals-server-args '(;; Metals claims to support range formatting by default but it supports range
-;;                             ;; formatting of multiline strings only. You might want to disable it so that
-;;                             ;; emacs can use indentation provided by scala-mode.
-;;                             "-J-Dmetals.allow-multiline-string-formatting=off"
-;;                             ;; Enable unicode icons. But be warned that emacs might not render unicode
-;;                             ;; correctly in all cases.
-;;                             "-J-Dmetals.icons=unicode"))
-;;   ;; In case you want semantic highlighting. This also has to be enabled in lsp-mode using
-;;   ;; `lsp-semantic-tokens-enable' variable. Also you might want to disable highlighting of modifiers
-;;   ;; setting `lsp-semantic-tokens-apply-modifiers' to `nil' because metals sends `abstract' modifier
-;;   ;; which is mapped to `keyword' face.
-;;   (lsp-metals-enable-semantic-highlighting t)
-;;   ;; :hook (scala-mode . lsp)
-;;   )
 (use-package magit :ensure t)
 (use-package transient :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package mustache-mode :ensure t)
-;; (use-package nix-mode :ensure t :mode "\\.nix\\'")
-;;(use-package rg :ensure t)
+
+(use-package rg :ensure t)
 (use-package org :ensure t)
-;; (use-package pdf-tools :ensure t)
+(use-package pdf-tools :ensure t)
 (use-package persistent-scratch :ensure t)
 ;; (use-package proof-general :ensure t)
 (use-package protobuf-mode :ensure t)
@@ -277,7 +370,6 @@
 (use-package vterm :ensure t)
 ;; (use-package vue-html-mode :ensure t)
 ;; (use-package vue-mode :ensure t)
-(use-package web-mode :ensure t)
 (use-package websocket :ensure t)
 (use-package ws-butler :ensure t)
 (use-package xterm-color :ensure t)
@@ -314,9 +406,10 @@
 
 (use-package gptel :ensure t)
 
-;; (use-package tramp :ensure t)
-;; (use-package envrc :ensure t)
-;; (use-package direnv :ensure t :config (direnv-mode))
+(use-package gcmh :ensure t)
+
+
+(use-package envrc :ensure t)
 
 ;; (load "~/dotfiles/emacs/areas/c.el")
 ;;(load "~/dotfiles/emacs/areas/csharp.el")
@@ -328,26 +421,19 @@
 (load "~/dotfiles/emacs/areas/java.el")
 (load "~/dotfiles/emacs/areas/javascript.el")
 (load "~/dotfiles/emacs/areas/json.el")
-;; (load "~/dotfiles/emacs/areas/lisp.el")
-;; (load "~/dotfiles/emacs/areas/markdown.el")
-;; (load "~/dotfiles/emacs/areas/org.el")
-;; (load "~/dotfiles/emacs/areas/proof-general.el")
-;; (load "~/dotfiles/emacs/areas/purescript.el")
-;; (load "~/dotfiles/emacs/areas/python.el")
-;; (load "~/dotfiles/emacs/areas/sage.el")
+(load "~/dotfiles/emacs/areas/lisp.el")
+(load "~/dotfiles/emacs/areas/markdown.el")
+(load "~/dotfiles/emacs/areas/org.el")
+(load "~/dotfiles/emacs/areas/purescript.el")
+(load "~/dotfiles/emacs/areas/python.el")
 (load "~/dotfiles/emacs/areas/scala.el")
 (load "~/dotfiles/emacs/areas/shell.el")
 (load "~/dotfiles/emacs/areas/sql.el")
-;; (load "~/dotfiles/emacs/areas/twitter.el")
 (load "~/dotfiles/emacs/areas/web.el")
 (load "~/dotfiles/emacs/areas/yaml.el")
 (load "~/dotfiles/emacs/init_private.el")
-(load "~/dotfiles/emacs/custom_commands.el")
-(load "~/dotfiles/emacs/package_list.el")
 
 (projectile-mode 1)
-
-;; (ace-popup-menu-mode 1)
 
 (eval-when-compile
   (require 'use-package))
@@ -394,11 +480,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
+ '(ag-arguments '("--smart-case" "--stats" "-p '~/dotfiles/.agignore'"))
+ '(ag-ignore-list '("*.js"))
+ '(async-bytecomp-allowed-packages ''(all))
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
  '(auto-revert-avoid-polling t)
+ '(auto-revert-check-vc-info t)
+ '(auto-revert-remote-files t)
+ '(auto-revert-verbose nil)
  '(battery-mode-line-limit 99)
  '(bidi-paragraph-direction 'left-to-right)
  '(blink-cursor-blinks 0)
@@ -407,55 +497,23 @@
  '(company-backends
    '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
                   (company-dabbrev-code company-gtags company-etags company-keywords) company-oddmuse company-dabbrev))
- '(company-clang-executable "clang")
- '(compilation-always-kill t)
- '(compilation-ask-about-save nil)
- '(compilation-auto-jump-to-first-error nil)
- '(compilation-message-face 'default)
- '(compilation-scroll-output 'first-error)
- '(compilation-skip-threshold 2)
- '(confirm-kill-processes nil)
+ '(connection-local-criteria-alist
+   '(((:application tramp :protocol "scp") remote-direct-async-process)
+     ((:application tramp) tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)
+     ((:application eshell) eshell-connection-default-profile)))
+ '(counsel-ag-base-command "ag --nocolor --nogroup %s")
  '(counsel-mode t)
  '(counsel-mode-override-describe-bindings t)
- '(counsel-projectile-mode nil)
+ '(counsel-projectile-ag-initial-input '(ivy-thing-at-point))
+ '(counsel-projectile-mode t nil (counsel-projectile))
+ '(counsel-projectile-rg-initial-input '(ivy-thing-at-point))
+ '(counsel-projectile-sort-buffers t)
+ '(counsel-projectile-sort-directories t)
+ '(counsel-projectile-sort-files t)
+ '(counsel-projectile-sort-projects t)
  '(cursor-type t)
- '(custom-enabled-themes '(wombat))
+ '(custom-enabled-themes '(darktooth))
  '(custom-file "~/dotfiles/emacs/custom.el")
- '(custom-safe-themes
-   '("c23446c6dd105f7eda80655f500e8554d701c7729867a1ad578c211b47a25482"
-     "d5fd482fcb0fe42e849caba275a01d4925e422963d1cd165565b31d3f4189c87"
-     "5a0ddbd75929d24f5ef34944d78789c6c3421aa943c15218bac791c199fc897d"
-     "b1a691bb67bd8bd85b76998caf2386c9a7b2ac98a116534071364ed6489b695d"
-     "5aedf993c7220cbbe66a410334239521d8ba91e1815f6ebde59cecc2355d7757"
-     "0517759e6b71f4ad76d8d38b69c51a5c2f7196675d202e3c2507124980c3c2a3"
-     "b5fab52f16546a15f171e6bd450ff11f2a9e20e5ac7ec10fa38a14bb0c67b9ab"
-     "e266d44fa3b75406394b979a3addc9b7f202348099cfde69e74ee6432f781336"
-     "8dbbcb2b7ea7e7466ef575b60a92078359ac260c91fe908685b3983ab8e20e3f"
-     "0489e00d609dd8d3262d03e2c72b1da0a040c25806c230c6602005be1db01e46"
-     "2d70bca08b194d0becf19a1df2c54fcb78daeeebc880042de47c735a5c837af0"
-     "bfd5296f0c37dc9a52a0416f1d3c380ac381c1da112d061ceb784d0ed51d6587"
-     "07885feecd236e4ba3837e7ff15753d47694e1f9a8049400c114b3298285534e"
-     "046a2b81d13afddae309930ef85d458c4f5d278a69448e5a5261a5c78598e012"
-     "98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd"
-     "ba323a013c25b355eb9a0550541573d535831c557674c8d59b9ac6aa720c21d3"
-     "d824f0976625bb3bb38d3f6dd10b017bdb4612f27102545a188deef0d88b0cd9"
-     "5eed5311ae09ed84cb2e4bf2f033eb4df27e7846a68e4ea3ab8d28f6b017e44a"
-     "ab04c00a7e48ad784b52f34aa6bfa1e80d0c3fcacc50e1189af3651013eb0d58"
-     "d2e0c53dbc47b35815315fae5f352afd2c56fa8e69752090990563200daae434"
-     "a0feb1322de9e26a4d209d1cfa236deaf64662bb604fa513cca6a057ddf0ef64"
-     "04dd0236a367865e591927a3810f178e8d33c372ad5bfef48b5ce90d4b476481"
-     "0feb7052df6cfc1733c1087d3876c26c66410e5f1337b039be44cb406b6187c6"
-     "eb3ef63dc31fbebb37df3646fbc1e07f25159d19bb1cade2a80000a2764690de"
-     "d94a55a07623ee474ddb4a0a5dca9a250ea4dcebe554249ce305560c3340ec57"
-     "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb"
-     "e1d09f1b2afc2fed6feb1d672be5ec6ae61f84e058cb757689edb669be926896"
-     "b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa"
-     "5e3fc08bcadce4c6785fc49be686a4a82a356db569f55d411258984e952f194a"
-     "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223"
-     "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
-     "7153b82e50b6f7452b4519097f880d968a6eaf6f6ef38cc45a144958e553fbc6"
-     "1a1cdd9b407ceb299b73e4afd1b63d01bbf2e056ec47a9d95901f4198a0d2428"
-     "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
  '(desktop-save t)
@@ -465,26 +523,23 @@
  '(diff-hl-draw-borders t)
  '(diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-pos)
  '(diff-hl-side 'left)
+ '(dired-async--modeline-mode nil)
+ '(dired-async-mode nil)
  '(diredfl-global-mode t nil (diredfl))
  '(display-battery-mode t)
  '(display-line-numbers-grow-only t)
- '(display-time-day-and-date t)
+ '(display-time-day-and-date nil)
  '(display-time-default-load-average nil)
  '(display-time-format nil)
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key '("Tag"))
  '(ediff-split-window-function 'split-window-horizontally)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
- '(eglot-autoreconnect t)
- '(eglot-autoshutdown t)
- '(eglot-events-buffer-config '(:size 0 :format full))
- '(emms-mode-line-icon-color "#1fb3b3" t)
+ '(elfeed-search-filter "@1-week-ago")
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
- '(enable-remote-dir-locals t)
- '(envrc-global-mode nil)
  '(eshell-buffer-maximum-lines 4096)
  '(explicit-shell-file-name "zsh")
  '(eyebrowse-keymap-prefix "\3")
@@ -492,40 +547,65 @@
  '(eyebrowse-mode-line-style 'smart)
  '(eyebrowse-new-workspace t)
  '(eyebrowse-wrap-around t)
- '(fci-rule-color "#222222")
  '(fill-column 120)
+ '(flycheck-buffer-switch-check-intermediate-buffers t)
+ '(flycheck-check-syntax-automatically
+   '(save idle-change idle-buffer-switch new-line mode-enabled))
+ '(flycheck-checker-error-threshold 3000)
+ '(flycheck-checkers
+   '(lsp rtags ada-gnat asciidoctor asciidoc awk-gawk bazel-build-buildifier bazel-module-buildifier
+         bazel-starlark-buildifier bazel-workspace-buildifier c/c++-clang c/c++-gcc c/c++-cppcheck cfengine
+         chef-foodcritic coffee coffee-coffeelint css-csslint css-stylelint cuda-nvcc cwl d-dmd dockerfile-hadolint
+         elixir-credo emacs-lisp emacs-lisp-checkdoc ember-template erlang-rebar3 erlang eruby-erubis eruby-ruumba
+         fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck go-unconvert go-staticcheck groovy haml
+         handlebars haskell-ghc haskell-hlint html-tidy javascript-eslint javascript-jshint javascript-standard
+         json-jsonlint json-python-json json-jq jsonnet less less-stylelint llvm-llc lua-luacheck lua
+         markdown-markdownlint-cli markdown-mdl nix nix-linter opam perl perl-perlcritic php php-phpmd php-phpcs
+         processing proselint protobuf-protoc protobuf-prototool pug puppet-parser puppet-lint python-flake8
+         python-pylint python-pycompile python-pyright python-mypy r-lintr racket rpm-rpmlint rst-sphinx rst
+         ruby-rubocop ruby-standard ruby-reek ruby-rubylint ruby ruby-jruby rust-cargo rust rust-clippy scala
+         scala-scalastyle scheme-chicken scss-lint scss-stylelint sass/scss-sass-lint sass scss sh-bash sh-posix-dash
+         sh-posix-bash sh-zsh sh-shellcheck slim slim-lint sql-sqlint systemd-analyze tcl-nagelfar terraform
+         terraform-tflint tex-chktex tex-lacheck texinfo textlint typescript-tslint verilog-verilator vhdl-ghdl
+         xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby yaml-yamllint))
+ '(flycheck-display-errors-delay 0.1)
+ '(flycheck-hlint-args '("-j"))
+ '(flycheck-idle-buffer-switch-delay 0.1)
+ '(flycheck-idle-change-delay 0.1)
+ '(flycheck-navigation-minimum-level 'warning)
  '(fringe-mode '(nil . 0) nil (fringe))
- '(git-link-use-commit nil)
+ '(git-link-use-commit t)
  '(global-auto-revert-mode t)
  '(global-company-mode t)
- '(global-completion-preview-mode t)
  '(global-diff-hl-mode t)
  '(global-display-line-numbers-mode t)
+ '(global-emojify-mode nil)
  '(global-git-commit-mode t)
  '(global-git-gutter-mode nil)
  '(global-highlight-thing-mode nil)
  '(global-hl-todo-mode t)
- '(global-so-long-mode t)
+ '(global-linum-mode nil)
+ '(global-nlinum-mode nil)
+ '(global-so-long-mode nil)
  '(global-visual-line-mode t)
- '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
- '(gnus-mode-line-image-cache
-   '(image :type xpm :ascent center :data
-           "/* XPM */\12static char *gnus-pointer[] = {\12/* width height num_colors chars_per_pixel */\12\"    18    13        2            1\",\12/* colors */\12\". c #1fb3b3\",\12\"# c None s None\",\12/* pixels */\12\"##################\",\12\"######..##..######\",\12\"#####........#####\",\12\"#.##.##..##...####\",\12\"#...####.###...##.\",\12\"#..###.######.....\",\12\"#####.########...#\",\12\"###########.######\",\12\"####.###.#..######\",\12\"######..###.######\",\12\"###....####.######\",\12\"###..######.######\",\12\"###########.######\" };") t)
- '(gptel-default-mode 'org-mode)
- '(gptel-org-branching-context t)
- '(gradle-gradlew-executable "./gradlew")
  '(gradle-mode nil)
  '(gradle-use-gradlew t)
  '(grep-command "grep  -h --null -e ")
+ '(grep-find-command
+   '("find . -type f -exec grep  -nH --null -e  \\{\\} +" . 42))
+ '(grep-find-ignored-directories
+   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" ".yarn" "webpack"))
+ '(grep-find-template
+   "find <D> <X> -type f <F> -exec grep <C> -nH -P -C 2 --null -e <R> \\{\\} +")
  '(grep-highlight-matches 'auto)
  '(grep-scroll-output t)
- '(groovy-highlight-assignments t)
  '(groovy-indent-offset 2)
  '(haskell-font-lock-symbols nil)
  '(haskell-stylish-on-save nil)
  '(haskell-tags-on-save nil)
- '(highlight-symbol-colors
-   '("#FFF68F" "#B7EB8F" "#76DDBA" "#91D5FF" "#ADC6FF" "#D3ADF7" "#FFADD2" "#FFA39E" "#FFD591"))
+ '(highlight-thing-all-visible-buffers-p t)
+ '(highlight-thing-case-sensitive-p t)
+ '(highlight-thing-exclude-thing-under-point t)
  '(ibuffer-default-sorting-mode 'recency)
  '(imenu-sort-function 'imenu--sort-by-name)
  '(initial-major-mode 'fundamental-mode)
@@ -533,8 +613,6 @@
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
  '(ivy-initial-inputs-alist nil)
- '(jdee-jdk-registry
-   '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string? t)
  '(large-file-warning-threshold 100000000)
@@ -543,90 +621,104 @@
  '(logview-additional-level-mappings nil)
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
- '(lsp-auto-select-workspace nil)
- '(lsp-disabled-clients '(rubocop-ls-tramp vue-semantic-server-tramp))
+ '(lsp-diagnostics-attributes
+   '((unnecessary :foreground "dim gray") (deprecated :strike-through t)))
  '(lsp-enable-file-watchers nil)
- '(lsp-keep-workspace-alive nil)
- '(lsp-log-io nil)
- '(lsp-metals-ammonite-jvm-properties ["-Xmx12g" "-Xms1g"])
- '(lsp-metals-bloop-sbt-already-installed t)
- '(lsp-metals-enable-semantic-highlighting t)
- '(lsp-metals-install-scala-version "2.12")
- '(lsp-metals-show-inferred-type t)
- '(lsp-restart 'auto-restart)
- '(lsp-rubocop-use-bundler nil)
- '(lsp-ruby-lsp-use-bundler nil)
- '(lsp-semgrep-metrics-enabled nil)
+ '(lsp-enable-imenu t)
+ '(lsp-enable-semantic-tokens t)
+ '(lsp-haskell-formatting-provider "stylish-haskell")
+ '(lsp-imenu-sort-methods '(name))
+ '(lsp-lens-enable nil)
+ '(lsp-modeline-workspace-status-enable t)
+ '(lsp-restart 'ignore)
+ '(lsp-sqls-server "~/go/bin/sqls")
+ '(lsp-ui-doc-enable nil)
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-imenu-enable t)
+ '(lsp-ui-peek-enable t)
+ '(lsp-ui-sideline-enable t)
  '(magit-auto-revert-mode t)
  '(magit-diff-refine-hunk 'all)
  '(magit-diff-use-overlays nil)
  '(magit-fetch-modules-jobs 8 t)
  '(magit-log-auto-more t)
  '(magit-pull-or-fetch t)
- '(magit-refresh-status-buffer t)
+ '(magit-refresh-status-buffer nil)
  '(magit-section-cache-visibility nil)
  '(magit-status-show-hashes-in-headers t)
  '(magithub-api-available-check-frequency 2)
  '(magithub-api-timeout 10)
- '(max-lisp-eval-depth 5000)
  '(menu-bar-mode nil)
  '(message-log-max 4096)
  '(mode-line-format
    '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
-     mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
-     "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
- '(mouse-wheel-progressive-speed nil)
+     mode-line-client mode-line-modified mode-line-remote mode-line-auto-compile mode-line-frame-identification
+     mode-line-buffer-identification "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info
+     mode-line-end-spaces))
  '(network-security-level 'high)
  '(ns-antialias-text t)
  '(ns-confirm-quit t)
- '(org-format-latex-options
-   '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale
-                 1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
- '(org-hide-emphasis-markers nil)
- '(org-imenu-depth 6)
+ '(org-modules
+   '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m))
+ '(org-src-block-faces
+   '(("emacs-lisp" (:background "#F0FFF0")) ("dot" (:foreground "gray50"))))
  '(package-native-compile t)
  '(package-selected-packages
-   '(adoc-mode ag alect-themes ansible auto-compile auto-package-update auto-virtualenv browse-at-remote cdlatex company
-        company-terraform counsel csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker
-        docker-compose-mode dockerfile-mode dotenv-mode emacsql espresso-theme exec-path-from-shell eyebrowse feature-mode
-        fill-column-indicator flycheck-gradle format-all gcmh git-gutter git-link git-timemachine go-mode gptel gruvbox-theme
-        haskell-mode helpful hlint-refactor latex-extra latex-math-preview logview lsp-ivy lsp-metals lsp-ui magit
-        mustache-mode org-appear org-side-tree org-xlatex persistent-scratch preview-auto projectile protobuf-mode
-        restart-emacs restclient rg rust-mode smartparens smarty-mode tramp typescript-mode vdiff vterm web-mode websocket
-        ws-butler xterm-color yasnippet))
+   '(ace-popup-menu adoc-mode ag agent-shell alect-themes ansible async auto-compile auto-package-update auto-virtualenv
+                    browse-at-remote cider company-terraform copilot copilot-chat counsel-projectile crontab-mode
+                    csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker
+                    docker-compose-mode dockerfile-mode emacsql envrc espresso-theme ess exec-path-from-shell eyebrowse
+                    fill-column-indicator flycheck-haskell flycheck-inline flycheck-rtags format-all fsharp-mode gcmd
+                    gcmh git-gutter git-link git-timemachine go-mode gptel groovy-mode gruvbox-theme helpful
+                    highlight-defined highlight-indent-guides highlight-thing hindent hlint-refactor iedit julia-mode
+                    julia-repl logview lsp-haskell lsp-ivy lsp-metals lsp-ui magit mustache-mode nix-mode pdf-tools
+                    persistent-scratch protobuf-mode puppet-mode purescript-mode racket-mode rainbow-delimiters
+                    repl-toggle restart-emacs restclient rg rust-mode sbt-mode slime smartparens snakemake-mode
+                    swift-mode typescript-mode uuidgen vagrant vagrant-tramp vdiff visual-fill-column vterm websocket
+                    ws-butler xterm-color yasnippet))
+ '(package-vc-selected-packages
+   '((tramp-rpc :url "https://github.com/ArthurHeymans/emacs-tramp-rpc" :lisp-dir "lisp")
+     (copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
  '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
  '(proced-auto-update-flag t)
- '(projectile-completion-system 'ivy)
- '(projectile-mode t nil (projectile))
+ '(proced-format 'verbose)
+ '(projectile-dynamic-mode-line nil)
+ '(projectile-enable-caching t)
+ '(projectile-enable-idle-timer nil)
+ '(projectile-idle-timer-seconds 30)
+ '(projectile-mode-line-function '(lambda nil ("")))
+ '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
  '(projectile-sort-order 'recently-active)
- '(projectile-tags-command "echo foo")
- '(recentf-auto-cleanup 300)
- '(recentf-keep '(recentf-keep-default-predicate file-remote-p))
+ '(projectile-tags-backend 'auto)
+ '(projectile-tags-command "fast-tags -e -R %s")
+ '(projectile-use-git-grep t)
+ '(purescript-mode-hook
+   '(turn-on-eldoc-mode turn-on-purescript-indent
+                        (lambda nil (company-mode) (lsp) (flycheck-mode) (turn-on-purescript-indentation))))
  '(rich-minority-mode t)
  '(ring-bell-function nil)
  '(rm-blacklist
    '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
  '(rm-whitelist nil)
- '(ruby-flymake-use-rubocop-if-available t)
  '(safe-local-variable-values
-   '((eval c-set-offset 'inlambda 0) (eval c-set-offset 'access-label '-) (eval c-set-offset 'substatement-open 0)
-     (eval c-set-offset 'arglist-cont-nonempty '+) (eval c-set-offset 'arglist-cont 0)
-     (eval c-set-offset 'arglist-intro '+) (eval c-set-offset 'inline-open 0) (eval c-set-offset 'defun-open 0)
-     (eval c-set-offset 'innamespace 0) (indicate-empty-lines . t) (c-block-comment-prefix . "  ")
-     (eval add-hook 'before-save-hook 'time-stamp) (buffer-file-coding-system . utf-8-unix) (TeX-master . t)))
+   '((package-lint-main-file . "copilot-chat.el") (lsp-enabled-clients jsts-ls) (lsp-lens-enable)
+     (haskell-process-args-cabal-repl "--ghc-option=-ferror-spans") (lsp-haskell-plugin-stan-global-on)
+     (lsp-nix-nil-formatter "nixpkgs-fmt") (eval c-set-offset 'inlambda 0) (eval c-set-offset 'access-label '-)
+     (eval c-set-offset 'substatement-open 0) (eval c-set-offset 'arglist-cont-nonempty '+)
+     (eval c-set-offset 'arglist-cont 0) (eval c-set-offset 'arglist-intro '+) (eval c-set-offset 'inline-open 0)
+     (eval c-set-offset 'defun-open 0) (eval c-set-offset 'innamespace 0) (indicate-empty-lines . t)
+     (c-block-comment-prefix . "  ") (eval add-hook 'before-save-hook 'time-stamp)
+     (buffer-file-coding-system . utf-8-unix) (TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
+ '(scala-indent:default-run-on-strategy 0)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
  '(shr-max-image-proportion 1.0)
  '(smartparens-global-strict-mode nil)
- '(sml/extra-filler 0)
- '(sml/mode-width 'full)
- '(sml/shorten-modes t)
- '(sml/theme 'respectful)
  '(sp-base-key-bindings 'sp)
  '(sp-navigate-reindent-after-up
    '((interactive cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode common-lisp-mode
@@ -646,16 +738,6 @@
  '(tags-revert-without-query t)
  '(term-scroll-to-bottom-on-output t)
  '(tool-bar-mode nil)
- '(tramp-default-method "ssh")
- '(tramp-remote-path
-   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/npm-global/bin/" "/home/becich/.gem/bin/" "/usr/local/bin/"
-     "/home/becich/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin"
-     "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin"
-     "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin" "/opt/homebrew/bin"
-     "/opt/homebrew/sbin"))
- '(tramp-use-connection-share t)
- '(twittering-timer-interval 300)
- '(twittering-use-icon-storage t)
  '(typescript-indent-level 2)
  '(vc-annotate-background "#222222")
  '(vc-annotate-color-map
@@ -663,14 +745,12 @@
      (140 . "#32cd32") (160 . "#8ce096") (180 . "#7fb07f") (200 . "#3cb370") (220 . "#099709") (240 . "#2fdbde")
      (260 . "#1fb3b3") (280 . "#8cf1f1") (300 . "#94bff3") (320 . "#62b6ea") (340 . "#30a5f5") (360 . "#e353b9")))
  '(vc-annotate-very-old-color "#e353b9")
- '(vc-handled-backends '(Git))
  '(vdiff-diff-algorithm 'git-diff)
  '(visible-bell nil)
  '(vterm-always-compile-module t)
  '(vterm-min-window-width 60)
- '(vterm-tramp-shells '(("docker" "/usr/bin/zsh") ("ssh" "/usr/bin/zsh")))
- '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
+ '(warning-suppress-types '((direnv) (frameset) (frameset) (comp) (comp) (comp)))
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark
           newline-mark))
@@ -680,8 +760,7 @@
      ("US/Hawaii" "Honolulu")))
  '(world-clock-time-format "%A %d %B %I:%M %p %Z")
  '(ws-butler-keep-whitespace-before-point nil)
- '(xref-search-program 'ripgrep)
- '(yas-global-mode nil))
+ '(yas-global-mode t))
 
 ;; (setq ring-bell-function 'ignore)
 
@@ -692,8 +771,6 @@
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 (setq-default line-spacing 0)
-
-(setq docker-arguments nil)
 
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 
@@ -787,7 +864,7 @@
 
 (global-set-key "\C-xO" 'other-frame)
 
-;; (setq x-wait-for-event-timeout nil)
+(add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
 
 (eyebrowse-mode t)
 (eyebrowse-setup-opinionated-keys)
@@ -797,6 +874,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(copilot-chat-spinner-face ((t nil)))
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
@@ -825,21 +903,6 @@
 (setq search-default-mode #'char-fold-to-regexp)
 (global-set-key "\C-s" 'swiper)
 (global-set-key "\M-s" 'swiper-isearch-thing-at-point)
-;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
-;; (global-set-key (kbd "<f6>") 'ivy-resume)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
-;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-;; (global-set-key (kbd "C-c g") 'counsel-git)
-;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; (global-set-key (kbd "C-c k") 'counsel-ag)
-;; (global-set-key (kbd "C-x l") 'counsel-locate)
-;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 (global-set-key (kbd "C-c i") 'counsel-imenu)
 
@@ -856,6 +919,7 @@
 (add-to-list 'auto-mode-alist '("\\.avro\\'" . js-json-mode))
 (put 'magit-clean 'disabled nil)
 
+(envrc-global-mode)
 
 (setq lsp-semgrep-languages nil)
 
@@ -879,24 +943,12 @@
 
 (setq lsp-copilot-enabled nil)
 
-
-;; TRAMP responsiveness: avoid extra remote probes, keep SSH sessions warm,
-;; and use out-of-band copy only after the inline path becomes expensive.
 (setq remote-file-name-inhibit-locks t
       remote-file-name-inhibit-auto-save-visited t
       tramp-use-connection-share t
       tramp-use-scp-direct-remote-copying t
       tramp-copy-size-limit (* 1024 1024) ;; 1MB
       tramp-verbose 1)
-
-;; (with-eval-after-load 'tramp
-;;   (with-eval-after-load 'vc
-;;     (unless (string-match-p (regexp-quote tramp-file-name-regexp)
-;;                             vc-ignore-dir-regexp)
-;;       (setq vc-ignore-dir-regexp
-;;             (format "\\(%s\\)\\|\\(%s\\)"
-;;                     vc-ignore-dir-regexp
-;;                     tramp-file-name-regexp)))))
 
 (connection-local-set-profile-variables
  'remote-direct-async-process
@@ -923,11 +975,10 @@
 ;; (setq magit-refresh-status-buffer nil)
 
 
+(gptel-make-gh-copilot "Copilot")
+
 (setq gptel-backend (gptel-make-gh-copilot "Copilot"))
 
-;;(setq gptel-stream nil)
-;
-;; (setq gptel-curl-extra-args '("--http1.1"))
 
 ;; (let ((major-mode 'org-mode))
 ;;   (org-latex-preview))

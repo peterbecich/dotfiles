@@ -1,36 +1,13 @@
 # [ $TERM = "dumb" ] && unsetopt zle && PS1='$ '
 
 export ZSH="$HOME/.oh-my-zsh"
-export MOZ_ENABLE_WAYLAND=1
+export MOZ_ENABLE_WAYLAND=0
 
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="gnzh"
-# ZSH_THEME="simple"
+ZSH_THEME="steeef"
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode auto
 
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -59,9 +36,11 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+plugins=(git ssh-agent zsh-syntax-highlighting history-substring-search)
+
+
+source $ZSH/oh-my-zsh.sh  ~
 
 # User configuration
 
@@ -74,7 +53,7 @@ EDITOR=emacs
 KUBE_EDITOR=emacs
 
 
-# export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 # Aliases
 alias ls='ls --color=auto'
 alias ll='ls -lah --color=auto'
@@ -89,30 +68,14 @@ HISTSIZE=5000
 SAVEHIST=5000
 HISTFILE=~/.zsh_history
 
-plugins=(git)
-
 export N_PREFIX=~/.n
 
-path=($N_PREFIX/bin $path)
+path=($path ~/.npm-global/bin )
 
-path=(~/.npm-global/bin $path)
-
-path=(~/.local/bin $path)
-
-path=(~/bin $path)
-
-path=(~/.gem/ruby/3.2.0/bin $path)
-
-# path=(/opt/swift/usr/bin $path)
-
-# path=(/usr/local/go/bin $path)
-
-[ -f "/home/peterbecich/.ghcup/env" ] && source "/home/peterbecich/.ghcup/env" # ghcup-env
 
 export MINIKUBE_HOME=/var/lib/docker/minikube
 
-export TERM=xterm-color
-set +e
+fpath+=(~/.config/hcloud/completion/zsh)
 
 autoload -Uz compinit promptinit
 compinit
@@ -132,18 +95,22 @@ vterm_printf(){
     fi
 }
 
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
-
-export KEYCLOAK_SOURCE=~/libraries/keycloak/
-
+# export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
 
 source <(kubectl completion zsh)
 
-eval $(minikube -p minikube docker-env)
+# eval $(minikube -p minikube docker-env)
 
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
 
-eval "$(rbenv init -)"
+export MOZ_DISABLE_RDD_SANDBOX=1
+export LIBVA_DRIVER_NAME=nvidia
+export __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/10_nvidia.json
+
+
+
+path=(~/.local/bin $path)
+
+path=(~/bin $path)
+
+[ -f "/home/peterbecich/.ghcup/env" ] && . "/home/peterbecich/.ghcup/env" # ghcup-env
