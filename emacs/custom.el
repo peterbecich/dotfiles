@@ -5,6 +5,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(agent-shell-preferred-agent-config 'codex)
+ '(agent-shell-tramp-rpc-mode t)
+ '(agent-shell-transcript-file-path-function
+   #[128 "\304\300\301\3#\207"
+         [agent-shell-tramp-rpc--transcript-file-path-around agent-shell--default-transcript-file-path :around nil apply]
+         5 advice])
  '(ansi-color-names-vector
    ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
@@ -259,6 +264,7 @@
      "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
      "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"
      "/opt/homebrew/bin" "/opt/homebrew/sbin"))
+ '(tramp-rpc-debug nil)
  '(tramp-use-connection-share t)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)

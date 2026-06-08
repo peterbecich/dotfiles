@@ -621,7 +621,6 @@
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
- '(show-smartparens-global-mode t)
  '(shr-max-image-proportion 1.0)
  '(smartparens-global-strict-mode nil)
  '(sml/extra-filler 0)
