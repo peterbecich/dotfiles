@@ -1,3 +1,5 @@
+;;; package_list.el --- Package list scratch settings -*- lexical-binding: t; -*-
+
 ;; (setq my-package-list '(
 ;; 			auctex
 ;; 			auto-complete

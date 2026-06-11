@@ -1,3 +1,5 @@
+;;; json.el --- JSON settings -*- lexical-binding: t; -*-
+
 ;; (add-hook 'json-mode-hook
 ;;           (lambda ()
 ;;             (make-local-variable 'js-indent-level)

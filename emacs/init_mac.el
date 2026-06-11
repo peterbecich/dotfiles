@@ -1,3 +1,5 @@
+;;; init_mac.el --- macOS-specific Emacs settings -*- lexical-binding: t; -*-
+
 ;;(setq use-package-always-ensure t)
 
 (let ((private-mac-file

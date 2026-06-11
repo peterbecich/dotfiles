@@ -1,3 +1,5 @@
+;;; scala.el --- Scala settings -*- lexical-binding: t; -*-
+
 
 ;; (require 'package)
 ;; (require 'use-package)

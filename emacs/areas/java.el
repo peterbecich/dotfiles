@@ -1,3 +1,5 @@
+;;; java.el --- Java settings -*- lexical-binding: t; -*-
+
 
 (add-hook 'java-mode-hook #'smartparens-mode)
 (add-hook 'java-mode-hook 'flycheck-mode)
@@ -10,4 +12,3 @@
 ;;    (eclim-mode t))
 
 ;; (add-hook 'java-mode-hook 'my-java-mode-hook)
-

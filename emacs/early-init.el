@@ -18,10 +18,11 @@
 ;; Disable native compilation before package managers can queue async comp jobs.
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
-      native-comp-deferred-compilation nil
       native-comp-jit-compilation nil
       package-native-compile nil
       straight-disable-native-compile t)
+(with-suppressed-warnings ((obsolete native-comp-deferred-compilation))
+  (setq native-comp-deferred-compilation nil))
 
 (add-hook 'emacs-startup-hook
           (lambda ()

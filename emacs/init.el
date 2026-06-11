@@ -1,10 +1,12 @@
+;;; init.el --- Emacs startup configuration -*- lexical-binding: t; -*-
 
 (setq network-security-level 'high)
 (setq package-enable-at-startup nil
       package-native-compile nil
-      native-comp-deferred-compilation nil
       native-comp-jit-compilation nil
       straight-disable-native-compile t)
+(with-suppressed-warnings ((obsolete native-comp-deferred-compilation))
+  (setq native-comp-deferred-compilation nil))
 (setq tls-checktrust t)
 
 
@@ -60,12 +62,12 @@
 (defun my/call-after-startup (delay function &rest args)
   "Call FUNCTION with ARGS after startup and DELAY idle seconds."
   (let ((start-timer
-         `(lambda ()
+         (lambda ()
             (run-with-idle-timer
-             ,delay nil
+             delay nil
              (lambda ()
-               (when (fboundp ',function)
-                 (apply ',function ',args)))))))
+               (when (fboundp function)
+                 (apply function args)))))))
     (if (bound-and-true-p after-init-time)
         (funcall start-timer)
       (add-hook 'emacs-startup-hook start-timer))))
@@ -90,8 +92,7 @@
 ;;   (auto-compile-on-load-mode)
 ;;   (auto-compile-on-save-mode))
 
-(use-package async
-  :defer t)
+(use-package async)
 
 
 (if (eq system-type 'gnu/linux)
@@ -103,18 +104,19 @@
 
 
 
-(use-package transient :defer t)
-(use-package tramp :defer t)
+(use-package compat)
+(use-package transient)
+(use-package tramp)
 (defvar tramp-remote-path '(tramp-default-remote-path)
   "Remote PATH entries for TRAMP, set early so private config can extend it lazily.")
 
 (use-package ace-popup-menu :commands ace-popup-menu-mode)
 (use-package ag :commands (ag ag-project ag-regexp ag-project-regexp))
-(use-package alect-themes :defer t)
-(use-package ansible :defer t)
-(use-package auto-virtualenv :defer t)
+(use-package alect-themes)
+(use-package ansible)
+(use-package auto-virtualenv)
 (use-package browse-at-remote :commands browse-at-remote)
-(use-package cider :defer t)
+(use-package cider)
 (use-package company
   :commands (company-mode global-company-mode)
   :hook (scala-mode . company-mode)
@@ -139,14 +141,13 @@
         counsel-projectile-sort-directories t
         counsel-projectile-sort-files t
         counsel-projectile-sort-projects t))
-(use-package csv-mode :defer t)
+(use-package csv-mode)
 (use-package dap-mode
-  :defer t
   :hook
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode))
-(use-package darktooth-theme :defer t)
-(use-package dhall-mode :defer t)
+(use-package darktooth-theme)
+(use-package dhall-mode)
 (use-package diff-hl
   :commands (diff-hl-mode global-diff-hl-mode)
   :init
@@ -163,15 +164,15 @@
   :init
   (my/call-after-startup 1.3 'diredfl-global-mode 1))
 (use-package docker :commands docker)
-(use-package docker-compose-mode :defer t)
-(use-package dockerfile-mode :defer t)
+(use-package docker-compose-mode)
+(use-package dockerfile-mode)
 (use-package editorconfig
   :commands editorconfig-mode
   :init
   (my/call-after-startup 1.1 'editorconfig-mode 1))
-(use-package emacsql :defer t)
-(use-package espresso-theme :defer t)
-(use-package ess :defer t)
+(use-package emacsql)
+(use-package espresso-theme)
+(use-package ess)
 (use-package exec-path-from-shell :disabled t)
 (use-package eyebrowse
   :commands eyebrowse-mode
@@ -186,12 +187,12 @@
 (use-package flycheck-haskell :after (flycheck haskell-mode))
 (use-package flycheck-inline :after flycheck)
 (use-package flycheck-rtags :after flycheck)
-(use-package fsharp-mode :defer t)
+(use-package fsharp-mode)
 (use-package git-link :commands git-link)
 (use-package git-timemachine :commands git-timemachine)
-(use-package go-mode :defer t)
+(use-package go-mode)
 (use-package groovy-mode :mode "\\.jenkinsfile")
-(use-package haskell-mode :defer t)
+(use-package haskell-mode)
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-key helpful-at-point helpful-function helpful-command)
   :bind (("C-h f" . helpful-callable)
@@ -201,8 +202,10 @@
          ("C-h F" . helpful-function)
          ("C-h C" . helpful-command)))
 (use-package highlight-defined :hook (emacs-lisp-mode . highlight-defined-mode))
-(use-package highlight-indent-guides :defer t)
-(use-package highlight-thing :defer t)
+(use-package highlight-indent-guides
+  :init
+  (setq highlight-indent-guides-suppress-auto-error t))
+(use-package highlight-thing)
 (use-package hindent :after haskell-mode)
 (use-package hlint-refactor :after haskell-mode)
 (use-package iedit :commands iedit-mode)
@@ -212,10 +215,10 @@
   (my/call-after-startup 0.5 'ivy-mode 1)
   :custom
   (ivy-use-virtual-buffers t))
-(use-package julia-mode :defer t)
+(use-package julia-mode)
 (use-package julia-repl :after julia-mode)
 ;; (use-package kubernetes :ensure t)
-(use-package logview :defer t)
+(use-package logview)
 (use-package lsp-haskell :after lsp-mode)
 ;; (use-package lsp-java :ensure t)
 (use-package lsp-metals
@@ -224,25 +227,24 @@
   (lsp-metals-enable-semantic-highlighting t))
 (use-package lsp-ui :commands (lsp-ui-mode lsp-ui-sideline-mode))
 (use-package magit :commands (magit-status magit-dispatch))
-(use-package markdown-mode :defer t)
+(use-package markdown-mode)
 (use-package nix-mode
   :hook (nix-mode . lsp-deferred))
 (use-package org
-  :straight nil
-  :defer t)
+  :straight nil)
 ;; (use-package pdf-tools :ensure t)
 (use-package persistent-scratch
   :commands persistent-scratch-setup-default
   :init
   (my/call-after-startup 1.8 'persistent-scratch-setup-default))
-(use-package protobuf-mode :defer t)
-(use-package puppet-mode :defer t)
-(use-package purescript-mode :defer t)
-(use-package racket-mode :defer t)
+(use-package protobuf-mode)
+(use-package puppet-mode)
+(use-package purescript-mode)
+(use-package racket-mode)
 (use-package rainbow-delimiters :commands rainbow-delimiters-mode)
 (use-package repl-toggle :commands repl-toggle)
 (use-package restart-emacs :commands restart-emacs)
-(use-package restclient :defer t)
+(use-package restclient)
 (use-package slime :commands slime)
 (use-package smartparens
   :commands (show-smartparens-global-mode smartparens-mode smartparens-strict-mode)
@@ -251,16 +253,16 @@
   (my/call-after-startup 1.6 'show-smartparens-global-mode 1)
   :config
   (require 'smartparens-config))
-(use-package snakemake-mode :defer t)
-(use-package swift-mode :defer t)
+(use-package snakemake-mode)
+(use-package swift-mode)
 (use-package swiper
   :commands (swiper swiper-isearch-thing-at-point)
   :bind (("C-s" . swiper)
          ("M-s" . swiper-isearch-thing-at-point)))
-(use-package terraform-mode :defer t)
-(use-package typescript-mode :defer t)
+(use-package terraform-mode)
+(use-package typescript-mode)
 (use-package uuidgen :commands uuidgen)
-(use-package vagrant :defer t)
+(use-package vagrant)
 (use-package vagrant-tramp :after (vagrant tramp))
 (use-package vdiff
   :commands (vdiff-files vdiff-buffers vdiff-current-file)
@@ -268,12 +270,12 @@
   (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map))
 (use-package visual-fill-column :commands visual-fill-column-mode)
 (use-package vterm :commands vterm)
-(use-package websocket :defer t)
+(use-package websocket)
 (use-package ws-butler
   :hook ((prog-mode yaml-mode) . ws-butler-mode))
 (use-package xterm-color :commands xterm-color-filter)
-(use-package yaml-mode :defer t)
-(use-package rust-mode :defer t)
+(use-package yaml-mode)
+(use-package rust-mode)
 (use-package envrc :commands envrc-global-mode)
 
 (use-package copilot
@@ -314,8 +316,7 @@
   :commands agent-shell)
 
 (use-package acp
-  :straight (:host github :repo "xenodium/acp.el")
-  :defer t)
+  :straight (:host github :repo "xenodium/acp.el"))
 
 
 (use-package agent-shell-tramp-rpc
@@ -327,7 +328,6 @@
 
 (use-package format-all :commands format-all-buffer)
 (use-package git-gutter
-  :defer t
   :commands git-gutter:revert-hunk)
 (use-package git-commit
   :straight nil
@@ -338,15 +338,15 @@
   :commands global-hl-todo-mode
   :init
   (my/call-after-startup 1.5 'global-hl-todo-mode 1))
-(use-package mustache-mode :defer t)
+(use-package mustache-mode)
 (use-package rg :commands (rg rg-project rg-dwim))
 (use-package pdf-tools :commands pdf-tools-install)
-(use-package adoc-mode :defer t)
-(use-package yasnippet :defer t)
-(use-package scala-mode :defer t)
+(use-package adoc-mode)
+(use-package yasnippet)
+(use-package scala-mode)
 
 (use-package eglot
-  :defer t
+  :straight nil
   :custom
   (eglot-sync-connect nil)
   (eglot-events-buffer-size 0))
@@ -361,7 +361,7 @@
   (gcmh-low-cons-threshold (* 32 1024 1024)))
 
 
-(use-package crontab-mode :defer t)
+(use-package crontab-mode)
 
 (use-package gptel
   :commands (gptel gptel-send gptel-menu))

@@ -1,3 +1,5 @@
+;;; lisp.el --- Lisp settings -*- lexical-binding: t; -*-
+
 
 (add-hook 'emacs-lisp-mode-hook 'highlight-defined-mode)
 
