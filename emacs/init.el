@@ -179,6 +179,31 @@
   :init
   (my/call-after-startup 0.8 'eyebrowse-mode 1)
   :config
+  (defvar my/eyebrowse-mode-line-segment
+    '(eyebrowse-mode
+      (:eval
+       (let ((indicator (eyebrowse-mode-line-indicator)))
+         (if (string= indicator "")
+             ""
+           (concat indicator " ")))))
+    "Left-side mode-line segment for `eyebrowse-mode'.")
+
+  (defun my/eyebrowse-move-mode-line-left (&rest _)
+    "Move the eyebrowse indicator to the left side of the mode line."
+    (setq mode-line-misc-info
+          (remove '(eyebrowse-mode (:eval (eyebrowse-mode-line-indicator)))
+                  mode-line-misc-info))
+    (setq-default mode-line-format
+                  (let ((format (remove my/eyebrowse-mode-line-segment
+                                        (default-value 'mode-line-format))))
+                    (if (equal (car format) "%e")
+                        (cons "%e" (cons my/eyebrowse-mode-line-segment
+                                         (cdr format)))
+                      (cons my/eyebrowse-mode-line-segment format))))
+    (force-mode-line-update t))
+
+  (advice-add 'eyebrowse-mode :after #'my/eyebrowse-move-mode-line-left)
+  (my/eyebrowse-move-mode-line-left)
   (eyebrowse-setup-opinionated-keys))
 (use-package fill-column-indicator :commands fci-mode)
 (use-package flycheck

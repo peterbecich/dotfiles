@@ -223,10 +223,10 @@
  '(max-lisp-eval-depth 5000)
  '(menu-bar-mode nil)
  '(message-log-max 4096)
- '(mode-line-format
-   '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
-     mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
-     "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+ ;; '(mode-line-format
+ ;;   '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
+ ;;     mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
+ ;;     "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
  '(mouse-wheel-progressive-speed nil)
  '(network-security-level 'high)
  '(ns-antialias-text t)
