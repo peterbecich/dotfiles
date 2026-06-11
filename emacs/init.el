@@ -12,8 +12,6 @@
 
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
 
-;; (when (memq window-system '(mac ns x))
-;;   (exec-path-from-shell-initialize))
 
 (defvar my/emacs-config-directory
   (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
@@ -173,7 +171,7 @@
 (use-package emacsql)
 (use-package espresso-theme)
 (use-package ess)
-(use-package exec-path-from-shell :disabled t)
+(use-package exec-path-from-shell)
 (use-package eyebrowse
   :commands eyebrowse-mode
   :init
@@ -791,3 +789,6 @@
 
 
 (setq tramp-rpc-deploy-git-build-policy 'release)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
