@@ -1,3 +1,5 @@
+;;; haskell.el --- Haskell settings -*- lexical-binding: t; -*-
+
 
 (add-hook 'lsp-mode 'lsp-ui-sideline-mode)
 
@@ -6,5 +8,4 @@
 
 ;; Ignore compiled Haskell files in filename completions
 (add-to-list 'completion-ignored-extensions ".hi")
-
 

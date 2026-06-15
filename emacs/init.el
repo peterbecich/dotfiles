@@ -1,13 +1,17 @@
+;;; init.el --- Emacs startup configuration -*- lexical-binding: t; -*-
 
 (setq network-security-level 'high)
-(setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil
+      package-native-compile nil
+      native-comp-jit-compilation nil
+      straight-disable-native-compile t)
+(with-suppressed-warnings ((obsolete native-comp-deferred-compilation))
+  (setq native-comp-deferred-compilation nil))
 (setq tls-checktrust t)
 
 
 (autoload #'tramp-register-crypt-file-name-handler "tramp-crypt")
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
 
 (defvar my/emacs-config-directory
   (file-name-directory (or load-file-name buffer-file-name user-emacs-directory))
@@ -24,6 +28,9 @@
 (setq custom-file (my/config-file "custom.el"))
 
 ;; Bootstrap straight.el before `use-package' so explicit :straight recipes work.
+(setq straight-check-for-modifications '(check-on-save find-when-checking)
+      straight-vc-git-default-clone-depth 1)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -40,33 +47,28 @@
   (load bootstrap-file nil 'nomessage))
 
 
-(require 'package)
-
-
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-
-(unless (require 'use-package nil 'noerror)
-  (unless package--initialized
-    (package-initialize))
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (require 'use-package))
-
-(unless package--initialized
-  (package-initialize))
+(setq straight-use-package-by-default t)
+(straight-use-package 'use-package)
+(require 'use-package)
 
 (eval-when-compile
   (require 'use-package))
 
-(use-package exec-path-from-shell
-  :ensure t
-  :if (memq window-system '(mac ns x))
-  :config
-  (exec-path-from-shell-initialize))
+(setq use-package-always-ensure nil
+      load-prefer-newer t)
 
-(setq load-prefer-newer t)
+(defun my/call-after-startup (delay function &rest args)
+  "Call FUNCTION with ARGS after startup and DELAY idle seconds."
+  (let ((start-timer
+         (lambda ()
+            (run-with-idle-timer
+             delay nil
+             (lambda ()
+               (when (fboundp function)
+                 (apply function args)))))))
+    (if (bound-and-true-p after-init-time)
+        (funcall start-timer)
+      (add-hook 'emacs-startup-hook start-timer))))
 
 ;; Subprocess-heavy packages (LSP servers, shells, TRAMP, ripgrep, GPTel) are
 ;; where Emacs gets most of its useful parallelism.
@@ -80,22 +82,15 @@
       auto-revert-remote-files nil
       auto-revert-use-notify t)
 
-(use-package auto-compile
-  :ensure t
-  :custom
-  (auto-compile-native-compile t))
+;; (use-package auto-compile
+;;   :demand t
+;;   :custom
+;;   (auto-compile-native-compile t)
+;;   :config
+;;   (auto-compile-on-load-mode)
+;;   (auto-compile-on-save-mode))
 
-(require 'auto-compile)
-(auto-compile-on-load-mode)
-(auto-compile-on-save-mode)
-
-(use-package async
-  :ensure t
-  :config
-  (require 'dired-async)
-  (require 'async-bytecomp)
-  (dired-async-mode 1)
-  (async-bytecomp-package-mode 1))
+(use-package async)
 
 
 (if (eq system-type 'gnu/linux)
@@ -107,163 +102,241 @@
 
 
 
-(use-package ace-popup-menu :ensure t)
-(use-package ag :ensure t)
-(use-package alect-themes :ensure t)
-(use-package ansible :ensure t)
-(use-package auto-compile :ensure t)
-(use-package browse-at-remote :ensure t)
-(use-package cider :ensure t)
+(use-package compat)
+(use-package transient)
+(use-package tramp)
+(defvar tramp-remote-path '(tramp-default-remote-path)
+  "Remote PATH entries for TRAMP, set early so private config can extend it lazily.")
+
+(use-package ace-popup-menu :commands ace-popup-menu-mode)
+(use-package ag :commands (ag ag-project ag-regexp ag-project-regexp))
+(use-package alect-themes)
+(use-package ansible)
+(use-package auto-virtualenv)
+(use-package browse-at-remote :commands browse-at-remote)
+(use-package cider)
 (use-package company
+  :commands (company-mode global-company-mode)
   :hook (scala-mode . company-mode)
-  :config (setq lsp-completion-provider :capf)
-  :ensure t
-  )
-(use-package company-terraform :ensure t)
-(use-package counsel :ensure t)
-(use-package counsel-projectile :ensure t)
-(use-package csv-mode :ensure t)
+  :init
+  (my/call-after-startup 1.0 'global-company-mode 1)
+  :custom
+  (lsp-completion-provider :capf))
+(use-package company-terraform :after (company terraform-mode))
+(use-package counsel
+  :commands (counsel-mode counsel-imenu counsel-yank-pop)
+  :bind (("C-c i" . counsel-imenu))
+  :init
+  (setq counsel-ag-base-command "ag --nocolor --nogroup %s"
+        counsel-mode-override-describe-bindings t)
+  (my/call-after-startup 0.7 'counsel-mode 1))
+(use-package counsel-projectile
+  :commands (counsel-projectile counsel-projectile-find-file counsel-projectile-rg counsel-projectile-ag)
+  :init
+  (setq counsel-projectile-ag-initial-input '(ivy-thing-at-point)
+        counsel-projectile-rg-initial-input '(ivy-thing-at-point)
+        counsel-projectile-sort-buffers t
+        counsel-projectile-sort-directories t
+        counsel-projectile-sort-files t
+        counsel-projectile-sort-projects t))
+(use-package csv-mode)
 (use-package dap-mode
   :hook
   (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode)
-  )
-(use-package darktooth-theme :ensure t)
-(use-package dhall-mode :ensure t)
-(use-package diff-hl :ensure t)
-(use-package diminish :ensure t)
-(use-package dired-git-info :ensure t)
-(use-package diredfl :ensure t)
-(use-package docker :ensure t)
-(use-package docker-compose-mode :ensure t)
-(use-package dockerfile-mode :ensure t)
+  (lsp-mode . dap-ui-mode))
+(use-package darktooth-theme)
+(use-package dhall-mode)
+(use-package diff-hl
+  :commands (diff-hl-mode global-diff-hl-mode)
+  :init
+  (my/call-after-startup 1.2 'global-diff-hl-mode 1)
+  :custom
+  (diff-hl-update-async t))
+(use-package diminish
+  :commands diminish
+  :init
+  (my/call-after-startup 2.2 'my/diminish-modes))
+(use-package dired-git-info :commands dired-git-info-mode)
+(use-package diredfl
+  :commands diredfl-global-mode
+  :init
+  (my/call-after-startup 1.3 'diredfl-global-mode 1))
+(use-package docker :commands docker)
+(use-package docker-compose-mode)
+(use-package dockerfile-mode)
 (use-package editorconfig
-  :ensure t
+  :commands editorconfig-mode
+  :init
+  (my/call-after-startup 1.1 'editorconfig-mode 1))
+(use-package emacsql)
+(use-package espresso-theme)
+(use-package ess)
+(use-package exec-path-from-shell)
+(use-package eyebrowse
+  :commands eyebrowse-mode
+  :init
+  (my/call-after-startup 0.8 'eyebrowse-mode 1)
   :config
-  (editorconfig-mode 1))
-(use-package emacsql :ensure t)
-(use-package espresso-theme :ensure t)
-(use-package ess :ensure t)
-(use-package exec-path-from-shell :ensure t)
-(use-package eyebrowse :ensure t)
-(use-package fill-column-indicator :ensure t)
-(use-package flycheck :init (global-flycheck-mode))
-(use-package flycheck-haskell :ensure t)
-(use-package flycheck-inline :ensure t)
-(use-package flycheck-rtags :ensure t)
-(use-package fsharp-mode :ensure t)
-(use-package git-link :ensure t)
-(use-package git-timemachine :ensure t)
-(use-package go-mode :ensure t)
-(use-package groovy-mode :ensure t :mode "\\.jenkinsfile")
-(use-package haskell-mode :ensure t)
-(use-package helpful :ensure t)
-(use-package highlight-defined :ensure t)
-(use-package highlight-indent-guides :ensure t)
-(use-package highlight-thing :ensure t)
-(use-package hindent :ensure t)
-(use-package hlint-refactor :ensure t)
-(use-package iedit :ensure t)
-(use-package ivy :ensure t)
-(use-package julia-mode :ensure t)
-(use-package julia-repl :ensure t)
+  (defvar my/eyebrowse-mode-line-segment
+    '(eyebrowse-mode
+      (:eval
+       (let ((indicator (eyebrowse-mode-line-indicator)))
+         (if (string= indicator "")
+             ""
+           (concat indicator " ")))))
+    "Left-side mode-line segment for `eyebrowse-mode'.")
+
+  (defun my/eyebrowse-move-mode-line-left (&rest _)
+    "Move the eyebrowse indicator to the left side of the mode line."
+    (setq mode-line-misc-info
+          (remove '(eyebrowse-mode (:eval (eyebrowse-mode-line-indicator)))
+                  mode-line-misc-info))
+    (setq-default mode-line-format
+                  (let ((format (remove my/eyebrowse-mode-line-segment
+                                        (default-value 'mode-line-format))))
+                    (if (equal (car format) "%e")
+                        (cons "%e" (cons my/eyebrowse-mode-line-segment
+                                         (cdr format)))
+                      (cons my/eyebrowse-mode-line-segment format))))
+    (force-mode-line-update t))
+
+  (advice-add 'eyebrowse-mode :after #'my/eyebrowse-move-mode-line-left)
+  (my/eyebrowse-move-mode-line-left)
+  (eyebrowse-setup-opinionated-keys))
+(use-package fill-column-indicator :commands fci-mode)
+(use-package flycheck
+  :commands flycheck-mode
+  :hook (prog-mode . flycheck-mode))
+(use-package flycheck-haskell :after (flycheck haskell-mode))
+(use-package flycheck-inline :after flycheck)
+(use-package flycheck-rtags :after flycheck)
+(use-package fsharp-mode)
+(use-package git-link :commands git-link)
+(use-package git-timemachine :commands git-timemachine)
+(use-package go-mode)
+(use-package groovy-mode :mode "\\.jenkinsfile")
+(use-package haskell-mode)
+(use-package helpful
+  :commands (helpful-callable helpful-variable helpful-key helpful-at-point helpful-function helpful-command)
+  :bind (("C-h f" . helpful-callable)
+         ("C-h v" . helpful-variable)
+         ("C-h k" . helpful-key)
+         ("C-c C-d" . helpful-at-point)
+         ("C-h F" . helpful-function)
+         ("C-h C" . helpful-command)))
+(use-package highlight-defined :hook (emacs-lisp-mode . highlight-defined-mode))
+(use-package highlight-indent-guides
+  :init
+  (setq highlight-indent-guides-suppress-auto-error t))
+(use-package highlight-thing)
+(use-package hindent :after haskell-mode)
+(use-package hlint-refactor :after haskell-mode)
+(use-package iedit :commands iedit-mode)
+(use-package ivy
+  :commands ivy-mode
+  :init
+  (my/call-after-startup 0.5 'ivy-mode 1)
+  :custom
+  (ivy-use-virtual-buffers t))
+(use-package julia-mode)
+(use-package julia-repl :after julia-mode)
 ;; (use-package kubernetes :ensure t)
-(use-package logview :ensure t)
-(use-package lsp-haskell :ensure t)
+(use-package logview)
+(use-package lsp-haskell :after lsp-mode)
 ;; (use-package lsp-java :ensure t)
-(use-package lsp-metals)
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package magit :ensure t)
-(use-package transient :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package nix-mode :ensure t :mode "\\.nix\\'")
-(use-package org :ensure t)
+(use-package lsp-metals
+  :after lsp-mode
+  :custom
+  (lsp-metals-enable-semantic-highlighting t))
+(use-package lsp-ui :commands (lsp-ui-mode lsp-ui-sideline-mode))
+(use-package magit :commands (magit-status magit-dispatch))
+(use-package markdown-mode)
+(use-package nix-mode
+  :hook (nix-mode . lsp-deferred))
+(use-package org
+  :straight nil)
 ;; (use-package pdf-tools :ensure t)
-(use-package persistent-scratch :ensure t)
-(use-package protobuf-mode :ensure t)
-(use-package puppet-mode :ensure t)
-(use-package purescript-mode :ensure t)
-(use-package racket-mode :ensure t)
-(use-package rainbow-delimiters :ensure t)
-(use-package repl-toggle :ensure t)
-(use-package restart-emacs :ensure t)
-(use-package restclient :ensure t)
-(use-package slime :ensure t)
-(use-package smartparens :ensure t)
-(use-package snakemake-mode :ensure t)
-(use-package swift-mode :ensure t)
-(use-package swiper :ensure t)
-(use-package terraform-mode :ensure t)
-(use-package typescript-mode :ensure t)
-(use-package uuidgen :ensure t)
-(use-package vagrant :ensure)
-(use-package vagrant-tramp :ensure t)
-(use-package vdiff :ensure t)
-(use-package visual-fill-column :ensure t)
-(use-package vterm :ensure t)
-(use-package websocket :ensure t)
-(use-package ws-butler :ensure t)
-(use-package xterm-color :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package rust-mode :ensure t)
-(use-package envrc :ensure t
-  :after (lsp-mode flycheck)
-  :init (envrc-global-mode)
-  )
+(use-package persistent-scratch
+  :commands persistent-scratch-setup-default
+  :init
+  (my/call-after-startup 1.8 'persistent-scratch-setup-default))
+(use-package protobuf-mode)
+(use-package puppet-mode)
+(use-package purescript-mode)
+(use-package racket-mode)
+(use-package rainbow-delimiters :commands rainbow-delimiters-mode)
+(use-package repl-toggle :commands repl-toggle)
+(use-package restart-emacs :commands restart-emacs)
+(use-package restclient)
+(use-package slime :commands slime)
+(use-package smartparens
+  :commands (show-smartparens-global-mode smartparens-mode smartparens-strict-mode)
+  :hook (prog-mode . smartparens-mode)
+  :init
+  (my/call-after-startup 1.6 'show-smartparens-global-mode 1)
+  :config
+  (require 'smartparens-config))
+(use-package snakemake-mode)
+(use-package swift-mode)
+(use-package swiper
+  :commands (swiper swiper-isearch-thing-at-point)
+  :bind (("C-s" . swiper)
+         ("M-s" . swiper-isearch-thing-at-point)))
+(use-package terraform-mode)
+(use-package typescript-mode)
+(use-package uuidgen :commands uuidgen)
+(use-package vagrant)
+(use-package vagrant-tramp :after (vagrant tramp))
+(use-package vdiff
+  :commands (vdiff-files vdiff-buffers vdiff-current-file)
+  :config
+  (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map))
+(use-package visual-fill-column :commands visual-fill-column-mode)
+(use-package vterm :commands vterm)
+(use-package websocket)
+(use-package ws-butler
+  :hook ((prog-mode yaml-mode) . ws-butler-mode))
+(use-package xterm-color :commands xterm-color-filter)
+(use-package yaml-mode)
+(use-package rust-mode)
+(use-package envrc :commands envrc-global-mode)
 
 (use-package copilot
-  :vc (:url "https://github.com/copilot-emacs/copilot.el"
-            :rev :newest
-            :branch "main"))
+  :straight (:host github :repo "copilot-emacs/copilot.el" :branch "main")
+  :commands (copilot-mode copilot-complete copilot-accept-completion))
 
 
 (use-package lsp-mode
-  :ensure t
-  :config
-  ;; Uncomment following section if you would like to tune lsp-mode performance according to
-  ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
-  ;; (setq gc-cons-threshold 100000000) ;; 100mb
-  (setq read-process-output-max (* 4 1024 1024)) ;; 4mb
-  (setq lsp-idle-delay 0.2
-        lsp-response-timeout 30)
-  ;;       (setq lsp-log-io nil)
-  ;; (setq lsp-completion-provider :capf)
-  ;; (setq lsp-prefer-flymake nil)
-  )
-
-(use-package lsp-ui :commands lsp-ui-mode)
-
-
+  :commands (lsp lsp-deferred)
+  :custom
+  (lsp-idle-delay 0.2)
+  (lsp-response-timeout 30))
 
 (use-package lsp-nix
-  :ensure lsp-mode
-  :after (lsp-mode)
-  :demand t
+  :straight nil
+  :after lsp-mode
   :custom
   (lsp-nix-nil-formatter ["nixfmt"]))
 
-(use-package projectile :ensure t)
+(use-package projectile
+  :commands projectile-mode
+  :bind-keymap ("C-c C-p" . projectile-command-map)
+  :init
+  (my/call-after-startup 1.4 'projectile-mode 1))
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
-
-(use-package nix-mode
-  :hook (nix-mode . lsp-deferred)
-  :ensure t)
 
 ;; (add-hook 'prog-mode-hook #'lsp-deferred)
 
 
 
-(use-package tramp :ensure t)
-
 (use-package tramp-rpc
   :after tramp
-  :vc (:url "https://github.com/ArthurHeymans/emacs-tramp-rpc"
-       :rev :newest
-       :lisp-dir "lisp"))
+  :straight (:host github :repo "ArthurHeymans/emacs-tramp-rpc" :files ("lisp/*.el")))
 
-(use-package agent-shell :ensure t)
+(use-package agent-shell
+  :commands agent-shell)
 
 (use-package acp
   :straight (:host github :repo "xenodium/acp.el"))
@@ -276,184 +349,165 @@
   (agent-shell-tramp-rpc-mode 1))
 
 
-(use-package ag :ensure t)
-(use-package alect-themes :ensure t)
-(use-package ansible :ensure t)
-(use-package auto-virtualenv :ensure t)
-(use-package browse-at-remote :ensure t)
-
-(use-package company :ensure t :defer t)
-
-(use-package company-terraform :ensure t)
-(use-package counsel :ensure t)
-
-(use-package csv-mode :ensure t)
-(use-package darktooth-theme :ensure t)
-(use-package dhall-mode :ensure t)
-(use-package diff-hl
-  :ensure t
-  :custom
-  (diff-hl-update-async t))
-(use-package diminish :ensure t)
-(use-package dired-git-info :ensure t)
-(use-package diredfl :ensure t)
-(use-package docker :ensure t)
-(use-package docker-compose-mode :ensure t)
-(use-package dockerfile-mode :ensure t)
-;; (use-package editorconfig
-;;   :ensure t
-;;   :config
-;;   (editorconfig-mode 1))
-;; (use-package elfeed :ensure t)
-(use-package emacsql :ensure t)
-(use-package espresso-theme :ensure t)
-
-(use-package exec-path-from-shell :ensure t)
-(use-package eyebrowse :ensure t)
-(use-package fill-column-indicator :ensure t)
-(use-package flycheck :ensure t)
-
-(use-package format-all :ensure t)
-(use-package git-link :ensure t)
-(use-package git-timemachine :ensure t)
-
+(use-package format-all :commands format-all-buffer)
 (use-package git-gutter
-  :ensure t
-  :defer t
   :commands git-gutter:revert-hunk)
-(use-package haskell-mode :ensure t)
-(use-package helpful :ensure t)
-(use-package hlint-refactor :ensure t)
-(use-package ivy :ensure t)
-(use-package lsp-metals
-  :ensure t
-  :custom
-  (lsp-metals-enable-semantic-highlighting t)
-  )
-(use-package logview
-  :ensure t
-  :mode ("\\.out\\'" . logview-mode))
-(use-package magit :ensure t)
-(use-package transient :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package mustache-mode :ensure t)
-
-(use-package rg :ensure t)
-(use-package org :ensure t)
-(use-package pdf-tools :ensure t)
-(use-package persistent-scratch :ensure t)
-;; (use-package proof-general :ensure t)
-(use-package protobuf-mode :ensure t)
-;;(use-package puppet-mode :ensure t)
-;; (use-package purescript-mode :ensure t)
-;; (use-package racket-mode :ensure t)
-;; (use-package repl-toggle :ensure t)
-(use-package restart-emacs :ensure t)
-(use-package restclient :ensure t)
-;; (use-package rtags :ensure t)
-;; (use-package sage-shell-mode :ensure t)
-;; (use-package shakespeare-mode :ensure t)
-;; (use-package slime :ensure t)
-;; (use-package slime-company :ensure t)
-(use-package smartparens :ensure t)
-;; (use-package snakemake-mode :ensure t)
-;; (use-package swift-mode :ensure t)
-(use-package swiper :ensure t)
-;; (use-package symon :ensure t)
-(use-package terraform-mode :ensure t)
-(use-package typescript-mode :ensure t)
-;; (use-package uuidgen :ensure t)
-;; (use-package vagrant :ensure)
-;; (use-package vagrant-tramp :ensure t)
-(use-package vdiff :ensure t)
-;; (use-package visual-fill-column :ensure t)
-(use-package vterm :ensure t)
-;; (use-package vue-html-mode :ensure t)
-;; (use-package vue-mode :ensure t)
-(use-package websocket :ensure t)
-(use-package ws-butler :ensure t)
-(use-package xterm-color :ensure t)
-(use-package adoc-mode
-  :ensure t
-  :mode (("\\.adoc\\'" . adoc-mode)
-         ("\\.asciidoc\\'" . adoc-mode)))
-;; (use-package yaml-imenu :ensure t)
-(use-package yaml-mode :ensure t)
-(use-package rust-mode :ensure t)
-(use-package yasnippet :ensure t)
-(use-package scala-mode :ensure t)
-(use-package go-mode :ensure t)
-
-(use-package groovy-mode :ensure t)
+(use-package git-commit
+  :straight nil
+  :commands global-git-commit-mode
+  :init
+  (my/call-after-startup 1.5 'global-git-commit-mode 1))
+(use-package hl-todo
+  :commands global-hl-todo-mode
+  :init
+  (my/call-after-startup 1.5 'global-hl-todo-mode 1))
+(use-package mustache-mode)
+(use-package rg :commands (rg rg-project rg-dwim))
+(use-package pdf-tools :commands pdf-tools-install)
+(use-package adoc-mode)
+(use-package yasnippet)
+(use-package scala-mode)
 
 (use-package eglot
-  :ensure t
+  :straight nil
   :custom
   (eglot-sync-connect nil)
   (eglot-events-buffer-size 0))
 
 (use-package gcmh
-  :ensure t
+  :commands gcmh-mode
+  :init
+  (my/call-after-startup 2.0 'gcmh-mode 1)
   :custom
   (gcmh-idle-delay 5)
   (gcmh-high-cons-threshold (* 256 1024 1024))
   (gcmh-low-cons-threshold (* 32 1024 1024)))
 
-(use-package tramp :ensure t)
 
+(use-package crontab-mode)
 
-(use-package crontab-mode :ensure t)
+(use-package gptel
+  :commands (gptel gptel-send gptel-menu))
 
-(use-package gptel :ensure t)
+;; Lightweight area configuration formerly loaded from areas/*.el.
+(setq magit-last-seen-setup-instructions "1.4.0"
+      inferior-lisp-program "/usr/bin/sbcl"
+      slime-contribs '(slime-fancy)
+      org-directory "~/org"
+      eww-search-prefix "https://www.google.com/search?q=")
 
-(use-package gcmh :ensure t)
+(add-hook 'java-mode-hook #'smartparens-mode)
+(add-hook 'java-mode-hook #'flycheck-mode)
+(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+(add-hook 'lsp-mode-hook #'lsp-ui-sideline-mode)
+(add-to-list 'completion-ignored-extensions ".hi")
 
+(defun my/truncate-eshell-buffers ()
+  "Truncate all eshell buffers."
+  (interactive)
+  (dolist (buffer (buffer-list t))
+    (with-current-buffer buffer
+      (when (eq major-mode 'eshell-mode)
+        (eshell-truncate-buffer)))))
 
-(use-package envrc :ensure t)
+(defvar my/eshell-truncate-timer nil
+  "Idle timer used to truncate eshell buffers.")
 
-;; (load "~/dotfiles/emacs/areas/c.el")
-;;(load "~/dotfiles/emacs/areas/csharp.el")
-;; (load "~/dotfiles/emacs/areas/epub.el")
-(load "~/dotfiles/emacs/areas/git.el")
-;; (load "~/dotfiles/emacs/areas/haskell.el")
-;; (load "~/dotfiles/emacs/areas/helm.el")
-;;(load "~/dotfiles/emacs/areas/irc.el")
-(load "~/dotfiles/emacs/areas/java.el")
-(load "~/dotfiles/emacs/areas/javascript.el")
-(load "~/dotfiles/emacs/areas/json.el")
-(load "~/dotfiles/emacs/areas/lisp.el")
-(load "~/dotfiles/emacs/areas/markdown.el")
-(load "~/dotfiles/emacs/areas/org.el")
-(load "~/dotfiles/emacs/areas/purescript.el")
-(load "~/dotfiles/emacs/areas/python.el")
-(load "~/dotfiles/emacs/areas/scala.el")
-(load "~/dotfiles/emacs/areas/shell.el")
-(load "~/dotfiles/emacs/areas/sql.el")
-(load "~/dotfiles/emacs/areas/web.el")
-(load "~/dotfiles/emacs/areas/yaml.el")
+(with-eval-after-load 'esh-mode
+  (when (timerp my/eshell-truncate-timer)
+    (cancel-timer my/eshell-truncate-timer))
+  (setq my/eshell-truncate-timer
+        (run-with-idle-timer 5 t #'my/truncate-eshell-buffers))
+  (add-hook 'eshell-mode-hook
+            (lambda ()
+              (setq xterm-color-preserve-properties t)
+              (setenv "TERM" "xterm-256color")))
+  (add-to-list 'eshell-preoutput-filter-functions #'xterm-color-filter)
+  (setq eshell-output-filter-functions
+        (remove #'eshell-handle-ansi-color eshell-output-filter-functions)))
+
+(with-eval-after-load 'comint
+  (add-hook 'compilation-filter-hook #'comint-truncate-buffer)
+  (add-hook 'comint-output-filter-functions #'comint-truncate-buffer)
+  (setq comint-buffer-maximum-size 40960)
+  (setq comint-output-filter-functions
+        (remove #'ansi-color-process-output comint-output-filter-functions)))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (font-lock-mode -1)
+            (setq-local font-lock-function (lambda (_) nil))
+            (add-hook 'comint-preoutput-filter-functions #'xterm-color-filter nil t)))
+
+(defvar sql-product)
+(defvar sql-prompt-regexp)
+(defvar sql-prompt-cont-regexp)
+
+(defun my-sql-comint-preoutput-filter (output)
+  "Filter prompts out of SQL query output."
+  (if (string-match (concat "\\`\\(" sql-prompt-regexp "\\)\\'") output)
+      output
+    (let ((main-prompt sql-prompt-regexp)
+          (any-prompt comint-prompt-regexp)
+          (prefix-newline nil))
+      (with-temp-buffer
+        (insert output)
+        (goto-char (point-min))
+        (when (looking-at main-prompt)
+          (setq prefix-newline t))
+        (while (looking-at any-prompt)
+          (replace-match ""))
+        (when prefix-newline
+          (goto-char (point-min))
+          (unless (looking-at "\n")
+            (insert "\n")))
+        (buffer-substring-no-properties (point-min) (point-max))))))
+
+(defun my-sql-interactive-mode-hook ()
+  "Custom interactive SQL mode behaviours. See `sql-interactive-mode-hook'."
+  (when (eq sql-product 'postgres)
+    (setq sql-prompt-regexp "^\\(?:\\sw\\|\\s_\\)*=[#>] "
+          sql-prompt-cont-regexp "^\\(?:\\sw\\|\\s_\\)*[-(][#>] "))
+  (add-hook 'comint-preoutput-filter-functions
+            #'my-sql-comint-preoutput-filter :append :local))
+
+(defun my-prefix-newline-to-sql-string (args)
+  "Force all `sql-send-*' commands to include an initial newline."
+  (cons (concat "\n" (car args)) (cdr args)))
+
+(defun my-font-lock-everything-in-sql-interactive-mode ()
+  (unless (eq 'oracle sql-product)
+    (sql-product-font-lock nil nil)))
+
+(with-eval-after-load 'sql
+  (add-hook 'sql-interactive-mode-hook #'my-sql-interactive-mode-hook)
+  (add-hook 'sql-interactive-mode-hook #'my-font-lock-everything-in-sql-interactive-mode)
+  (advice-remove 'sql-send-string #'my-prefix-newline-to-sql-string)
+  (advice-add 'sql-send-string :filter-args #'my-prefix-newline-to-sql-string))
+
+(defun xah-rename-eww-hook ()
+  "Rename eww browser's buffer so sites open in new page."
+  (rename-buffer "eww" t))
+
+(with-eval-after-load 'eww
+  (add-hook 'eww-mode-hook #'xah-rename-eww-hook))
+
+(global-set-key "\C-c C-o" #'browse-url-at-point)
 (load "~/dotfiles/emacs/init_private.el")
-
-(projectile-mode 1)
-
-(eval-when-compile
-  (require 'use-package))
 
 ;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'auto-revert-mode)
 
 ;; (setq request-backend 'url-retrieve)
 
-(desktop-save-mode 0)
-
 ;; (pdf-tools-install)
 
 (setq dired-listing-switches "-alh")
 
 (use-package auto-package-update
-   :ensure t
-   :config
-   (setq auto-package-update-delete-old-versions t)
-   )
+  :commands (auto-package-update-now auto-package-update-maybe)
+  :custom
+  (auto-package-update-delete-old-versions t))
 
 (setq dired-dwim-target t)
 
@@ -475,293 +529,13 @@
 
 (setq resize-mini-windows t)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ag-arguments '("--smart-case" "--stats" "-p '~/dotfiles/.agignore'"))
- '(ag-ignore-list '("*.js"))
- '(async-bytecomp-allowed-packages ''(all))
- '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
- '(auto-package-update-hide-results t)
- '(auto-revert-avoid-polling t)
- '(auto-revert-check-vc-info t)
- '(auto-revert-remote-files t)
- '(auto-revert-verbose nil)
- '(battery-mode-line-limit 99)
- '(bidi-paragraph-direction 'left-to-right)
- '(blink-cursor-blinks 0)
- '(byte-compile-warnings nil)
- '(column-number-mode t)
- '(company-backends
-   '(company-bbdb company-semantic company-clang company-cmake company-capf company-files
-                  (company-dabbrev-code company-gtags company-etags company-keywords) company-oddmuse company-dabbrev))
- '(connection-local-criteria-alist
-   '(((:application tramp :protocol "scp") remote-direct-async-process)
-     ((:application tramp) tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)
-     ((:application eshell) eshell-connection-default-profile)))
- '(counsel-ag-base-command "ag --nocolor --nogroup %s")
- '(counsel-mode t)
- '(counsel-mode-override-describe-bindings t)
- '(counsel-projectile-ag-initial-input '(ivy-thing-at-point))
- '(counsel-projectile-mode t nil (counsel-projectile))
- '(counsel-projectile-rg-initial-input '(ivy-thing-at-point))
- '(counsel-projectile-sort-buffers t)
- '(counsel-projectile-sort-directories t)
- '(counsel-projectile-sort-files t)
- '(counsel-projectile-sort-projects t)
- '(cursor-type t)
- '(custom-enabled-themes '(darktooth))
- '(custom-file "~/dotfiles/emacs/custom.el")
- '(datetime-timezone 'US/Pacific)
- '(desktop-load-locked-desktop t)
- '(desktop-save t)
- '(desktop-save-mode t)
- '(dgi-commit-message-format "%cr %s ")
- '(diary-entry-marker 'font-lock-variable-name-face)
- '(diff-hl-draw-borders t)
- '(diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-pos)
- '(diff-hl-side 'left)
- '(dired-async--modeline-mode nil)
- '(dired-async-mode nil)
- '(diredfl-global-mode t nil (diredfl))
- '(display-battery-mode t)
- '(display-line-numbers-grow-only t)
- '(display-time-day-and-date nil)
- '(display-time-default-load-average nil)
- '(display-time-format nil)
- '(display-time-mode nil)
- '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
- '(doc-view-resolution 200)
- '(docker-image-default-sort-key '("Tag"))
- '(ediff-split-window-function 'split-window-horizontally)
- '(ediff-window-setup-function 'ediff-setup-windows-plain)
- '(elfeed-search-filter "@1-week-ago")
- '(emms-stream-default-action "play")
- '(emms-stream-repeat-p t)
- '(eshell-buffer-maximum-lines 4096)
- '(explicit-shell-file-name "zsh")
- '(eyebrowse-keymap-prefix "\3")
- '(eyebrowse-mode t)
- '(eyebrowse-mode-line-style 'smart)
- '(eyebrowse-new-workspace t)
- '(eyebrowse-wrap-around t)
- '(fill-column 120)
- '(flycheck-buffer-switch-check-intermediate-buffers t)
- '(flycheck-check-syntax-automatically
-   '(save idle-change idle-buffer-switch new-line mode-enabled))
- '(flycheck-checker-error-threshold 3000)
- '(flycheck-checkers
-   '(lsp rtags ada-gnat asciidoctor asciidoc awk-gawk bazel-build-buildifier bazel-module-buildifier
-         bazel-starlark-buildifier bazel-workspace-buildifier c/c++-clang c/c++-gcc c/c++-cppcheck cfengine
-         chef-foodcritic coffee coffee-coffeelint css-csslint css-stylelint cuda-nvcc cwl d-dmd dockerfile-hadolint
-         elixir-credo emacs-lisp emacs-lisp-checkdoc ember-template erlang-rebar3 erlang eruby-erubis eruby-ruumba
-         fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck go-unconvert go-staticcheck groovy haml
-         handlebars haskell-ghc haskell-hlint html-tidy javascript-eslint javascript-jshint javascript-standard
-         json-jsonlint json-python-json json-jq jsonnet less less-stylelint llvm-llc lua-luacheck lua
-         markdown-markdownlint-cli markdown-mdl nix nix-linter opam perl perl-perlcritic php php-phpmd php-phpcs
-         processing proselint protobuf-protoc protobuf-prototool pug puppet-parser puppet-lint python-flake8
-         python-pylint python-pycompile python-pyright python-mypy r-lintr racket rpm-rpmlint rst-sphinx rst
-         ruby-rubocop ruby-standard ruby-reek ruby-rubylint ruby ruby-jruby rust-cargo rust rust-clippy scala
-         scala-scalastyle scheme-chicken scss-lint scss-stylelint sass/scss-sass-lint sass scss sh-bash sh-posix-dash
-         sh-posix-bash sh-zsh sh-shellcheck slim slim-lint sql-sqlint systemd-analyze tcl-nagelfar terraform
-         terraform-tflint tex-chktex tex-lacheck texinfo textlint typescript-tslint verilog-verilator vhdl-ghdl
-         xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby yaml-yamllint))
- '(flycheck-display-errors-delay 0.1)
- '(flycheck-hlint-args '("-j"))
- '(flycheck-idle-buffer-switch-delay 0.1)
- '(flycheck-idle-change-delay 0.1)
- '(flycheck-navigation-minimum-level 'warning)
- '(fringe-mode '(nil . 0) nil (fringe))
- '(git-link-use-commit t)
- '(global-auto-revert-mode t)
- '(global-company-mode t)
- '(global-diff-hl-mode t)
- '(global-display-line-numbers-mode t)
- '(global-emojify-mode nil)
- '(global-git-commit-mode t)
- '(global-git-gutter-mode nil)
- '(global-highlight-thing-mode nil)
- '(global-hl-todo-mode t)
- '(global-linum-mode nil)
- '(global-nlinum-mode nil)
- '(global-so-long-mode nil)
- '(global-visual-line-mode t)
- '(gradle-mode nil)
- '(gradle-use-gradlew t)
- '(grep-command "grep  -h --null -e ")
- '(grep-find-command
-   '("find . -type f -exec grep  -nH --null -e  \\{\\} +" . 42))
- '(grep-find-ignored-directories
-   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" ".yarn" "webpack"))
- '(grep-find-template
-   "find <D> <X> -type f <F> -exec grep <C> -nH -P -C 2 --null -e <R> \\{\\} +")
- '(grep-highlight-matches 'auto)
- '(grep-scroll-output t)
- '(groovy-indent-offset 2)
- '(haskell-font-lock-symbols nil)
- '(haskell-stylish-on-save nil)
- '(haskell-tags-on-save nil)
- '(highlight-thing-all-visible-buffers-p t)
- '(highlight-thing-case-sensitive-p t)
- '(highlight-thing-exclude-thing-under-point t)
- '(ibuffer-default-sorting-mode 'recency)
- '(imenu-sort-function 'imenu--sort-by-name)
- '(initial-major-mode 'fundamental-mode)
- '(isearch-allow-scroll t)
- '(ispell-dictionary "english")
- '(ispell-local-dictionary-alist nil)
- '(ivy-initial-inputs-alist nil)
- '(json-reformat:indent-width 2)
- '(json-reformat:pretty-string? t)
- '(large-file-warning-threshold 100000000)
- '(line-number-display-limit-width 1024)
- '(line-number-mode nil)
- '(logview-additional-level-mappings nil)
- '(logview-auto-revert-mode 'auto-revert-tail-mode)
- '(lsp-auto-guess-root t)
- '(lsp-diagnostics-attributes
-   '((unnecessary :foreground "dim gray") (deprecated :strike-through t)))
- '(lsp-enable-file-watchers nil)
- '(lsp-enable-imenu t)
- '(lsp-enable-semantic-tokens t)
- '(lsp-haskell-formatting-provider "stylish-haskell")
- '(lsp-imenu-sort-methods '(name))
- '(lsp-lens-enable nil)
- '(lsp-modeline-workspace-status-enable t)
- '(lsp-restart 'ignore)
- '(lsp-sqls-server "~/go/bin/sqls")
- '(lsp-ui-doc-enable nil)
- '(lsp-ui-flycheck-enable t)
- '(lsp-ui-imenu-enable t)
- '(lsp-ui-peek-enable t)
- '(lsp-ui-sideline-enable t)
- '(magit-auto-revert-mode t)
- '(magit-diff-refine-hunk 'all)
- '(magit-diff-use-overlays nil)
- '(magit-fetch-modules-jobs 8 t)
- '(magit-log-auto-more t)
- '(magit-pull-or-fetch t)
- '(magit-refresh-status-buffer nil)
- '(magit-section-cache-visibility nil)
- '(magit-status-show-hashes-in-headers t)
- '(magithub-api-available-check-frequency 2)
- '(magithub-api-timeout 10)
- '(menu-bar-mode nil)
- '(message-log-max 4096)
- '(mode-line-format
-   '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
-     mode-line-client mode-line-modified mode-line-remote mode-line-auto-compile mode-line-frame-identification
-     mode-line-buffer-identification "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info
-     mode-line-end-spaces))
- '(network-security-level 'high)
- '(ns-antialias-text t)
- '(ns-confirm-quit t)
- '(org-modules
-   '(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-protocol org-w3m))
- '(org-src-block-faces
-   '(("emacs-lisp" (:background "#F0FFF0")) ("dot" (:foreground "gray50"))))
- '(package-native-compile t)
- '(package-selected-packages
-   '(ace-popup-menu adoc-mode ag agent-shell alect-themes ansible async auto-compile auto-package-update auto-virtualenv
-                    browse-at-remote cider company-terraform copilot copilot-chat counsel-projectile crontab-mode
-                    csv-mode darktooth-theme dhall-mode diff-hl diminish dired-git-info diredfl docker
-                    docker-compose-mode dockerfile-mode emacsql envrc espresso-theme ess exec-path-from-shell eyebrowse
-                    fill-column-indicator flycheck-haskell flycheck-inline flycheck-rtags format-all fsharp-mode gcmd
-                    gcmh git-gutter git-link git-timemachine go-mode gptel groovy-mode gruvbox-theme helpful
-                    highlight-defined highlight-indent-guides highlight-thing hindent hlint-refactor iedit julia-mode
-                    julia-repl logview lsp-haskell lsp-ivy lsp-metals lsp-ui magit mustache-mode nix-mode pdf-tools
-                    persistent-scratch protobuf-mode puppet-mode purescript-mode racket-mode rainbow-delimiters
-                    repl-toggle restart-emacs restclient rg rust-mode sbt-mode slime smartparens snakemake-mode
-                    swift-mode typescript-mode uuidgen vagrant vagrant-tramp vdiff visual-fill-column vterm websocket
-                    ws-butler xterm-color yasnippet))
- '(package-vc-selected-packages
-   '((tramp-rpc :url "https://github.com/ArthurHeymans/emacs-tramp-rpc" :lisp-dir "lisp")
-     (copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
- '(pdf-view-midnight-colors '("#FDF4C1" . "#282828"))
- '(pos-tip-background-color "#36473A")
- '(pos-tip-foreground-color "#FFFFC8")
- '(proced-auto-update-flag t)
- '(proced-format 'verbose)
- '(projectile-dynamic-mode-line nil)
- '(projectile-enable-caching t)
- '(projectile-enable-idle-timer nil)
- '(projectile-idle-timer-seconds 30)
- '(projectile-mode-line-function '(lambda nil ("")))
- '(projectile-mode-line-prefix " ")
- '(projectile-require-project-root t)
- '(projectile-sort-order 'recently-active)
- '(projectile-tags-backend 'auto)
- '(projectile-tags-command "fast-tags -e -R %s")
- '(projectile-use-git-grep t)
- '(purescript-mode-hook
-   '(turn-on-eldoc-mode turn-on-purescript-indent
-                        (lambda nil (company-mode) (lsp) (flycheck-mode) (turn-on-purescript-indentation))))
- '(rich-minority-mode t)
- '(ring-bell-function nil)
- '(rm-blacklist
-   '(" hl-p" " hlt" " wb" " Hi" " h-i-g" " GitGutter" " ElDoc" " Wrap" " company" " Projectile"))
- '(rm-whitelist nil)
- '(safe-local-variable-values
-   '((package-lint-main-file . "copilot-chat.el") (lsp-enabled-clients jsts-ls) (lsp-lens-enable)
-     (haskell-process-args-cabal-repl "--ghc-option=-ferror-spans") (lsp-haskell-plugin-stan-global-on)
-     (lsp-nix-nil-formatter "nixpkgs-fmt") (eval c-set-offset 'inlambda 0) (eval c-set-offset 'access-label '-)
-     (eval c-set-offset 'substatement-open 0) (eval c-set-offset 'arglist-cont-nonempty '+)
-     (eval c-set-offset 'arglist-cont 0) (eval c-set-offset 'arglist-intro '+) (eval c-set-offset 'inline-open 0)
-     (eval c-set-offset 'defun-open 0) (eval c-set-offset 'innamespace 0) (indicate-empty-lines . t)
-     (c-block-comment-prefix . "  ") (eval add-hook 'before-save-hook 'time-stamp)
-     (buffer-file-coding-system . utf-8-unix) (TeX-master . t)))
- '(sbt:scroll-to-bottom-on-output t)
- '(scala-indent:default-run-on-strategy 0)
- '(scroll-bar-mode nil)
- '(shm-use-hdevtools t)
- '(show-paren-mode t)
- '(show-smartparens-global-mode t)
- '(shr-max-image-proportion 1.0)
- '(smartparens-global-strict-mode nil)
- '(sp-base-key-bindings 'sp)
- '(sp-navigate-reindent-after-up
-   '((interactive cider-repl-mode clojure-mode clojurec-mode clojurescript-mode clojurex-mode common-lisp-mode
-                  emacs-lisp-mode eshell-mode geiser-repl-mode gerbil-mode inf-clojure-mode inferior-emacs-lisp-mode
-                  inferior-lisp-mode inferior-scheme-mode lisp-interaction-mode lisp-mode monroe-mode racket-mode
-                  racket-repl-mode scheme-interaction-mode scheme-mode slime-repl-mode stumpwm-mode haskell-mode)))
- '(sp-navigate-reindent-after-up-in-string nil)
- '(sp-no-reindent-after-kill-modes
-   '(python-mode coffee-mode asm-mode makefile-gmake-mode haml-mode haskell-mode))
- '(split-height-threshold 120)
- '(split-width-threshold 120)
- '(symon-mode nil)
- '(symon-monitors
-   '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor
-                                 symon-darwin-battery-monitor))
- '(symon-sparkline-type 'boxed)
- '(tags-revert-without-query t)
- '(term-scroll-to-bottom-on-output t)
- '(tool-bar-mode nil)
- '(typescript-indent-level 2)
- '(vc-annotate-background "#222222")
- '(vc-annotate-color-map
-   '((20 . "#fa5151") (40 . "#ea3838") (60 . "#f8ffa0") (80 . "#e8e815") (100 . "#fe8b04") (120 . "#e5c900")
-     (140 . "#32cd32") (160 . "#8ce096") (180 . "#7fb07f") (200 . "#3cb370") (220 . "#099709") (240 . "#2fdbde")
-     (260 . "#1fb3b3") (280 . "#8cf1f1") (300 . "#94bff3") (320 . "#62b6ea") (340 . "#30a5f5") (360 . "#e353b9")))
- '(vc-annotate-very-old-color "#e353b9")
- '(vdiff-diff-algorithm 'git-diff)
- '(visible-bell nil)
- '(vterm-always-compile-module t)
- '(vterm-min-window-width 60)
- '(wakatime-python-bin nil t)
- '(warning-suppress-types '((direnv) (frameset) (frameset) (comp) (comp) (comp)))
- '(whitespace-style
-   '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark
-          newline-mark))
- '(world-clock-list
-   '(("Europe/Zurich" "Zurich") ("Europe/Madrid" "Madrid") ("Etc/UTC" "UTC") ("America/New_York" "Boston")
-     ("America/Chicago" "Chicago") ("US/Arizona" "Phoenix") ("America/Los_Angeles" "Los Angeles")
-     ("US/Hawaii" "Honolulu")))
- '(world-clock-time-format "%A %d %B %I:%M %p %Z")
- '(ws-butler-keep-whitespace-before-point nil)
- '(yas-global-mode t))
+(my/call-after-startup 0.2 'display-battery-mode 1)
+(my/call-after-startup 0.2 'display-time-mode 1)
+(my/call-after-startup 0.3 'global-display-line-numbers-mode 1)
+(my/call-after-startup 0.4 'global-auto-revert-mode 1)
+(my/call-after-startup 0.4 'global-so-long-mode 1)
+(my/call-after-startup 0.4 'global-visual-line-mode 1)
+(my/call-after-startup 0.5 'global-completion-preview-mode 1)
 
 ;; (setq ring-bell-function 'ignore)
 
@@ -773,8 +547,6 @@
 
 (setq-default line-spacing 0)
 
-(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-
 (global-set-key (kbd "\C-c l") 'git-link)
 
 (global-set-key (kbd "\C-x r h") 'git-gutter:revert-hunk)
@@ -782,10 +554,6 @@
 (setq-default indent-tabs-mode nil)
 
 (setq global-whitespace-cleanup-mode t)
-(require 'ws-butler)
-(add-hook 'prog-mode-hook #'ws-butler-mode)
-
-(add-hook 'yaml-mode-hook #'ws-butler-mode)
 
 ;; (setq-default gc-cons-threshold (eval-when-compile (* 1024 1024 32)))
 ;; (setq garbage-collection-messages nil)
@@ -797,8 +565,6 @@
 
 (global-set-key (kbd "<kp-2>") 'end-of-defun)
 (global-set-key (kbd "<kp-8>") 'beginning-of-defun)
-
-(persistent-scratch-setup-default)
 
 ;; (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 ;; (add-hook 'yaml-mode-hook 'highlight-indent-guides-mode)
@@ -867,49 +633,28 @@
 
 (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
 
-(eyebrowse-mode t)
-(eyebrowse-setup-opinionated-keys)
+(defun my/diminish-modes ()
+  "Hide noisy minor modes from the mode line after startup."
+  (dolist (mode '(smartparens-mode
+                  auto-revert-mode
+                  counsel-mode
+                  ivy-mode
+                  highlight-indent-guides-mode
+                  highlight-thing-mode
+                  yas-global-mode
+                  ws-butler-mode
+                  eldoc-mode
+                  yas-minor-mode
+                  company-mode
+                  projectile-mode
+                  editorconfig-mode
+                  visual-line-mode))
+    (ignore-errors
+      (diminish mode))))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(copilot-chat-spinner-face ((t nil)))
- '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
- '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
- '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))
- '(eyebrowse-mode-line-active ((t (:inverse-video t :weight bold)))))
-
-(diminish 'smartparens-mode)
-(diminish 'auto-revert-mode)
-(diminish 'counsel-mode)
-(diminish 'ivy-mode)
-(diminish 'highlight-indent-guides-mode)
-(diminish 'highlight-thing-mode)
-(diminish 'yas-global-mode)
-(diminish 'ws-butler-mode)
-(diminish 'eldoc-mode)
-(diminish 'yas-minor-mode)
-(diminish 'company-mode)
-(diminish 'projectile-mode)
-(diminish 'editorconfig-mode)
-(diminish 'visual-line-mode)
-
-
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
 ;; (setq enable-recursive-minibuffers t)
 ;; ;; enable this if you want `swiper' to use it
 (setq search-default-mode #'char-fold-to-regexp)
-(global-set-key "\C-s" 'swiper)
-(global-set-key "\M-s" 'swiper-isearch-thing-at-point)
-
-(global-set-key (kbd "C-c i") 'counsel-imenu)
-
-(require 'vdiff)
-(define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map)
-
 
 ;; (add-to-list 'auto-mode-alist '("\\.jenkins\\'" . groovy-mode))
 
@@ -920,8 +665,6 @@
 (add-to-list 'auto-mode-alist '("\\.avro\\'" . js-json-mode))
 (put 'magit-clean 'disabled nil)
 
-(envrc-global-mode)
-
 (setq lsp-semgrep-languages nil)
 
 (defun my/lsp-clear-session-folders (&rest _args)
@@ -931,8 +674,6 @@
 (advice-remove 'lsp #'my/lsp-clear-session-folders)
 (advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
-
-(gcmh-mode 1)
 
 (unless (version< emacs-version "27.0")
   (add-function :after after-focus-change-function
@@ -976,9 +717,8 @@
 ;; (setq magit-refresh-status-buffer nil)
 
 
-(gptel-make-gh-copilot "Copilot")
-
-(setq gptel-backend (gptel-make-gh-copilot "Copilot"))
+(with-eval-after-load 'gptel
+  (setq gptel-backend (gptel-make-gh-copilot "Copilot")))
 
 
 ;; (let ((major-mode 'org-mode))
@@ -1001,7 +741,8 @@
     (org-latex-preview 16)))  ;; 16 = preview whole buffer
     ;;(org-latex-preview (list 1 beg end))))  ;; 16 = preview whole buffer
 
-(add-hook 'gptel-post-response-functions #'my/gptel-org-latex-preview)
+(with-eval-after-load 'gptel
+  (add-hook 'gptel-post-response-functions #'my/gptel-org-latex-preview))
 (setq org-preview-latex-default-process 'dvisvgm) ;No blur when scaling
 
 
@@ -1024,8 +765,9 @@
 ;; 			("magick -density %D -trim -antialias %f -quality 300 %O")))
 ;; (setq org-preview-latex-default-process 'tectonic)
 
-(setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
-(setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
+(with-eval-after-load 'gptel
+  (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
+  (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
 
 
 
@@ -1048,4 +790,8 @@
 
 (setq tramp-rpc-deploy-git-build-policy 'release)
 
+
 (agent-shell-make-environment-variables :inherit-env t)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))

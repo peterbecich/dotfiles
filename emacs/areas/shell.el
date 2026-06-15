@@ -1,3 +1,5 @@
+;;; shell.el --- Shell settings -*- lexical-binding: t; -*-
+
 (defun my/truncate-eshell-buffers ()
   "Truncate all eshell buffers."
   (interactive)

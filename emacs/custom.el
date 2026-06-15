@@ -6,9 +6,13 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
+ '(async-bytecomp-allowed-packages ''(all))
  '(auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc"))
  '(auto-package-update-hide-results t)
  '(auto-revert-avoid-polling t)
+ '(auto-revert-check-vc-info t)
+ '(auto-revert-remote-files t)
+ '(auto-revert-verbose nil)
  '(battery-mode-line-limit 99)
  '(bidi-paragraph-direction 'left-to-right)
  '(blink-cursor-blinks 0)
@@ -25,9 +29,12 @@
  '(compilation-scroll-output 'first-error)
  '(compilation-skip-threshold 2)
  '(confirm-kill-processes nil)
- '(counsel-mode t)
- '(counsel-mode-override-describe-bindings t)
- '(counsel-projectile-mode nil)
+ '(connection-local-criteria-alist
+   '(((:application tramp :protocol "rsync") remote-direct-async-process)
+     ((:application tramp :protocol "ssh") remote-direct-async-process)
+     ((:application tramp :protocol "scp") remote-direct-async-process)
+     ((:application tramp) tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)
+     ((:application eshell) eshell-connection-default-profile)))
  '(cursor-type t)
  '(custom-enabled-themes '(wombat))
  '(custom-file "~/dotfiles/emacs/custom.el")
@@ -68,20 +75,16 @@
      "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
- '(desktop-save t)
- '(desktop-save-mode t)
+ '(desktop-save nil)
  '(dgi-commit-message-format "%cr %s ")
  '(diary-entry-marker 'font-lock-variable-name-face)
  '(diff-hl-draw-borders t)
  '(diff-hl-fringe-bmp-function 'diff-hl-fringe-bmp-from-pos)
  '(diff-hl-side 'left)
- '(diredfl-global-mode t nil (diredfl))
- '(display-battery-mode t)
  '(display-line-numbers-grow-only t)
  '(display-time-day-and-date t)
  '(display-time-default-load-average nil)
  '(display-time-format nil)
- '(display-time-mode t)
  '(doc-view-pdf->png-converter-function 'doc-view-pdf->png-converter-mupdf)
  '(doc-view-resolution 200)
  '(docker-image-default-sort-key '("Tag"))
@@ -90,33 +93,46 @@
  '(eglot-autoreconnect t)
  '(eglot-autoshutdown t)
  '(eglot-events-buffer-config '(:size 0 :format full))
+ '(elfeed-search-filter "@1-week-ago")
  '(emms-mode-line-icon-color "#1fb3b3" t)
  '(emms-stream-default-action "play")
  '(emms-stream-repeat-p t)
  '(enable-remote-dir-locals t)
- '(envrc-global-mode nil)
  '(eshell-buffer-maximum-lines 4096)
  '(explicit-shell-file-name "zsh")
  '(eyebrowse-keymap-prefix "\3")
- '(eyebrowse-mode t)
  '(eyebrowse-mode-line-style 'smart)
  '(eyebrowse-new-workspace t)
  '(eyebrowse-wrap-around t)
  '(fci-rule-color "#222222")
  '(fill-column 120)
+ '(flycheck-buffer-switch-check-intermediate-buffers t)
+ '(flycheck-check-syntax-automatically
+   '(save idle-change idle-buffer-switch new-line mode-enabled))
+ '(flycheck-checker-error-threshold 3000)
+ '(flycheck-checkers
+   '(lsp rtags ada-gnat asciidoctor asciidoc awk-gawk bazel-build-buildifier bazel-module-buildifier
+         bazel-starlark-buildifier bazel-workspace-buildifier c/c++-clang c/c++-gcc c/c++-cppcheck cfengine
+         chef-foodcritic coffee coffee-coffeelint css-csslint css-stylelint cuda-nvcc cwl d-dmd dockerfile-hadolint
+         elixir-credo emacs-lisp emacs-lisp-checkdoc ember-template erlang-rebar3 erlang eruby-erubis eruby-ruumba
+         fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck go-unconvert go-staticcheck groovy haml
+         handlebars haskell-ghc haskell-hlint html-tidy javascript-eslint javascript-jshint javascript-standard
+         json-jsonlint json-python-json json-jq jsonnet less less-stylelint llvm-llc lua-luacheck lua
+         markdown-markdownlint-cli markdown-mdl nix nix-linter opam perl perl-perlcritic php php-phpmd php-phpcs
+         processing proselint protobuf-protoc protobuf-prototool pug puppet-parser puppet-lint python-flake8
+         python-pylint python-pycompile python-pyright python-mypy r-lintr racket rpm-rpmlint rst-sphinx rst
+         ruby-rubocop ruby-standard ruby-reek ruby-rubylint ruby ruby-jruby rust-cargo rust rust-clippy scala
+         scala-scalastyle scheme-chicken scss-lint scss-stylelint sass/scss-sass-lint sass scss sh-bash sh-posix-dash
+         sh-posix-bash sh-zsh sh-shellcheck slim slim-lint sql-sqlint systemd-analyze tcl-nagelfar terraform
+         terraform-tflint tex-chktex tex-lacheck texinfo textlint typescript-tslint verilog-verilator vhdl-ghdl
+         xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby yaml-yamllint))
+ '(flycheck-display-errors-delay 0.1)
+ '(flycheck-hlint-args '("-j"))
+ '(flycheck-idle-buffer-switch-delay 0.1)
+ '(flycheck-idle-change-delay 0.1)
+ '(flycheck-navigation-minimum-level 'warning)
  '(fringe-mode '(nil . 0) nil (fringe))
  '(git-link-use-commit nil)
- '(global-auto-revert-mode t)
- '(global-company-mode t)
- '(global-completion-preview-mode t)
- '(global-diff-hl-mode t)
- '(global-display-line-numbers-mode t)
- '(global-git-commit-mode t)
- '(global-git-gutter-mode nil)
- '(global-highlight-thing-mode nil)
- '(global-hl-todo-mode t)
- '(global-so-long-mode t)
- '(global-visual-line-mode t)
  '(gnus-logo-colors '("#528d8d" "#c0c0c0") t)
  '(gnus-mode-line-image-cache
    '(image :type xpm :ascent center :data
@@ -124,9 +140,14 @@
  '(gptel-default-mode 'org-mode)
  '(gptel-org-branching-context t)
  '(gradle-gradlew-executable "./gradlew")
- '(gradle-mode nil)
  '(gradle-use-gradlew t)
  '(grep-command "grep  -h --null -e ")
+ '(grep-find-command
+   '("find . -type f -exec grep  -nH --null -e  \\{\\} +" . 42))
+ '(grep-find-ignored-directories
+   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules" ".yarn" "webpack"))
+ '(grep-find-template
+   "find <D> <X> -type f <F> -exec grep <C> -nH -P -C 2 --null -e <R> \\{\\} +")
  '(grep-highlight-matches 'auto)
  '(grep-scroll-output t)
  '(groovy-highlight-assignments t)
@@ -136,6 +157,9 @@
  '(haskell-tags-on-save nil)
  '(highlight-symbol-colors
    '("#FFF68F" "#B7EB8F" "#76DDBA" "#91D5FF" "#ADC6FF" "#D3ADF7" "#FFADD2" "#FFA39E" "#FFD591"))
+ '(highlight-thing-all-visible-buffers-p t)
+ '(highlight-thing-case-sensitive-p t)
+ '(highlight-thing-exclude-thing-under-point t)
  '(ibuffer-default-sorting-mode 'recency)
  '(imenu-sort-function 'imenu--sort-by-name)
  '(initial-major-mode 'fundamental-mode)
@@ -154,19 +178,33 @@
  '(logview-auto-revert-mode 'auto-revert-tail-mode)
  '(lsp-auto-guess-root t)
  '(lsp-auto-select-workspace nil)
+ '(lsp-diagnostics-attributes
+   '((unnecessary :foreground "dim gray") (deprecated :strike-through t)))
  '(lsp-disabled-clients '(rubocop-ls-tramp vue-semantic-server-tramp))
  '(lsp-enable-file-watchers nil)
+ '(lsp-enable-imenu t)
+ '(lsp-enable-semantic-tokens t)
+ '(lsp-haskell-formatting-provider "stylish-haskell")
+ '(lsp-imenu-sort-methods '(name))
  '(lsp-keep-workspace-alive nil)
+ '(lsp-lens-enable nil)
  '(lsp-log-io nil)
  '(lsp-metals-ammonite-jvm-properties ["-Xmx12g" "-Xms1g"])
  '(lsp-metals-bloop-sbt-already-installed t)
  '(lsp-metals-enable-semantic-highlighting t)
  '(lsp-metals-install-scala-version "2.12")
  '(lsp-metals-show-inferred-type t)
+ '(lsp-modeline-workspace-status-enable t)
  '(lsp-restart 'auto-restart)
  '(lsp-rubocop-use-bundler nil)
  '(lsp-ruby-lsp-use-bundler nil)
  '(lsp-semgrep-metrics-enabled nil)
+ '(lsp-sqls-server "~/go/bin/sqls")
+ '(lsp-ui-doc-enable nil)
+ '(lsp-ui-flycheck-enable t)
+ '(lsp-ui-imenu-enable t)
+ '(lsp-ui-peek-enable t)
+ '(lsp-ui-sideline-enable t)
  '(magit-auto-revert-mode t)
  '(magit-diff-refine-hunk 'all)
  '(magit-diff-use-overlays nil)
@@ -181,10 +219,10 @@
  '(max-lisp-eval-depth 5000)
  '(menu-bar-mode nil)
  '(message-log-max 4096)
- '(mode-line-format
-   '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
-     mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
-     "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
+ ;; '(mode-line-format
+ ;;   '("%e" (eyebrowse-mode (:eval (eyebrowse-mode-line-indicator))) mode-line-front-space mode-line-mule-info
+ ;;     mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification
+ ;;     "   " mode-line-position (vc-mode vc-mode) "  " mode-line-modes mode-line-misc-info mode-line-end-spaces))
  '(mouse-wheel-progressive-speed nil)
  '(network-security-level 'high)
  '(ns-antialias-text t)
@@ -194,7 +232,10 @@
                  1.0 :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(org-hide-emphasis-markers nil)
  '(org-imenu-depth 6)
- '(package-native-compile t)
+ '(org-modules nil)
+ '(org-src-block-faces
+   '(("emacs-lisp" (:background "#F0FFF0")) ("dot" (:foreground "gray50"))))
+ '(package-native-compile nil)
  '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((tramp-rpc :url "https://github.com/ArthurHeymans/emacs-tramp-rpc" :lisp-dir "lisp")))
@@ -202,11 +243,22 @@
  '(pos-tip-background-color "#36473A")
  '(pos-tip-foreground-color "#FFFFC8")
  '(proced-auto-update-flag t)
+ '(proced-format 'verbose)
  '(projectile-completion-system 'ivy)
- '(projectile-mode t nil (projectile))
+ '(projectile-dynamic-mode-line nil)
+ '(projectile-enable-caching t)
+ '(projectile-enable-idle-timer nil)
+ '(projectile-idle-timer-seconds 30)
+ '(projectile-mode-line-function '(lambda nil ("")))
+ '(projectile-mode-line-prefix " ")
  '(projectile-require-project-root t)
  '(projectile-sort-order 'recently-active)
+ '(projectile-tags-backend 'auto)
  '(projectile-tags-command "echo foo")
+ '(projectile-use-git-grep t)
+ '(purescript-mode-hook
+   '(turn-on-eldoc-mode turn-on-purescript-indent
+                        (lambda nil (company-mode) (lsp) (flycheck-mode) (turn-on-purescript-indentation))))
  '(recentf-auto-cleanup 300)
  '(recentf-keep '(recentf-keep-default-predicate file-remote-p))
  '(rich-minority-mode t)
@@ -222,12 +274,11 @@
      (eval c-set-offset 'innamespace 0) (indicate-empty-lines . t) (c-block-comment-prefix . "  ")
      (eval add-hook 'before-save-hook 'time-stamp) (buffer-file-coding-system . utf-8-unix) (TeX-master . t)))
  '(sbt:scroll-to-bottom-on-output t)
+ '(scala-indent:default-run-on-strategy 0)
  '(scroll-bar-mode nil)
  '(shm-use-hdevtools t)
  '(show-paren-mode t)
- '(show-smartparens-global-mode t)
  '(shr-max-image-proportion 1.0)
- '(smartparens-global-strict-mode nil)
  '(sml/extra-filler 0)
  '(sml/mode-width 'full)
  '(sml/shorten-modes t)
@@ -243,7 +294,6 @@
    '(python-mode coffee-mode asm-mode makefile-gmake-mode haml-mode haskell-mode))
  '(split-height-threshold 120)
  '(split-width-threshold 120)
- '(symon-mode nil)
  '(symon-monitors
    '(symon-darwin-memory-monitor symon-darwin-cpu-monitor symon-darwin-network-rx-monitor symon-darwin-network-tx-monitor
                                  symon-darwin-battery-monitor))
@@ -258,6 +308,7 @@
      "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
      "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"
      "/opt/homebrew/bin" "/opt/homebrew/sbin"))
+ '(tramp-rpc-debug nil)
  '(tramp-use-connection-share t)
  '(twittering-timer-interval 300)
  '(twittering-use-icon-storage t)
@@ -276,6 +327,7 @@
  '(vterm-tramp-shells '(("docker" "/usr/bin/zsh") ("ssh" "/usr/bin/zsh")))
  '(w3m-confirm-leaving-secure-page nil)
  '(wakatime-python-bin nil t)
+ '(warning-suppress-types '((direnv) (frameset) (frameset) (comp) (comp) (comp)))
  '(whitespace-style
    '(face trailing tabs spaces lines newline empty indentation space-after-tab space-before-tab space-mark tab-mark
           newline-mark))
@@ -285,13 +337,13 @@
      ("US/Hawaii" "Honolulu")))
  '(world-clock-time-format "%A %d %B %I:%M %p %Z")
  '(ws-butler-keep-whitespace-before-point nil)
- '(xref-search-program 'ripgrep)
- '(yas-global-mode nil))
+ '(xref-search-program 'ripgrep))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(copilot-chat-spinner-face ((t nil)))
  '(diff-hl-change ((t (:inherit diff-changed :background "#EBDBB2"))))
  '(diff-hl-delete ((t (:inherit diff-removed :background "#FB4934"))))
  '(diff-hl-insert ((t (:inherit diff-added :background "#B8BB26"))))

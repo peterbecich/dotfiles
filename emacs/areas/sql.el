@@ -1,3 +1,5 @@
+;;; sql.el --- SQL settings -*- lexical-binding: t; -*-
+
 ;; https://emacs.stackexchange.com/questions/13315/sql-send-paragraph-results-in-mis-aligned-headers/18403#18403
 
 ;; Silence compiler warnings

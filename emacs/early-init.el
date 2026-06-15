@@ -3,22 +3,26 @@
 ;; Let init.el initialize package.el explicitly after package archives are set.
 (setq package-enable-at-startup nil)
 
-;; Keep startup work off the interactive path where possible.  Emacs Lisp is
-;; mostly single-threaded, but native compilation and subprocess IO can run in
-;; parallel with the UI.
-(defconst my/processor-count
-  (max 1 (or (ignore-errors (num-processors)) 1)))
+;; (defun my-append-env-var (var-name value)
+;;   "Append VALUE to the beginning of current value of env variable VAR-NAME."
+;;   (setenv var-name (if (getenv var-name)
+;;                        (format "%s:%s" value (getenv var-name))
+;;                      value)))
+
+;; (let ((gccjitpath "/opt/homebrew/lib/gcc/11:/opt/homebrew/lib"))
+;;   (mapc (lambda (var-name) (my-append-env-var var-name gccjitpath))
+;;         '("LIBRARY_PATH" "LD_LIBRARY_PATH" "PATH")))
 
 (defconst my/runtime-gc-cons-threshold (* 64 1024 1024))
 
+;; Disable native compilation before package managers can queue async comp jobs.
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6
-      native-comp-async-jobs-number my/processor-count
-      native-comp-async-query-on-exit nil
-      native-comp-async-report-warnings-errors 'silent
-      native-comp-deferred-compilation t
-      native-comp-jit-compilation t
-      native-comp-speed 2)
+      native-comp-jit-compilation nil
+      package-native-compile nil
+      straight-disable-native-compile t)
+(with-suppressed-warnings ((obsolete native-comp-deferred-compilation))
+  (setq native-comp-deferred-compilation nil))
 
 (add-hook 'emacs-startup-hook
           (lambda ()

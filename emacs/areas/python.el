@@ -1,3 +1,5 @@
+;;; python.el --- Python settings -*- lexical-binding: t; -*-
+
 
 ;; (elpy-enable)
 

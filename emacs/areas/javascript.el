@@ -1,3 +1,5 @@
+;;; javascript.el --- JavaScript settings -*- lexical-binding: t; -*-
+
 
 
 ;; (setq js-indent-level 2)

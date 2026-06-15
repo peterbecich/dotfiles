@@ -1,3 +1,5 @@
+;;; irc.el --- IRC settings -*- lexical-binding: t; -*-
+
 
 (setq erc-join-buffer 'bury)
 

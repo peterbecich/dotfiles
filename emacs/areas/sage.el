@@ -1,3 +1,5 @@
+;;; sage.el --- SageMath settings -*- lexical-binding: t; -*-
+
 ;; Run SageMath by M-x run-sage instead of M-x sage-shell:run-sage
 (sage-shell:define-alias)
 

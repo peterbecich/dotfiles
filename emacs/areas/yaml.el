@@ -1,3 +1,5 @@
+;;; yaml.el --- YAML settings -*- lexical-binding: t; -*-
+
 ;; (defvar yaml-mode-syntax-table
 ;;   (let ((syntax-table (make-syntax-table)))
 ;;     ;; (modify-syntax-entry ?\' "\"" syntax-table)
