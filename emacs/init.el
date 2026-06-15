@@ -1047,3 +1047,5 @@
 
 
 (setq tramp-rpc-deploy-git-build-policy 'release)
+
+(agent-shell-make-environment-variables :inherit-env t)
