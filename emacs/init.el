@@ -666,12 +666,12 @@
 
 (setq lsp-semgrep-languages nil)
 
-(defun my/lsp-clear-session-folders (&rest _args)
-  "Clear remembered LSP workspace folders before starting LSP."
-  (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
+;; (defun my/lsp-clear-session-folders (&rest _args)
+;;   "Clear remembered LSP workspace folders before starting LSP."
+;;   (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
 
-(advice-remove 'lsp #'my/lsp-clear-session-folders)
-(advice-add 'lsp :before #'my/lsp-clear-session-folders)
+;; (advice-remove 'lsp #'my/lsp-clear-session-folders)
+;; (advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
 
 (unless (version< emacs-version "27.0")
