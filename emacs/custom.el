@@ -7,7 +7,6 @@
  '(acp-logging-enabled nil)
  '(ag-arguments '("--smart-case" "--stats" "-p '~/dotfiles/.agignore'"))
  '(ag-ignore-list '("*.js"))
- '(agent-shell-preferred-agent-config 'codex)
  '(ansi-color-names-vector
    ["#32302F" "#FB4934" "#B8BB26" "#FABD2F" "#83A598" "#D3869B" "#17CCD5" "#EBDBB2"])
  '(async-bytecomp-allowed-packages ''(all))
