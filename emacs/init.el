@@ -321,9 +321,13 @@
 
 (use-package projectile
   :commands projectile-mode
-  :bind-keymap ("C-c C-p" . projectile-command-map)
-  :init
-  (my/call-after-startup 1.4 'projectile-mode 1))
+
+  :config
+  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+  (global-set-key (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
 
