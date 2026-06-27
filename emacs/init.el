@@ -342,13 +342,12 @@
 (use-package acp
   :straight (:host github :repo "xenodium/acp.el"))
 
-
-(use-package agent-shell-tramp-rpc
-  :straight (:host github :repo "csheaff/agent-shell-tramp-rpc")
+(use-package agent-shell-tramp
+  :straight (:host github :repo "junyi-hou/agent-shell-tramp")
   :after agent-shell
   :config
-  (agent-shell-tramp-rpc-mode 1))
-
+  (agent-shell-tramp-mode 1))
+(agent-shell-tramp-mode 1)
 
 (use-package format-all :commands format-all-buffer)
 (use-package git-gutter
@@ -668,12 +667,12 @@
 
 (setq lsp-semgrep-languages nil)
 
-(defun my/lsp-clear-session-folders (&rest _args)
-  "Clear remembered LSP workspace folders before starting LSP."
-  (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
+;; (defun my/lsp-clear-session-folders (&rest _args)
+;;   "Clear remembered LSP workspace folders before starting LSP."
+;;   (setf (lsp-session-server-id->folders (lsp-session)) (ht)))
 
-(advice-remove 'lsp #'my/lsp-clear-session-folders)
-(advice-add 'lsp :before #'my/lsp-clear-session-folders)
+;; (advice-remove 'lsp #'my/lsp-clear-session-folders)
+;; (advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
 
 (unless (version< emacs-version "27.0")
