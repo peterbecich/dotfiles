@@ -111,7 +111,7 @@
 (use-package ace-popup-menu :commands ace-popup-menu-mode)
 (use-package ag :commands (ag ag-project ag-regexp ag-project-regexp))
 (use-package alect-themes)
-(use-package ansible)
+;; (use-package ansible)
 (use-package auto-virtualenv)
 (use-package browse-at-remote :commands browse-at-remote)
 (use-package cider)
@@ -319,7 +319,8 @@
 (use-package xterm-color :commands xterm-color-filter)
 (use-package yaml-mode)
 (use-package rust-mode)
-(use-package envrc :commands envrc-global-mode)
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
 
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :branch "main")
@@ -830,7 +831,7 @@
 (setq tramp-rpc-deploy-git-build-policy 'release)
 
 
-(agent-shell-make-environment-variables :inherit-env t)
+;;(setq agent-shell-github-copilot-environment (agent-shell-make-environment-variables :inherit-env t))
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
