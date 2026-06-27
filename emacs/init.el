@@ -247,7 +247,27 @@
 (use-package lsp-metals
   :after lsp-mode
   :custom
-  (lsp-metals-enable-semantic-highlighting t))
+  (lsp-metals-enable-semantic-highlighting t)
+  :config
+  (defconst my/lsp-metals-tramp-command "/home/becich/bin/metals"
+    "Absolute path to Metals on remote hosts.")
+
+  (defun my/lsp-metals-tramp-server-command ()
+    "Return the remote Metals command for TRAMP buffers."
+    `(,my/lsp-metals-tramp-command ,@lsp-metals-server-args))
+
+  (defun my/lsp-metals-tramp-server-present-p ()
+    "Return non-nil when remote Metals is executable."
+    (if-let* ((remote-prefix (file-remote-p default-directory)))
+        (file-executable-p
+         (concat remote-prefix my/lsp-metals-tramp-command))
+      (executable-find my/lsp-metals-tramp-command)))
+
+  (when-let* ((client (gethash 'metals-tramp lsp-clients)))
+    ;; `setf' for `lsp--client' slots is only known after lsp-mode defines the
+    ;; struct, but use-package macro-expands this form earlier.
+    (aset client 3 (lsp-stdio-connection #'my/lsp-metals-tramp-server-command
+                                         #'my/lsp-metals-tramp-server-present-p))))
 (use-package lsp-ui :commands (lsp-ui-mode lsp-ui-sideline-mode))
 (use-package magit :commands (magit-status magit-dispatch))
 (use-package markdown-mode)
@@ -333,7 +353,27 @@
 
 (use-package tramp-rpc
   :after tramp
-  :straight (:host github :repo "ArthurHeymans/emacs-tramp-rpc" :files ("lisp/*.el")))
+  :straight (:host github :repo "ArthurHeymans/emacs-tramp-rpc" :files ("lisp/*.el"))
+  :config
+  (defun my/tramp-rpc-disable-undo-in-buffer (buffer)
+    "Disable undo in BUFFER when it is live."
+    (when (buffer-live-p buffer)
+      (with-current-buffer buffer
+        (buffer-disable-undo))))
+
+  (defun my/tramp-rpc-disable-buffer-undo (_vec _process buffer &optional stderr-buffer)
+    "Disable undo in TRAMP-RPC connection buffers."
+    (dolist (buf (list buffer stderr-buffer))
+      (my/tramp-rpc-disable-undo-in-buffer buf)))
+
+  (unless (advice-member-p #'my/tramp-rpc-disable-buffer-undo
+                           #'tramp-rpc--set-connection)
+    (advice-add 'tramp-rpc--set-connection
+                :after #'my/tramp-rpc-disable-buffer-undo))
+
+  (dolist (buf (buffer-list))
+    (when (string-prefix-p "*tramp/rpc " (buffer-name buf))
+      (my/tramp-rpc-disable-undo-in-buffer buf))))
 
 (use-package agent-shell
   :commands agent-shell)

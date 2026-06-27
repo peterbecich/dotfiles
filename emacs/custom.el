@@ -78,7 +78,6 @@
      "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))
  '(datetime-timezone 'US/Pacific)
  '(desktop-load-locked-desktop t)
- '(desktop-save nil)
  '(dgi-commit-message-format "%cr %s ")
  '(diary-entry-marker 'font-lock-variable-name-face)
  '(diff-hl-draw-borders t)
@@ -306,8 +305,8 @@
  '(tool-bar-mode nil)
  '(tramp-default-method "ssh")
  '(tramp-remote-path
-   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/.cargo/bin" "/home/becich/npm-global/bin/" "/home/becich/.gem/bin/"
-     "/usr/local/bin/" "/home/becich/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin"
+   '("/home/becich/.gem/ruby/3.3.10/bin/" "/home/becich/.cargo/bin" "/home/becich/.n/bin/" "/home/becich/.gem/bin/"
+     "/usr/local/bin/" "/home/becich/bin/" "/home/becich/.local/bin/" "/home/becich/.local/share/coursier/bin/" tramp-default-remote-path "/bin"
      "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/local/freeware/bin"
      "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin"
      "/opt/homebrew/bin" "/opt/homebrew/sbin"))
