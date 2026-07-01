@@ -143,29 +143,54 @@
   :config
   (global-diff-hl-mode 1))
 
+(defvar my/diminished-mode-features
+  '((autorevert auto-revert-mode global-auto-revert-mode)
+    (company company-mode global-company-mode)
+    (counsel counsel-mode)
+    (editorconfig editorconfig-mode)
+    (eldoc eldoc-mode)
+    (gcmh gcmh-mode)
+    (hl-todo hl-todo-mode global-hl-todo-mode)
+    (highlight-indent-guides highlight-indent-guides-mode)
+    (highlight-thing highlight-thing-mode)
+    (ivy ivy-mode)
+    (projectile projectile-mode)
+    (simple visual-line-mode global-visual-line-mode)
+    (smartparens smartparens-mode show-smartparens-mode show-smartparens-global-mode)
+    (ws-butler ws-butler-mode)
+    (yasnippet yas-minor-mode yas-global-mode))
+  "Minor modes to hide from the mode line after their defining features load.")
+
+(defun my/diminish-mode (mode)
+  "Hide MODE from the mode line when it is registered."
+  (when (and (fboundp 'diminish)
+             (assq mode minor-mode-alist))
+    (diminish mode)))
+
 (defun my/diminish-modes ()
   "Hide noisy minor modes from the mode line."
-  (dolist (mode '(smartparens-mode
-                  auto-revert-mode
-                  counsel-mode
-                  ivy-mode
-                  highlight-indent-guides-mode
-                  highlight-thing-mode
-                  yas-global-mode
-                  ws-butler-mode
-                  eldoc-mode
-                  yas-minor-mode
-                  company-mode
-                  projectile-mode
-                  editorconfig-mode
-                  visual-line-mode))
-    (ignore-errors
-      (diminish mode))))
+  (dolist (feature-and-modes my/diminished-mode-features)
+    (dolist (mode (cdr feature-and-modes))
+      (my/diminish-mode mode))))
+
+(defun my/diminish-modes-after-load ()
+  "Hide configured minor modes as their packages become available."
+  (dolist (feature-and-modes my/diminished-mode-features)
+    (let ((feature (car feature-and-modes))
+          (modes (cdr feature-and-modes)))
+      (if (featurep feature)
+          (dolist (mode modes)
+            (my/diminish-mode mode))
+        (with-eval-after-load feature
+          (dolist (mode modes)
+            (my/diminish-mode mode)))))))
 
 (use-package diminish
   :demand t
   :config
-  (my/diminish-modes))
+  (my/diminish-modes-after-load)
+  (add-hook 'after-init-hook #'my/diminish-modes)
+  (add-hook 'after-change-major-mode-hook #'my/diminish-modes))
 (use-package dired-git-info :commands dired-git-info-mode)
 (use-package diredfl
   :demand t
