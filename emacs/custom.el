@@ -168,7 +168,6 @@
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
  '(ispell-local-dictionary-alist nil)
- '(ivy-initial-inputs-alist nil)
  '(jdee-jdk-registry
    '(("1.8" . "/Library/Java/JavaVirtualMachines/openjdk8/Contents/Home/")))
  '(json-reformat:indent-width 2)
@@ -246,18 +245,6 @@
  '(pos-tip-foreground-color "#FFFFC8")
  '(proced-auto-update-flag t)
  '(proced-format 'verbose)
- '(projectile-completion-system 'ivy)
- '(projectile-dynamic-mode-line nil)
- '(projectile-enable-caching t)
- '(projectile-enable-idle-timer nil)
- '(projectile-idle-timer-seconds 30)
- '(projectile-mode-line-function '(lambda nil ("")))
- '(projectile-mode-line-prefix " ")
- '(projectile-require-project-root t)
- '(projectile-sort-order 'recently-active)
- '(projectile-tags-backend 'auto)
- '(projectile-tags-command "echo foo")
- '(projectile-use-git-grep t)
  '(purescript-mode-hook
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil (company-mode) (lsp) (flycheck-mode) (turn-on-purescript-indentation))))

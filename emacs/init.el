@@ -57,19 +57,6 @@
 (setq use-package-always-ensure nil
       load-prefer-newer t)
 
-(defun my/call-after-startup (delay function &rest args)
-  "Call FUNCTION with ARGS after startup and DELAY idle seconds."
-  (let ((start-timer
-         (lambda ()
-            (run-with-idle-timer
-             delay nil
-             (lambda ()
-               (when (fboundp function)
-                 (apply function args)))))))
-    (if (bound-and-true-p after-init-time)
-        (funcall start-timer)
-      (add-hook 'emacs-startup-hook start-timer))))
-
 ;; Subprocess-heavy packages (LSP servers, shells, TRAMP, ripgrep, GPTel) are
 ;; where Emacs gets most of its useful parallelism.
 (setenv "LSP_USE_PLISTS" "true")
@@ -116,29 +103,32 @@
 (use-package browse-at-remote :commands browse-at-remote)
 (use-package cider)
 (use-package company
-  :commands (company-mode global-company-mode)
+  :demand t
   :hook (scala-mode . company-mode)
-  :init
-  (my/call-after-startup 1.0 'global-company-mode 1)
   :custom
-  (lsp-completion-provider :capf))
+  (lsp-completion-provider :capf)
+  :config
+  (global-company-mode 1))
 (use-package company-terraform :after (company terraform-mode))
 (use-package counsel
-  :commands (counsel-mode counsel-imenu counsel-yank-pop)
+  :demand t
   :bind (("C-c i" . counsel-imenu))
   :init
   (setq counsel-ag-base-command "ag --nocolor --nogroup %s"
         counsel-mode-override-describe-bindings t)
-  (my/call-after-startup 0.7 'counsel-mode 1))
+  :config
+  (counsel-mode 1))
 (use-package counsel-projectile
-  :commands (counsel-projectile counsel-projectile-find-file counsel-projectile-rg counsel-projectile-ag)
+  :demand t
   :init
   (setq counsel-projectile-ag-initial-input '(ivy-thing-at-point)
         counsel-projectile-rg-initial-input '(ivy-thing-at-point)
         counsel-projectile-sort-buffers t
         counsel-projectile-sort-directories t
         counsel-projectile-sort-files t
-        counsel-projectile-sort-projects t))
+        counsel-projectile-sort-projects t)
+  :config
+  (counsel-projectile-mode +1))
 (use-package csv-mode)
 (use-package dap-mode
   :hook
@@ -147,35 +137,53 @@
 (use-package darktooth-theme)
 (use-package dhall-mode)
 (use-package diff-hl
-  :commands (diff-hl-mode global-diff-hl-mode)
-  :init
-  (my/call-after-startup 1.2 'global-diff-hl-mode 1)
+  :demand t
   :custom
-  (diff-hl-update-async t))
+  (diff-hl-update-async t)
+  :config
+  (global-diff-hl-mode 1))
+
+(defun my/diminish-modes ()
+  "Hide noisy minor modes from the mode line."
+  (dolist (mode '(smartparens-mode
+                  auto-revert-mode
+                  counsel-mode
+                  ivy-mode
+                  highlight-indent-guides-mode
+                  highlight-thing-mode
+                  yas-global-mode
+                  ws-butler-mode
+                  eldoc-mode
+                  yas-minor-mode
+                  company-mode
+                  projectile-mode
+                  editorconfig-mode
+                  visual-line-mode))
+    (ignore-errors
+      (diminish mode))))
+
 (use-package diminish
-  :commands diminish
-  :init
-  (my/call-after-startup 2.2 'my/diminish-modes))
+  :demand t
+  :config
+  (my/diminish-modes))
 (use-package dired-git-info :commands dired-git-info-mode)
 (use-package diredfl
-  :commands diredfl-global-mode
-  :init
-  (my/call-after-startup 1.3 'diredfl-global-mode 1))
+  :demand t
+  :config
+  (diredfl-global-mode 1))
 (use-package docker :commands docker)
 (use-package docker-compose-mode)
 (use-package dockerfile-mode)
 (use-package editorconfig
-  :commands editorconfig-mode
-  :init
-  (my/call-after-startup 1.1 'editorconfig-mode 1))
+  :demand t
+  :config
+  (editorconfig-mode 1))
 (use-package emacsql)
 (use-package espresso-theme)
 (use-package ess)
 (use-package exec-path-from-shell)
 (use-package eyebrowse
-  :commands eyebrowse-mode
-  :init
-  (my/call-after-startup 0.8 'eyebrowse-mode 1)
+  :demand t
   :config
   (defvar my/eyebrowse-mode-line-segment
     '(eyebrowse-mode
@@ -202,7 +210,8 @@
 
   (advice-add 'eyebrowse-mode :after #'my/eyebrowse-move-mode-line-left)
   (my/eyebrowse-move-mode-line-left)
-  (eyebrowse-setup-opinionated-keys))
+  (eyebrowse-setup-opinionated-keys)
+  (eyebrowse-mode 1))
 (use-package fill-column-indicator :commands fci-mode)
 (use-package flycheck
   :commands flycheck-mode
@@ -233,11 +242,11 @@
 (use-package hlint-refactor :after haskell-mode)
 (use-package iedit :commands iedit-mode)
 (use-package ivy
-  :commands ivy-mode
-  :init
-  (my/call-after-startup 0.5 'ivy-mode 1)
+  :demand t
   :custom
-  (ivy-use-virtual-buffers t))
+  (ivy-use-virtual-buffers t)
+  :config
+  (ivy-mode 1))
 (use-package julia-mode)
 (use-package julia-repl :after julia-mode)
 ;; (use-package kubernetes :ensure t)
@@ -277,9 +286,9 @@
   :straight nil)
 ;; (use-package pdf-tools :ensure t)
 (use-package persistent-scratch
-  :commands persistent-scratch-setup-default
-  :init
-  (my/call-after-startup 1.8 'persistent-scratch-setup-default))
+  :demand t
+  :config
+  (persistent-scratch-setup-default))
 (use-package protobuf-mode)
 (use-package puppet-mode)
 (use-package purescript-mode)
@@ -290,12 +299,11 @@
 (use-package restclient)
 (use-package slime :commands slime)
 (use-package smartparens
-  :commands (show-smartparens-global-mode smartparens-mode smartparens-strict-mode)
+  :demand t
   :hook (prog-mode . smartparens-mode)
-  :init
-  (my/call-after-startup 1.6 'show-smartparens-global-mode 1)
   :config
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  (show-smartparens-global-mode 1))
 (use-package snakemake-mode)
 (use-package swift-mode)
 (use-package swiper
@@ -340,11 +348,20 @@
   (lsp-nix-nil-formatter ["nixfmt"]))
 
 (use-package projectile
-  :commands projectile-mode
-
+  :demand t
+  :bind
+  (("C-c p" . projectile-command-map)
+   ("C-c C-p" . projectile-command-map))
+  :custom
+  (projectile-completion-system 'ivy)
+  (projectile-dynamic-mode-line nil)
+  (projectile-enable-caching t)
+  (projectile-mode-line-function (lambda () ""))
+  (projectile-mode-line-prefix " ")
+  (projectile-require-project-root t)
+  (projectile-sort-order 'recently-active)
+  (projectile-use-git-grep t)
   :config
-  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-  (global-set-key (kbd "C-c p") 'projectile-command-map)
   (projectile-mode +1))
 
 
@@ -398,13 +415,13 @@
   :commands git-gutter:revert-hunk)
 (use-package git-commit
   :straight nil
-  :commands global-git-commit-mode
-  :init
-  (my/call-after-startup 1.5 'global-git-commit-mode 1))
+  :demand t
+  :config
+  (global-git-commit-mode 1))
 (use-package hl-todo
-  :commands global-hl-todo-mode
-  :init
-  (my/call-after-startup 1.5 'global-hl-todo-mode 1))
+  :demand t
+  :config
+  (global-hl-todo-mode 1))
 (use-package mustache-mode)
 (use-package rg :commands (rg rg-project rg-dwim))
 (use-package pdf-tools :commands pdf-tools-install)
@@ -419,13 +436,13 @@
   (eglot-events-buffer-size 0))
 
 (use-package gcmh
-  :commands gcmh-mode
-  :init
-  (my/call-after-startup 2.0 'gcmh-mode 1)
+  :demand t
   :custom
   (gcmh-idle-delay 5)
   (gcmh-high-cons-threshold (* 256 1024 1024))
-  (gcmh-low-cons-threshold (* 32 1024 1024)))
+  (gcmh-low-cons-threshold (* 32 1024 1024))
+  :config
+  (gcmh-mode 1))
 
 
 (use-package crontab-mode)
@@ -573,13 +590,15 @@
 
 (setq resize-mini-windows t)
 
-(my/call-after-startup 0.2 'display-battery-mode 1)
-(my/call-after-startup 0.2 'display-time-mode 1)
-(my/call-after-startup 0.3 'global-display-line-numbers-mode 1)
-(my/call-after-startup 0.4 'global-auto-revert-mode 1)
-(my/call-after-startup 0.4 'global-so-long-mode 1)
-(my/call-after-startup 0.4 'global-visual-line-mode 1)
-(my/call-after-startup 0.5 'global-completion-preview-mode 1)
+(when (fboundp 'display-battery-mode)
+  (display-battery-mode 1))
+(display-time-mode 1)
+(global-display-line-numbers-mode 1)
+(global-auto-revert-mode 1)
+(global-so-long-mode 1)
+(global-visual-line-mode 1)
+(when (fboundp 'global-completion-preview-mode)
+  (global-completion-preview-mode 1))
 
 ;; (setq ring-bell-function 'ignore)
 
@@ -676,25 +695,6 @@
 (global-set-key "\C-xO" 'other-frame)
 
 (add-to-list 'auto-mode-alist (cons "\\.adoc\\'" 'adoc-mode))
-
-(defun my/diminish-modes ()
-  "Hide noisy minor modes from the mode line after startup."
-  (dolist (mode '(smartparens-mode
-                  auto-revert-mode
-                  counsel-mode
-                  ivy-mode
-                  highlight-indent-guides-mode
-                  highlight-thing-mode
-                  yas-global-mode
-                  ws-butler-mode
-                  eldoc-mode
-                  yas-minor-mode
-                  company-mode
-                  projectile-mode
-                  editorconfig-mode
-                  visual-line-mode))
-    (ignore-errors
-      (diminish mode))))
 
 ;; (setq enable-recursive-minibuffers t)
 ;; ;; enable this if you want `swiper' to use it
