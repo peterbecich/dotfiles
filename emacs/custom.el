@@ -249,7 +249,8 @@
    '(turn-on-eldoc-mode turn-on-purescript-indent
                         (lambda nil (company-mode) (lsp) (flycheck-mode) (turn-on-purescript-indentation))))
  '(recentf-auto-cleanup 300)
- '(recentf-keep '(recentf-keep-default-predicate file-remote-p))
+ '(recentf-exclude '(file-remote-p))
+ '(recentf-keep '(recentf-keep-default-predicate))
  '(rich-minority-mode t)
  '(ring-bell-function nil)
  '(rm-blacklist

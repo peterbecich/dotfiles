@@ -244,7 +244,7 @@
 (use-package ivy
   :demand t
   :custom
-  (ivy-use-virtual-buffers t)
+  (ivy-use-virtual-buffers 'recentf)
   :config
   (ivy-mode 1))
 (use-package julia-mode)
