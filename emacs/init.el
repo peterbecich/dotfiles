@@ -212,7 +212,9 @@
 (use-package flycheck-rtags :after flycheck)
 (use-package fsharp-mode)
 (use-package git-link :commands git-link)
-(use-package git-timemachine :commands git-timemachine)
+(use-package git-timemachine
+  :straight (:host github :repo "emacsmirror/git-timemachine")
+  :commands git-timemachine)
 (use-package go-mode)
 (use-package groovy-mode :mode "\\.jenkinsfile")
 (use-package haskell-mode)
@@ -311,7 +313,7 @@
   :commands (vdiff-files vdiff-buffers vdiff-current-file)
   :config
   (define-key vdiff-mode-map (kbd "C-.") vdiff-mode-prefix-map))
-(use-package visual-fill-column :commands visual-fill-column-mode)
+;;(use-package visual-fill-column :commands visual-fill-column-mode)
 (use-package vterm :commands vterm)
 (use-package websocket)
 (use-package ws-butler
@@ -419,6 +421,7 @@
   (eglot-events-buffer-size 0))
 
 (use-package gcmh
+  :straight (:host github :repo "emacsmirror/gcmh")
   :commands gcmh-mode
   :init
   (my/call-after-startup 2.0 'gcmh-mode 1)
