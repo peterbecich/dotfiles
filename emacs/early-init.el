@@ -13,7 +13,8 @@
 ;;   (mapc (lambda (var-name) (my-append-env-var var-name gccjitpath))
 ;;         '("LIBRARY_PATH" "LD_LIBRARY_PATH" "PATH")))
 
-(defconst my/runtime-gc-cons-threshold (* 64 1024 1024))
+(defconst my/runtime-gc-cons-threshold (* 128 1024 1024)
+  "GC threshold used when the idle collector is unavailable.")
 
 ;; Disable native compilation before package managers can queue async comp jobs.
 (setq gc-cons-threshold most-positive-fixnum
@@ -27,6 +28,6 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (setq gc-cons-threshold my/runtime-gc-cons-threshold
-                  gc-cons-percentage 0.1)))
+                  gc-cons-percentage 0.15)))
 
 ;;; early-init.el ends here

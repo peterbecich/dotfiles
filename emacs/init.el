@@ -61,7 +61,8 @@
 ;; where Emacs gets most of its useful parallelism.
 (setenv "LSP_USE_PLISTS" "true")
 (setq lsp-use-plists t
-      read-process-output-max (* 4 1024 1024)
+      ;; Read large LSP responses in fewer passes through Emacs's main thread.
+      read-process-output-max (* 8 1024 1024)
       process-adaptive-read-buffering nil
       async-shell-command-buffer 'new-buffer
       async-shell-command-display-buffer nil
@@ -467,9 +468,12 @@
   :commands gcmh-mode
   :demand t
   :custom
-  (gcmh-idle-delay 5)
-  (gcmh-high-cons-threshold (* 256 1024 1024))
-  (gcmh-low-cons-threshold (* 32 1024 1024))
+  (gcmh-idle-delay 2)
+  ;; Emacs has no fixed heap limit.  Give interactive work ample headroom, but
+  ;; collect after a short idle period before the heap is large enough to cause
+  ;; a long stop-the-world pause.
+  (gcmh-high-cons-threshold (* 512 1024 1024))
+  (gcmh-low-cons-threshold my/runtime-gc-cons-threshold)
   :config
   (gcmh-mode 1))
 
@@ -748,12 +752,6 @@
 ;; (advice-add 'lsp :before #'my/lsp-clear-session-folders)
 
 
-(unless (version< emacs-version "27.0")
-  (add-function :after after-focus-change-function
-                (lambda ()
-                  (unless (frame-focus-state)
-                    (garbage-collect)))))
-
 ;;(rg-enable-menu)
 
 (setq lsp-copilot-enabled nil)
@@ -861,7 +859,9 @@
 ;; (setq gptel-stream nil)
 
 
-(setq tramp-rpc-deploy-git-build-policy 'release)
+;;(setq tramp-rpc-deploy-git-build-policy 'release)
+;;(setq tramp-rpc-deploy-git-build-policy 'auto)
+(setq tramp-rpc-deploy-git-build-policy 'build)
 
 
 ;;(setq agent-shell-github-copilot-environment (agent-shell-make-environment-variables :inherit-env t))
