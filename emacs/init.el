@@ -428,6 +428,14 @@
 (use-package agent-shell
   :commands agent-shell)
 
+(use-package knockknock
+  :straight (:host github :repo "konrad1977/knockknock"))
+
+(use-package agent-shell-knockknock
+  :straight (:host github :repo "xenodium/agent-shell-knockknock")
+  :after (agent-shell knockknock)
+  :hook (agent-shell-mode . agent-shell-knockknock-mode))
+
 (use-package acp
   :straight (:host github :repo "xenodium/acp.el"))
 
@@ -437,6 +445,10 @@
   :config
   (agent-shell-tramp-mode 1))
 (agent-shell-tramp-mode 1)
+
+(use-package agent-shell-sidebar
+  :after agent-shell
+  :straight (:host github :repo "cmacrae/agent-shell-sidebar"))
 
 (use-package format-all :commands format-all-buffer)
 (use-package git-gutter
@@ -873,37 +885,37 @@
 
 
 
-(defvar my/straight-update-timer nil)
+;; (defvar my/straight-update-timer nil)
 
-(defun my/straight--discard-dirty-worktree (local-repo)
-  "Make LOCAL-REPO pristine, permanently discarding local changes."
-  (let ((status (let ((straight--process-trim nil))
-                  (straight--process-output
-                   "git" "-c" "status.branch=false" "status" "--short"))))
-    (if (string-empty-p status)
-        t
-      (message "Discarding local changes in straight.el repository %s"
-               local-repo)
-      (and (straight--process-output "git" "reset" "--hard")
-           (straight--process-output "git" "clean" "-ffd")))))
+;; (defun my/straight--discard-dirty-worktree (local-repo)
+;;   "Make LOCAL-REPO pristine, permanently discarding local changes."
+;;   (let ((status (let ((straight--process-trim nil))
+;;                   (straight--process-output
+;;                    "git" "-c" "status.branch=false" "status" "--short"))))
+;;     (if (string-empty-p status)
+;;         t
+;;       (message "Discarding local changes in straight.el repository %s"
+;;                local-repo)
+;;       (and (straight--process-output "git" "reset" "--hard")
+;;            (straight--process-output "git" "clean" "-ffd")))))
 
-(defun my/straight-update-all ()
-  "Discard local package changes, update packages, and freeze versions."
-  (interactive)
-  (cl-letf (((symbol-function 'straight-vc-git--ensure-worktree)
-             #'my/straight--discard-dirty-worktree))
-    (straight-pull-all))
-  (straight-check-all)
-  (straight-freeze-versions))
+;; (defun my/straight-update-all ()
+;;   "Discard local package changes, update packages, and freeze versions."
+;;   (interactive)
+;;   (cl-letf (((symbol-function 'straight-vc-git--ensure-worktree)
+;;              #'my/straight--discard-dirty-worktree))
+;;     (straight-pull-all))
+;;   (straight-check-all)
+;;   (straight-freeze-versions))
 
-(defun my/straight-enable-auto-updates ()
-  "Update straight.el packages every 6 hours after Emacs has been idle."
-  (when (timerp my/straight-update-timer)
-    (cancel-timer my/straight-update-timer))
-  (setq my/straight-update-timer
-        (run-with-idle-timer
-         (* 10 60)   ; wait until Emacs has been idle for 10 minutes
-         (* 6 60 60) ; repeat every 6 hours
-         #'my/straight-update-all)))
+;; (defun my/straight-enable-auto-updates ()
+;;   "Update straight.el packages every 6 hours after Emacs has been idle."
+;;   (when (timerp my/straight-update-timer)
+;;     (cancel-timer my/straight-update-timer))
+;;   (setq my/straight-update-timer
+;;         (run-with-idle-timer
+;;          (* 10 60)   ; wait until Emacs has been idle for 10 minutes
+;;          (* 6 60 60) ; repeat every 6 hours
+;;          #'my/straight-update-all)))
 
-(my/straight-enable-auto-updates)
+;; (my/straight-enable-auto-updates)
