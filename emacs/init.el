@@ -485,7 +485,6 @@
   ;; collect after a short idle period before the heap is large enough to cause
   ;; a long stop-the-world pause.
   (gcmh-high-cons-threshold (* 512 1024 1024))
-  (gcmh-low-cons-threshold my/runtime-gc-cons-threshold)
   :config
   (gcmh-mode 1))
 
