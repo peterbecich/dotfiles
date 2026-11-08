@@ -308,8 +308,7 @@
 (use-package lsp-ui :commands (lsp-ui-mode lsp-ui-sideline-mode))
 (use-package magit :commands (magit-status magit-dispatch))
 (use-package markdown-mode)
-(use-package nix-mode
-  :hook (nix-mode . lsp-deferred))
+(use-package nix-mode)
 (use-package org
   :straight nil)
 ;; (use-package pdf-tools :ensure t)
@@ -365,6 +364,7 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
+  :hook (prog-mode . lsp-deferred)
   :custom
   (lsp-idle-delay 0.2)
   (lsp-response-timeout 30))
@@ -395,10 +395,6 @@
 
 
 (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-
-
-;; (add-hook 'prog-mode-hook #'lsp-deferred)
-
 
 
 (use-package tramp-rpc
@@ -751,7 +747,6 @@
 
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . js-json-mode))
 (add-to-list 'auto-mode-alist '("\\.avro\\'" . js-json-mode))
-(put 'magit-clean 'disabled nil)
 
 (setq lsp-semgrep-languages nil)
 
@@ -918,3 +913,4 @@
 ;;          #'my/straight-update-all)))
 
 ;; (my/straight-enable-auto-updates)
+(put 'magit-clean 'disabled nil)
