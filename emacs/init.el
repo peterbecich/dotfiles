@@ -102,7 +102,8 @@
 ;; (use-package ansible)
 (use-package auto-virtualenv)
 (use-package browse-at-remote :commands browse-at-remote)
-(use-package cider)
+(use-package cider
+  :commands (cider-jack-in-clj cider-jack-in-cljs cider-connect-clj cider-connect-cljs))
 (use-package company
   :demand t
   :hook (scala-mode . company-mode)
@@ -132,9 +133,15 @@
   (counsel-projectile-mode +1))
 (use-package csv-mode)
 (use-package dap-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode))
+  :commands (dap-debug dap-debug-last dap-debug-recent dap-breakpoint-toggle dap-mode)
+  :config
+  (defun my/enable-dap-modes (&rest _)
+    "Enable debugging support and its UI when a debugging command is invoked."
+    (dap-mode 1)
+    (dap-ui-mode 1))
+  ;; Metals requires dap-mode even when no debugging session is needed.
+  (advice-add 'dap-debug :before #'my/enable-dap-modes)
+  (advice-add 'dap-breakpoint-toggle :before #'my/enable-dap-modes))
 (use-package darktooth-theme)
 (use-package dhall-mode)
 (use-package diff-hl
@@ -206,7 +213,7 @@
   (editorconfig-mode 1))
 (use-package emacsql)
 (use-package espresso-theme)
-(use-package ess)
+(use-package ess :defer t)
 (use-package exec-path-from-shell)
 (use-package eyebrowse
   :demand t
@@ -425,14 +432,16 @@
   :commands agent-shell)
 
 (use-package knockknock
+  :defer t
   :straight (:host github :repo "konrad1977/knockknock"))
 
 (use-package agent-shell-knockknock
   :straight (:host github :repo "xenodium/agent-shell-knockknock")
-  :after (agent-shell knockknock)
+  :after agent-shell
   :hook (agent-shell-mode . agent-shell-knockknock-mode))
 
 (use-package acp
+  :defer t
   :straight (:host github :repo "xenodium/acp.el"))
 
 (use-package agent-shell-tramp
@@ -440,7 +449,6 @@
   :after agent-shell
   :config
   (agent-shell-tramp-mode 1))
-(agent-shell-tramp-mode 1)
 
 (use-package agent-shell-sidebar
   :after agent-shell
@@ -914,3 +922,11 @@
 
 ;; (my/straight-enable-auto-updates)
 (put 'magit-clean 'disabled nil)
+
+
+(with-eval-after-load 'agent-shell
+  ;; Automatically resume the latest session for this project.
+  (setq agent-shell-session-strategy 'latest)
+
+  ;; Show the previous conversation when restoring.
+  (setq agent-shell-session-restore-verbosity 'full))
